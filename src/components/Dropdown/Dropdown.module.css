@@ -1,0 +1,45 @@
+.sbui-dropdown-item {
+  @apply flex;
+  @apply hover:bg-gray-200 dark:hover:bg-gray-200;
+  @apply flex items-center;
+  cursor: 'default';
+  user-select: none;
+  width: 100%;
+}
+
+.sbui-dropdown-item-content {
+  @apply flex;
+  @apply text-typography-body-secondary-light dark:text-typography-body-secondary-light;
+  flex-direction: row;
+  width: inherit;
+}
+
+.sbui-dropdown-item svg {
+  @apply text-typography-body-secondary-light dark:text-typography-body-secondary-light;
+}
+
+.sbui-dropdown-label {
+  @apply text-typography-body-secondary-light dark:text-typography-body-secondary-light;
+  @apply px-4 py-1.5 flex items-center space-x-2;
+  font-size: 0.65rem;
+}
+
+.sbui-dropdown-misc {
+  @apply px-4 py-1.5;
+}
+
+.sbui-dropdown-input {
+  @apply flex items-center space-x-0 pl-8 pr-4;
+}
+
+.sbui-dropdown {
+  @apply rounded pt-3 pb-3;
+  @apply bg-white dark:bg-white;
+  max-height: 50vh;
+  overflow-y: auto;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.sbui-dropdown-icon {
+  @apply pr-3;
+}

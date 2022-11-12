@@ -1,0 +1,66 @@
+.sbui-input-container {
+  @apply relative flex box-border border border-solid rounded-md transition-all shadow-sm;
+  @apply border-input-border-light focus:border-input-border-light focus:outline-none;
+  @apply hover:ring-input-border-focus-dark hover:border-input-border-focus-dark hover:outline-none;
+  @apply focus:ring-input-border-light focus:outline-none;
+
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.sbui-input {
+  @apply pl-1 pr-3 py-2 w-full text-sm;
+  @apply text-input-value-dark;
+  @apply bg-transparent dark:bg-transparent focus:outline-none hover:outline-none outline-none;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: none;
+  border: 0;
+  box-shadow: none !important;
+  font-family: inherit;
+  appearance: textfield;
+  background: transparent;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: white;
+  background: url("data:image/svg+xml;utf8,<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16 2V6\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M8 2V6\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M3 10H21\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>") center/80% no-repeat;
+}
+
+.sbui-input:focus {
+  box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
+}
+
+.sbui-input--error {
+  @apply border-red-500 dark:border-red-500;
+}
+
+.sbui-input--borderless {
+  @apply border-transparent shadow-none;
+}
+
+.sbui-input-actions-container {
+  @apply absolute inset-y-0 right-0 pl-3 pr-1 flex items-center;
+}
+
+/*
+  Input sizes
+*/
+
+.sbui-input--tiny {
+  @apply px-2.5 py-1.5 text-xs;
+}
+.sbui-input--small {
+  @apply px-3 py-2 text-sm leading-4;
+}
+.sbui-input--medium {
+  @apply px-4 py-2 text-sm;
+}
+.sbui-input--large {
+  @apply px-4 py-2 text-base;
+}
+.sbui-input--xlarge {
+  @apply px-6 py-3 text-base;
+}
