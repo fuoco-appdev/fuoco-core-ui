@@ -24,8 +24,14 @@ export interface Props {
   label?: string
   layout?: 'horizontal' | 'vertical'
   descriptionText?: string
-  areaCodes?: string[]
-  defaultValue?: string
+  defaultCoordinates?: [number, number]
+  placeType?:
+    | 'address'
+    | 'postcode'
+    | 'place'
+    | 'district'
+    | 'region'
+    | 'country'
   disabled?: boolean
   disableDropdown?: boolean
   placeholder?: string
@@ -64,6 +70,8 @@ function InputGeocoding({
   formStyle,
   layout,
   descriptionText,
+  defaultCoordinates,
+  placeType = 'address',
   classes,
   containerStyle,
   inputStyle,
@@ -142,7 +150,7 @@ function InputGeocoding({
 
     const timeout = setTimeout(async () => {
       try {
-        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxAccessToken}&autocomplete=true`
+        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxAccessToken}&autocomplete=true&types=${placeType}`
         const response = await fetch(endpoint)
         const results = await response.json()
         setShowDropdown(true)
@@ -154,6 +162,43 @@ function InputGeocoding({
 
     return () => clearTimeout(timeout)
   }, [value])
+
+  useEffect(() => {
+    const updateLocationAsync = new Promise<void>(async (resolve, reject) => {
+      let selectedLongitude = 0
+      let selectedLatitude = 0
+      let defaultLongitude = 0
+      let defaultLatitude = 0
+      if (selectedFeature) {
+        selectedLongitude = selectedFeature['center'][0] ?? 0
+        selectedLatitude = selectedFeature['center'][1] ?? 0
+      }
+
+      if (defaultCoordinates) {
+        defaultLongitude = defaultCoordinates[0] ?? 0
+        defaultLatitude = defaultCoordinates[1] ?? 0
+      }
+
+      if (
+        selectedLongitude === defaultLongitude &&
+        selectedLatitude === defaultLatitude
+      ) {
+        resolve()
+      }
+
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${defaultLongitude},${defaultLatitude}.json?access_token=${mapboxAccessToken}&types=${placeType}`
+      const response = await fetch(endpoint)
+      const results = await response.json()
+      if (results.features.length > 0) {
+        const feature = results.features[0]
+        setSelectedFeature(feature)
+        setValue(feature['place_name'])
+        resolve()
+      }
+    })
+
+    updateLocationAsync.then()
+  }, [defaultCoordinates])
 
   const interpolation: number[] = []
   interpolation.push(0)
