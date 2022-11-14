@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
-import Listbox from './Listbox'
-import { IconBook } from '../../index'
+import Listbox, { ListboxOption, OptionProps } from './Listbox'
+import { IconBook, IconGlobe } from '../../index'
 import { Button } from '../Button'
 import Typography from '../Typography'
 
@@ -10,125 +10,120 @@ export default {
   component: Listbox,
 }
 
-const { Option } = Listbox
-
-const options = [
+const defaultOptions = [
   { value: 'one', label: 'one' },
   { value: 'two', label: 'two' },
   { value: 'three', label: 'three' },
   { value: 'four', label: 'four' },
 ]
 
-export const Default = (args: any) => (
-  <Listbox label="Default listbox">
-    {options.map((option) => {
-      return (
-        <Listbox.Option
-          label={option.label}
-          value={option.value}
-          children={({ active, selected }: any) => {
-            // console.log('selected', selected)
-            // console.log('active', active)
-            return <span>{option.label}</span>
-          }}
-        />
-      )
-    })}
-  </Listbox>
-)
+export const Default = (args: any) => {
+  const ref = useRef<any>(null)
+  const options: OptionProps[] = []
+  for (const option of defaultOptions) {
+    options.push({
+      parentRef: ref,
+      id: option.label,
+      value: option.value,
+      children: () => <span>{option.label}</span>,
+    })
+  }
+  return (
+    <Listbox
+      label="Default listbox"
+      ref={ref}
+      defaultIndex={0}
+      options={options}
+      onChange={(value: string) => console.log(value)}
+    />
+  )
+}
 
 const people = [
   {
-    value: 1,
-    label: 'Wade Cooper',
+    value: 'Wade Cooper',
     avatar:
       'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 2,
-    label: 'Arlene Mccoy',
+    value: 'Arlene Mccoy',
     avatar:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 3,
-    label: 'Devon Webb',
+    value: 'Devon Webb',
     avatar:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
   },
   {
-    value: 4,
-    label: 'Tom Cook',
+    value: 'Tom Cook',
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 5,
-    label: 'Tanya Fox',
+    value: 'Tanya Fox',
     avatar:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 6,
-    label: 'Hellen Schmidt',
+    value: 'Hellen Schmidt',
     avatar:
       'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 7,
-    label: 'Caroline Schultz',
+    value: 'Caroline Schultz',
     avatar:
       'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 8,
-    label: 'Mason Heaney',
+    value: 'Mason Heaney',
     avatar:
       'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 9,
-    label: 'Claudie Smitham',
+    value: 'Claudie Smitham',
     avatar:
       'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    value: 10,
-    label: 'Emil Schaefer',
+    value: 'Emil Schaefer',
     avatar:
       'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
 ]
 
-export const People = (args: any) => (
-  <Listbox
-    defaultValue={people[1].value}
-    label="Choose a person"
-    layout="horizontal"
-    descriptionText="Choose a person for this role"
-  >
-    {people.map((person) => {
-      return (
-        <Listbox.Option
-          value={person.value}
-          label={person.label}
-          addOnBefore={({ active, selected }: any) => [
-            <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />,
-          ]}
-          children={({ active, selected }: any) => {
-            // console.log('selected', selected)
-            // console.log('active', active)
-            return (
-              <span className={'font-normal block truncate'}>
-                {person.label}
-              </span>
-            )
-          }}
-        />
-      )
-    })}
-  </Listbox>
-)
+export const People = (args: any) => {
+  const ref = useRef<any>(null)
+  const options: OptionProps[] = []
+  for (const person of people) {
+    options.push({
+      parentRef: ref,
+      value: person.value,
+      addOnBefore: () => (
+        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
+      ),
+      children: () => {
+        // console.log('selected', selected)
+        // console.log('active', active)
+        return (
+          <span className={'font-normal block truncate'}>{person.value}</span>
+        )
+      },
+    })
+  }
+
+  return (
+    <Listbox
+      ref={ref}
+      label="Choose a person"
+      layout="horizontal"
+      descriptionText="Choose a person for this role"
+      defaultIndex={0}
+      options={options}
+      onChange={(value: string) => console.log(value)}
+    />
+  )
+}
 
 People.args = {
   disabled: false,
@@ -137,185 +132,85 @@ People.args = {
   size: 'medium',
 }
 
-export const WithState = (args: any) => {
-  const [value, setValue] = useState('foo')
+export const WithIcon = (args: any) => {
+  const ref = useRef<any>(null)
+  const options: OptionProps[] = []
+  for (const person of people) {
+    options.push({
+      parentRef: ref,
+      value: person.value,
+      addOnBefore: () => (
+        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
+      ),
+      children: () => {
+        return (
+          <span className={'font-normal block truncate'}>{person.value}</span>
+        )
+      },
+    })
+  }
   return (
     <Listbox
-      value={value}
-      onChange={(value) => setValue(value)}
-      label="Choose a person"
-      layout="horizontal"
-      descriptionText="Choose a person for this role"
-    >
-      <Listbox.Option value="foo" id="foo" label="foo" key="foo">
-        foo
-      </Listbox.Option>
-      {people.map((person) => {
-        return (
-          <Listbox.Option
-            key={person.value}
-            value={person.value}
-            label={person.label}
-            addOnBefore={({ active, selected }: any) => [
-              <img
-                src={person.avatar}
-                alt=""
-                className="h-6 w-6 rounded-full"
-              />,
-            ]}
-            children={({ active, selected }: any) => {
-              return (
-                <span className={'font-normal block truncate'}>
-                  {person.label}
-                </span>
-              )
-            }}
-          />
-        )
-      })}
-    </Listbox>
+      ref={ref}
+      label="Language"
+      layout="vertical"
+      icon={<IconGlobe />}
+      onChange={(value: string) => console.log(value)}
+      options={[
+        {
+          parentRef: ref,
+          value: 'English',
+          children: ({ selected }: any) => {
+            return <span className={'font-normal block truncate'}>English</span>
+          },
+        },
+        {
+          parentRef: ref,
+          value: 'French',
+          children: ({ selected }: any) => {
+            return <span className={'font-normal block truncate'}>French</span>
+          },
+        },
+      ]}
+    />
   )
 }
 
-WithState.args = {
+WithIcon.args = {
   disabled: false,
-  label: 'Label',
   layout: 'vertical',
   size: 'medium',
 }
 
-// export const Default = (args: any) => (
-//   <Listbox {...args}>
-//     <Option value="javascript">JavaScript</Option>
-//     <Option value="typeScript">TypeScript</Option>
-//     <Option value="react">React</Option>
-//   </Listbox>
-// )
-
-// export const withCheckboxes = (args: any) => <Listbox {...args} />
-
-export const ErrorState = (args: any) => (
-  <Listbox
-    label="Choose a person"
-    descriptionText="Choose a person for this role"
-    error="I am an error"
-  >
-    {people.map((person) => {
-      return (
-        <Listbox.Option
-          label={person.label}
-          value={person.value}
-          addOnBefore={({ active, selected }: any) => [
-            <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />,
-          ]}
-        >
-          {person.label}
-        </Listbox.Option>
-      )
-    })}
-  </Listbox>
-)
+export const ErrorState = (args: any) => {
+  const ref = useRef<any>(null)
+  const options: OptionProps[] = []
+  for (const person of people) {
+    options.push({
+      parentRef: ref,
+      value: person.value,
+      addOnBefore: ({ selected }: any) => (
+        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
+      ),
+      children: () => {
+        return (
+          <span className={'font-normal block truncate'}>{person.value}</span>
+        )
+      },
+    })
+  }
+  return (
+    <Listbox
+      label="Choose a person"
+      descriptionText="Choose a person for this role"
+      error="I am an error"
+      options={options}
+      onChange={(value: string) => console.log(value)}
+    />
+  )
+}
 
 ErrorState.args = {
   label: 'Choose a person',
   descriptionText: 'Choose a person for this role',
-}
-
-export const ListBoxChildrenPropChange = (args: any) => {
-  const [countries, setCountries] = useState<any[]>([
-    'England',
-    'Wales',
-    'Scotland',
-    'Ireland',
-  ])
-
-  function handlePop() {
-    console.log('handlepop')
-    let _data = []
-    _data = countries
-    _data.pop()
-    setCountries([..._data])
-
-    console.log(countries)
-  }
-
-  return (
-    <>
-      {countries.map((country) => {
-        return <span>{country}</span>
-      })}
-      <Listbox
-        defaultValue={'England'}
-        label="Choose a country"
-        descriptionText="Choose a person for this role"
-      >
-        {countries.map((country) => {
-          return (
-            <Listbox.Option label={country} value={country}>
-              {country}
-            </Listbox.Option>
-          )
-        })}
-        <Listbox.Option label="disabled country" value="disabled" disabled>
-          Disabled
-        </Listbox.Option>
-      </Listbox>
-      <Button onClick={handlePop}>Remove country</Button>
-    </>
-  )
-}
-
-ListBoxChildrenPropChange.args = {
-  label: 'Choose a country',
-}
-
-export const ValueChange = (args: any) => {
-  const [countries, setCountries] = useState<any[]>([
-    'England',
-    'Wales',
-    'Scotland',
-    'Ireland',
-  ])
-
-  const [value, setValue] = useState<string>('England')
-
-  function handleRandom() {
-    const random = countries[Math.floor(Math.random() * countries.length)]
-    setValue(random)
-  }
-
-  return (
-    <>
-      <Typography.Text>current value: {value}</Typography.Text>
-      <div>
-        <Listbox
-          value={value}
-          label="Choose a country"
-          descriptionText="Choose a person for this role"
-          onChange={setValue}
-        >
-          {countries.map((country) => {
-            return (
-              <Listbox.Option label={country} value={country} key={country}>
-                {country}
-              </Listbox.Option>
-            )
-          })}
-          <Listbox.Option
-            label="disabled country"
-            value="disabled"
-            disabled
-            key="disabled"
-          >
-            Disabled
-          </Listbox.Option>
-        </Listbox>
-      </div>
-      <Button onClick={handleRandom}>Change country</Button>
-    </>
-  )
-}
-
-ValueChange.args = {
-  label: 'Choose a country',
 }

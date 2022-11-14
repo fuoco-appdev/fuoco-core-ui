@@ -1,5 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, { Fragment, ReactNode, useEffect, useState } from 'react'
+import React, {
+  Fragment,
+  ReactNode,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+  Children,
+} from 'react'
 import { Listbox as HeadlessListbox, Transition } from '@headlessui/react'
 import { FormLayout } from '../../lib/Layout/FormLayout'
 // @ts-ignore
@@ -8,16 +16,18 @@ import SelectStyles from './SelectStyled.module.css'
 import InputIconContainer from '../../lib/Layout/InputIconContainer'
 import InputErrorIcon from '../../lib/Layout/InputErrorIcon'
 import { IconCheck } from '../Icon/icons/IconCheck'
-
-import { flatten } from 'lodash'
+import Ripples from 'react-ripples'
+import { Dropdown } from '../Dropdown'
+import { DropdownAlignment } from '../Dropdown/Dropdown'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
 export interface Props {
+  options: OptionProps[]
+  defaultIndex?: number
   className?: string
-  children: React.ReactNode
   descriptionText?: string
   error?: string
   icon?: any
@@ -25,78 +35,55 @@ export interface Props {
   label?: string
   labelOptional?: string
   layout?: 'horizontal' | 'vertical'
-  onChange?(x: string): void
+  onChange?(value: string): void
   style?: React.CSSProperties
-  value?: any
   reveal?: boolean
   actions?: React.ReactNode
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
-  defaultValue?: any
   borderless?: boolean
 }
 
-function Listbox({
-  children,
-  className,
-  descriptionText,
-  error,
-  icon,
-  id,
-  label,
-  labelOptional,
-  layout,
-  onChange,
-  value,
-  style,
-  size = 'medium',
-  defaultValue,
-  borderless = false,
-}: Props) {
-  const [selected, setSelected] = useState(defaultValue || undefined)
-  const [selectedNode, setSelectedNode] = useState<any>({})
+function Listbox(
+  {
+    defaultIndex = 0,
+    options,
+    className,
+    descriptionText,
+    error,
+    icon,
+    id,
+    label,
+    labelOptional,
+    layout,
+    onChange,
+    style,
+    size = 'medium',
+    borderless = false,
+  }: Props,
+  ref: React.ForwardedRef<any>
+) {
+  const [childRefs] = useState<Record<string, React.MutableRefObject<any>>>({})
+  const [selectedProps, setSelectedProps] = useState<OptionProps | null>(
+    options[defaultIndex]
+  )
+  const anchorRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    if (value) {
-      setSelected(value)
-    }
-  }, [value])
+  function handleOnChange(e: any) {}
 
-  useEffect(() => {
-    const data: any = children
-    const content: any = flatten(data)
+  useImperativeHandle(ref, () => ({
+    addRef(id: string, ref: React.MutableRefObject<any>) {
+      childRefs[id] = ref
+    },
+    setSelected(props: OptionProps) {
+      setSelectedProps(props)
 
-    function findNode(value: any) {
-      return content.find((node: any) => node.props.value == value)
-    }
+      if (onChange) onChange(props?.value)
 
-    /*
-     * value prop overrides everything
-     */
-    if (value) {
-      setSelected(value)
-      const node: any = findNode(value)
-      setSelectedNode(node?.props ? node.props : undefined)
-      return
-    }
-
-    /*
-     * if no value prop, then use selected state
-     */
-    if (selected) {
-      const node: any = findNode(selected)
-      setSelectedNode(node?.props ? node.props : undefined)
-    } else {
-      /*
-       * if no selected value (including a `defaultvalue`), then use first child
-       */
-      setSelectedNode(content[0].props)
-    }
-  }, [children, selected, value])
-
-  function handleOnChange(e: any) {
-    if (onChange) onChange(e)
-    setSelected(e)
-  }
+      for (const key in childRefs) {
+        childRefs[key]?.current?.updateSelectedValue(props?.value)
+      }
+    },
+  }))
 
   let selectClasses = [SelectStyles['sbui-listbox']]
   if (error) selectClasses.push(SelectStyles['sbui-listbox--error'])
@@ -117,59 +104,67 @@ function Listbox({
       size={size}
     >
       <div className={SelectStyles['sbui-listbox-container']}>
-        <HeadlessListbox value={selected} onChange={handleOnChange}>
+        <HeadlessListbox value={selectedProps?.value} onChange={handleOnChange}>
           {({ open }) => {
             return (
-              <div className="relative">
-                <HeadlessListbox.Button className={selectClasses.join(' ')}>
-                  {icon && <InputIconContainer icon={icon} />}
-                  <span className={SelectStyles['sbui-listbox-addonbefore']}>
-                    {selectedNode?.addOnBefore && <selectedNode.addOnBefore />}
-                    <span className={SelectStyles['sbui-listbox-label']}>
-                      {selectedNode?.label}
+              <div ref={anchorRef}>
+                <Ripples className={SelectStyles['sbui-listbox-ripple']}>
+                  <HeadlessListbox.Button className={selectClasses.join(' ')}>
+                    {icon && <InputIconContainer icon={icon} />}
+                    <span className={SelectStyles['sbui-listbox-addonbefore']}>
+                      {selectedProps?.addOnBefore &&
+                        selectedProps.addOnBefore(selectedProps?.value)}
+                      <span className={SelectStyles['sbui-listbox-label']}>
+                        {selectedProps?.value}
+                      </span>
                     </span>
-                  </span>
-                  <span
-                    className={SelectStyles['sbui-listbox-chevron-container']}
-                  >
-                    <svg
-                      className={SelectStyles['sbui-listbox-chevron']}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
+                    <span
+                      className={SelectStyles['sbui-listbox-chevron-container']}
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  {error && (
-                    <div
-                      className={SelectStyles['sbui-listbox-actions-container']}
-                    >
-                      {error && <InputErrorIcon size={size} />}
-                    </div>
-                  )}
-                </HeadlessListbox.Button>
-                <Transition
-                  show={open}
-                  as={Fragment}
-                  leave={SelectStyles['sbui-listbox-transition--leave']}
-                  leaveFrom={
-                    SelectStyles['sbui-listbox-transition--leave-from']
-                  }
-                  leaveTo={SelectStyles['sbui-listbox-transition--leave-to']}
+                      <svg
+                        className={SelectStyles['sbui-listbox-chevron']}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                    {error && (
+                      <div
+                        className={
+                          SelectStyles['sbui-listbox-actions-container']
+                        }
+                      >
+                        {error && <InputErrorIcon size={size} />}
+                      </div>
+                    )}
+                  </HeadlessListbox.Button>
+                </Ripples>
+                <Dropdown
+                  style={{
+                    width: anchorRef.current?.getClientRects()[0].width,
+                  }}
+                  onOpen={() => {
+                    for (const key in childRefs) {
+                      childRefs[key]?.current?.updateSelectedValue(
+                        selectedProps?.value
+                      )
+                    }
+                  }}
+                  align={DropdownAlignment.Right}
+                  open={open}
+                  anchorRef={anchorRef}
                 >
-                  <HeadlessListbox.Options
-                    static
-                    className={SelectStyles['sbui-listbox-option-container']}
-                  >
-                    {children}
-                  </HeadlessListbox.Options>
-                </Transition>
+                  {options.map((option) => {
+                    return <ListboxOption {...option} />
+                  })}
+                </Dropdown>
               </div>
             )
           }}
@@ -179,78 +174,55 @@ function Listbox({
   )
 }
 
-interface OptionProps {
+export interface OptionProps {
+  parentRef: React.MutableRefObject<any>
+  value: string
   id?: string
   className?: string
-  value: any
-  children?: React.ReactNode | any
-  label: string
-  addOnBefore?: ({ active, selected }: any) => React.ReactNode
+  children?: ({ selected }: any) => React.ReactNode | React.ReactNode | any
+  addOnBefore?: ({ selected }: any) => React.ReactNode
   disabled?: boolean
 }
 
-type addOnBefore = {
-  selected: boolean
-  active: boolean
-}
+export const ListboxOption = React.forwardRef(
+  (props: OptionProps, ref: React.ForwardedRef<any>) => {
+    ref = React.createRef()
 
-function SelectOption({
-  id,
-  className,
-  value,
-  children,
-  label,
-  addOnBefore,
-  disabled = false,
-}: OptionProps) {
-  // console.log('children typeof', typeof children)
+    const [selectedItem, setSelectedItem] = useState<string | undefined>()
+    useImperativeHandle(ref, () => ({
+      updateSelectedValue(value: string) {
+        setSelectedItem(value)
+      },
+    }))
 
-  return (
-    <HeadlessListbox.Option key={id} value={value} disabled={disabled}>
-      {({ selected, active }) => {
-        // if (active) {
-        //   console.log('selected', selected, 'active', active)
-        //   console.log(label)
-        // }
-        return (
-          <div
-            className={classNames(
-              SelectStyles['sbui-listbox-option'],
-              active ? SelectStyles['sbui-listbox-option--active'] : ' ',
-              disabled ? SelectStyles['sbui-listbox-option--disabled'] : ' '
-            )}
-          >
-            <div className={SelectStyles['sbui-listbox-option__inner']}>
-              {addOnBefore && addOnBefore({ active, selected })}
-              <span>
-                {typeof children === 'function'
-                  ? children({ active, selected })
-                  : children}
-              </span>
-            </div>
+    useEffect(() => {
+      props.parentRef?.current?.addRef(props.value, ref)
+    }, [])
 
-            {selected ? (
-              <span
-                className={classNames(
-                  active
-                    ? SelectStyles['sbui-listbox-option__check--active']
-                    : '',
-                  SelectStyles['sbui-listbox-option__check']
-                )}
-              >
-                <IconCheck
-                  className={SelectStyles['sbui-listbox-option__check__icon']}
-                  aria-hidden="true"
-                />
-              </span>
-            ) : null}
+    return (
+      <Dropdown.Item
+        key={props.id}
+        onClick={() => {
+          props.parentRef?.current?.setSelected(props)
+        }}
+      >
+        <div
+          ref={ref}
+          className={classNames(SelectStyles['sbui-listbox-option'])}
+        >
+          <div className={SelectStyles['sbui-listbox-option__inner']}>
+            {props.addOnBefore &&
+              props.addOnBefore?.({ selected: selectedItem === props.value })}
+            <span>
+              {typeof props.children === 'function'
+                ? props.children?.({ selected: selectedItem })
+                : props.children}
+            </span>
           </div>
-        )
-      }}
-    </HeadlessListbox.Option>
-  )
-}
+        </div>
+      </Dropdown.Item>
+    )
+  }
+)
 
-Listbox.Option = SelectOption
-
-export default Listbox
+export default React.forwardRef(Listbox)

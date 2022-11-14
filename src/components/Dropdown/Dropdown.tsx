@@ -18,6 +18,7 @@ interface RootProps {
   open?: boolean
   parentRef?: React.RefObject<HTMLElement>
   anchorRef?: React.RefObject<HTMLElement>
+  onOpen?: () => void
   onClose?: (e: MouseEvent) => void
   children?: React.ReactNode
   style?: React.CSSProperties
@@ -31,8 +32,10 @@ function Dropdown({
   open,
   parentRef,
   anchorRef,
+  onOpen,
   onClose,
   children,
+  style,
 }: RootProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [dropdownTop, setDropdownTop] = useState<number>(0)
@@ -80,6 +83,8 @@ function Dropdown({
       } else if (align === DropdownAlignment.Right) {
         setDropdownLeft(anchorLeft + anchorWidth - dropdownWidth * 2)
       }
+
+      onOpen?.()
     }
   }, [open])
 
@@ -103,15 +108,15 @@ function Dropdown({
     },
   })
   return transition(
-    (style, item) =>
+    (transitionStyle, item) =>
       item && (
         <animated.div
           ref={containerRef}
           style={{
+            ...transitionStyle,
             ...style,
             position: 'absolute',
             zIndex: 24,
-            width: 'fit-content',
             top: dropdownTop,
             left: dropdownLeft,
           }}
