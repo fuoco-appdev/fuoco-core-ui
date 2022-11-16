@@ -36,7 +36,7 @@
 .sbui-dropdown {
   @apply rounded pt-3 pb-3;
   @apply bg-white dark:bg-white;
-  max-height: 50vh;
+  max-height: 300px;
   overflow-y: auto;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }

@@ -28,10 +28,9 @@
 }
 
 .sbui-inputphonenumber-dropdown {
-    @apply absolute rounded border border-lightmode dark:border-darkmode !important;
+    @apply rounded border border-lightmode dark:border-darkmode !important;
     @apply dark:text-white !important;
     border-radius: 0.25rem !important;
-    top: 36px;
     height: inherit;
     width: inherit;
 }

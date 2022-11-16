@@ -169,7 +169,7 @@ function InputPhoneNumber({
 }: Props) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const numberInputRef = useRef<HTMLInputElement | null>(null)
-  const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const inputRef = useRef<HTMLDivElement | null>(null)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
   const countryData = new CountryData(
     enableAreaCodes,
@@ -903,9 +903,12 @@ function InputPhoneNumber({
         style={formStyle}
         size={size}
       >
-        <div className={classesContainer.join(' ')} style={containerStyle}>
+        <div
+          className={classesContainer.join(' ')}
+          style={containerStyle}
+          ref={inputRef}
+        >
           <Button
-            buttonRef={buttonRef}
             className={InputPhoneNumberStyles['sbui-inputphonenumber-button']}
             htmlType={'button'}
             size={'tiny'}
@@ -918,7 +921,7 @@ function InputPhoneNumber({
           <Dropdown
             className={classes?.dropdown}
             parentRef={parentRef}
-            anchorRef={buttonRef}
+            anchorRef={inputRef}
             align={DropdownAlignment.Left}
             ref={dropdownRef}
             open={showDropdown}

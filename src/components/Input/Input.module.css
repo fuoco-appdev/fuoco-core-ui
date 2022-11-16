@@ -8,7 +8,7 @@
 }
 
 .sbui-input {
-  @apply pl-1 pr-3 py-2 w-full text-sm;
+  @apply pl-3 pr-3 py-2 w-full text-sm;
   @apply text-input-value-dark;
   @apply bg-transparent dark:bg-transparent focus:outline-none hover:outline-none outline-none;
 

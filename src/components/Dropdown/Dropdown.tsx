@@ -38,8 +38,9 @@ function Dropdown({
   style,
 }: RootProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [dropdownTop, setDropdownTop] = useState<number>(0)
-  const [dropdownLeft, setDropdownLeft] = useState<number>(0)
+  const [top, setTop] = useState<number>(0)
+  const [left, setLeft] = useState<number>(0)
+
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
@@ -74,17 +75,16 @@ function Dropdown({
       const anchorLeft = anchorRef?.current?.getClientRects()[0].x ?? 0
       const anchorWidth = anchorRef?.current?.getClientRects()[0].width ?? 0
       const dropdownWidth = containerRef.current?.getClientRects()[0].width ?? 0
-
       if (dropdownBottom > parentBottom && parentHeight > anchorHeight) {
-        setDropdownTop(anchorTop - dropdownHeight * 2)
+        setTop(anchorTop - dropdownHeight * 2)
       } else {
-        setDropdownTop(dropdownTop)
+        setTop(dropdownTop)
       }
 
       if (align === DropdownAlignment.Left) {
-        setDropdownLeft(anchorLeft)
+        setLeft(anchorLeft)
       } else if (align === DropdownAlignment.Right) {
-        setDropdownLeft(anchorLeft + anchorWidth - dropdownWidth * 2)
+        setLeft(anchorLeft + anchorWidth - dropdownWidth * 2)
       }
 
       onOpen?.()
@@ -122,8 +122,8 @@ function Dropdown({
             ...style,
             position: 'absolute',
             zIndex: 24,
-            top: dropdownTop,
-            left: dropdownLeft,
+            top: top,
+            left: left,
           }}
         >
           <ul
