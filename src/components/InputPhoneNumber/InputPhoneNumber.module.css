@@ -36,6 +36,10 @@
     width: inherit;
 }
 
+.country-name, .dial-code {
+  @apply text-sm text-input-value-light dark:text-input-value-light;
+}
+
 .sbui-inputphonenumber-dropdown li span {
     font-family: Poppins !important;
 }

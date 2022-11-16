@@ -130,6 +130,15 @@ function Listbox(
                         {selectedProps?.value}
                       </span>
                     </span>
+                    {error && (
+                      <div
+                        className={
+                          SelectStyles['sbui-listbox-actions-container']
+                        }
+                      >
+                        {error && <InputErrorIcon size={size} />}
+                      </div>
+                    )}
                     <span
                       className={SelectStyles['sbui-listbox-chevron-container']}
                     >
@@ -147,15 +156,6 @@ function Listbox(
                         />
                       </svg>
                     </span>
-                    {error && (
-                      <div
-                        className={
-                          SelectStyles['sbui-listbox-actions-container']
-                        }
-                      >
-                        {error && <InputErrorIcon size={size} />}
-                      </div>
-                    )}
                   </HeadlessListbox.Button>
                 </Ripples>
                 <Dropdown
@@ -171,6 +171,7 @@ function Listbox(
                     }
                   }}
                   onClose={() => {
+                    console.log('blur')
                     onBlur?.()
                   }}
                   align={DropdownAlignment.Right}

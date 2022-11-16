@@ -11,6 +11,7 @@
   @apply flex;
   @apply text-typography-body-secondary-light dark:text-typography-body-secondary-light;
   flex-direction: row;
+  justify-content: flex-start;
   width: inherit;
 }
 

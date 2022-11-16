@@ -16,6 +16,7 @@ export interface Props {
   mapboxAccessToken: string
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
+  icon?: JSX.Element
   afterLabel?: string
   beforeLabel?: string
   labelOptional?: string
@@ -51,6 +52,8 @@ export interface Props {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onMouseEnter?: (event: React.MouseEvent<HTMLInputElement>) => void
+  onMouseLeave?: (event: React.MouseEvent<HTMLInputElement>) => void
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   onEnterKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
@@ -61,6 +64,7 @@ function InputGeocoding({
   id,
   mapboxAccessToken,
   parentRef,
+  icon,
   className,
   error,
   label,
@@ -84,6 +88,8 @@ function InputGeocoding({
   onChange,
   onFocus,
   onBlur,
+  onMouseEnter,
+  onMouseLeave,
   onClick,
   onKeyDown,
   onEnterKeyPress,
@@ -94,7 +100,6 @@ function InputGeocoding({
   const inputRef = useRef<HTMLInputElement | null>(null)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
-  const [mapPinIconLit, setMapPinIconLit] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
   const [features, setFeatures] = useState<any[]>([])
   const [selectedFeature, setSelectedFeature] = useState<any | null>(null)
@@ -118,29 +123,6 @@ function InputGeocoding({
     setValue(feature['place_name'])
     onLocationChanged?.(value, feature)
     setShowDropdown(false)
-  }
-
-  const handleOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    setMapPinIconLit(true)
-    onFocus?.(e)
-  }
-
-  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setMapPinIconLit(false)
-    onBlur?.(e)
-  }
-
-  const handleOnMouseEnter = (e: React.MouseEvent<HTMLInputElement>) => {
-    setMapPinIconLit(true)
-    inputProps?.onMouseEnter?.(e)
-  }
-
-  const handleOnMouseLeave = (e: React.MouseEvent<HTMLInputElement>) => {
-    if (document.activeElement !== e.currentTarget) {
-      setMapPinIconLit(false)
-    }
-
-    inputProps?.onMouseLeave?.(e)
   }
 
   useEffect(() => {
@@ -211,10 +193,10 @@ function InputGeocoding({
   interpolation.push(0)
 
   const classesContainer: string[] = [
-    InputGeocodingStyles['sbui-inputphonenumber-container'],
+    InputGeocodingStyles['sbui-inputgeocoding-container'],
   ]
   if (error)
-    classesContainer.push(InputGeocodingStyles['sbui-inputphonenumber--error'])
+    classesContainer.push(InputGeocodingStyles['sbui-inputgeocoding--error'])
 
   return (
     <animated.div
@@ -240,37 +222,30 @@ function InputGeocoding({
           className={classesContainer.join(' ')}
           style={containerStyle}
         >
-          <InputIconContainer
-            icon={
-              <IconMapPin
-                size={size}
-                stroke={mapPinIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
-            }
-          />
+          <InputIconContainer icon={icon} />
           <input
             {...inputProps}
-            className={InputGeocodingStyles['sbui-inputphonenumber']}
+            className={InputGeocodingStyles['sbui-inputgeocoding']}
             style={inputStyle}
             onChange={handleChange}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onFocus={onFocus}
+            onBlur={onBlur}
             value={value}
             placeholder={placeholder}
             disabled={disabled}
           />
           <Space
             className={
-              InputGeocodingStyles['sbui-inputphonenumber-actions-container']
+              InputGeocodingStyles['sbui-inputgeocoding-actions-container']
             }
             size={1}
           ></Space>
           {error ? (
             <Space
               className={
-                InputGeocodingStyles['sbui-inputphonenumber-actions-container']
+                InputGeocodingStyles['sbui-inputgeocoding-actions-container']
               }
               size={1}
             >
@@ -299,7 +274,9 @@ function InputGeocoding({
               }
               key={`feature_${index}`}
             >
-              <span className="place-name">{feature['place_name']}</span>
+              <span className={InputGeocodingStyles['place-name']}>
+                {feature['place_name']}
+              </span>
             </Dropdown.Item>
           )
         })}

@@ -616,10 +616,10 @@ function InputPhoneNumber({
           <Dropdown.Icon>
             <div className={inputFlagClasses} />
           </Dropdown.Icon>
-          <span className="country-name">
+          <span className={InputPhoneNumberStyles['country-name']}>
             {getDropdownCountryName(country)}
           </span>
-          <span className="dial-code">
+          <span className={InputPhoneNumberStyles['dial-code']}>
             {country.format
               ? formatNumber(country.dialCode, country)
               : prefix + country.dialCode}

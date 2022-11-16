@@ -7,8 +7,8 @@
 
   @apply text-gray-700 border border-solid border-gray-300;
   /* @apply focus:ring-brand-500 focus:border-brand-500 focus:outline-none; */
-
-  @apply cursor-default focus:outline-none focus:ring-1 focus:ring-brand-600 focus:border-brand-600;
+  @apply hover:outline-none hover:ring-brand-600 hover:border-brand-600;
+  @apply cursor-default;
 
   @apply dark:bg-transparent dark:text-white dark:border-gray-500;
   @apply dark:focus:border-brand-500;
@@ -45,7 +45,7 @@
   height: inherit;
   width: inherit;
   pointer-events: auto;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /*
@@ -61,6 +61,7 @@
 .sbui-listbox--medium {
   @apply py-2 text-sm;
   background-color: transparent;
+  align-items: center;
 }
 .sbui-listbox--large {
   @apply px-4 py-2 text-base;
@@ -70,7 +71,7 @@
 }
 
 .sbui-listbox-actions-container {
-  @apply absolute inset-y-0 right-0 pl-3 pr-1 mr-5 flex items-center;
+  @apply inset-y-0 right-0 pr-1 flex items-center;
 }
 
 /*
@@ -91,7 +92,7 @@
 */
 
 .sbui-listbox-chevron-container {
-  @apply absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none;
+  @apply inset-y-0 right-0 flex items-center pr-3 pointer-events-none;
 }
 
 .sbui-listbox-chevron {
@@ -107,7 +108,7 @@
 }
 
 .sbui-listbox-option {
-  @apply cursor-pointer select-none relative py-2 pl-3 pr-9 text-gray-900 dark:text-white;
+  @apply cursor-pointer select-none relative pr-9 text-gray-900 dark:text-white;
   width: inherit;
 }
 

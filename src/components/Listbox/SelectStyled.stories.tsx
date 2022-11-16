@@ -25,7 +25,9 @@ export const Default = (args: any) => {
       parentRef: ref,
       id: option.label,
       value: option.value,
-      children: () => <span>{option.label}</span>,
+      children: () => (
+        <span style={{ fontSize: '0.875rem' }}>{option.label}</span>
+      ),
     })
   }
   return (
@@ -106,7 +108,12 @@ export const People = (args: any) => {
         // console.log('selected', selected)
         // console.log('active', active)
         return (
-          <span className={'font-normal block truncate'}>{person.value}</span>
+          <span
+            className={'font-normal block truncate'}
+            style={{ fontSize: '0.875rem' }}
+          >
+            {person.value}
+          </span>
         )
       },
     })
@@ -134,6 +141,7 @@ People.args = {
 
 export const WithIcon = (args: any) => {
   const ref = useRef<any>(null)
+  const [isGlobeIconLit, setIsGlobeIconLit] = useState<boolean>(false)
   const options: OptionProps[] = []
   for (const person of people) {
     options.push({
@@ -144,7 +152,12 @@ export const WithIcon = (args: any) => {
       ),
       children: () => {
         return (
-          <span className={'font-normal block truncate'}>{person.value}</span>
+          <span
+            className={'font-normal block truncate'}
+            style={{ fontSize: '0.875rem' }}
+          >
+            {person.value}
+          </span>
         )
       },
     })
@@ -154,21 +167,43 @@ export const WithIcon = (args: any) => {
       ref={ref}
       label="Language"
       layout="vertical"
-      icon={<IconGlobe />}
+      icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
       onChange={(value: string) => console.log(value)}
+      onMouseEnter={() => setIsGlobeIconLit(true)}
+      onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+        if (document.activeElement !== e.currentTarget) {
+          setIsGlobeIconLit(false)
+        }
+      }}
+      onFocus={() => setIsGlobeIconLit(true)}
+      onBlur={() => setIsGlobeIconLit(false)}
       options={[
         {
           parentRef: ref,
           value: 'English',
           children: ({ selected }: any) => {
-            return <span className={'font-normal block truncate'}>English</span>
+            return (
+              <span
+                className={'font-normal block truncate'}
+                style={{ fontSize: '0.875rem' }}
+              >
+                English
+              </span>
+            )
           },
         },
         {
           parentRef: ref,
           value: 'French',
           children: ({ selected }: any) => {
-            return <span className={'font-normal block truncate'}>French</span>
+            return (
+              <span
+                className={'font-normal block truncate'}
+                style={{ fontSize: '0.875rem' }}
+              >
+                French
+              </span>
+            )
           },
         },
       ]}
@@ -194,7 +229,12 @@ export const ErrorState = (args: any) => {
       ),
       children: () => {
         return (
-          <span className={'font-normal block truncate'}>{person.value}</span>
+          <span
+            className={'font-normal block truncate'}
+            style={{ fontSize: '0.875rem' }}
+          >
+            {person.value}
+          </span>
         )
       },
     })

@@ -19,7 +19,7 @@ interface RootProps {
   parentRef?: React.RefObject<HTMLElement>
   anchorRef?: React.RefObject<HTMLElement>
   onOpen?: () => void
-  onClose?: (e: MouseEvent) => void
+  onClose?: () => void
   children?: React.ReactNode
   style?: React.CSSProperties
 }
@@ -46,10 +46,10 @@ function Dropdown({
      */
     function handleClickOutside(event: MouseEvent) {
       if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
+        anchorRef?.current &&
+        !anchorRef?.current.contains(event.target as Node)
       ) {
-        onClose?.(event)
+        onClose?.()
       }
     }
     // Bind the event listener
@@ -63,16 +63,19 @@ function Dropdown({
   useEffect(() => {
     if (open) {
       const parentHeight = parentRef?.current?.getClientRects()[0].height ?? 0
+      const parentTop = parentRef?.current?.getClientRects()[0].y ?? 0
+      const parentBottom = parentTop + parentHeight
       const anchorTop = anchorRef?.current?.getClientRects()[0].y ?? 0
       const anchorHeight = anchorRef?.current?.getClientRects()[0].height ?? 0
       const dropdownHeight =
         containerRef.current?.getClientRects()[0].height ?? 0
       const dropdownTop = anchorTop + anchorHeight
+      const dropdownBottom = dropdownTop + dropdownHeight * 2
       const anchorLeft = anchorRef?.current?.getClientRects()[0].x ?? 0
       const anchorWidth = anchorRef?.current?.getClientRects()[0].width ?? 0
       const dropdownWidth = containerRef.current?.getClientRects()[0].width ?? 0
 
-      if (dropdownTop > parentHeight && parentHeight > anchorHeight) {
+      if (dropdownBottom > parentBottom && parentHeight > anchorHeight) {
         setDropdownTop(anchorTop - dropdownHeight * 2)
       } else {
         setDropdownTop(dropdownTop)
@@ -85,6 +88,8 @@ function Dropdown({
       }
 
       onOpen?.()
+    } else {
+      onClose?.()
     }
   }, [open])
 
@@ -145,7 +150,7 @@ function Item({ ref, children, onClick }: ItemProps) {
       <Button
         className={DropdownStyles['sbui-dropdown-item-content']}
         type={'text'}
-        size={'small'}
+        size={'large'}
         onClick={onClick}
       >
         {children}
