@@ -97,10 +97,6 @@ const Button = forwardRef<RefHandle, ButtonProps>(
       classes.push(ButtonStyles[`sbui-btn--${size}`])
     }
 
-    if (className) {
-      classes.push(className)
-    }
-
     const iconLoaderClasses = [ButtonStyles['sbui-btn--anim--spin']]
 
     if (loadingCentered) {
@@ -113,7 +109,10 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     classes.push(ButtonStyles[`sbui-btn--text-align-${textAlign}`])
 
     return (
-      <Ripples {...rippleProps} className={ButtonStyles['sbui-btn-ripple']}>
+      <Ripples
+        {...rippleProps}
+        className={[ButtonStyles['sbui-btn-ripple'], ...className].join(' ')}
+      >
         <button
           {...props}
           ref={buttonRef}

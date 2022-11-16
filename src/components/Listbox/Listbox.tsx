@@ -41,6 +41,10 @@ export interface Props {
   actions?: React.ReactNode
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
   borderless?: boolean
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 function Listbox(
@@ -59,6 +63,10 @@ function Listbox(
     style,
     size = 'medium',
     borderless = false,
+    onMouseEnter,
+    onMouseLeave,
+    onFocus,
+    onBlur,
   }: Props,
   ref: React.ForwardedRef<any>
 ) {
@@ -103,7 +111,11 @@ function Listbox(
       style={style}
       size={size}
     >
-      <div className={SelectStyles['sbui-listbox-container']}>
+      <div
+        className={SelectStyles['sbui-listbox-container']}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <HeadlessListbox value={selectedProps?.value} onChange={handleOnChange}>
           {({ open }) => {
             return (
@@ -151,11 +163,15 @@ function Listbox(
                     width: anchorRef.current?.getClientRects()[0].width,
                   }}
                   onOpen={() => {
+                    onFocus?.()
                     for (const key in childRefs) {
                       childRefs[key]?.current?.updateSelectedValue(
                         selectedProps?.value
                       )
                     }
+                  }}
+                  onClose={() => {
+                    onBlur?.()
                   }}
                   align={DropdownAlignment.Right}
                   open={open}
