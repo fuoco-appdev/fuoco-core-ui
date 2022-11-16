@@ -111,7 +111,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     return (
       <Ripples
         {...rippleProps}
-        className={[ButtonStyles['sbui-btn-ripple'], ...className].join(' ')}
+        className={[ButtonStyles['sbui-btn-ripple'], className].join(' ')}
       >
         <button
           {...props}
