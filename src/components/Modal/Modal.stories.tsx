@@ -19,89 +19,107 @@ export default {
 
 export const Default = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const withIcon = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const withVerticalLayout = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const withCloseButton = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       This Modal has a close button on the top right
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const rightAlignedFooter = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const hideFooter = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const withFooterBackground = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const customFooter = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
 
 export const customFooterVertical = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary">
+    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
       Modal content is inserted here, if you need to insert anything into the
       Modal you can do so via{' '}
-      <Typography.Text code>{'{children}'}</Typography.Text>
+      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+        {'{children}'}
+      </Typography.Text>
     </Typography.Text>
   </Modal>
 )
@@ -229,7 +247,7 @@ export const LongModal = () => (
       Modal you can do so via
     </p>
     <Modal visible={true}>
-      <Typography.Text type="secondary">
+      <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
         <p>
           Modal content is inserted here, if you need to insert anything into
           the Modal you can do so via
@@ -286,7 +304,9 @@ export const LongModal = () => (
           Modal content is inserted here, if you need to insert anything into
           the Modal you can do so via
         </p>
-        <Typography.Text code>{'{children}'}</Typography.Text>
+        <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+          {'{children}'}
+        </Typography.Text>
       </Typography.Text>
     </Modal>
   </div>

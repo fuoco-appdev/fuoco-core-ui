@@ -11,7 +11,7 @@ export default {
 
 export const Default = (args: any) => (
   <Accordion {...args}>
-    <Accordion.Item label="Single Item">
+    <Accordion.Item id="1" label="Single Item">
       <Typography>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
         amet labore.
@@ -20,7 +20,9 @@ export const Default = (args: any) => (
   </Accordion>
 )
 
-Default.args = {}
+Default.args = {
+  defaultActiveId: ['1'],
+}
 
 const Multiple = (args: any) => (
   <Accordion {...args}>

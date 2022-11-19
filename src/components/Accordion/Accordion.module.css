@@ -2,19 +2,22 @@
   @apply flex flex-col rounded-md;
 }
 
-.sbui-accordion-container--bordered {
-  @apply border border-solid;
+.sbui-accordion-item-bordered {
+  @apply border-2 border-solid;
   @apply border-gray-100;
-  @apply dark:bg-dark-100 dark:border-darkmode;
+  @apply dark:bg-dark-100 dark:border-lightmode;
 }
 
 .sbui-accordion-item {
   @apply w-full;
 }
 
-.sbui-accordion-item__button {
-  @apply flex justify-between w-full text-left cursor-pointer px-6 py-4 border-0 border-solid font-medium text-base rounded-t-md bg-transparent;
+.sbui-accordion-item-ripples {
+  @apply rounded-sm;
+}
 
+.sbui-accordion-item__button {
+  @apply flex rounded-sm justify-between w-full text-left cursor-pointer px-6 py-4 border-solid font-medium text-base rounded-t-md bg-transparent;
   @apply border-gray-200 text-gray-100 hover:text-gray-100;
   @apply dark:border-darkmode dark:text-dark-100 dark:hover:text-white;
 
@@ -40,7 +43,7 @@
 
 .sbui-accordion-container--bordered
   .sbui-accordion-item__button:not(:first-child) {
-  @apply rounded-none border-t border-gray-200 dark:border-darkmode;
+  @apply rounded-none border-t border-gray-200 dark:border-gray-200;
 }
 
 .sbui-accordion-item__panel {
