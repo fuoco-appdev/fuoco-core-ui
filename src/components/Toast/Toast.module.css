@@ -1,9 +1,41 @@
-.sbui-toast-container {
-  @apply max-w-xs w-full shadow-lg rounded-md pointer-events-auto overflow-hidden py-4 px-2;
+.sbui-toast-root {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 24;
+  pointer-events: none;
+  overflow: none;
+}
 
+.sbui-toast-overlay-container {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 16px;
+  overflow: none;
+}
+
+.sbui-toast-content {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.sbui-toast-text-container {
+  width: 100%;
+}
+
+.sbui-toast-container {
+  @apply relative shadow-lg rounded-md py-4 px-2 overflow-hidden;
   @apply border border-solid;
-  @apply bg-white border-gray-300;
+  @apply bg-gray-700 border-gray-400;
   @apply dark:bg-dark-700 dark:border-gray-400;
+  min-width: 344px;
+  display: flex;
+  flex: 1;
 }
 
 .sbui-toast-container--sm {
@@ -30,7 +62,7 @@
 }
 
 .sbui-toast-details {
-  @apply ml-3 w-0 flex flex-1 justify-between;
+  @apply ml-3 flex flex-1;
 }
 
 .sbui-toast-details--actions-bottom {
@@ -46,11 +78,11 @@
 }
 
 .sbui-toast-message {
-  @apply m-0 text-sm font-medium text-gray-900;
+  @apply m-0 text-sm font-medium text-gray-100;
 }
 
 .sbui-toast-description {
-  @apply m-0 mt-1 text-sm font-normal text-gray-500;
+  @apply m-0 mt-1 text-sm font-normal text-gray-300;
 }
 
 .sbui-toast-details__actions {
@@ -95,10 +127,11 @@
   }
 }
 
-div[data-radix-portal]:not(.portal--toast) {
-  /* 
-  override z-index to be lower than radix value of 2147483647 
-  except for the toast portal
-  */
-  z-index: 2147483646 !important;
+.sbui-toast-life {
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  width: auto;
+  background-image: linear-gradient(130deg, #00b4e6, #10DADA);
+  height: 5px;
 }
