@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { Button, Space, IconPackage, IconChevronRight } from './../../index'
+import { Button, Space, IconPackage, IconChevronRight } from '../../index'
 
 export default {
   title: 'General/Button',

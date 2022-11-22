@@ -1,6 +1,6 @@
 
-import Typography from './Typography'
+import Typography from './typography'
 export default Typography
-export { default as Typography } from './Typography'
+export { default as Typography } from './typography'
 
 

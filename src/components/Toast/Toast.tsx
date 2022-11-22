@@ -5,16 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { IconCheck } from '../Icon/icons/IconCheck'
-import { IconLoader } from '../Icon/icons/IconLoader'
-import { IconX } from '../Icon/icons/IconX'
-import { IconAlertCircle } from '../Icon/icons/IconAlertCircle'
-import { Button } from '../Button/index'
+import { IconCheck } from '../icon/icons/icon-check'
+import { IconLoader } from '../icon/icons/icon-loader'
+import { IconX } from '../icon/icons/icon-x'
+import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
+import { Button } from '../button/index'
 // @ts-ignore
-import ToastStyles from './Toast.module.css'
-import Typography from '../Typography'
+import ToastStyles from './toast.module.css'
+import Typography from '../typography'
 import { useTransition, animated, SpringValue } from 'react-spring'
-import { X } from '../Icon/IconImportHandler'
+import { X } from '../icon/icon-import-handler'
 
 export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
 

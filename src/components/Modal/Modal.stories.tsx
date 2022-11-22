@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 
 import { Modal } from '.'
-import Typography from '../Typography'
-import { Badge } from '../Badge'
-import { Button } from '../Button'
-import { Space } from '../Space'
-import { IconTrash, IconAlertCircle, IconCheck } from './../../index'
-import { Dropdown } from '../Dropdown'
+import Typography from '../typography'
+import { Badge } from '../badge'
+import { Button } from '../button'
+import { Space } from '../space'
+import { IconTrash, IconAlertCircle, IconCheck } from '../../index'
+import { Dropdown } from '../dropdown'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

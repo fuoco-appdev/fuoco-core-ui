@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import SpaceStyles from './Space.module.css'
+import SpaceStyles from './space.module.css'
 
 function Space({
   direction,

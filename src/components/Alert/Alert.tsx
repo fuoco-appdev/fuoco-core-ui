@@ -1,13 +1,11 @@
 import React from 'react'
-import { IconAlertTriangle } from '../Icon/icons/IconAlertTriangle'
-import { IconCheck } from '../Icon/icons/IconCheck'
-import { IconInfo } from '../Icon/icons/IconInfo'
-import { IconX } from '../Icon/icons/IconX'
-import { IconXCircle } from '../Icon/icons/IconXCircle'
+import { IconAlertTriangle } from '../icon/icons/icon-alert-triangle'
+import { IconCheck } from '../icon/icons/icon-check'
+import { IconInfo } from '../icon/icons/icon-info'
+import { IconX } from '../icon/icons/icon-x'
+import { IconXCircle } from '../icon/icons/icon-x-circle'
 import { animated } from 'react-spring'
-
-// @ts-ignore
-import AlertStyles from './Alert.module.css'
+import AlertStyles from './alert.module.css'
 
 export interface Props {
   variant?: 'success' | 'danger' | 'warning' | 'info'

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
-import { Space } from '../Space'
+import { FormLayout } from '../../lib/layout/form-layout'
+import { Space } from '../space'
 // @ts-ignore
-import RadioStyles from './Radio.module.css'
-import { RadioContext } from './RadioContext'
+import RadioStyles from './radio.module.css'
+import { RadioContext } from './radio-context'
 
 interface InputProps {
   label: string

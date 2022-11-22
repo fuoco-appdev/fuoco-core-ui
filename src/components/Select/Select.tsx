@@ -1,12 +1,12 @@
 // @ts-ignore
 import React, { Ref } from 'react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
-import InputErrorIcon from '../../lib/Layout/InputErrorIcon'
-import InputIconContainer from '../../lib/Layout/InputIconContainer'
+import { FormLayout } from '../../lib/layout/form-layout'
+import InputErrorIcon from '../../lib/layout/input-error-icon'
+import InputIconContainer from '../../lib/layout/input-icon-container'
 import { Space } from '../../index'
 // @ts-ignore
-import SelectStyles from './Select.module.css'
-import { Icon } from '../Icon'
+import SelectStyles from './select.module.css'
+import { Icon } from '../icon'
 
 interface OptionProps {
   value: string

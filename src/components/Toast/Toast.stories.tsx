@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import { Toast } from '.'
-import { Button } from '../Button/index'
-import { ToastProps } from './Toast'
+import { Button } from '../button/index'
+import { ToastProps } from './toast'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
-import InputErrorIcon from '../../lib/Layout/InputErrorIcon'
-import InputIconContainer from '../../lib/Layout/InputIconContainer'
+import { FormLayout } from '../../lib/layout/form-layout'
+import InputErrorIcon from '../../lib/layout/input-error-icon'
+import InputIconContainer from '../../lib/layout/input-icon-container'
 import {
   Button,
   Space,
@@ -11,7 +11,7 @@ import {
   IconEyeOff,
 } from '../../index'
 // @ts-ignore
-import InputStyles from './Input.module.css'
+import InputStyles from './input.module.css'
 import { animated, useSpring } from 'react-spring'
 
 export interface Props
@@ -81,11 +81,12 @@ function Input({
     type = 'text'
   }
 
-  let inputClasses = [InputStyles['sbui-input']]
-  if (error) inputClasses.push(InputStyles['sbui-input--error'])
-  if (icon) inputClasses.push(InputStyles['sbui-input--with-icon'])
-  if (size) inputClasses.push(InputStyles[`sbui-input--${size}`])
-  if (borderless) inputClasses.push(InputStyles['sbui-input--borderless'])
+  let inputContainerClasses = [InputStyles['sbui-input-container']]
+  if (error) inputContainerClasses.push(InputStyles['sbui-input--error'])
+  if (icon) inputContainerClasses.push(InputStyles['sbui-input--with-icon'])
+  if (size) inputContainerClasses.push(InputStyles[`sbui-input--${size}`])
+  if (borderless)
+    inputContainerClasses.push(InputStyles['sbui-input--borderless'])
 
   function onCopy(value: any) {
     navigator.clipboard.writeText(value).then(
@@ -142,7 +143,7 @@ function Input({
         style={style}
         size={size}
       >
-        <div className={InputStyles['sbui-input-container']}>
+        <div className={inputContainerClasses.join(' ')}>
           {icon && <InputIconContainer icon={icon} />}
           <input
             {...props}
@@ -160,7 +161,7 @@ function Input({
             ref={inputRef}
             type={password ? (hidden ? 'password' : type) : type}
             value={value}
-            className={inputClasses.join(' ')}
+            className={InputStyles['sbui-input']}
           />
           {copy || error || actions || password ? (
             <Space
@@ -251,7 +252,7 @@ function TextArea({
   style,
   rows = 4,
   limit,
-  size,
+  size = 'medium',
   borderless = false,
   shakeInterpolationCount = 3,
   shakeDistance = 6,
@@ -276,6 +277,13 @@ function TextArea({
     to: error ? { x: 1 } : { x: 0 },
     config: { mass: 1, tension: 500, friction: 100 },
   })
+
+  let inputContainerClasses = [InputStyles['sbui-input-container']]
+  if (error) inputContainerClasses.push(InputStyles['sbui-input--error'])
+  if (icon) inputContainerClasses.push(InputStyles['sbui-input--with-icon'])
+  if (size) inputContainerClasses.push(InputStyles[`sbui-input--${size}`])
+  if (borderless)
+    inputContainerClasses.push(InputStyles['sbui-input--borderless'])
 
   const interpolation: number[] = []
   interpolation.push(0)
@@ -307,7 +315,7 @@ function TextArea({
         style={style}
         size={size}
       >
-        <div className={InputStyles['sbui-input-container']}>
+        <div className={inputContainerClasses.join(' ')}>
           <textarea
             autoComplete={autoComplete ? 'on' : 'off'}
             autoFocus={autofocus}
@@ -322,7 +330,7 @@ function TextArea({
             onBlur={onBlur ? (event) => onBlur(event) : undefined}
             onKeyDown={onKeyDown ? (event) => onKeyDown(event) : undefined}
             value={value}
-            className={classes.join(' ')}
+            className={InputStyles['sbui-input']}
             maxLength={limit}
           >
             {value}

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { Divider } from '../Divider'
-import { IconMail } from './../../index'
-import Typography from '../Typography'
+import { Divider } from '../divider'
+import { IconMail } from '../../index'
+import Typography from '../typography'
 
-import { Menu } from './'
+import { Menu } from '.'
 
 export default {
   title: 'Navigation/Menu',

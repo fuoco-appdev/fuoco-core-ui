@@ -13,11 +13,11 @@ import {
   IconMail,
   IconInbox,
   IconLock,
-} from './../../index'
-import { UserContextProvider, useUser } from './UserContext'
-import * as SocialIcons from './Icons'
+} from '../../index'
+import { UserContextProvider, useUser } from './user-context'
+import * as SocialIcons from './icons'
 // @ts-ignore
-import AuthStyles from './Auth.module.css'
+import AuthStyles from './auth.module.css'
 import { RipplesProps } from 'react-ripples'
 
 const VIEWS: ViewsMap = {

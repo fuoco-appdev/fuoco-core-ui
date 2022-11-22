@@ -1,3 +1,3 @@
-import Radio from './Radio'
+import Radio from './radio'
 export default Radio
-export { default as Radio } from './Radio'
+export { default as Radio } from './radio'

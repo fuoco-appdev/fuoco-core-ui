@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Textarea from './Textarea'
+import Textarea from './textarea'
 
 describe('#Textarea', () => {
   it('should render textarea correctly', async () => {

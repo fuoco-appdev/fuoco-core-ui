@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import ImageStyles from './Image.module.css'
+import ImageStyles from './image.module.css'
 
 interface Props {
     source?: string

@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import TextStyles from './Text.module.css'
+import TextStyles from './text.module.css'
 
 export interface Props {
   className?: string

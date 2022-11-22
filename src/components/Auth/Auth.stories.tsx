@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from 'react'
-import { Auth } from './'
+import { Auth } from '.'
 import { ApiError, createClient } from '@supabase/supabase-js'
 // @ts-ignore
 import { Typography, Button, Space } from '../../index'

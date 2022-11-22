@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button } from '../Button'
-import { Divider } from '../Divider'
-import { Space } from '../Space'
-import { TabsContext } from './TabsContext'
+import { Button } from '../button'
+import { Divider } from '../divider'
+import { Space } from '../space'
+import { TabsContext } from './tabs-context'
 
 // @ts-ignore
-import TabsStyles from './Tabs.module.css'
+import TabsStyles from './tabs.module.css'
 
 interface TabsProps {
   id?: string

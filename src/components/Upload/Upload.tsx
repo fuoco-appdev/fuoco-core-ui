@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
+import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
-import UploadStyles from './Upload.module.css'
+import UploadStyles from './upload.module.css'
 
 function Upload({ label, children }: any) {
   return <h1>WIP</h1>

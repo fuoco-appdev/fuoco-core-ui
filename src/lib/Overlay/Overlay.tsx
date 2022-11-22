@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 //@ts-ignore
-import { useOnClickOutside } from './../../lib/Hooks'
-import { DropdownContext } from './OverlayContext'
+import { useOnClickOutside } from '../hooks'
+import { DropdownContext } from './overlay-context'
 import { AnimationTailwindClasses } from '../../types'
 // @ts-ignore
-import OverlayStyles from './Overlay.module.css'
+import OverlayStyles from './overlay.module.css'
 
 import { Transition } from '@headlessui/react'
 

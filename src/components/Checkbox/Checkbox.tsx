@@ -1,8 +1,8 @@
 import React from 'react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
-import { CheckboxContext } from './CheckboxContext'
+import { FormLayout } from '../../lib/layout/form-layout'
+import { CheckboxContext } from './checkbox-context'
 // @ts-ignore
-import CheckboxStyles from './Checkbox.module.css'
+import CheckboxStyles from './checkbox.module.css'
 import Ripples, { RipplesProps } from 'react-ripples'
 
 interface InputProps {

@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { Alert } from './'
+import { Alert } from '.'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

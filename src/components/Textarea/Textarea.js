@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './Textarea.css'
+import './textarea.css'
 
 const Textarea = ({
   className = '',

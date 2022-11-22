@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button } from '../Button'
-import { Space } from '../Space'
-import Typography from '../Typography'
+import { Button } from '../button'
+import { Space } from '../space'
+import Typography from '../typography'
 
-import { Divider } from './'
+import { Divider } from '.'
 
 export default {
   title: 'Utilities/Divider',

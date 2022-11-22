@@ -1,13 +1,10 @@
-import { Button } from '../Button'
-import { Divider } from '../Divider'
-import { IconChevronDown } from './../../index'
+import { Button } from '../button'
+import { Divider } from '../divider'
+import { IconChevronDown } from '../../index'
 
-import { Dropdown } from './'
-import { IconLogIn } from '../Icon/icons/IconLogIn'
+import { Dropdown } from '.'
+import { IconLogIn } from '../icon/icons/icon-logIn'
 import { useEffect, useRef, useState } from 'react'
-
-// @ts-ignore
-import DropdownStyles from './Dropdown.module.css'
 
 export default {
   title: 'Navigation/Dropdown',

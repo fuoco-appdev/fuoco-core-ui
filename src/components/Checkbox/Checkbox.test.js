@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Checkbox from './Checkbox'
+import Checkbox from './checkbox'
 
 describe('#Checkbox', () => {
   it('should render checkbox correctly', () => {

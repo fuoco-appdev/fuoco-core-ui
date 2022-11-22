@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Toggle } from '.'
-import { Button } from '../Button'
-import { Input } from '../Input'
-import { Space } from '../Space'
+import { Button } from '../button'
+import { Input } from '../input'
+import { Space } from '../space'
 
 export default {
   title: 'Data Input/Toggle',

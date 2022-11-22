@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { animated, useTransition } from 'react-spring'
-import { Button } from '../Button/index'
+import { Button } from '../button/index'
 
 // @ts-ignore
-import DropdownStyles from './Dropdown.module.css'
+import DropdownStyles from './dropdown.module.css'
 
 export enum DropdownAlignment {
   Left,

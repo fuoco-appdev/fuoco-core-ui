@@ -1,7 +1,7 @@
 import React from 'react'
-import { IconAirplay } from '../Icon/icons/IconAirplay'
+import { IconAirplay } from '../icon/icons/icon-airplay'
 
-import Avatar from './Avatar'
+import Avatar from './avatar'
 
 export default {
   title: 'General/Avatar',

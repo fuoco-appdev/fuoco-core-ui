@@ -8,7 +8,7 @@
 }
 
 .sbui-input {
-  @apply pl-3 pr-3 py-2 w-full text-sm;
+  @apply pl-3 pr-3 py-1 w-full text-sm;
   @apply text-input-value-dark;
   @apply bg-transparent dark:bg-transparent focus:outline-none hover:outline-none outline-none;
 
@@ -50,13 +50,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 */
 
 .sbui-input--tiny {
-  @apply px-2.5 py-1.5 text-xs;
+  @apply px-2 py-1.5 text-xs;
 }
 .sbui-input--small {
-  @apply px-3 py-2 text-sm leading-4;
+  @apply px-2 py-2 text-sm leading-4;
 }
 .sbui-input--medium {
-  @apply px-4 py-2 text-sm;
+  @apply px-2 py-2 text-sm;
 }
 .sbui-input--large {
   @apply px-4 py-2 text-base;

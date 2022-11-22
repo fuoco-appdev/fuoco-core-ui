@@ -1,11 +1,11 @@
-import { Button } from '../Button'
-import { Divider } from '../Divider'
+import { Button } from '../button'
+import { Divider } from '../divider'
 import { IconChevronDown } from '../../index'
-import Typography from '../Typography'
+import Typography from '../typography'
 
 import { Popover } from '.'
-import { IconLogIn } from '../Icon/icons/IconLogIn'
-import { Input } from '../Input'
+import { IconLogIn } from '../icon/icons/icon-logIn'
+import { Input } from '../input'
 
 export default {
   title: 'Navigation/Popover',

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import Alert from './Alert'
+import Alert from './alert'
 
 const VARIANTS = ['success', 'danger', 'warning', 'info']
 

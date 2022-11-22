@@ -1,8 +1,8 @@
 import React from 'react'
-import Typography from '../Typography'
+import Typography from '../typography'
 // import { AutoForm } from 'uniforms'
 
-import { Badge } from './'
+import { Badge } from '.'
 
 export default {
   title: 'Displays/Badge',

@@ -1,10 +1,10 @@
 import React from 'react'
-import { DropdownContext } from '../../lib/Overlay/OverlayContext'
-import { Space } from '../Space'
-import Typography from '../Typography'
+import { DropdownContext } from '../../lib/overlay/overlay-context'
+import { Space } from '../space'
+import Typography from '../typography'
 
 // @ts-ignore
-import MenuStyles from './Menu.module.css'
+import MenuStyles from './menu.module.css'
 
 interface MenuProps {
   children: React.ReactNode

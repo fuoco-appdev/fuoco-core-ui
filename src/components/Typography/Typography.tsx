@@ -1,9 +1,9 @@
 import React from 'react'
 // @ts-ignore
-import TypographyStyles from './Typography.module.css'
-import Title from './Title'
-import Text from './Text'
-import Link from './Link'
+import TypographyStyles from './typography.module.css'
+import Title from './title'
+import Text from './text'
+import Link from './link'
 
 function Typography({ children, className, tag = 'div', style }: any) {
   let classes = [

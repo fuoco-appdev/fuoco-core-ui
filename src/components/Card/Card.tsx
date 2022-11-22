@@ -1,7 +1,7 @@
 import React from 'react'
-import Typography from '../Typography'
+import Typography from '../typography'
 // @ts-ignore
-import CardStyles from './Card.module.css'
+import CardStyles from './card.module.css'
 
 interface CardProps {
   children?: React.ReactNode

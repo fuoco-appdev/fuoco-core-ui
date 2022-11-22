@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
-import Button from './Button'
+import Button from './button'
 
 const SIZES = ['tiny', 'small', 'medium', 'large', 'xlarge']
 const TYPES = [

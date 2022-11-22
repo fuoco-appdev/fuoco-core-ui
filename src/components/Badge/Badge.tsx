@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import BadgeStyles from './Badge.module.css'
+import BadgeStyles from './badge.module.css'
 
 interface Props {
   color?:

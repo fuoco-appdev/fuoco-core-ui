@@ -1,8 +1,8 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react'
 // @ts-ignore
-import ButtonStyles from './Button.module.css'
-import { IconContext } from '../Icon/IconContext'
-import { IconLoader } from '../Icon/icons/IconLoader'
+import ButtonStyles from './button.module.css'
+import { IconContext } from '../icon/icon-context'
+import { IconLoader } from '../icon/icons/icon-loader'
 import Ripples, { RipplesProps } from 'react-ripples'
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {

@@ -9,16 +9,16 @@ import React, {
   Children,
 } from 'react'
 import { Listbox as HeadlessListbox, Transition } from '@headlessui/react'
-import { FormLayout } from '../../lib/Layout/FormLayout'
+import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
-import SelectStyles from './SelectStyled.module.css'
+import SelectStyles from './select-styled.module.css'
 
-import InputIconContainer from '../../lib/Layout/InputIconContainer'
-import InputErrorIcon from '../../lib/Layout/InputErrorIcon'
-import { IconCheck } from '../Icon/icons/IconCheck'
+import InputIconContainer from '../../lib/layout/input-icon-container'
+import InputErrorIcon from '../../lib/layout/input-error-icon'
+import { IconCheck } from '../icon/icons/icon-check'
 import Ripples from 'react-ripples'
-import { Dropdown } from '../Dropdown'
-import { DropdownAlignment } from '../Dropdown/Dropdown'
+import { Dropdown } from '../dropdown'
+import { DropdownAlignment } from '../dropdown/dropdown'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')

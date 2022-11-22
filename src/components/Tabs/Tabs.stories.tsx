@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button } from '../Button'
+import { Button } from '../button'
 import { IconMail } from '../../index'
-import Typography from '../Typography'
+import Typography from '../typography'
 
-import { Tabs } from './'
+import { Tabs } from '.'
 
 export default {
   title: 'Displays/Tabs',

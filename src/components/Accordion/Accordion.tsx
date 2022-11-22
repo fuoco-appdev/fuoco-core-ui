@@ -8,9 +8,9 @@ import React, {
 import Ripples from 'react-ripples'
 import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
-import AccordionStyles from './Accordion.module.css'
-import { IconChevronUp } from '../Icon/icons/IconChevronUp'
-import Typography from '../Typography'
+import AccordionStyles from './accordion.module.css'
+import { IconChevronUp } from '../icon/icons/icon-chevron-up'
+import Typography from '../typography'
 import { animated, useSpring, useTransition } from 'react-spring'
 
 type ContextValue = Required<Pick<AccordionProps, 'defaultActiveId'>> &

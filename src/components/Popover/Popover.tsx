@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import * as RadixPopover from '@radix-ui/react-popover'
 import type * as RadixPopoverTypes from '@radix-ui/react-popover/'
 
-import { IconCheck } from '../Icon/icons/IconCheck'
+import { IconCheck } from '../icon/icons/icon-check'
 
 // @ts-ignore
-import DropdownStyles from './Popover.module.css'
+import DropdownStyles from './popover.module.css'
 
 // import type * as RadixDropdownTypes from '@radix-ui/react-dropdown-menu/'
-import { IconX } from '../Icon/icons/IconX'
+import { IconX } from '../icon/icons/icon-x'
 
 interface RootProps {
   align?: RadixPopoverTypes.PopoverContentProps['align']
