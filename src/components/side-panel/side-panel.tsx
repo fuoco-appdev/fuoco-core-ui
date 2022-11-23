@@ -183,7 +183,7 @@ const SidePanel = ({
                         style={{
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          display: 'flex'
+                          display: 'flex',
                         }}
                       >
                         {title && (

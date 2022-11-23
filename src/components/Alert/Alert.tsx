@@ -5,6 +5,7 @@ import { IconInfo } from '../icon/icons/icon-info'
 import { IconX } from '../icon/icons/icon-x'
 import { IconXCircle } from '../icon/icons/icon-x-circle'
 import { animated } from 'react-spring'
+// @ts-ignore
 import AlertStyles from './alert.module.css'
 
 export interface Props {

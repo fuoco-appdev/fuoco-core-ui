@@ -3,7 +3,7 @@ import { Divider } from '../divider'
 import { IconChevronDown } from '../../index'
 
 import { Dropdown } from '.'
-import { IconLogIn } from '../icon/icons/icon-logIn'
+import { IconLogIn } from '../icon/icons/icon-log-in'
 import { useEffect, useRef, useState } from 'react'
 
 export default {

@@ -4,7 +4,7 @@ import { Divider } from '../divider'
 import { IconSettings, IconLogOut } from '../../index'
 import Typography from '../typography'
 import { ContextMenu } from '.'
-import { IconLogIn } from '../icon/icons/icon-logIn'
+import { IconLogIn } from '../icon/icons/icon-log-in'
 
 export default {
   title: 'Navigation/ContextMenu',

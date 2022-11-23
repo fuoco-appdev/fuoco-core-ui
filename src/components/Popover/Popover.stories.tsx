@@ -4,7 +4,7 @@ import { IconChevronDown } from '../../index'
 import Typography from '../typography'
 
 import { Popover } from '.'
-import { IconLogIn } from '../icon/icons/icon-logIn'
+import { IconLogIn } from '../icon/icons/icon-log-in'
 import { Input } from '../input'
 
 export default {

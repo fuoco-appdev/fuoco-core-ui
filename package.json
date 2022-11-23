@@ -15,7 +15,6 @@
     "test": "react-scripts test",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build:icons": "node --experimental-modules internals/populate-icons.js",
     "typedoc:json": "typedoc src/index.tsx --json spec/spec.json",
     "chromatic": "npx chromatic --project-token=227247dd9d4f",
     "story2sketch": "story2sketch --input storybook-static/iframe.html --output stories.asketch.json"
