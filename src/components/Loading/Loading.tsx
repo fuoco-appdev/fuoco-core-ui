@@ -1,7 +1,7 @@
 import React from 'react'
-import { IconLoader } from '../../index'
+import { IconLoader } from '../icon/icons/icon-loader'
 // @ts-ignore
-import LoadingStyles from './loading.module.css'
+import LoadingStyles from './loading.module.scss'
 
 interface Props {
   children: React.ReactNode

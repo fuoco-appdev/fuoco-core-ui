@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '../button'
-import { IconMail } from '../../index'
+import { IconMail } from '../../components/icon/icons/icon-mail'
 import Typography from '../typography'
 
 import { Tabs } from '.'
@@ -11,155 +11,136 @@ export default {
 }
 
 export const Default = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
+  <Tabs
+    {...args}
+    activeId={'panel-1'}
+    tabs={[
+      {
+        id: 'panel-1',
+        label: '1st tab',
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        label: '2st tab',
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        label: '3st tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
+)
+
+export const IconsAndText = (args: any) => (
+  <Tabs
+    {...args}
+    activeId={'panel-1'}
+    tabs={[
+      {
+        id: 'panel-1',
+        label: '1st tab',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        label: '2st tab',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        label: '3st tab',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
+)
+
+export const Vertical = (args: any) => (
+  <Tabs
+    {...args}
+    activeId={'panel-1'}
+    tabs={[
+      {
+        id: 'panel-1',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        icon: <IconMail />,
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
 )
 
 export const Underlined = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-export const WithIcons = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab" icon={<IconMail />}>
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab" icon={<IconMail />}>
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab" icon={<IconMail />}>
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-export const LargeButtons = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-export const BlockTabs = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-const limit = 30
-let infitniteSroll: JSX.Element[] = []
-
-for (var i = 0; i < limit; i++) {
-  infitniteSroll.push(
-    <Tabs.Panel id={`panel-${i}`} label={`Tab ${i}`}>
-      <Typography.Text>Content for the panel {i}</Typography.Text>
-    </Tabs.Panel>
-  )
-}
-
-export const Scroll = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    {infitniteSroll}
-  </Tabs>
-)
-
-export const addOnBefore = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-export const addOnAfter = (args: any) => (
-  <Tabs defaultActiveId={'panel-1'} {...args}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-2" label="2nd tab">
-      <Typography.Text>Content for the second panel</Typography.Text>
-    </Tabs.Panel>
-    <Tabs.Panel id="panel-3" label="3rd tab">
-      <Typography.Text>Content for the third panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
-)
-
-export const OneTab = () => (
-  <Tabs defaultActiveId={'panel-1'}>
-    <Tabs.Panel id="panel-1" label="1st tab">
-      <Typography.Text>Content for the first panel</Typography.Text>
-    </Tabs.Panel>
-  </Tabs>
+  <Tabs
+    {...args}
+    activeId={'panel-1'}
+    tabs={[
+      {
+        id: 'panel-1',
+        label: '1st tab',
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        label: '2st tab',
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        label: '3st tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
 )
 
 Default.args = {}
+IconsAndText.args = {
+  type: 'underlined',
+}
+Vertical.args = {
+  type: 'underlined',
+  direction: 'vertical',
+}
 Underlined.args = {
   type: 'underlined',
-}
-WithIcons.args = {
-  type: 'underlined',
-}
-LargeButtons.args = {
-  type: 'underlined',
-  size: 'large',
-}
-BlockTabs.args = {
-  type: 'underlined',
-  block: true,
-}
-Scroll.args = {
-  type: 'underlined',
-  block: true,
-  scrollable: true,
-}
-addOnBefore.args = {
-  type: 'underlined',
-  size: 'large',
-  addOnBefore: <Button type="outline">Left button</Button>,
-}
-addOnAfter.args = {
-  type: 'underlined',
-  size: 'large',
-  addOnAfter: <Button type="outline">Right button</Button>,
 }

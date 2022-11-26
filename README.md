@@ -141,7 +141,6 @@ _Layout_
 - [ ] ~~Layout~~
 - [ ] ~~Grid (Flex)~~
 - [x] Divider
-- [x] Space (Flex)
 
 _Display_
 

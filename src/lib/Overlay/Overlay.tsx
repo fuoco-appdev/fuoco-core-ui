@@ -4,7 +4,7 @@ import { useOnClickOutside } from '../hooks'
 import { DropdownContext } from './overlay-context'
 import { AnimationTailwindClasses } from '../../types'
 // @ts-ignore
-import OverlayStyles from './overlay.module.css'
+import OverlayStyles from './overlay.module.scss'
 
 import { Transition } from '@headlessui/react'
 

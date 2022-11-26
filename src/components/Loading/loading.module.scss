@@ -1,0 +1,32 @@
+.sbui-loading {
+  position: relative;
+}
+
+.sbui-loading--active .sbui-loading-content {
+  opacity: 0.4;
+}
+.sbui-loading-content {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@keyframes spin {
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.sbui-loading-spinner {
+  color: $brand-800;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  & .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+}

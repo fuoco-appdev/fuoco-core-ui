@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 // @ts-ignore
-import SlidePanelStyles from './side-panel.module.css'
-import { Button, IconX, Space, Typography } from '../../index'
+import SlidePanelStyles from './side-panel.module.scss'
+import { Button, Typography } from '../../index'
+import { IconX } from '../icon/icons/icon-x'
 import { AnimationTailwindClasses } from '../../types'
 
 import * as Dialog from '@radix-ui/react-dialog'
@@ -78,7 +79,7 @@ const SidePanel = ({
     <div className={footerClasses.join(' ')}>{customFooter}</div>
   ) : (
     <div className={footerClasses.join(' ')}>
-      <Space
+      <div
         style={{
           width: '100%',
           justifyContent: alignFooter === 'right' ? 'flex-end' : 'flex-start',
@@ -97,7 +98,7 @@ const SidePanel = ({
         >
           {confirmText}
         </Button>
-      </Space>
+      </div>
     </div>
   )
 
@@ -165,9 +166,7 @@ const SidePanel = ({
                   className={sidePanelClasses.join(' ')}
                   onClick={stopPropagation}
                 >
-                  <Space
-                    size={6}
-                    direction="vertical"
+                  <div
                     style={{
                       minHeight: '0',
                       flex: '1 1 0%',
@@ -177,9 +176,7 @@ const SidePanel = ({
                     <header
                       className={SlidePanelStyles['sbui-sidepanel-header']}
                     >
-                      <Space
-                        size={3}
-                        direction="row"
+                      <div
                         style={{
                           alignItems: 'center',
                           justifyContent: 'space-between',
@@ -205,7 +202,7 @@ const SidePanel = ({
                             icon={<IconX size="xlarge" strokeWidth={2} />}
                           />
                         </div>
-                      </Space>
+                      </div>
                       <div>
                         {description && (
                           <Typography.Text type="secondary">
@@ -217,7 +214,7 @@ const SidePanel = ({
                     <div className={SlidePanelStyles['sbui-sidepanel-content']}>
                       {children}
                     </div>
-                  </Space>
+                  </div>
                   {!hideFooter && footerContent}
                 </div>
               </div>

@@ -1,0 +1,103 @@
+.sbui-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.sbui-divider-vertical {
+  width: 1px;
+  height: inherit;
+  background-color: $gray-200;
+}
+
+.sbui-divider-vertical.sbui-divider--light {
+  background-color: $gray-100;
+}
+
+.sbui-divider--no-text {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: $gray-200;
+}
+
+.sbui-divider > span {
+  display: inline-block;
+  padding: 0 1em;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-300;
+}
+
+.sbui-divider--left:before {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  top: 50%;
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 5%;
+  border-color: $gray-200;
+}
+
+.sbui-divider--left:after {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  top: 50%;
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 95%;
+  border-color: $gray-200;
+}
+
+.sbui-divider--right:before {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  top: 50%;
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 95%;
+  border-color: $gray-200;
+}
+
+.sbui-divider--right:after {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  top: 50%;
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 5%;
+  border-color: $gray-200;
+}
+
+.sbui-divider--center:before,
+.sbui-divider--center:after {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  top: 50%;
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  border-color: $gray-200;
+}
+
+.sbui-divider--light.sbui-divider--left:before,
+.sbui-divider--light.sbui-divider--left:after,
+.sbui-divider--light.sbui-divider--right:before,
+.sbui-divider--light.sbui-divider--right:after,
+.sbui-divider--light.sbui-divider--center:before,
+.sbui-divider--light.sbui-divider--center:after,
+.sbui-divider--light.sbui-divider--no-text {
+  border-color: $gray-100;
+}
+
+.sbui-divider--light.sbui-divider > span {
+  color: $gray-200;
+}

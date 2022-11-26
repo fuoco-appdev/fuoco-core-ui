@@ -1,0 +1,136 @@
+.sbui-formlayout {
+  display: grid;
+  gap: $mp-2;
+  margin-bottom: $mp-4;
+}
+
+.sbui-formlayout--flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sbui-formlayout--flex-right div:last-child {
+  text-align: right;
+}
+
+.sbui-formlayout--flex-left div:first-child {
+  order: 2;
+}
+
+.sbui-formlayout--flex-left div:last-child {
+  order: 1;
+}
+
+.sbui-formlayout--non-responsive {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: $mp-4;
+}
+
+.sbui-formlayout--responsive {
+  .md\:grid {
+    display: grid;
+  }
+
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .md\:gap-4 {
+    gap: 1rem/* 16px */;
+  }
+}
+
+.sbui-formlayout__label-container-horizontal {
+  justify-content: space-between;
+  grid-column: span 12 / span 12;
+}
+
+.sbui-formlayout__label-container-vertical {
+  grid-column: span 4 / span 4;
+}
+
+.sbui-formlayout__content-container-horizontal {
+  grid-column: span 12 / span 12;
+}
+
+.sbui-formlayout__content-container-vertical {
+  grid-column: span 8 / span 8;
+}
+
+.sbui-formlayout__content-container-vertical--align-right {
+  text-align: right;
+}
+
+.sbui-formlayout__label {
+  display: block;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-100;
+}
+
+.sbui-formlayout__label-opt,
+.sbui-formlayout__label .sbui-formlayout__label-before,
+.sbui-formlayout__label .sbui-formlayout__label-after {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-100;
+}
+
+.sbui-formlayout__error {
+  margin-top: $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $red-500;
+}
+
+.sbui-formlayout__description {
+  margin-top: $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-100;
+}
+
+/* .sbui-formlayout__content-container--width-25 {
+  width: 
+} */
+
+/*
+  Layout sizes
+*/
+
+.sbui-formlayout--tiny .sbui-formlayout__label,
+.sbui-formlayout--tiny .sbui-formlayout__label-opt,
+.sbui-formlayout--tiny .sbui-formlayout__error,
+.sbui-formlayout--tiny .sbui-formlayout__description {
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+}
+.sbui-formlayout--small .sbui-formlayout__label,
+.sbui-formlayout--small .sbui-formlayout__label-opt,
+.sbui-formlayout--small .sbui-formlayout__error,
+.sbui-formlayout--small .sbui-formlayout__description {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-xs;
+}
+.sbui-formlayout--medium .sbui-formlayout__label,
+.sbui-formlayout--medium .sbui-formlayout__label-opt,
+.sbui-formlayout--medium .sbui-formlayout__error,
+.sbui-formlayout--medium .sbui-formlayout__description {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+.sbui-formlayout--large .sbui-formlayout__label,
+.sbui-formlayout--large .sbui-formlayout__label-opt,
+.sbui-formlayout--large .sbui-formlayout__error,
+.sbui-formlayout--large .sbui-formlayout__description {
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+.sbui-formlayout--xlarge .sbui-formlayout__label,
+.sbui-formlayout--xlarge .sbui-formlayout__label-opt,
+.sbui-formlayout--xlarge .sbui-formlayout__error,
+.sbui-formlayout--xlarge .sbui-formlayout__description {
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}

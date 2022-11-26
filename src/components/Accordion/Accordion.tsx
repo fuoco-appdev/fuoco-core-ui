@@ -8,7 +8,7 @@ import React, {
 import Ripples from 'react-ripples'
 import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
-import AccordionStyles from './accordion.module.css'
+import AccordionStyles from './accordion.module.scss'
 import { IconChevronUp } from '../icon/icons/icon-chevron-up'
 import Typography from '../typography'
 import { animated, useSpring, useTransition } from 'react-spring'
@@ -41,9 +41,9 @@ function Accordion({
   bordered,
   onChange,
 }: AccordionProps) {
-  let containerClasses = [AccordionStyles['sbui-accordion-container']]
+  let containerClasses = [AccordionStyles['accordion-container']]
   if (bordered) {
-    containerClasses.push(AccordionStyles['sbui-accordion-container--bordered'])
+    containerClasses.push(AccordionStyles['accordion-container-bordered'])
   }
   if (className) {
     containerClasses.push(className)
@@ -74,11 +74,11 @@ export function Item({ children, className, label, id }: ItemProps) {
   const isDefaultActive = id ? defaultActiveId?.includes(id) : false
   const [disclosureOpen, setDisclosureOpen] = useState<boolean>(isDefaultActive)
 
-  let panelClasses = [AccordionStyles['sbui-accordion-item__panel']]
+  let panelClasses = [AccordionStyles['accordion-item-panel']]
 
-  let buttonClasses = [AccordionStyles['sbui-accordion-item__button']]
+  let buttonClasses = [AccordionStyles['accordion-item-button']]
   if (bordered) {
-    buttonClasses.push(AccordionStyles['sbui-accordion-item-bordered'])
+    buttonClasses.push(AccordionStyles['accordion-item-bordered'])
   }
 
   if (className) {
@@ -112,7 +112,7 @@ export function Item({ children, className, label, id }: ItemProps) {
     <Disclosure defaultOpen={isDefaultActive}>
       {({ open }) => (
         <>
-          <Ripples className={AccordionStyles['sbui-accordion-item-ripples']}>
+          <Ripples className={AccordionStyles['accordion-item-ripples']}>
             <Disclosure.Button
               onClick={() => setDisclosureOpen(!disclosureOpen)}
               className={buttonClasses.join(' ')}

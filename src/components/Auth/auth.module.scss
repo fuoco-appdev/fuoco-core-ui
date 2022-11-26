@@ -1,0 +1,56 @@
+.sbui-auth {
+  width: 100%;
+}
+
+.terms-of-service {
+  display: flex;
+}
+
+.privacy-policy {
+  display: flex;
+}
+
+.button-root {
+  margin-bottom: $mp-4;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $mp-2;
+}
+
+.button-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.remember-me-container {
+  justify-content: space-between;
+  margin-bottom: $mp-2;
+}
+
+.email-button-container {
+  margin-bottom: $mp-4;
+}
+
+.email-button-content {
+  color: $gray-100;
+}
+
+.button-icon {
+  display: flex;
+  justify-content: center;
+  padding-right: $mp-2;
+}
+
+.divider {
+  margin-bottom: $mp-4;
+}
+
+.link-container {
+  text-align: center;
+}

@@ -1,156 +1,187 @@
-import React, { useState } from 'react'
-import { Button } from '../button'
-import { Divider } from '../divider'
-import { Space } from '../space'
+import React, { useEffect, useRef, useState } from 'react'
+import InputIconContainer from '../../lib/layout/input-icon-container'
 import { TabsContext } from './tabs-context'
 
 // @ts-ignore
-import TabsStyles from './tabs.module.css'
+import TabsStyles from './tabs.module.scss'
 
-interface TabsProps {
-  id?: string
-  type?: 'pills' | 'underlined' | 'cards'
-  children: any
-  defaultActiveId?: string
-  activeId?: string
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
-  block?: boolean
-  tabBarGutter?: number
-  tabBarStyle?: React.CSSProperties
-  onChange?: any
-  onClick?: any
-  scrollable?: boolean
-  addOnBefore?: React.ReactNode
-  addOnAfter?: React.ReactNode
-}
-
-function Tabs({
-  id,
-  children,
-  defaultActiveId,
-  activeId,
-  type,
-  size,
-  block,
-  tabBarGutter,
-  tabBarStyle,
-  onChange,
-  onClick,
-  scrollable,
-  addOnBefore,
-  addOnAfter,
-}: TabsProps) {
-  const [activeTab, setActiveTab] = useState(
-    defaultActiveId
-      ? defaultActiveId
-      : // if no defaultActiveId is set use the first panel
-      children && children[0].props
-      ? children[0].props.id
-      : ''
-  )
-
-  // activeId state can be overriden externally with `active`
-  // defaults to use activeTab
-  const active = activeId ? activeId : activeTab
-
-  function onTabClick(id: string) {
-    const newTabSelected = id !== active
-    setActiveTab(id)
-    if (onClick) onClick(id)
-    if (onChange && newTabSelected) onChange(id)
-  }
-
-  // for styling the tabs for underline style
-  const underlined = type === 'underlined'
-  // for styling the tabs for cards style
-  const cards = type === 'cards'
-
-  // if only 1 react child, it needs to be converted to a list/array
-  // this is so 1 tab can be displayed
-  if (children && !Array.isArray(children)) {
-    children = [children]
-  }
-
-  return (
-    <Space direction="vertical" size={4}>
-      <div id={id} role="tablist" aria-label={id} style={tabBarStyle}>
-        <Space className={TabsStyles['sbui-tab-bar-container']} size={0}>
-          <Space
-            size={tabBarGutter ? tabBarGutter : underlined ? 6 : 3}
-            className={
-              TabsStyles['sbui-tab-bar-inner-container'] +
-              (scrollable ? ` ${TabsStyles['sbui-tab-bar--scrollable']}` : '')
-            }
-          >
-            {addOnBefore}
-            {children.map((tab: any) => {
-              const activeMatch = active === tab.props.id
-              return (
-                <Button
-                  icon={tab.props.icon}
-                  size={size}
-                  block={block}
-                  shadow={!block}
-                  className={
-                    underlined && activeMatch
-                      ? `${TabsStyles['sbui-tab-button-underline']} ${TabsStyles['sbui-tab-button-underline--active']}`
-                      : underlined
-                      ? TabsStyles['sbui-tab-button-underline']
-                      : ''
-                  }
-                  type={activeMatch && !underlined ? 'primary' : 'text'}
-                  key={`${tab.props.id}-tab-button`}
-                  onClick={() => onTabClick(tab.props.id)}
-                  ariaSelected={activeMatch ? true : false}
-                  ariaControls={tab.props.id}
-                  tabIndex={activeMatch ? 0 : -1}
-                  role="tab"
-                >
-                  {tab.props.label}
-                </Button>
-              )
-            })}
-          </Space>
-          {addOnAfter}
-        </Space>
-        {underlined && <Divider />}
-      </div>
-      <TabsContext.Provider value={{ activeId: active }}>
-        {children}
-      </TabsContext.Provider>
-    </Space>
-  )
-}
-
-interface PanelProps {
+interface TabProps {
   children?: any
   id?: string
   label?: string
   icon?: React.ReactNode
 }
 
-export function Panel({ children, id }: PanelProps) {
+interface TabsProps {
+  tabs?: TabProps[]
+  onChange?: (input: number) => void
+  type?: 'pills' | 'underlined'
+  direction?: 'vertical' | 'horizontal'
+  activeId?: string
+  scrollable?: boolean
+}
+
+function Tabs({
+  tabs = [],
+  activeId,
+  type = 'pills',
+  direction = 'horizontal',
+  onChange,
+  scrollable,
+}: TabsProps) {
+  const [buttonRefs, setButtonRefs] = useState<Array<HTMLButtonElement | null>>(
+    []
+  )
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
+
+  useEffect(() => {
+    setButtonRefs((prev) => prev.slice(0, tabs.length))
+  }, [tabs.length])
+
+  useEffect(() => {
+    const index = tabs.findIndex((value) => value.id === activeId)
+    if (selectedTabIndex !== index) {
+      setSelectedTabIndex(index)
+    }
+  }, [activeId])
+
+  const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
+  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
+
+  const navRef = useRef<HTMLDivElement>(null)
+  const navRect = navRef.current?.getBoundingClientRect()
+
+  const selectedRect = buttonRefs[selectedTabIndex]?.getBoundingClientRect()
+
+  const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
+  const isInitialRender = useRef(true)
+
+  const onLeaveTabs = () => {
+    setIsInitialHoveredElement(true)
+    setHoveredTabIndex(null)
+  }
+
+  const onEnterTab = (
+    e:
+      | React.PointerEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLButtonElement>,
+    i: number
+  ) => {
+    if (!e.target || !(e.target instanceof HTMLButtonElement)) return
+
+    setHoveredTabIndex((prev) => {
+      if (prev != null && prev !== i) {
+        setIsInitialHoveredElement(false)
+      }
+
+      return i
+    })
+    setHoveredRect(e.target.getBoundingClientRect())
+  }
+
+  const onSelectTab = (i: number) => {
+    onChange?.(i)
+    setSelectedTabIndex(i)
+  }
+
+  let hoverStyles: React.CSSProperties = { opacity: 0 }
+  if (type === 'underlined' && navRect && hoveredRect) {
+    hoverStyles.transform = `translate3d(${hoveredRect.left - navRect.left}px,${
+      hoveredRect.top - navRect.top
+    }px,0px)`
+    hoverStyles.width = hoveredRect.width
+    hoverStyles.height = hoveredRect.height
+    hoverStyles.opacity = hoveredTabIndex != null ? 1 : 0
+    hoverStyles.transition = isInitialHoveredElement
+      ? `opacity 150ms`
+      : `transform 150ms 0ms, opacity 150ms 0ms, width 150ms`
+  }
+
+  let selectStyles: React.CSSProperties = {}
+  if (type === 'underlined' && navRect && selectedRect) {
+    if (direction === 'vertical') {
+      selectStyles.transform = `translate3d(calc(${
+        selectedRect.right
+      }px), calc(${selectedRect.bottom - navRect.bottom}px), 0px)`
+      selectStyles.height = selectedRect.height
+      selectStyles.width = '2px'
+      selectStyles.transition = isInitialRender.current
+        ? `opacity 150ms 150ms`
+        : `transform 150ms 0ms, opacity 150ms 150ms, height 150ms`
+    } else {
+      selectStyles.transform = `translateX(calc(${
+        selectedRect.left - navRect.left
+      }px + 10%))`
+      selectStyles.width = selectedRect.width * 0.8
+      selectStyles.transition = isInitialRender.current
+        ? `opacity 150ms 150ms`
+        : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
+    }
+
+    isInitialRender.current = false
+  }
+
+  let selectPillStyles: React.CSSProperties = { opacity: 0 }
+  if (type === 'pills' && navRect && selectedRect) {
+    selectPillStyles.width = selectedRect.width
+    selectPillStyles.height = selectedRect.height
+    selectPillStyles.transform = `translate3d(calc(${
+      selectedRect.left - navRect.left
+    }px), ${selectedRect.top - navRect.top}px, 0px)`
+    selectPillStyles.opacity = 1
+    selectPillStyles.transition = isInitialRender.current
+      ? `opacity 150ms 150ms`
+      : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
+
+    isInitialRender.current = false
+  }
+
+  const navClasses = [TabsStyles['nav']]
+  if (direction === 'vertical') {
+    navClasses.push(TabsStyles['nav-verticle'])
+  }
+
   return (
-    children && (
-      <TabsContext.Consumer>
-        {({ activeId }) => {
-          const active = activeId === id
-          return (
-            <div
-              id={id}
-              role="tabpanel"
-              tabIndex={active ? 0 : -1}
-              aria-labelledby={id}
-              hidden={!active}
-            >
-              {children}
-            </div>
-          )
-        }}
-      </TabsContext.Consumer>
-    )
+    <nav
+      ref={navRef}
+      className={navClasses.join(' ')}
+      onPointerLeave={onLeaveTabs}
+    >
+      {tabs.map((item, i) => {
+        const iconClasses = [TabsStyles['tab-icon']]
+        if (item.label) {
+          iconClasses.push(TabsStyles['tab-icon-space'])
+        }
+
+        return (
+          <button
+            key={i}
+            className={TabsStyles['tab-button']}
+            ref={(el) => (buttonRefs[i] = el)}
+            onPointerEnter={(e) => onEnterTab(e, i)}
+            onFocus={(e) => onEnterTab(e, i)}
+            onClick={() => onSelectTab(i)}
+          >
+            {item.icon && (
+              <div className={iconClasses.join(' ')}>{item.icon}</div>
+            )}
+            {item.label}
+          </button>
+        )
+      })}
+      {type === 'pills' ? (
+        <div
+          className={TabsStyles['tab-slider-pill']}
+          style={selectPillStyles}
+        />
+      ) : (
+        <div className={TabsStyles['tab-slider']} style={hoverStyles} />
+      )}
+      {type === 'underlined' && (
+        <div className={TabsStyles['tab-outline']} style={selectStyles} />
+      )}
+    </nav>
   )
 }
 
-Tabs.Panel = Panel
 export default Tabs

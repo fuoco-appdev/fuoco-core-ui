@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
-import InputPhoneNumberStyles from './input-phone-number.module.css'
-import 'react-phone-input-2/lib/style.css'
+import InputPhoneNumberStyles from './input-phone-number.module.scss'
 import memoize from 'lodash.memoize'
 import { reduce, startsWith } from 'lodash'
 import { Button } from '../button'
@@ -11,7 +10,6 @@ import { Dropdown } from '../dropdown/index'
 import { Divider } from '../divider'
 import InputIconContainer from '../../lib/layout/input-icon-container'
 import { IconSearch } from '../icon/icons/icon-search'
-import { Space } from '../space'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
@@ -65,7 +63,6 @@ export interface Props {
   formStyle?: React.CSSProperties
   containerStyle?: React.CSSProperties
   inputStyle?: React.CSSProperties
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
   shakeInterpolationCount?: number
   shakeDistance?: number
   classes?: {
@@ -165,7 +162,6 @@ function InputPhoneNumber({
   onEnterKeyPress,
   isValid,
   onMount,
-  size = 'medium',
 }: Props) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const numberInputRef = useRef<HTMLInputElement | null>(null)
@@ -643,17 +639,17 @@ function InputPhoneNumber({
               InputPhoneNumberStyles['sbui-inputphonenumber-search-container']
             }
           >
-            <InputIconContainer
-              icon={
-                <IconSearch
-                  className={
-                    InputPhoneNumberStyles[
-                      'sbui-inputphonenumber-search--with-icon'
-                    ]
-                  }
-                />
-              }
-            />
+            <div
+              className={InputPhoneNumberStyles['inputphonenumber-search-icon']}
+            >
+              <IconSearch
+                className={
+                  InputPhoneNumberStyles[
+                    'sbui-inputphonenumber-search--with-icon'
+                  ]
+                }
+              />
+            </div>
             <input
               autoComplete={autocompleteSearch ? 'on' : 'off'}
               autoFocus={true}
@@ -901,7 +897,6 @@ function InputPhoneNumber({
         error={error}
         descriptionText={descriptionText}
         style={formStyle}
-        size={size}
       >
         <div
           className={classesContainer.join(' ')}
@@ -944,16 +939,15 @@ function InputPhoneNumber({
             ref={numberInputRef}
           />
           {error ? (
-            <Space
+            <div
               className={
                 InputPhoneNumberStyles[
                   'sbui-inputphonenumber-actions-container'
                 ]
               }
-              size={1}
             >
-              {error && <InputErrorIcon size={size} />}
-            </Space>
+              {error && <InputErrorIcon />}
+            </div>
           ) : null}
         </div>
       </FormLayout>

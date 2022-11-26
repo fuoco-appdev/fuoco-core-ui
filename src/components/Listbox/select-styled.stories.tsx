@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
 
-import Listbox, { ListboxOption, OptionProps } from './listbox'
-import { IconBook, IconGlobe } from '../../index'
-import { Button } from '../button'
-import Typography from '../typography'
+import Listbox, { OptionProps } from './listbox'
+import { IconGlobe } from '../icon/icons/icon-globe'
 
 export default {
   title: 'Data Input/Listbox',
@@ -102,7 +100,16 @@ export const People = (args: any) => {
       parentRef: ref,
       value: person.value,
       addOnBefore: () => (
-        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
+        <img
+          src={person.avatar}
+          alt=""
+          style={{
+            height: '1.5rem',
+            width: '1.5rem',
+            borderRadius: '99999px',
+            marginRight: '8px',
+          }}
+        />
       ),
       children: () => {
         // console.log('selected', selected)
@@ -142,32 +149,19 @@ People.args = {
 export const WithIcon = (args: any) => {
   const ref = useRef<any>(null)
   const [isGlobeIconLit, setIsGlobeIconLit] = useState<boolean>(false)
-  const options: OptionProps[] = []
-  for (const person of people) {
-    options.push({
-      parentRef: ref,
-      value: person.value,
-      addOnBefore: () => (
-        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
-      ),
-      children: () => {
-        return (
-          <span
-            className={'font-normal block truncate'}
-            style={{ fontSize: '0.875rem' }}
-          >
-            {person.value}
-          </span>
-        )
-      },
-    })
-  }
   return (
     <Listbox
       ref={ref}
       label="Language"
       layout="vertical"
-      icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
+      icon={
+        <IconGlobe
+          stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'}
+          style={{
+            marginRight: '8px',
+          }}
+        />
+      }
       onChange={(value: string) => console.log(value)}
       onMouseEnter={() => setIsGlobeIconLit(true)}
       onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -225,7 +219,16 @@ export const ErrorState = (args: any) => {
       parentRef: ref,
       value: person.value,
       addOnBefore: ({ selected }: any) => (
-        <img src={person.avatar} alt="" className="h-6 w-6 rounded-full" />
+        <img
+          src={person.avatar}
+          alt=""
+          style={{
+            height: '1.5rem',
+            width: '1.5rem',
+            borderRadius: '99999px',
+            marginRight: '8px',
+          }}
+        />
       ),
       children: () => {
         return (

@@ -1,12 +1,10 @@
 // @ts-ignore
-import React, { Ref } from 'react'
+import React from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import InputIconContainer from '../../lib/layout/input-icon-container'
-import { Space } from '../../index'
 // @ts-ignore
-import SelectStyles from './select.module.css'
-import { Icon } from '../icon'
+import SelectStyles from './select.module.scss'
 
 interface OptionProps {
   value: string

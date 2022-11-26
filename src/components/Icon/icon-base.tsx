@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconContext } from './icon-context'
 // @ts-ignore
-import IconStyles from './icon.module.css'
+import IconStyles from './icon.module.scss'
 
 interface Props {
   className?: string

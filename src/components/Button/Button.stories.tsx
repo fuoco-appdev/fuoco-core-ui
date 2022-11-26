@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 
-import { Button, Space, IconPackage, IconChevronRight } from '../../index'
+import { Button } from '../../index'
+import { IconPackage } from '../icon/icons/icon-package'
+import { IconChevronRight } from '../icon/icons/icon-chevron-right'
 
 export default {
   title: 'General/Button',
@@ -41,8 +43,8 @@ export const withRef = () => {
 }
 export const allButtons = (args: any) => (
   <>
-    <Space direction="vertical" size={6}>
-      <Space>
+    <div>
+      <div>
         <Button {...args} size="tiny">
           Button text
         </Button>
@@ -64,9 +66,9 @@ export const allButtons = (args: any) => (
         <Button {...args} size="tiny" type="outline">
           Button text
         </Button>
-      </Space>
+      </div>
 
-      <Space>
+      <div>
         <Button {...args} size="small">
           Button text
         </Button>
@@ -88,8 +90,8 @@ export const allButtons = (args: any) => (
         <Button {...args} size="small" type="outline">
           Button text
         </Button>
-      </Space>
-      <Space>
+      </div>
+      <div>
         <Button {...args}>Button text</Button>
         <Button {...args} size="medium" type="secondary">
           Button text
@@ -109,8 +111,8 @@ export const allButtons = (args: any) => (
         <Button {...args} size="medium" type="outline">
           Button text
         </Button>
-      </Space>
-      <Space>
+      </div>
+      <div>
         <Button {...args} size="large">
           Button text
         </Button>
@@ -132,8 +134,8 @@ export const allButtons = (args: any) => (
         <Button {...args} size="large" type="outline">
           Button text
         </Button>
-      </Space>
-      <Space>
+      </div>
+      <div>
         <Button {...args} size="xlarge">
           Button text
         </Button>
@@ -155,8 +157,8 @@ export const allButtons = (args: any) => (
         <Button {...args} size="xlarge" type="outline">
           Button text
         </Button>
-      </Space>
-    </Space>
+      </div>
+    </div>
   </>
 )
 

@@ -1,0 +1,66 @@
+.sbui-contextmenu-item {
+  cursor: pointer;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+  color: $gray-100;
+  padding: $mp-4 $mp-1-5;
+  align-items: center;
+  margin-right: $mp-2;
+  margin-left: $mp-2;
+  border-style: none;
+
+  & :focus {
+    background-color: $gray-100;
+  }
+}
+
+.sbui-contextmenu-item svg {
+  color: $gray-100;
+}
+
+.sbui-contextmenu-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.65rem;
+  color: $gray-100;
+  padding: $mp-1-5 $mp-4;
+  margin-right: $mp-2;
+  margin-left: $mp-2;
+}
+
+.sbui-contextmenu-misc {
+  padding: $mp-1-5 $mp-4;
+}
+
+.sbui-contextmenu-item:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.sbui-contextmenu-input {
+  display: flex;
+  align-items: center;
+  margin-right: $mp-2;
+  margin-left: $mp-2;
+}
+
+.sbui-contextmenu-input__check {
+  display: flex;
+  align-items: center;
+}
+
+.sbui-contextmenu__content {
+  overflow: visible;
+  border-style: solid;
+  border-width: 1px;
+  background-color: $gray-100;
+  border-radius: $rounded-base;
+  border-color: $gray-100;
+  box-shadow: $shadow-6;
+}
+
+.sbui-contextmenu__trigger {
+  border-style: none;
+  background-color: transparent;
+  padding: 0px;
+}

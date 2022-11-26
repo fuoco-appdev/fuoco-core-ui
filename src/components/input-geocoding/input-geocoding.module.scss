@@ -1,0 +1,144 @@
+.sbui-inputgeocoding-container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    border-radius: $rounded-md;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $gray-100;
+    padding: 0 $mp-3;
+}
+
+.sbui-inputgeocoding-container:hover {
+  border-color: $brand-400;
+}
+
+.sbui-inputgeocoding {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    box-shadow: none !important;
+    font-family: inherit;
+    appearance: textfield;
+    float: left;
+    background: transparent;
+    padding: $mp-3 0;
+    width: 100%;
+    font-size: $font-size-sm;
+    line-height: $font-line-height-sm;
+    color: $gray-100;
+}
+
+.sbui-inputgeocoding-dropdown {
+    position: absolute;
+    border-radius: $rounded-base;
+    border-width: 1px;
+    border-color: $gray-100;
+    color: white;
+    border-radius: 0.25rem !important;
+    top: 36px;
+    height: inherit;
+    width: inherit;
+}
+
+.sbui-inputgeocoding-dropdown li span {
+    font-family: $font-family !important;
+}
+
+.sbui-inputgeocoding-search-container {
+  position: relative;
+  margin-left: $mp-3;
+  margin-right: $mp-3;
+  margin-bottom: $mp-2;
+}
+
+.sbui-inputgeocoding-search {
+  display: block;
+  box-sizing: border-box;
+  padding-left: $mp-10;
+  padding-right: $mp-2;
+  padding-top: $mp-1;
+  padding-bottom: $mp-1;
+  width: 100%;
+  border-radius: $rounded-full;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  border-width: 1px;
+  border-style: solid;
+  font-family: inherit;
+  background-color: transparent;
+  color: $gray-600;
+  border-color: $gray-100;
+}
+
+.input-geocoding-icon {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: $mp-3;
+}
+
+.place-name {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-600;
+}
+
+.sbui-inputgeocoding-search--with-icon {
+  padding: $mp-0-5;
+  color: $gray-600;
+}
+
+.sbui-inputgeocoding-map-pin-icon {
+    top: 0px;
+    bottom: 0px;
+    right: $mp-3;
+    padding-right: $mp-2;
+    padding-left: $mp-2;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.sbui-inputgeocoding::-webkit-inner-spin-button,
+.sbui-inputgeocoding::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sbui-inputgeocoding:focus {
+    box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
+    outline: 0;
+}
+
+.sbui-inputgeocoding--error {
+    border-color: $red-500;
+}
+
+.sbui-inputgeocoding--borderless {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.sbui-inputgeocoding-actions-container {
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-left: $mp-3;
+  padding-right: $mp-1;
+  display: flex;
+  align-items: center;
+}
+
+
+  .hide {
+    display: none;
+  }
+  .v-hide {
+    visibility: hidden;
+  }
+
+  #sbui-dropdown-button {}
+
+  #sbui-basic-menu {}

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
-import { Space } from '../space'
 // @ts-ignore
-import RadioStyles from './radio.module.css'
+import RadioStyles from './radio.module.scss'
 import { RadioContext } from './radio-context'
 
 interface InputProps {
@@ -95,7 +94,7 @@ function RadioGroup({
           size={size}
         >
           <div className={RadioStyles['sbui-radio-group-contents']}>
-            <Space direction="vertical" size="px" minus>
+            <div>
               {options
                 ? options.map((option: InputProps) => {
                     return (
@@ -110,7 +109,7 @@ function RadioGroup({
                     )
                   })
                 : children}
-            </Space>
+            </div>
           </div>
         </FormLayout>
       </fieldset>

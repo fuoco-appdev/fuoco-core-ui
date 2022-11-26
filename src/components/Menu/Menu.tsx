@@ -1,10 +1,9 @@
 import React from 'react'
 import { DropdownContext } from '../../lib/overlay/overlay-context'
-import { Space } from '../space'
 import Typography from '../typography'
 
 // @ts-ignore
-import MenuStyles from './menu.module.css'
+import MenuStyles from './menu.module.scss'
 
 interface MenuProps {
   children: React.ReactNode
@@ -72,12 +71,12 @@ export function Item({
             style={style}
           >
             <Typography.Text>
-              <Space size={2}>
+              <div>
                 {icon && icon}
                 <span className={MenuStyles['sbui-menu__content']}>
                   {children}
                 </span>
-              </Space>
+              </div>
             </Typography.Text>
           </div>
         )
@@ -95,10 +94,10 @@ interface GroupProps {
 export function Group({ children, icon, title }: GroupProps) {
   return (
     <div className={MenuStyles['sbui-menu__group']}>
-      <Space size={2} direction="vertical">
+      <div>
         {icon && icon}
         <Typography.Text type="secondary">{title}</Typography.Text>
-      </Space>
+      </div>
       {children}
     </div>
   )

@@ -3,9 +3,7 @@ import React, { useState, useCallback } from 'react'
 // import { AutoForm } from 'uniforms'
 
 import { InputNumber } from '.'
-import { IconPackage } from '../../index'
-import { Button } from '../button'
-import { Space } from '../space'
+import { IconPackage } from '../icon/icons/icon-package'
 
 export default {
   title: 'Data Input/InputNumber',

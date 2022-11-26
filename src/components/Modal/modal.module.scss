@@ -1,0 +1,153 @@
+/* 
+ Modal animations imported first as so placement styles are not affected.
+*/
+
+.sbui-modal-flex-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: $mp-4;
+  padding-left: $mp-6;
+  padding-right: $mp-6;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.sbui-modal-overlay-container {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.sbui-modal-overlay {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sbui-modal-div-trick {
+  display: none;
+}
+
+.sbui-modal {
+  display: inline-block;
+  background-color: white;
+  border-color: $gray-400;
+  border-radius: $rounded-lg;
+  border-style: solid;
+  border-width: 1px;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: $shadow-6;
+  vertical-align: middle;
+}
+
+.sbui-footer-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px;
+}
+
+.sbui-modal--tiny {
+
+}
+
+.sbui-modal--small {
+
+}
+
+.sbui-modal--medium {
+
+}
+
+.sbui-modal--large {
+
+}
+
+.sbui-modal-content {
+  padding: 28px $mp-6;
+}
+
+.sbui-modal-title {
+  padding-bottom: $mp-4;
+  font-weight: $font-weight-bold;
+  color: $gray-800;
+}
+
+.sbui-modal-description {
+  color: $gray-800;
+}
+
+.sbui-modal-footer {
+  justify-content: flex-end;
+}
+
+.sbui-footer-cancel-text {
+  color: $gray-800;
+}
+
+.sbui-modal-footer--with-bg {
+  justify-content: flex-end;
+}
+
+.sbui-modal-icon-container {
+  margin-left: auto;
+  margin-right: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem/* 48px */;
+  width: 3rem/* 48px */;
+  border-radius: $rounded-full;
+}
+
+.sbui-modal-icon-container--danger {
+  color: $red-600;
+  background-color: rgba($red-600, $opacity-2);
+}
+
+.sbui-modal-icon-container--warning {
+  color: $yellow-600;
+  background-color: rgba($yellow-600, $opacity-2);
+}
+
+.sbui-modal-icon-container--success {
+  color: $brand-400;
+  background-color: rgba($brand-400, $opacity-2);
+}
+
+.sbui-modal-close-container {
+  position: absolute;
+  right: $mp-1;
+  top: $mp-1;
+}
+
+.sbui-modal-close-button {
+ width: 42px;
+ height: 42px;
+ border-radius: $rounded-full;
+}
+
+.sbui-modal-close-container button,
+.dark .sbui-modal-close-container button {
+  color: $gray-400;
+
+  & :hover {
+    color: $gray-900;
+    background-color: transparent;
+  }
+}
+
+.sbui-sidepanel__trigger {
+  border-style: none;
+  background-color: transparent;
+  padding: 0px;
+}

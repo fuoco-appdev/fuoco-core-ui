@@ -3,7 +3,7 @@ import { animated, useTransition } from 'react-spring'
 import { Button } from '../button/index'
 
 // @ts-ignore
-import DropdownStyles from './dropdown.module.css'
+import DropdownStyles from './dropdown.module.scss'
 
 export enum DropdownAlignment {
   Left,

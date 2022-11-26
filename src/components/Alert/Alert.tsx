@@ -6,7 +6,8 @@ import { IconX } from '../icon/icons/icon-x'
 import { IconXCircle } from '../icon/icons/icon-x-circle'
 import { animated } from 'react-spring'
 // @ts-ignore
-import AlertStyles from './alert.module.css'
+import AlertStyles from './alert.module.scss'
+import { Button } from '../button'
 
 export interface Props {
   variant?: 'success' | 'danger' | 'warning' | 'info'
@@ -44,8 +45,6 @@ const Alert = ({
   if (className) containerClasses.push(className)
   let descriptionClasses = [AlertStyles['sbui-alert-description']]
   descriptionClasses.push(AlertStyles[`sbui-alert-description--${variant}`])
-  let closeButtonClasses = [AlertStyles['sbui-close-button']]
-  closeButtonClasses.push(AlertStyles[`sbui-close-button--${variant}`])
 
   return (
     <>
@@ -55,21 +54,18 @@ const Alert = ({
             {withIcon && icons[variant]}
           </div>
           <div className={AlertStyles['sbui-description-content-container']}>
-            <h3 className="sbui-alert-title">{title}</h3>
+            <h3 className={AlertStyles['sbui-alert-title']}>{title}</h3>
             <div className={descriptionClasses.join(' ')}>{children}</div>
           </div>
         </div>
         {closable && (
           <div className={AlertStyles['sbui-close-root']}>
-            <div className={AlertStyles['sbui-close-container']}>
-              <button
-                aria-label="Close alert"
-                onClick={(e) => onCloseClick?.(e)}
-                className={closeButtonClasses.join(' ')}
-              >
-                <IconX size="xlarge" strokeWidth={1.5} />
-              </button>
-            </div>
+            <Button
+              type={'text'}
+              icon={<IconX size="xlarge" strokeWidth={1.5} stroke={'#fff'} />}
+              onClick={(e) => onCloseClick?.(e)}
+              className={AlertStyles['sbui-close-button']}
+            />
           </div>
         )}
       </animated.div>

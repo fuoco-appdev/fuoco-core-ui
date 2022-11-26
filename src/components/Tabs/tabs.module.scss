@@ -1,0 +1,73 @@
+.nav {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  position: relative;
+  z-index: 0;
+  padding: $mp-2 0;
+}
+
+.nav-verticle {
+  flex-direction: column;
+}
+
+.tab-button {
+  position: relative;
+  border-radius: $rounded-md;
+  display: flex;
+  align-items: center;
+  padding: $mp-2 $mp-4;
+  z-index: 20;
+  background-color: transparent;
+  margin-right: $mp-2;
+  margin-bottom: $mp-2;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+  cursor: pointer;
+  transition: all $duration-expand-sm;
+  transition-timing-function: $transition-standard-easing;
+  color: $gray-100;
+  border: 0;
+}
+
+.tab-icon {
+  display: flex;
+  justify-content: center;
+  padding: $mp-2 0;
+}
+
+.tab-icon-space {
+  margin-right: $mp-2;
+  padding: 0;
+}
+
+.tab-slider {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  border-radius: $rounded-md;
+  background-color: rgba($gray-200, $opacity-35);
+  transition: width $transition-accelerated-easing;
+  transition-timing-function: $duration-expand-md;
+}
+
+.tab-slider-pill {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  border-radius: $rounded-full;
+  background-color: rgba($gray-200, $opacity-35);
+  transition: width $transition-accelerated-easing;
+  transition-timing-function: $duration-expand-md;
+}
+
+.tab-outline {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  height: $mp-0-5;
+  background-color: $brand-400;
+}

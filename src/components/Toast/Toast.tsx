@@ -11,7 +11,7 @@ import { IconX } from '../icon/icons/icon-x'
 import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
 import { Button } from '../button/index'
 // @ts-ignore
-import ToastStyles from './toast.module.css'
+import ToastStyles from './toast.module.scss'
 import Typography from '../typography'
 import { useTransition, animated, SpringValue } from 'react-spring'
 import { X } from '../icon/icon-import-handler'
@@ -122,10 +122,10 @@ function Toast(props: ToastProps) {
               className={closeButtonClasses.join(' ')}
               icon={
                 <IconX
-                  className="h-5 w-5"
                   aria-hidden="true"
                   size="small"
                   strokeWidth={2}
+                  stroke={'#fff'}
                 />
               }
               onClick={props.onClose}

@@ -11,7 +11,7 @@ import React, {
 import { Listbox as HeadlessListbox, Transition } from '@headlessui/react'
 import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
-import SelectStyles from './select-styled.module.css'
+import SelectStyles from './select-styled.module.scss'
 
 import InputIconContainer from '../../lib/layout/input-icon-container'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
@@ -39,7 +39,6 @@ export interface Props {
   style?: React.CSSProperties
   reveal?: boolean
   actions?: React.ReactNode
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
   borderless?: boolean
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
@@ -61,7 +60,6 @@ function Listbox(
     layout,
     onChange,
     style,
-    size = 'medium',
     borderless = false,
     onMouseEnter,
     onMouseLeave,
@@ -96,7 +94,6 @@ function Listbox(
   let selectClasses = [SelectStyles['sbui-listbox']]
   if (error) selectClasses.push(SelectStyles['sbui-listbox--error'])
   if (icon) selectClasses.push(SelectStyles['sbui-listbox--with-icon'])
-  if (size) selectClasses.push(SelectStyles[`sbui-listbox--${size}`])
   if (borderless) selectClasses.push(SelectStyles['sbui-listbox--borderless'])
 
   return (
@@ -109,7 +106,6 @@ function Listbox(
       descriptionText={descriptionText}
       className={className}
       style={style}
-      size={size}
     >
       <div
         className={SelectStyles['sbui-listbox-container']}
@@ -123,12 +119,15 @@ function Listbox(
                 <Ripples className={SelectStyles['sbui-listbox-ripple']}>
                   <HeadlessListbox.Button className={selectClasses.join(' ')}>
                     {icon && <InputIconContainer icon={icon} />}
-                    <span className={SelectStyles['sbui-listbox-addonbefore']}>
-                      {selectedProps?.addOnBefore &&
-                        selectedProps.addOnBefore(selectedProps?.value)}
-                      <span className={SelectStyles['sbui-listbox-label']}>
-                        {selectedProps?.value}
+                    {selectedProps?.addOnBefore && (
+                      <span
+                        className={SelectStyles['sbui-listbox-addonbefore']}
+                      >
+                        {selectedProps.addOnBefore(selectedProps?.value)}
                       </span>
+                    )}
+                    <span className={SelectStyles['sbui-listbox-label']}>
+                      {selectedProps?.value}
                     </span>
                     {error && (
                       <div
@@ -136,7 +135,7 @@ function Listbox(
                           SelectStyles['sbui-listbox-actions-container']
                         }
                       >
-                        {error && <InputErrorIcon size={size} />}
+                        {error && <InputErrorIcon />}
                       </div>
                     )}
                     <span

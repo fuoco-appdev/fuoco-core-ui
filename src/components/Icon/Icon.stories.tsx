@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { IconMail, Typography } from '../../index'
+import { Typography } from '../../index'
+import { IconMail } from './icons/icon-mail'
 
 export default {
   title: 'General/Icon',

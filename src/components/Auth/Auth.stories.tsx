@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Auth } from '.'
 import { ApiError, createClient } from '@supabase/supabase-js'
 // @ts-ignore
-import { Typography, Button, Space } from '../../index'
+import { Typography, Button } from '../../index'
 import ReactMarkdown from 'react-markdown'
 const gfm = require('remark-gfm')
 
@@ -213,8 +213,7 @@ export const ChangeViewState = (args: any) => {
 
   return (
     <div>
-      <Space>
-        <Button
+      <Button
           type={view === 'sign_up' ? 'primary' : 'default'}
           onClick={() => setView('sign_up')}
         >
@@ -250,7 +249,6 @@ export const ChangeViewState = (args: any) => {
         >
           Privacy Policy
         </Button>
-      </Space>
       <Auth.UserContextProvider supabaseClient={supabase}>
         <Container supabaseClient={supabase}>
           <Auth

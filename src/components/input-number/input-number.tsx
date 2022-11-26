@@ -4,9 +4,8 @@ import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { IconChevronDown } from '../icon/icons/icon-chevron-down'
 import { IconChevronUp } from '../icon/icons/icon-chevron-up'
 import InputIconContainer from '../../lib/layout/input-icon-container'
-import { Space } from '../../index'
 // @ts-ignore
-import InputNumberStyles from './input-number.module.css'
+import InputNumberStyles from './input-number.module.scss'
 
 export interface Props {
   autoComplete?: string
@@ -175,14 +174,13 @@ function InputNumber({
           </div>
           {icon && <InputIconContainer icon={icon} />}
           {error ? (
-            <Space
+            <div
               className={
                 InputNumberStyles['sbui-inputnumber-actions-container']
               }
-              size={1}
             >
               {error && <InputErrorIcon size={size} />}
-            </Space>
+            </div>
           ) : null}
         </div>
       </FormLayout>

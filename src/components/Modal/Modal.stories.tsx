@@ -1,13 +1,13 @@
 import { actions } from '@storybook/addon-actions'
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
-
 import { Modal } from '.'
 import Typography from '../typography'
 import { Badge } from '../badge'
 import { Button } from '../button'
-import { Space } from '../space'
-import { IconTrash, IconAlertCircle, IconCheck } from '../../index'
+import { IconTrash } from '../icon/icons/icon-trash'
+import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
+import { IconCheck } from '../icon/icons/icon-check'
 import { Dropdown } from '../dropdown'
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -416,7 +416,7 @@ customFooter.args = {
   title: 'This is the title of the modal',
   description: 'And i am the description',
   customFooter: [
-    <Space size={2}>
+    <div>
       <div>
         <Badge color="red" dot size="small">
           Proceed with caution
@@ -424,7 +424,7 @@ customFooter.args = {
       </div>
       <Button type="secondary">Cancel</Button>
       <Button danger>Delete</Button>
-    </Space>,
+    </div>,
   ],
 }
 
@@ -437,7 +437,7 @@ customFooterVertical.args = {
   description: 'And i am the description',
   layout: 'vertical',
   customFooter: [
-    <Space
+    <div
       style={{
         width: '100%',
         display: 'flex',
@@ -450,7 +450,7 @@ customFooterVertical.args = {
       <Button size="medium" block danger icon={<IconTrash />}>
         Delete
       </Button>
-    </Space>,
+    </div>,
   ],
 }
 
@@ -465,10 +465,10 @@ CustomFooterOneButton.args = {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.',
   layout: 'vertical',
   customFooter: [
-    <Space style={{ width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <Button size="medium" block icon={<IconCheck />}>
         Confirm
       </Button>
-    </Space>,
+    </div>,
   ],
 }

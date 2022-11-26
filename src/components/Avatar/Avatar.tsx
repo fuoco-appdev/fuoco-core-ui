@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon } from '../icon/icon-import-handler'
 import { IconUser } from '../icon/icons/icon-user'
 // @ts-ignore
-import AvatarStyles from './avatar.module.css'
+import AvatarStyles from './avatar.module.scss'
 
 interface Props {
   children?: React.ReactNode

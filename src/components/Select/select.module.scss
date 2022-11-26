@@ -1,0 +1,117 @@
+.sbui-select-container {
+  position: relative;
+}
+
+.sbui-select {
+  display: block;
+  width: 100%;
+  padding-left: $mp-3;
+  padding-right: $mp-10;
+  padding-top: $mp-2;
+  padding-bottom: $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  border-radius: $rounded-md;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+  transition: box-shadow 0.3s ease-in-out;
+  background-image: none;
+  color: white;
+  background-color: transparent;
+
+  & :focus {
+    border-color: $brand-400;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+
+.sbui-select option {
+  background-color: white;
+  color: $gray-900;
+}
+
+.sbui-select:focus {
+ 
+}
+
+.sbui-select--error {
+  border-color: $red-500;
+}
+
+.sbui-select--borderless {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/*
+  Select sizes
+*/
+
+.sbui-select--tiny {
+  padding: $mp-1-5 $mp-2-5;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+}
+.sbui-select--small {
+  padding: $mp-2 $mp-3;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-xs;
+}
+.sbui-select--medium {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+.sbui-select--large {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+.sbui-select--xlarge {
+  padding: $mp-3 $mp-6;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+
+.sbui-select-actions-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-left: $mp-3;
+  padding-right: $mp-1;
+  margin-right: $mp-5;
+}
+
+/*
+  Select icon
+*/
+
+.sbui-select--with-icon {
+  padding-left: $mp-10;
+}
+
+/*
+  Select Chevron
+*/
+
+.sbui-select-chevron-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-right: $mp-2;
+  pointer-events: none;
+}
+
+.sbui-select-chevron {
+  height: $mp-5;
+  width: $mp-5;
+  color: $gray-100;
+}

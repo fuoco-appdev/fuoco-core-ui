@@ -1,0 +1,90 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.sbui-alert-container {
+  display: flex;
+  border-radius: $rounded-md;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: $shadow-6;
+  padding: $mp-4;
+}
+
+.sbui-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.sbui-icon-content-container {
+  flex-shrink: 0;
+}
+
+.sbui-description-content-container {
+  display: inline-block;
+  margin-left: $mp-3;
+}
+
+.sbui-close-root {
+  padding-left: $mp-3;
+  height: fit-content;
+}
+
+.sbui-alert-container--danger {
+  background-color: rgba($red-600, $opacity-7);
+  color: $red-300;
+}
+
+.sbui-alert-container--warning {
+  background-color: rgba($yellow-600, $opacity-7);
+  color: $yellow-300;
+}
+
+.sbui-alert-container--info {
+  background-color: rgba($blue-600, $opacity-7);
+  color: $blue-300;
+}
+
+.sbui-alert-container--success {
+  background-color: rgba($green-600, $opacity-7);
+  color: $green-300;
+}
+
+.sbui-alert-title {
+  margin: 0px;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  font-weight: $font-weight-medium;
+  color: white;
+}
+
+.sbui-alert-description {
+  margin-top: $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+.sbui-alert-description--danger {
+  color: $red-100;
+}
+
+.sbui-alert-description--warning {
+  color: $yellow-100;
+}
+
+.sbui-alert-description--info {
+  color: $blue-100;
+}
+
+.sbui-alert-description--success {
+  color: $green-100;
+}
+
+.sbui-close-button {
+  border-radius: $rounded-full;
+  overflow: hidden;
+
+  & :hover {
+    background-color: transparent;
+  }
+}

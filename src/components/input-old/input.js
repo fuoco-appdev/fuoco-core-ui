@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './input.css'
+import './input.scss'
 
 export const SIZES = ['small', 'medium']
 

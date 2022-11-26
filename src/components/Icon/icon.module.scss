@@ -1,0 +1,57 @@
+.sbui-icon {
+  display: inline;
+}
+
+.sbui-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $rounded-full;
+  padding: $mp-3;
+  flex-shrink: 0;
+}
+
+.sbui-icon-container--brand {
+  background-color: rgba($brand-800, $opacity-1);
+  color: $brand-800;
+}
+
+.sbui-icon-container--gray {
+  background-color: rgba($gray-600, $opacity-1);
+  color: $gray-500;
+}
+
+.sbui-icon-container--red {
+  background-color: rgba($red-600, $opacity-1);
+  color: $red-500;
+}
+
+.sbui-icon-container--yellow {
+  background-color: rgba($yellow-600, $opacity-1);
+  color: $yellow-500;
+}
+
+.sbui-icon-container--green {
+  background-color: rgba($green-600, $opacity-1);
+  color: $green-500;
+}
+
+.sbui-icon-container--blue {
+  background-color: rgba($blue-600, $opacity-1);
+  color: $blue-500;
+}
+
+.sbui-icon-container--indigo {
+  background-color: rgba($indigo-600, $opacity-1);
+  color: $indigo-500;
+}
+
+.sbui-icon-container--purple {
+  background-color: rgba($purple-600, $opacity-1);
+  color: $purple-500;
+}
+
+.sbui-icon-container--pink {
+  background-color: rgba($pink-600, $opacity-1);
+  color: $pink-500;
+}

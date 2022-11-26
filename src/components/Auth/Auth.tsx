@@ -6,18 +6,17 @@ import {
   Input,
   Checkbox,
   Button,
-  Space,
   Typography,
-  Divider,
-  IconKey,
-  IconMail,
-  IconInbox,
-  IconLock,
+  Divider
 } from '../../index'
+import { IconMail } from '../icon/icons/icon-mail'
+import { IconKey } from '../icon/icons/icon-key'
+import { IconLock } from '../icon/icons/icon-lock'
+import {IconInbox} from '../icon/icons/icon-inbox'
 import { UserContextProvider, useUser } from './user-context'
 import * as SocialIcons from './icons'
 // @ts-ignore
-import AuthStyles from './auth.module.css'
+import AuthStyles from './auth.module.scss'
 import { RipplesProps } from 'react-ripples'
 
 const VIEWS: ViewsMap = {
@@ -183,8 +182,7 @@ function Auth({
 
   const Container = (props: any) => (
     <div className={containerClasses.join(' ')} style={style}>
-      <Space size={8} direction={'vertical'}>
-        <SocialAuth
+      <SocialAuth
           view={view}
           strings={{...defaultStrings, ...strings}}
           supabaseClient={supabaseClient}
@@ -206,7 +204,6 @@ function Auth({
           onEmailConfirmationSent={onEmailConfirmationSent}
         />
         {!onlyThirdPartyProviders && props.children}
-      </Space>
     </div>
   )
 
@@ -437,7 +434,6 @@ function SocialButton({
         size={socialButtonSize}
         style={socialColors ? (isHover ? buttonHoverStyles[provider] : buttonStyles[provider]) : {}}
         onClick={() => handleProviderSignIn(provider)}
-        className="flex items-center social-media-button"
         rippleProps={{
           color: 'rgba(0, 0, 0, .3)',
           during: 250,
@@ -494,11 +490,11 @@ function SocialAuth({
 
   const signLabel = props.view === 'sign_up' ? `${strings?.signUpWith} ` : `${strings?.signInWith} `
   return (
-    <Space size={8} direction={'vertical'}>
+    <div>
       {providers && providers.length > 0 && (
         <React.Fragment>
-          <Space size={4} direction={'vertical'}>
-            <Space size={2} direction={socialLayout} className={AuthStyles['button-container']}>
+          <div className={AuthStyles['button-root']}>
+            <div className={AuthStyles['button-container']}>
               {providers.map((provider) => {
                 return (<SocialButton
                   key={`${provider}-button`}
@@ -510,12 +506,12 @@ function SocialAuth({
                   strings={strings!}
                   handleProviderSignIn={handleProviderSignIn}/>)
               })}
-            </Space>
-          </Space>
-          {!onlyThirdPartyProviders && <Divider>{strings?.orContinueWith}</Divider>}
+            </div>
+          </div>
+          {!onlyThirdPartyProviders && <Divider className={AuthStyles['divider']}>{strings?.orContinueWith}</Divider>}
         </React.Fragment>
       )}
-    </Space>
+    </div>
   )
 }
 
@@ -636,8 +632,8 @@ function EmailAuth({
 
   return (
     <form id={id} onSubmit={handleSubmit}>
-      <Space size={6} direction={'vertical'}>
-        <Space size={3} direction={'vertical'}>
+      <div>
+        <div>
           <Input
             label={strings.emailAddress}
             error={emailErrorMessage}
@@ -686,9 +682,9 @@ function EmailAuth({
             onFocus={() => setPasswordIconLit(true)}
             onBlur={() => setPasswordIconLit(false)}
           />
-        </Space>
-        <Space direction="vertical" size={6} className={AuthStyles['button-container']}>
-          <Space style={{ justifyContent: 'space-between' }}>
+        </div>
+        <div className={AuthStyles['button-container']}>
+          <div className={AuthStyles['remember-me-container']}>
             {authView === VIEWS.SIGN_IN && (
               <Checkbox
                 label={strings.rememberMe ?? ""}
@@ -749,26 +745,28 @@ function EmailAuth({
                 checked={termAgreementChecked}
               />
             )}
-          </Space>
-          <Button
-            htmlType="submit"
-            type="primary"
-            size="large"
-            disabled={
-              authView === VIEWS.SIGN_UP ? !termAgreementChecked : false
-            }
-            block
-            rippleProps={rippleProps}
-          >
-            <div className={AuthStyles['button-content']}>
-              <div className={AuthStyles['button-icon']}>
-                <IconLock size={21} />
+          </div>
+          <div className={AuthStyles['email-button-container']}>
+            <Button
+              htmlType="submit"
+              type="primary"
+              size="large"
+              disabled={
+                authView === VIEWS.SIGN_UP ? !termAgreementChecked : false
+              }
+              block
+              rippleProps={rippleProps}
+            >
+              <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+                <div className={AuthStyles['button-icon']}>
+                  <IconLock size={21} />
+                </div>
+                {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
-              {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
-            </div>
-          </Button>
-        </Space>
-        <Space direction="vertical" style={{ textAlign: 'center' }}>
+            </Button>
+          </div> 
+        </div>
+        <div className={AuthStyles['link-container']}>
           {authView === VIEWS.SIGN_IN && magicLink && (
             <Typography.Link
               href={'#'}
@@ -801,8 +799,8 @@ function EmailAuth({
               {strings.doYouHaveAnAccount}
             </Typography.Link>
           )}
-        </Space>
-      </Space>
+        </div>
+      </div>
     </form>
   )
 }
@@ -846,8 +844,8 @@ function MagicLink({
 
   return (
     <form id="auth-magic-link" onSubmit={handleMagicLinkSignIn}>
-      <Space size={4} direction={'vertical'}>
-        <Space size={3} direction={'vertical'} className={AuthStyles['button-container']}>
+      <div>
+        <div className={AuthStyles['button-container']}>
           <Input
             label={strings.emailAddress}
             placeholder={strings.yourEmailAddress}
@@ -876,14 +874,14 @@ function MagicLink({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={AuthStyles['button-content']}>
+            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
               <div className={AuthStyles['button-icon']}>
                 <IconInbox size={21} />
               </div>
               {strings.sendMagicLink}
             </div>
           </Button>
-        </Space>
+        </div>
         <Typography.Link
           href="#auth-sign-in"
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -893,7 +891,7 @@ function MagicLink({
         >
           {strings.signInWithPassword}
         </Typography.Link>
-      </Space>
+      </div>
     </form>
   )
 }
@@ -937,8 +935,8 @@ function ForgottenPassword({
 
   return (
     <form id="auth-forgot-password" onSubmit={handlePasswordReset}>
-      <Space size={4} direction={'vertical'}>
-        <Space size={3} direction={'vertical'} className={AuthStyles['button-container']}>
+      <div>
+        <div className={AuthStyles['button-container']}>
           <Input
             label="Email address"
             placeholder="Your email address"
@@ -966,14 +964,14 @@ function ForgottenPassword({
             size="large"
             htmlType="submit"
           >
-            <div className={AuthStyles['button-content']}>
+            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
               <div className={AuthStyles['button-icon']}>
                 <IconInbox size={21} />
               </div>
               {strings.sendResetPasswordInstructions}
             </div>
           </Button>
-        </Space>
+        </div>
         <Typography.Link
           href={'#'}
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -983,7 +981,7 @@ function ForgottenPassword({
         >
           {strings.goBackToSignIn}
         </Typography.Link>
-      </Space>
+      </div>
     </form>
   )
 }
@@ -1027,8 +1025,8 @@ function ResetPassword({
 
   return (
     <form id="auth-reset-password" onSubmit={handlePasswordReset}>
-      <Space size={4} direction={'vertical'}>
-        <Space size={3} direction={'vertical'} className={AuthStyles['button-container']}>
+      <div>
+        <div className={AuthStyles['button-container']}>
           <Input
             label={strings?.newPassword}
             placeholder={strings?.enterYourNewPassword}
@@ -1059,15 +1057,15 @@ function ResetPassword({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={AuthStyles['button-content']}>
+            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
               <div className={AuthStyles['button-icon']}>
                 <IconKey size={21} />
               </div>
               {strings?.resetPassword}
             </div>
           </Button>
-        </Space>
-      </Space>
+        </div>
+      </div>
     </form>
   )
 }
@@ -1106,8 +1104,8 @@ function UpdatePassword({
 
   return (
     <form id="auth-update-password" onSubmit={handlePasswordReset}>
-      <Space size={4} direction={'vertical'}>
-        <Space size={3} direction={'vertical'} className={AuthStyles['button-container']}>
+      <div>
+        <div className={AuthStyles['button-container']}>
           <Input
             label={strings?.newPassword}
             placeholder={strings?.enterYourNewPassword}
@@ -1138,15 +1136,15 @@ function UpdatePassword({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={AuthStyles['button-content']}>
+            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
               <div className={AuthStyles['button-icon']}>
                 <IconKey size={21} />
               </div>
               {strings?.updatePassword}
             </div>
           </Button>
-        </Space>
-      </Space>
+        </div>
+      </div>
     </form>
   )
 }

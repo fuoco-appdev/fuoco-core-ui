@@ -40,7 +40,6 @@ export default {
     sidepanel: 'src/components/side-panel/index.tsx',
     dropdown: 'src/components/dropdown/index.tsx',
     contextmenu: 'src/components/context-menu/index.tsx',
-    space: 'src/components/space/index.tsx',
     loading: 'src/components/loading/index.tsx',
     divider: 'src/components/divider/index.tsx',
     select: 'src/components/select/index.tsx',
@@ -117,7 +116,7 @@ export default {
     del({ targets: ['dist/*'] }),
     copy({
       targets: [
-        { src: 'src/assets/images/**/*', dest: 'dist/cjs/src/assets/images' }
+        { src: 'src/assets/images/**/*', dest: 'dist/cjs/src/assets/images' },
       ],
     }),
   ],

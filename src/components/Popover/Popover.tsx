@@ -6,7 +6,7 @@ import type * as RadixPopoverTypes from '@radix-ui/react-popover/'
 import { IconCheck } from '../icon/icons/icon-check'
 
 // @ts-ignore
-import DropdownStyles from './popover.module.css'
+import DropdownStyles from './popover.module.scss'
 
 // import type * as RadixDropdownTypes from '@radix-ui/react-dropdown-menu/'
 import { IconX } from '../icon/icons/icon-x'

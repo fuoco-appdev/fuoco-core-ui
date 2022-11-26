@@ -12,7 +12,7 @@ export const Default = (args: any) => {
   return (
     <>
       <Loading {...args}>
-        <Card title={'This card can be set to loading'}></Card>
+        <Card></Card>
       </Loading>
     </>
   )

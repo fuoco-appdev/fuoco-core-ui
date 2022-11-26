@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import TypographyStyles from './typography.module.css'
+import TypographyStyles from './typography.module.scss'
 import Title from './title'
 import Text from './text'
 import Link from './link'

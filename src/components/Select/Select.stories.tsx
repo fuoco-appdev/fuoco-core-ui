@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Select from '.'
-import { IconBook } from '../../index'
+import { IconBook } from '../icon/icons/icon-book'
 
 const { Option, OptGroup } = Select
 

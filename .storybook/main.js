@@ -1,5 +1,4 @@
 const babel = require('@babel/core')
-const postCssLoader = './postCssLoader'
 const path = require('path');
 require('storybook-addon-sketch/register-options')({ kind: true });
 
@@ -13,19 +12,25 @@ module.exports = {
     'storybook-addon-sketch/register',
   ],
   webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@themes': path.resolve(__dirname, '../src/themes'),
+      // ...
+    };
+
     config.module.rules.push({
-      test: /\.css$/,
+      test: /\.scss$/,
       use: [
+        'style-loader',
+        'css-loader',
         {
-          loader: 'postcss-loader',
+          loader: 'sass-loader',
           options: {
-            postcssOptions: {
-              ident: 'postcss',
-              plugins: [
-                require('tailwindcss'),
-                require('autoprefixer'),
-              ]
-            }
+            additionalData: `
+              @import "@themes/_colors.scss";
+              @import "@themes/_global.scss";
+              @import "@themes/_margins-paddings.scss";
+            `
           },
         },
       ],

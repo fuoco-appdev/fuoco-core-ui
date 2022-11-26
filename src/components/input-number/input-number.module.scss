@@ -1,0 +1,178 @@
+.sbui-inputnumber-container {
+  position: relative;
+}
+
+.sbui-inputnumber {
+  display: block;
+  box-sizing: border-box;
+  padding: $mp-2 $mp-3;
+  width: 100%;
+  border-radius: $rounded-md;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  border-width: 1px;
+  border-style: solid;
+  color: $gray-100;
+  border-color: $gray-100;
+  font-family: inherit;
+  transition: box-shadow 0.3s ease-in-out;
+  -moz-appearance: textfield;
+  float: left;
+  display: block;
+  background-color: transparent;
+
+  & :focus {
+    border-color: $gray-100;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  & :hover {
+    border-color: $brand-400;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+
+.sbui-inputnumber::-webkit-inner-spin-button,
+.sbui-inputnumber::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sbui-inputnumber:focus {
+  outline: 0;
+}
+
+.sbui-inputnumber--error {
+  border-color: $red-500;
+}
+
+.sbui-inputnumber--borderless {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.sbui-inputnumber-actions-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-left: $mp-3;
+  padding-right: $mp-1;
+}
+
+.sbui-inputnumber-nav {
+  display: none;
+  float: left;
+  position: relative;
+}
+
+.sbui-inputnumber:focus + .sbui-inputnumber-nav {
+  display: block;
+}
+
+.sbui-inputnumber-button {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  padding: $mp-2 $mp-3;
+  width: 100%;
+  border-radius: $rounded-md;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+  cursor: pointer;
+  width: 21px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 0;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.sbui-inputnumber-button:active {
+  background: #eaeaea;
+  background-clip: padding-box;
+}
+
+.sbui-inputnumber-button-up {
+  position: absolute;
+  height: 50%;
+  top: 0;
+  border-radius: 0 0.375rem 0 0;
+  line-height: 1.6;
+}
+
+.sbui-inputnumber-button-down {
+  position: absolute;
+  bottom: 0;
+  height: 50%;
+  border-radius: 0 0 0.375rem 0;
+}
+
+/*
+    Input sizes
+  */
+
+.sbui-inputnumber--tiny {
+  padding: $mp-1-5 $mp-2-5;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+}
+.sbui-inputnumber--small {
+  padding: $mp-2 $mp-3;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-xs;
+}
+.sbui-inputnumber--medium {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+.sbui-inputnumber--large {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+.sbui-inputnumber--xlarge {
+  padding: $mp-3 $mp-6;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+
+.sbui-inputnumber-nav--tiny {
+  height: 30px;
+}
+.sbui-inputnumber-nav--small {
+  height: 34px;
+}
+.sbui-inputnumber-nav--medium {
+  height: 38px;
+}
+.sbui-inputnumber-nav--large {
+  height: 42px;
+}
+.sbui-inputnumber-nav--xlarge {
+  height: 50px;
+}
+/*
+    Input icon
+  */
+
+.sbui-inputnumber--with-icon {
+  padding-left: $mp-10;
+}

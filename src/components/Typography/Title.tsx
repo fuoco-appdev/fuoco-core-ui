@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import TitleStyles from './title.module.css'
+import TitleStyles from './title.module.scss'
 
 interface Props {
   className?: string

@@ -2,16 +2,12 @@ import React, { useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import InputIconContainer from '../../lib/layout/input-icon-container'
-import {
-  Button,
-  Space,
-  Typography,
-  IconCopy,
-  IconEye,
-  IconEyeOff,
-} from '../../index'
+import { Button, Typography } from '../../index'
+import { IconCopy } from '../icon/icons/icon-copy'
+import { IconEye } from '../icon/icons/icon-eye'
+import { IconEyeOff } from '../icon/icons/icon-eye-off'
 // @ts-ignore
-import InputStyles from './input.module.css'
+import InputStyles from './input.module.scss'
 import { animated, useSpring } from 'react-spring'
 
 export interface Props
@@ -164,10 +160,7 @@ function Input({
             className={InputStyles['sbui-input']}
           />
           {copy || error || actions || password ? (
-            <Space
-              className={InputStyles['sbui-input-actions-container']}
-              size={1}
-            >
+            <div className={InputStyles['sbui-input-actions-container']}>
               {reveal ? (
                 <Button
                   htmlType={'button'}
@@ -190,7 +183,7 @@ function Input({
                 </Button>
               ) : null}
               {actions && actions}
-            </Space>
+            </div>
           ) : null}
         </div>
       </FormLayout>
@@ -320,6 +313,7 @@ function TextArea({
             autoComplete={autoComplete ? 'on' : 'off'}
             autoFocus={autofocus}
             disabled={disabled}
+            draggable={false}
             id={id}
             name={name}
             rows={rows}
@@ -336,12 +330,9 @@ function TextArea({
             {value}
           </textarea>
           {error ? (
-            <Space
-              className={InputStyles['sbui-input-actions-container']}
-              size={1}
-            >
+            <div className={InputStyles['sbui-input-actions-container']}>
               {error && <InputErrorIcon size={size} />}
-            </Space>
+            </div>
           ) : null}
         </div>
 

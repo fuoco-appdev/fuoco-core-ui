@@ -1,0 +1,62 @@
+$rounded-sm: 0.125rem/* 2px */ !default;
+$rounded-base: 0.25rem/* 4px */ !default;
+$rounded-md: 0.375rem/* 6px */ !default;
+$rounded-lg: 0.5rem/* 8px */ !default;
+$rounded-xl: 0.625rem/* */ !default;
+$rounded-full: 9999px !default;
+
+$border-2: 2px !default;
+
+$font-family: Poppins;
+
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-bold: 600 !default;
+
+$font-size-xs: 0.75rem/* 12px */;
+$font-size-sm: 0.875rem/* 14px */ !default;
+$font-size-base: 1rem !default;
+$font-size-lg: 1.125/* 24px */ !default;
+
+$font-line-height-xs: 1rem/* 16px */ !default;
+$font-line-height-sm: 1.25rem/* 20px */ !default;
+$font-line-height-base: 1.5rem !default;
+$font-line-height-lg: 1.75rem/* 28px */ !default; 
+
+$shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default;
+$shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !default;
+$shadow-3: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !default;
+$shadow-4: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !default;
+$shadow-5: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !default;
+$shadow-6: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !default;
+
+$opacity-1: 0.1 !default;
+$opacity-15: 0.15 !default;
+$opacity-2: 0.2 !default;
+$opacity-25: 0.25 !default;
+$opacity-3: 0.3 !default;
+$opacity-35: 0.35 !default;
+$opacity-4: 0.4 !default;
+$opacity-45: 0.45 !default;
+$opacity-5: 0.5 !default;
+$opacity-55: 0.55 !default;
+$opacity-6: 0.6 !default;
+$opacity-65: 0.65 !default;
+$opacity-7: 0.7 !default;
+$opacity-75: 0.75 !default;
+$opacity-8: 0.8 !default;
+$opacity-85: 0.85 !default;
+$opacity-9: 0.9 !default;
+$opacity-95: 0.95 !default;
+
+$transition-standard-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+$transition-decelerated-easing: cubic-bezier(0.0, 0.0, 0.2, 1);
+$transition-accelerated-easing: cubic-bezier(0.4, 0.0, 1, 1);
+
+$duration-expand-sm: 100ms;
+$duration-collapse-smm: 100ms;
+$duration-expand-md: 250ms;
+$duration-collapse-md: 200ms;
+$duration-expand-lg: 300ms;
+$duration-collapse-lg: 250ms;
+$duration-small: 100ms;

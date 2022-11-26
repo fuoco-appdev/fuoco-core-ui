@@ -1,0 +1,275 @@
+.sbui-btn {
+  position: relative;
+  display: inline-flex;
+  font-family: inherit;
+  font-weight: inherit;
+  padding: $mp-2 $mp-4;
+  align-items: center;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: $rounded-base;
+  cursor: pointer;
+  color: inherit;
+}
+
+.sbui-btn-ripple { 
+  display: flex;
+  height: inherit;
+  width: inherit;
+  pointer-events: auto;
+  justify-content: center;
+  border-radius: $rounded-base;
+}
+
+.sbui-btn-children {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  align-items: center;
+  width: inherit;
+}
+
+.sbui-btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.sbui-btn-container--shadow {
+  box-shadow: $shadow-2;
+}
+
+.sbui-btn--w-full {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sbui-btn:disabled {
+  pointer-events: none;
+  opacity: $opacity-75;
+  cursor: not-allowed;
+}
+
+/*
+  Button sizes
+*/
+
+.sbui-btn-tiny {
+  padding: $mp-1-5 $mp-2-5;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+.sbui-btn-small {
+  padding: $mp-2 $mp-3;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-xs;
+}
+.sbui-btn-medium {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+.sbui-btn-large {
+  padding: $mp-2-5 $mp-4;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+.sbui-btn-xlarge {
+  padding: $mp-3 $mp-6;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+
+/*
+  Button varients
+*/
+.sbui-btn-primary {
+  background-color: $brand-700;
+  color: $gray-100;
+}
+
+.sbui-btn-primary:hover {
+  background-color: $brand-900;
+}
+
+.sbui-btn-default {
+  color: $gray-500;
+  background-color: white;
+  border-color: $gray-200;
+}
+
+.sbui-btn-default:hover {
+  color: $gray-500;
+  background-color: white;
+  border-color: $gray-200;
+}
+
+.dark .sbui-btn-default {
+  text-shadow: $shadow-1;
+}
+
+.sbui-btn-secondary { 
+  color: $gray-100;
+  background-color: $gray-600;
+}
+
+.sbui-btn-secondary:hover {
+  background-color: $gray-100;
+  
+  & .sbui-btn-children {
+    color: $gray-900;
+  }
+}
+
+.dark .sbui-btn-secondary {
+  text-shadow: $shadow-1;
+}
+
+.sbui-btn-outline {
+  border-width: 1px;
+  color: $gray-100;
+  background-color: transparent;
+  border-color: $gray-200;
+  border-style: solid;
+}
+
+.sbui-btn-outline:hover {
+  background-color: white;
+  color: $gray-500;
+  border-color: $gray-600;
+}
+
+.sbui-btn-dashed {
+  border-width: 1px;
+  color: $gray-500;
+  background-color: transparent;
+  border-color: $gray-200;
+  border-style: dashed;
+}
+
+.sbui-btn-dashed:hover {
+  color: $gray-100;
+  border-color: $gray-600;
+}
+
+.sbui-btn-link {
+  background-color: transparent;
+  color: $brand-800;
+}
+
+.sbui-btn-link:hover {
+  background-color: rgba($brand-900, $opacity-25);
+}
+
+.sbui-btn-text {
+  color: $gray-100;
+  background-color: transparent;
+}
+
+.sbui-btn-text:hover {
+  background-color: rgba($gray-200, $opacity-25);
+}
+
+.sbui-btn--danger {
+  border-color: $red-500;
+  color: $red-500;
+}
+
+.dark .sbui-btn--danger {
+  text-shadow: $shadow-1;
+}
+
+.sbui-btn-primary.sbui-btn--danger {
+  background-color: $red-500;
+  color: white;
+}
+
+.sbui-btn-primary.sbui-btn--danger:hover {
+  background-color: $red-600;
+  border-color: $red-600;
+}
+
+.sbui-btn-default.sbui-btn--danger,
+.sbui-btn-secondary.sbui-btn--danger,
+.sbui-btn-outline.sbui-btn--danger,
+.sbui-btn-dashed.sbui-btn--danger,
+.sbui-btn-link.sbui-btn--danger,
+.sbui-btn-text.sbui-btn--danger {
+  & :hover {
+    background-color: $red-600;
+    color: white;
+    border-color: $red-600;
+  }
+}
+/* {
+  @apply hover:bg-red-600 hover:text-white hover:border-red-600;
+} */
+
+/* 
+  Animation for icon
+*/
+.sbui-btn--anim--spin {
+  stroke: currentColor;
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */
+  /* transform: rotate(.03turn);  */
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sbui-btn-loader--center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto 0;
+  width: inherit;
+  height: inherit;
+}
+
+.sbui-btn--text-fade-out span {
+  opacity: 0%;
+}
+
+.sbui-btn--text-align-left {
+  justify-content: flex-start;
+}
+
+.sbui-btn--text-align-right {
+  justify-content: flex-end;
+}
+
+.sbui-btn-text-align-center {
+  width: inherit;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.left-icon-space {
+  margin-right: $mp-2;
+}
+
+.right-icon-space {
+  margin-left: $mp-2;
+}

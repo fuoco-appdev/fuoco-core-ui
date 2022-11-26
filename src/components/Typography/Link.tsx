@@ -1,7 +1,7 @@
 import { HandlerFunction } from '@storybook/addon-actions'
 import React from 'react'
 // @ts-ignore
-import LinkStyles from './link.module.css'
+import LinkStyles from './link.module.scss'
 
 interface Props {
   children?: React.ReactNode

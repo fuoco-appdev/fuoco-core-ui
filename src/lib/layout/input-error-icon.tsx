@@ -1,8 +1,8 @@
 import React from 'react'
 // @ts-ignore
-import { IconAlertCircle } from '../../index'
+import { IconAlertCircle } from '../../components/icon/icons/icon-alert-circle'
 // @ts-ignore
-import InputErrorIconStyles from './input-error-icon.module.css'
+import InputErrorIconStyles from './input-error-icon.module.scss'
 
 interface Props {
   style?: React.CSSProperties

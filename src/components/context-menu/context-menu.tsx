@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { IconCheck } from '../icon/icons/icon-check'
 
 // @ts-ignore
-import ContextMenuStyles from './context-menu.module.css'
+import ContextMenuStyles from './context-menu.module.scss'
 
 import type * as RadixContextMenuTypes from '@radix-ui/react-context-menu/'
 

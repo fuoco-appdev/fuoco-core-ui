@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import DividerStyles from './divider.module.css'
+import DividerStyles from './divider.module.scss'
 
 interface Props {
   children?: React.ReactNode

@@ -1,8 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import { Space } from '../../../index'
-// @ts-ignore
-import FormLayoutStyles from './form-layout.module.css'
+import FormLayoutStyles from './form-layout.module.scss'
 
 type Props = {
   align?: string
@@ -70,13 +68,7 @@ export function FormLayout({
   return (
     <div className={containerClasses.join(' ')}>
       {labelled || labelOptional || layout === 'horizontal' ? (
-        <Space
-          direction={
-            (layout && layout === 'horizontal') ||
-            (flex && layout && layout === 'vertical')
-              ? 'vertical'
-              : 'horizontal'
-          }
+        <div
           className={
             '' +
             (layout !== 'horizontal' && !flex
@@ -116,7 +108,7 @@ export function FormLayout({
               {labelOptional}
             </span>
           )}
-        </Space>
+        </div>
       ) : null}
       <div
         className={

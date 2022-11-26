@@ -1,0 +1,106 @@
+.sbui-input-container {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $rounded-md;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: $gray-100;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.sbui-input-container:hover {
+  border-color: $brand-400;
+}
+
+.sbui-input {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: none;
+  border: 0;
+  box-shadow: none !important;
+  font-family: inherit;
+  appearance: textfield;
+  background: transparent;
+  padding: $mp-1 $mp-3;
+  width: 100%;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-100;
+  background-color: transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  resize: vertical;
+
+  & :focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  & :hover {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: white;
+  background: url("data:image/svg+xml;utf8,<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16 2V6\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M8 2V6\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M3 10H21\" stroke=\"white\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>") center/80% no-repeat;
+}
+
+.sbui-input:focus {
+  box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
+}
+
+.sbui-input--error {
+  border-color: $red-500;
+}
+
+.sbui-input--borderless {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.sbui-input-actions-container {
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-left: $mp-3;
+  padding-left: $mp-1;
+}
+
+/*
+  Input sizes
+*/
+
+.sbui-input--tiny {
+  padding: $mp-1-5 $mp-2;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+}
+.sbui-input--small {
+  padding: $mp-2 $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-xs;
+}
+.sbui-input--medium {
+  padding: $mp-2 $mp-2;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+.sbui-input--large {
+  padding: $mp-2 $mp-4;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+.sbui-input--xlarge {
+  padding: $mp-3 $mp-6;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}

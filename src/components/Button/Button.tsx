@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react'
 // @ts-ignore
-import ButtonStyles from './button.module.css'
+import ButtonStyles from './button.module.scss'
 import { IconContext } from '../icon/icon-context'
 import { IconLoader } from '../icon/icons/icon-loader'
 import Ripples, { RipplesProps } from 'react-ripples'
@@ -76,9 +76,9 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     const showIcon = loading || icon
 
     let classes = [ButtonStyles['sbui-btn']]
-    let containerClasses = [ButtonStyles['sbui-btn-container']]
-
     classes.push(ButtonStyles[`sbui-btn-${type}`])
+    let containerClasses = [ButtonStyles['sbui-btn-ripple']]
+    containerClasses.push(className)
 
     if (block) {
       containerClasses.push(ButtonStyles['sbui-btn--w-full'])
@@ -94,7 +94,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     }
 
     if (size) {
-      classes.push(ButtonStyles[`sbui-btn--${size}`])
+      classes.push(ButtonStyles[`sbui-btn-${size}`])
     }
 
     const iconLoaderClasses = [ButtonStyles['sbui-btn--anim--spin']]
@@ -106,13 +106,20 @@ const Button = forwardRef<RefHandle, ButtonProps>(
       classes.push(ButtonStyles[`sbui-btn--text-fade-out`])
     }
 
-    classes.push(ButtonStyles[`sbui-btn--text-align-${textAlign}`])
+    classes.push(ButtonStyles[`sbui-btn-text-align-${textAlign}`])
+
+    const leftIconClasses = [ButtonStyles['icon-container']]
+    if (children) {
+      leftIconClasses.push(ButtonStyles['left-icon-space'])
+    }
+
+    const rightIconClasses = [ButtonStyles['icon-container']]
+    if (children) {
+      rightIconClasses.push(ButtonStyles['right-icon-space'])
+    }
 
     return (
-      <Ripples
-        {...rippleProps}
-        className={[ButtonStyles['sbui-btn-ripple'], className].join(' ')}
-      >
+      <Ripples {...rippleProps} className={containerClasses.join(' ')}>
         <button
           {...props}
           ref={buttonRef}
@@ -130,7 +137,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
               <IconLoader size={size} className={iconLoaderClasses.join(' ')} />
             ) : icon ? (
               <IconContext.Provider value={{ contextSize: size }}>
-                {icon}
+                <div className={leftIconClasses.join(' ')}>{icon}</div>
               </IconContext.Provider>
             ) : null)}
           {children && (
@@ -140,7 +147,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
           )}
           {iconRight && !loading && (
             <IconContext.Provider value={{ contextSize: size }}>
-              {iconRight}
+              <div className={rightIconClasses.join(' ')}>{iconRight}</div>
             </IconContext.Provider>
           )}
         </button>

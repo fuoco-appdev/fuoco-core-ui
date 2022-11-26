@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
-import { Space } from '../space'
 // @ts-ignore
-import ToggleStyles from './toggle.module.css'
+import ToggleStyles from './toggle.module.scss'
 
 interface Props {
   disabled?: boolean

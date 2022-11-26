@@ -1,0 +1,82 @@
+/* 
+ Overlay animations imported first as so placement styles are not affected.
+*/
+
+.sbui-overlay--enter {
+
+}
+.sbui-overlay--enterFrom {
+
+}
+.sbui-overlay--enterTo {
+
+}
+.sbui-overlay--leave {
+
+}
+.sbui-overlay--leaveFrom {
+
+}
+.sbui-overlay--leaveTo {
+
+}
+
+.sbui-overlay {
+  position: relative;
+  display: inline-block;
+}
+
+.sbui-overlay-container {
+  width: 14rem/* 224px */;
+}
+
+.sbui-overlay-container--bottomRight {
+  position: absolute;
+  transform-origin: top right;
+  right: 0px;
+  margin-top: $mp-2;
+}
+
+.sbui-overlay-container--bottomLeft {
+  position: absolute;
+  transform-origin: top left;
+  left: 0px;
+  margin-top: $mp-2;
+}
+
+.sbui-overlay-container--bottomCenter {
+  margin-top: 0.5rem;
+  position: absolute;
+  transform-origin: center;
+  transform-origin: bottom center;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.sbui-overlay-container--topRight {
+  transform-origin: bottom right;
+  margin-top: -0.5rem;
+  position: absolute;
+  left: 0;
+  transform-origin: top left;
+  transform: translatey(-100%);
+}
+
+.sbui-overlay-container--topLeft {
+  transform-origin: bottom left;
+  margin-top: -0.5rem;
+  position: absolute;
+  right: 0;
+  transform-origin: top left;
+  transform: translatey(-100%);
+}
+
+.sbui-overlay-container--topCenter {
+  transform-origin: bottom left;
+  margin-top: -0.5rem;
+  position: absolute;
+  left: 50%;
+  transform-origin: top left;
+  transform: translatey(-100%) translateX(-50%);
+}

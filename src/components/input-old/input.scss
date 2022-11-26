@@ -1,0 +1,20 @@
+.form-input:disabled {
+  background-color: $gray-100;
+  cursor: not-allowed;
+}
+
+.form-input--small {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  padding-top: $mp-1;
+  padding-bottom: $mp-1;
+}
+
+.form-input--medium {
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+}
+
+.form-input--error {
+  border-color: $red-500;
+}

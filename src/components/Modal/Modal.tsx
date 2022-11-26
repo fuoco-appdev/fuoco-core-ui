@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react'
 // @ts-ignore
-import ModalStyles from './modal.module.css'
-import { Button, IconX, Typography, Space } from '../../index'
+import ModalStyles from './modal.module.scss'
+import { Button, Typography } from '../../index'
+import { IconX } from '../icon/icons/icon-x'
 import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
-import * as Dialog from '@radix-ui/react-dialog'
-
-import { Transition } from '@headlessui/react'
-
-// import { Transition } from '@tailwindui/react'
 
 export interface Props {
   children?: React.ReactNode

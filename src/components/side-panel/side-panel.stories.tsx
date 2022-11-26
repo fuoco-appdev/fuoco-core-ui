@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
 import React, { useState } from 'react'
-import { Button, Space, Typography } from '../../index'
+import { Button, Typography } from '../../index'
 
 import { SidePanel } from './index'
 
@@ -172,10 +172,10 @@ customFooter.args = {
   title: 'This is the title of the SidePanel',
   description: 'And i am the description',
   customFooter: [
-    <Space>
+    <div>
       <Button type="secondary">Cancel</Button>
       <Button danger>Delete</Button>
-    </Space>,
+    </div>,
   ],
 }
 

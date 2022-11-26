@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
-import InputGeocodingStyles from './input-geocoding.module.css'
-import { Button } from '../button'
+import InputGeocodingStyles from './input-geocoding.module.scss'
 import { Dropdown } from '../dropdown/index'
-import { Space } from '../space'
-import { IconMapPin } from '../icon/icons/icon-map-pin'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
@@ -222,7 +219,11 @@ function InputGeocoding({
           className={classesContainer.join(' ')}
           style={containerStyle}
         >
-          <InputIconContainer icon={icon} />
+          {icon && (
+            <div className={InputGeocodingStyles['input-geocoding-icon']}>
+              {icon}
+            </div>
+          )}
           <input
             {...inputProps}
             className={InputGeocodingStyles['sbui-inputgeocoding']}
@@ -236,21 +237,19 @@ function InputGeocoding({
             placeholder={placeholder}
             disabled={disabled}
           />
-          <Space
+          <div
             className={
               InputGeocodingStyles['sbui-inputgeocoding-actions-container']
             }
-            size={1}
-          ></Space>
+          ></div>
           {error ? (
-            <Space
+            <div
               className={
                 InputGeocodingStyles['sbui-inputgeocoding-actions-container']
               }
-              size={1}
             >
               {error && <InputErrorIcon size={size} />}
-            </Space>
+            </div>
           ) : null}
         </div>
       </FormLayout>
