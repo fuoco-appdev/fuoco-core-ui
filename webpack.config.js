@@ -14,7 +14,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      '@themes': path.resolve(__dirname, 'src/themes'),
+      '@src': path.resolve(__dirname, 'src'),
     },
     plugins: [
         new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })
@@ -30,11 +30,10 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              sourceMap: true,
               additionalData: `
-                    @import "@themes/_colors.scss";
-                    @import "@themes/_global.scss";
-                    @import "@themes/_margins-paddings.scss";
-                  `,
+                @import "@src/styles.scss";
+              `,
             },
           },
         ],

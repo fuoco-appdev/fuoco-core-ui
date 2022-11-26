@@ -28,21 +28,18 @@ export const Default = (args: any) => (
               Title is here
             </Typography.Title>
             <Input
-              size="tiny"
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"
               layout="horizontal"
             />
             <Input
-              size="tiny"
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"
               layout="horizontal"
             />
             <Input
-              size="tiny"
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"

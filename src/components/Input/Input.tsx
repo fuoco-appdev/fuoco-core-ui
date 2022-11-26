@@ -28,7 +28,6 @@ export interface Props
   name?: string
   reveal?: boolean
   actions?: React.ReactNode
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
   borderless?: boolean
   shakeInterpolationCount?: number
   shakeDistance?: number
@@ -63,7 +62,6 @@ function Input({
   style,
   reveal = false,
   actions,
-  size = 'medium',
   borderless = false,
   shakeInterpolationCount = 3,
   shakeDistance = 6,
@@ -80,7 +78,6 @@ function Input({
   let inputContainerClasses = [InputStyles['sbui-input-container']]
   if (error) inputContainerClasses.push(InputStyles['sbui-input--error'])
   if (icon) inputContainerClasses.push(InputStyles['sbui-input--with-icon'])
-  if (size) inputContainerClasses.push(InputStyles[`sbui-input--${size}`])
   if (borderless)
     inputContainerClasses.push(InputStyles['sbui-input--borderless'])
 
@@ -137,10 +134,9 @@ function Input({
         error={error}
         descriptionText={descriptionText}
         style={style}
-        size={size}
       >
         <div className={inputContainerClasses.join(' ')}>
-          {icon && <InputIconContainer icon={icon} />}
+          {icon && <div className={InputStyles['icon-container']}>{icon}</div>}
           <input
             {...props}
             autoComplete={autoComplete}
@@ -170,7 +166,7 @@ function Input({
                   onClick={onReveal}
                 />
               ) : null}
-              {error && <InputErrorIcon size={size} />}
+              {error && <InputErrorIcon />}
               {copy && !(reveal && hidden) ? (
                 <Button
                   htmlType={'button'}

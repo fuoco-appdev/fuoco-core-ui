@@ -9,6 +9,7 @@
   outline-offset: 2px;
   border-color: $gray-100;
   transition: box-shadow 0.3s ease-in-out;
+  padding: 0 $mp-3;
 }
 
 .sbui-input-container:hover {
@@ -25,7 +26,7 @@
   font-family: inherit;
   appearance: textfield;
   background: transparent;
-  padding: $mp-1 $mp-3;
+  padding: $mp-3 0;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
@@ -44,6 +45,13 @@
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: $mp-3;
 }
 
 
@@ -73,34 +81,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   right: 0px;
   padding-left: $mp-3;
   padding-left: $mp-1;
-}
-
-/*
-  Input sizes
-*/
-
-.sbui-input--tiny {
-  padding: $mp-1-5 $mp-2;
-  font-size: $font-size-xs;
-  line-height: $font-line-height-xs;
-}
-.sbui-input--small {
-  padding: $mp-2 $mp-2;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-xs;
-}
-.sbui-input--medium {
-  padding: $mp-2 $mp-2;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
-}
-.sbui-input--large {
-  padding: $mp-2 $mp-4;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
-}
-.sbui-input--xlarge {
-  padding: $mp-3 $mp-6;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
 }
