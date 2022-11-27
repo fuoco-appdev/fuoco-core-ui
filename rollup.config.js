@@ -4,14 +4,13 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import scss from 'rollup-plugin-scss'
 import copy from 'rollup-plugin-copy'
-import json from './package.json' assert { type: "json" };
 
 export default [
   {
     input: 'src/index.tsx',
     output: [
       {
-        file: json.main,
+        file: 'dist/index.js',
         format: 'cjs',
         sourcemap: true,
       },
@@ -35,7 +34,7 @@ export default [
   },
   {
     input: 'dist/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'cjs' }],
+    output: [{ file: 'index.d.ts', format: 'cjs' }],
     plugins: [
       dts(),
     ],
