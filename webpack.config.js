@@ -1,5 +1,6 @@
 const path = require('path')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -10,15 +11,21 @@ module.exports = {
     library: 'core-ui',
     libraryTarget: 'umd',
   },
-  devtool:'source-map',
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/styles.scss', to: 'styles.scss' },
+        { from: 'src/themes', to: 'themes' },
+      ],
+    }),
+  ],
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       '@src': path.resolve(__dirname, 'src'),
     },
-    plugins: [
-        new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })
-    ],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
   module: {
     rules: [
@@ -45,12 +52,12 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-                compilerOptions: {
-                    outDir: './dist'
-                }
-            }
-          }
-        ]
+              compilerOptions: {
+                outDir: './dist',
+              },
+            },
+          },
+        ],
       },
     ],
   },
