@@ -1,4 +1,5 @@
 // // GENERAL
+export * from './types';
 export * from './components/button'
 export * from './components/typography'
 export * from './components/icon'
