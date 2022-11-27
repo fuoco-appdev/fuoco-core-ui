@@ -7,12 +7,12 @@ import {
   Checkbox,
   Button,
   Typography,
-  Divider
+  Divider,
+  IconMail,
+  IconKey,
+  IconLock,
+  IconInbox
 } from '../../index'
-import { IconMail } from '../icon/icons/icon-mail'
-import { IconKey } from '../icon/icons/icon-key'
-import { IconLock } from '../icon/icons/icon-lock'
-import {IconInbox} from '../icon/icons/icon-inbox'
 import { UserContextProvider, useUser } from './user-context'
 import * as SocialIcons from './icons'
 // @ts-ignore
