@@ -1,6 +1,6 @@
 import React from 'react'
 import { DropdownContext } from '../../lib/overlay/overlay-context'
-import Typography from '../typography'
+import { Typography } from '../../index'
 
 // @ts-ignore
 import MenuStyles from './menu.module.scss'

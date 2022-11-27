@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../button'
 import { IconMail } from '../../components/icon/icons/icon-mail'
-import Typography from '../typography'
+import { Typography } from '../../index'
 
 import { Tabs } from '.'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from '.'
+import { Input } from '../../index'
 import { IconPackage } from '../icon/icons/icon-package'
 import { Button } from '../button'
 

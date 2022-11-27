@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // @ts-ignore
 import ReactMarkdown from 'react-markdown'
 
-import Typography from '.'
+import { Typography } from '.'
 const gfm = require('remark-gfm')
 
 const { Title, Text, Link } = Typography

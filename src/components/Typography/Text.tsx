@@ -7,6 +7,7 @@ export interface Props {
   children: any
   style?: React.CSSProperties
   type?: 'default' | 'secondary' | 'success' | 'warning' | 'danger'
+  align?: 'center' | 'left' | 'right'
   disabled?: boolean
   mark?: boolean
   code?: boolean
@@ -22,6 +23,7 @@ function Text({
   children,
   style,
   type,
+  align = 'left',
   disabled,
   mark,
   code,
@@ -54,6 +56,10 @@ function Text({
 
   if (small) {
     classes.push(TextStyles['sbui-typography-text-small'])
+  }
+
+  if (align) {
+    classes.push(TextStyles[`sbui-typography-text-${align}`])
   }
 
   if (code)

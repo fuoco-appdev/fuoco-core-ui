@@ -1,7 +1,7 @@
 import { Button } from '../button'
 import { Divider } from '../divider'
 import { IconChevronDown } from '../icon/icons/icon-chevron-down'
-import Typography from '../typography'
+import { Typography } from '../../index'
 
 import { Popover } from '.'
 import { IconLogIn } from '../icon/icons/icon-log-in'

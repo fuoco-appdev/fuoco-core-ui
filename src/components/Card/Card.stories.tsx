@@ -1,5 +1,5 @@
 import React from 'react'
-import Typography from '../typography'
+import { Typography } from '../../index'
 // import { AutoForm } from 'uniforms'
 
 import { Card } from '.'

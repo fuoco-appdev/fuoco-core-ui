@@ -1,8 +1,19 @@
 .sbui-typography-text {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  color: white;
+  color: inherit;
+}
+
+.sbui-typography-text-center {
   align-self: center;
+}
+
+.sbui-typography-text-left {
+  align-self: flex-start;
+}
+
+.sbui-typography-text-right {
+  align-self: flex-end;
 }
 
 .sbui-typography-text-small {

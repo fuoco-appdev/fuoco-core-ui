@@ -10,7 +10,7 @@ import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
 import AccordionStyles from './accordion.module.scss'
 import { IconChevronUp } from '../icon/icons/icon-chevron-up'
-import Typography from '../typography'
+import { Typography } from '../../index'
 import { animated, useSpring, useTransition } from 'react-spring'
 
 type ContextValue = Required<Pick<AccordionProps, 'defaultActiveId'>> &

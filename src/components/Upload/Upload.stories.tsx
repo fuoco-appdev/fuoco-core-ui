@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Upload from '.'
-import Typography from '../typography'
+import { Typography } from '../../index'
 
 export default {
   title: 'Data Input/Upload',

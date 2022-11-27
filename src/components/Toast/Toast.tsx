@@ -12,7 +12,7 @@ import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
 import { Button } from '../button/index'
 // @ts-ignore
 import ToastStyles from './toast.module.scss'
-import Typography from '../typography'
+import { Typography } from '../../index'
 import { useTransition, animated, SpringValue } from 'react-spring'
 import { X } from '../icon/icon-import-handler'
 

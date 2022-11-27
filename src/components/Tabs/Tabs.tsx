@@ -152,7 +152,7 @@ function Tabs({
           <button
             key={i}
             className={TabsStyles['tab-button']}
-            ref={(el) => (buttonRefs[i] = el)}
+            ref={(el) => (buttonRefs[item.id ?? ''] = el)}
             onPointerEnter={(e) => onEnterTab(e, i)}
             onFocus={(e) => onEnterTab(e, i)}
             onClick={() => onSelectTab(item.id ?? '')}

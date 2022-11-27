@@ -3,7 +3,7 @@ import { Button } from '../button'
 import { Divider } from '../divider'
 import { IconSettings } from '../icon/icons/icon-settings'
 import { IconLogOut } from '../icon/icons/icon-log-out'
-import Typography from '../typography'
+import { Typography } from '../../index'
 import { ContextMenu } from '.'
 import { IconLogIn } from '../icon/icons/icon-log-in'
 

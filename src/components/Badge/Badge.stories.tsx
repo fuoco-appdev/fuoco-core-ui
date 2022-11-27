@@ -1,7 +1,4 @@
 import React from 'react'
-import Typography from '../typography'
-// import { AutoForm } from 'uniforms'
-
 import { Badge } from '.'
 
 export default {

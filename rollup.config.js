@@ -1,4 +1,4 @@
-import dts from 'rollup-plugin-dts'
+/* eslint-disable import/no-anonymous-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
@@ -10,8 +10,13 @@ export default [
     input: 'src/index.tsx',
     output: [
       {
-        file: 'dist/index.js',
+        file: 'dist/cjs/index.js',
         format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: 'dist/esm/index.js',
+        format: 'es',
         sourcemap: true,
       },
     ],
@@ -20,23 +25,16 @@ export default [
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       scss({
-        runtime: import("sass"),
+        runtime: import('sass'),
         output: false,
         prefix: `@import "./src/styles.scss";`,
       }),
       copy({
         targets: [
-          { src: 'src/_styles.scss', dest: 'dist' },
-          { src: 'src/themes/**/*', dest: 'dist/themes' }
-        ]
-      })
+          { src: 'src/_styles.scss', dest: 'dist/cjs' },
+          { src: 'src/themes/**/*', dest: 'dist/cjs/themes' },
+        ],
+      }),
     ],
-  },
-  {
-    input: 'dist/index.d.ts',
-    output: [{ file: 'index.d.ts', format: 'cjs' }],
-    plugins: [
-      dts(),
-    ],
-  },
+  }
 ]
