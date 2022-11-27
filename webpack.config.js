@@ -37,7 +37,6 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
               additionalData: `
                 @import "@src/styles.scss";
               `,
@@ -45,6 +44,12 @@ module.exports = {
           },
         ],
         include: path.resolve(__dirname, '.'),
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'source-map-loader',
       },
       {
         test: /\.tsx?$/,
