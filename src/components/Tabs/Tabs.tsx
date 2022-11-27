@@ -14,7 +14,7 @@ interface TabProps {
 
 interface TabsProps {
   tabs?: TabProps[]
-  onChange?: (input: number) => void
+  onChange?: (id: string) => void
   type?: 'pills' | 'underlined'
   direction?: 'vertical' | 'horizontal'
   activeId?: string
@@ -29,19 +29,14 @@ function Tabs({
   onChange,
   scrollable,
 }: TabsProps) {
-  const [buttonRefs, setButtonRefs] = useState<Array<HTMLButtonElement | null>>(
-    []
-  )
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
+  const [buttonRefs, setButtonRefs] = useState<
+    Record<string, HTMLButtonElement | null>
+  >({})
+  const [selectedId, setSelectedId] = useState<string>(activeId ?? '')
 
   useEffect(() => {
-    setButtonRefs((prev) => prev.slice(0, tabs.length))
-  }, [tabs.length])
-
-  useEffect(() => {
-    const index = tabs.findIndex((value) => value.id === activeId)
-    if (selectedTabIndex !== index) {
-      setSelectedTabIndex(index)
+    if (selectedId !== activeId) {
+      setSelectedId(activeId ?? '')
     }
   }, [activeId])
 
@@ -51,7 +46,7 @@ function Tabs({
   const navRef = useRef<HTMLDivElement>(null)
   const navRect = navRef.current?.getBoundingClientRect()
 
-  const selectedRect = buttonRefs[selectedTabIndex]?.getBoundingClientRect()
+  const selectedRect = buttonRefs[selectedId]?.getBoundingClientRect()
 
   const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
   const isInitialRender = useRef(true)
@@ -79,9 +74,9 @@ function Tabs({
     setHoveredRect(e.target.getBoundingClientRect())
   }
 
-  const onSelectTab = (i: number) => {
-    onChange?.(i)
-    setSelectedTabIndex(i)
+  const onSelectTab = (id: string) => {
+    onChange?.(id)
+    setSelectedId(id)
   }
 
   let hoverStyles: React.CSSProperties = { opacity: 0 }
@@ -160,7 +155,7 @@ function Tabs({
             ref={(el) => (buttonRefs[i] = el)}
             onPointerEnter={(e) => onEnterTab(e, i)}
             onFocus={(e) => onEnterTab(e, i)}
-            onClick={() => onSelectTab(i)}
+            onClick={() => onSelectTab(item.id ?? '')}
           >
             {item.icon && (
               <div className={iconClasses.join(' ')}>{item.icon}</div>
