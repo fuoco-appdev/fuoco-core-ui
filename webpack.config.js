@@ -14,8 +14,8 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'src/styles.scss', to: 'styles.scss' },
-        { from: 'src/themes', to: 'themes' },
+        { from: 'src/_styles.scss', to: 'src/_styles.scss' },
+        { from: 'src/themes', to: 'src/themes' },
       ],
     }),
   ],
