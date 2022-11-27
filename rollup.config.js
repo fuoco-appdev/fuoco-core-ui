@@ -38,8 +38,9 @@ export default [
       }),
       typescript(),
       scss({
+        failOnError: true,
         runtime: import('sass'),
-        output: false,
+        output: 'dist/cjs/style.css',
         prefix: `@import "./src/styles.scss";`,
       }),
       copy({
