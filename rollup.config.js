@@ -1,8 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
+import external from 'rollup-plugin-peer-deps-external'
 import commonjs from '@rollup/plugin-commonjs'
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 import scss from 'rollup-plugin-scss'
 import copy from 'rollup-plugin-copy'
 
@@ -24,6 +25,7 @@ export default [
       },
     ],
     plugins: [
+      external(),
       resolve({
         ignoreGlobal: false,
         include: ['node_modules/**'],
@@ -34,7 +36,7 @@ export default [
         ignoreGlobal: false,
         include: 'node_modules/**',
       }),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript(),
       scss({
         runtime: import('sass'),
         output: false,
