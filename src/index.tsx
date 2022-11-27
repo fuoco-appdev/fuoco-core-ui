@@ -1,47 +1,48 @@
 // // GENERAL
 export * from './types';
-export * from './components/button'
-export * from './components/typography'
+export * as Button from './components/button'
+export * as Typography from './components/typography'
+export * as Icon from './components/icon'
 export * from './components/icon'
-export * from './components/image'
+export * as Image from './components/image'
 
 // DISPLAYS
 
-export * from './components/card'
-export * from './components/badge'
-export * from './components/tabs'
-export * from './components/alert'
-export * from './components/accordion'
+export * as Card from './components/card'
+export * as Badge from './components/badge'
+export * as Tabs from './components/tabs'
+export * as Alert from './components/alert'
+export * as Accordion from './components/accordion'
 
 // NAV
 
-export * from './components/menu'
+export * as Menu from './components/menu'
 
 // OVERLAYS
 
-export * from './components/modal'
-export * from './components/side-panel'
-export * from './components/dropdown'
-export * from './components/context-menu'
-export * from './components/popover'
-export * from './components/toast'
+export * as Modal from './components/modal'
+export * as SidePanel from './components/side-panel'
+export * as Dropdown from './components/dropdown'
+export * as ContextMenu from './components/context-menu'
+export * as Popover from './components/popover'
+export * as Toast from './components/toast'
 
 // UTILITIES
-export * from './components/loading'
-export * from './components/divider'
+export * as Loading from './components/loading'
+export * as Divider from './components/divider'
 
 // DATA ENTRY
 
-export * from './components/select'
-export * from './components/listbox'
-export * from './components/checkbox'
-export * from './components/input'
-export * from './components/input-number'
-export * from './components/input-phone-number'
-export * from './components/input-geocoding'
-export * from './components/radio'
-export * from './components/toggle'
-export * from './components/upload'
+export * as Select from './components/select'
+export * as Listbox from './components/listbox'
+export * as Checkbox from './components/checkbox'
+export * as Input from './components/input'
+export * as InputNumber from './components/input-number'
+export * as InputPhoneNumber from './components/input-phone-number'
+export * as InputGeocoding from './components/input-geocoding'
+export * as Radio from './components/radio'
+export * as Toggle from './components/toggle'
+export * as Upload from './components/upload'
 
 // ARCHIVE
 
@@ -49,4 +50,4 @@ export * from './components/upload'
 
 // AUTH
 
-export * from './components/auth'
+export * as Auth from './components/auth'

@@ -135,5 +135,5 @@ export function Item({ children, className, label, id }: ItemProps) {
   )
 }
 
-Accordion.Item = Item
-export default Accordion
+Accordion.Item = Item;
+export default Accordion;
