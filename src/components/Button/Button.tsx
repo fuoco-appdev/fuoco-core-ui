@@ -45,8 +45,7 @@ export interface RefHandle {
   button: () => HTMLButtonElement | null
 }
 
-const Button = forwardRef<RefHandle, ButtonProps>(
-  ({
+function Button({
     buttonRef,
     block,
     className,
@@ -71,7 +70,8 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     textAlign = 'center',
     rippleProps,
     ...props
-  }: ButtonProps) => {
+  }: ButtonProps,
+  ref: React.ForwardedRef<any>) {
     // styles
     const showIcon = loading || icon
 
@@ -153,7 +153,6 @@ const Button = forwardRef<RefHandle, ButtonProps>(
         </button>
       </Ripples>
     )
-  }
-)
+}
 
-export default Button
+export default React.forwardRef(Button)
