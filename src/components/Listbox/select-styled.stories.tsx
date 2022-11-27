@@ -16,7 +16,7 @@ const defaultOptions = [
 ]
 
 export const Default = (args: any) => {
-  const ref = useRef<any>(null)
+  const ref = useRef<any | null>(null)
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
     options.push({

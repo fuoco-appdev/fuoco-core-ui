@@ -22,7 +22,7 @@ export const withLoadingCentered = (args: any) => (
   <Button {...args}>Loading icon is centered</Button>
 )
 export const withRef = () => {
-  const buttonRef = useRef(null)
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
   const [msg, setMsg] = useState<string>('Click button to console.log Ref')
 
   function onClick() {

@@ -16,7 +16,7 @@ export const Default = (args: any) => {
   return (
     <div>
       <Button
-        buttonRef={buttonRef}
+        ref={buttonRef}
         as="span"
         type="outline"
         iconRight={<IconChevronDown />}
@@ -65,7 +65,7 @@ export const Bottom = (args: any) => {
     >
       <div>
         <Button
-          buttonRef={buttonRef}
+          ref={buttonRef}
           as="span"
           type="outline"
           iconRight={<IconChevronDown />}

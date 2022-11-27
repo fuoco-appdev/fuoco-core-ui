@@ -39,7 +39,7 @@ function Overlay({
   overlayClassName,
   transition,
 }: Props) {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement | null>(null)
   const [visibleState, setVisibleState] = useState(!!visible)
 
   let classes = [

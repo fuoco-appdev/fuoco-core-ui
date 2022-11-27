@@ -472,7 +472,7 @@ function InputPhoneNumber({
 
     const lastChar = newFormattedNumber.charAt(newFormattedNumber.length - 1)
     if (lastChar === ')') {
-      numberInputRef.current?.setSelectionRange(
+      numberInputRef?.current?.setSelectionRange(
         newFormattedNumber.length - 1,
         newFormattedNumber.length - 1
       )
@@ -480,9 +480,9 @@ function InputPhoneNumber({
       caretPosition > 0 &&
       oldFormattedText.length >= newFormattedNumber.length
     ) {
-      numberInputRef.current?.setSelectionRange(caretPosition, caretPosition)
+      numberInputRef?.current?.setSelectionRange(caretPosition, caretPosition)
     } else if (oldCaretPosition < oldFormattedText.length) {
-      numberInputRef.current?.setSelectionRange(
+      numberInputRef?.current?.setSelectionRange(
         oldCaretPosition,
         oldCaretPosition
       )
@@ -587,7 +587,7 @@ function InputPhoneNumber({
 
   // Put the cursor to the end of the input (usually after a focus event)
   const cursorToEnd = () => {
-    const input = numberInputRef.current
+    const input = numberInputRef?.current
     if (document.activeElement !== input) return
     input?.focus()
     let length = input?.value.length ?? 0
@@ -828,7 +828,7 @@ function InputPhoneNumber({
   }
 
   const scrollToTop = () => {
-    const container = dropdownRef.current
+    const container = dropdownRef?.current
     if (!container || !document.body) return
     container.scrollTop = 0
   }

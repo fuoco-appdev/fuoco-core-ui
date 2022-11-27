@@ -159,7 +159,7 @@ function Listbox(
                 </Ripples>
                 <Dropdown
                   style={{
-                    width: anchorRef.current?.getClientRects()[0].width,
+                    width: anchorRef?.current?.getClientRects()[0].width,
                   }}
                   onOpen={() => {
                     onFocus?.()

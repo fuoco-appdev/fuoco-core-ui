@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react'
+import React from 'react'
 // @ts-ignore
 import ButtonStyles from './button.module.scss'
 import { IconContext } from '../icon/icon-context'
@@ -28,7 +28,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | 'text'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
-  buttonRef?: React.RefObject<HTMLButtonElement>
   ariaSelected?: boolean
   ariaControls?: string
   tabIndex?: 0 | -1
@@ -38,15 +37,13 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   rippleProps?: RipplesProps
 }
 
-interface CustomButtonProps extends React.HTMLAttributes<HTMLOrSVGElement> {}
-
 export interface RefHandle {
   container: () => HTMLElement | null
   button: () => HTMLButtonElement | null
 }
 
-function Button({
-    buttonRef,
+function Button(
+  {
     block,
     className,
     children,
@@ -71,88 +68,87 @@ function Button({
     rippleProps,
     ...props
   }: ButtonProps,
-  ref: React.ForwardedRef<any>) {
-    // styles
-    const showIcon = loading || icon
+  ref: React.ForwardedRef<any>
+) {
+  // styles
+  const showIcon = loading || icon
 
-    let classes = [ButtonStyles['sbui-btn']]
-    classes.push(ButtonStyles[`sbui-btn-${type}`])
-    let containerClasses = [ButtonStyles['sbui-btn-ripple']]
-    containerClasses.push(className)
+  let classes = [ButtonStyles['sbui-btn']]
+  classes.push(ButtonStyles[`sbui-btn-${type}`])
+  let containerClasses = [ButtonStyles['sbui-btn-ripple']]
+  containerClasses.push(className)
 
-    if (block) {
-      containerClasses.push(ButtonStyles['sbui-btn--w-full'])
-      classes.push(ButtonStyles['sbui-btn--w-full'])
-    }
+  if (block) {
+    containerClasses.push(ButtonStyles['sbui-btn--w-full'])
+    classes.push(ButtonStyles['sbui-btn--w-full'])
+  }
 
-    if (danger) {
-      classes.push(ButtonStyles['sbui-btn--danger'])
-    }
+  if (danger) {
+    classes.push(ButtonStyles['sbui-btn--danger'])
+  }
 
-    if (shadow && type !== 'link' && type !== 'text') {
-      classes.push(ButtonStyles['sbui-btn-container--shadow'])
-    }
+  if (shadow && type !== 'link' && type !== 'text') {
+    classes.push(ButtonStyles['sbui-btn-container--shadow'])
+  }
 
-    if (size) {
-      classes.push(ButtonStyles[`sbui-btn-${size}`])
-    }
+  if (size) {
+    classes.push(ButtonStyles[`sbui-btn-${size}`])
+  }
 
-    const iconLoaderClasses = [ButtonStyles['sbui-btn--anim--spin']]
+  const iconLoaderClasses = [ButtonStyles['sbui-btn--anim--spin']]
 
-    if (loadingCentered) {
-      iconLoaderClasses.push(ButtonStyles[`sbui-btn-loader--center`])
-    }
-    if (loading && loadingCentered) {
-      classes.push(ButtonStyles[`sbui-btn--text-fade-out`])
-    }
+  if (loadingCentered) {
+    iconLoaderClasses.push(ButtonStyles[`sbui-btn-loader--center`])
+  }
+  if (loading && loadingCentered) {
+    classes.push(ButtonStyles[`sbui-btn--text-fade-out`])
+  }
 
-    classes.push(ButtonStyles[`sbui-btn-text-align-${textAlign}`])
+  classes.push(ButtonStyles[`sbui-btn-text-align-${textAlign}`])
 
-    const leftIconClasses = [ButtonStyles['icon-container']]
-    if (children) {
-      leftIconClasses.push(ButtonStyles['left-icon-space'])
-    }
+  const leftIconClasses = [ButtonStyles['icon-container']]
+  if (children) {
+    leftIconClasses.push(ButtonStyles['left-icon-space'])
+  }
 
-    const rightIconClasses = [ButtonStyles['icon-container']]
-    if (children) {
-      rightIconClasses.push(ButtonStyles['right-icon-space'])
-    }
+  const rightIconClasses = [ButtonStyles['icon-container']]
+  if (children) {
+    rightIconClasses.push(ButtonStyles['right-icon-space'])
+  }
 
-    return (
-      <Ripples {...rippleProps} className={containerClasses.join(' ')}>
-        <button
-          {...props}
-          ref={buttonRef}
-          id={props.id}
-          className={classes.join(' ')}
-          disabled={loading || (disabled && true)}
-          style={style}
-          onClick={(e) => setTimeout(() => onClick?.(e), rippleProps?.during)}
-          type={htmlType}
-          tabIndex={tabIndex}
-          role={role}
-        >
-          {showIcon &&
-            (loading ? (
-              <IconLoader size={size} className={iconLoaderClasses.join(' ')} />
-            ) : icon ? (
-              <IconContext.Provider value={{ contextSize: size }}>
-                <div className={leftIconClasses.join(' ')}>{icon}</div>
-              </IconContext.Provider>
-            ) : null)}
-          {children && (
-            <span className={ButtonStyles['sbui-btn-children']}>
-              {children}
-            </span>
-          )}
-          {iconRight && !loading && (
+  return (
+    <Ripples {...rippleProps} className={containerClasses.join(' ')}>
+      <button
+        {...props}
+        ref={ref}
+        id={props.id}
+        className={classes.join(' ')}
+        disabled={loading || (disabled && true)}
+        style={style}
+        onClick={(e) => setTimeout(() => onClick?.(e), rippleProps?.during)}
+        type={htmlType}
+        tabIndex={tabIndex}
+        role={role}
+      >
+        {showIcon &&
+          (loading ? (
+            <IconLoader size={size} className={iconLoaderClasses.join(' ')} />
+          ) : icon ? (
             <IconContext.Provider value={{ contextSize: size }}>
-              <div className={rightIconClasses.join(' ')}>{iconRight}</div>
+              <div className={leftIconClasses.join(' ')}>{icon}</div>
             </IconContext.Provider>
-          )}
-        </button>
-      </Ripples>
-    )
+          ) : null)}
+        {children && (
+          <span className={ButtonStyles['sbui-btn-children']}>{children}</span>
+        )}
+        {iconRight && !loading && (
+          <IconContext.Provider value={{ contextSize: size }}>
+            <div className={rightIconClasses.join(' ')}>{iconRight}</div>
+          </IconContext.Provider>
+        )}
+      </button>
+    </Ripples>
+  )
 }
 
 export default React.forwardRef(Button)

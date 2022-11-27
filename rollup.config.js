@@ -1,9 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
+import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import scss from 'rollup-plugin-scss'
 import copy from 'rollup-plugin-copy'
+
+const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 export default [
   {
@@ -21,8 +24,16 @@ export default [
       },
     ],
     plugins: [
-      resolve(),
-      commonjs(),
+      resolve({
+        ignoreGlobal: false,
+        include: ['node_modules/**'],
+        extensions,
+        // skip: keys(EXTERNALS), // <<-- skip: ['react', 'react-dom']
+      }),
+      commonjs({
+        ignoreGlobal: false,
+        include: 'node_modules/**',
+      }),
       typescript({ tsconfig: './tsconfig.json' }),
       scss({
         runtime: import('sass'),
@@ -35,6 +46,11 @@ export default [
           { src: 'src/themes/**/*', dest: 'dist/cjs/themes' },
         ],
       }),
+      babel({
+        babelHelpers: 'runtime',
+        exclude: 'node_modules/**',
+        extensions,
+      }),
     ],
-  }
+  },
 ]

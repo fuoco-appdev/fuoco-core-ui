@@ -1,10 +1,4 @@
-import React, {
-  ComponentProps,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { ComponentProps, useEffect, useMemo, useState } from 'react'
 import { IconCheck } from '../icon/icons/icon-check'
 import { IconLoader } from '../icon/icons/icon-loader'
 import { IconX } from '../icon/icons/icon-x'

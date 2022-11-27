@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import InputIconContainer from '../../lib/layout/input-icon-container'
-import { TabsContext } from './tabs-context'
 
 // @ts-ignore
 import TabsStyles from './tabs.module.scss'
@@ -44,7 +42,7 @@ function Tabs({
   const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
 
   const navRef = useRef<HTMLDivElement>(null)
-  const navRect = navRef.current?.getBoundingClientRect()
+  const navRect = navRef?.current?.getBoundingClientRect()
 
   const selectedRect = buttonRefs[selectedId]?.getBoundingClientRect()
 
