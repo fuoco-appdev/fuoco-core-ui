@@ -25,26 +25,6 @@
   order: 1;
 }
 
-.sbui-formlayout--non-responsive {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: $mp-4;
-}
-
-.sbui-formlayout--responsive {
-  .md\:grid {
-    display: grid;
-  }
-
-  .md\:grid-cols-12 {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-
-  .md\:gap-4 {
-    gap: 1rem/* 16px */;
-  }
-}
-
 .sbui-formlayout__label-container-horizontal {
   justify-content: space-between;
   grid-column: span 12 / span 12;

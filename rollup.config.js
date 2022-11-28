@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
+import url from 'postcss-url'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
@@ -40,8 +41,13 @@ export default [
       postcss({
         modules: true,
         inject: true,
-        // extract: true, // uncomment if you want separate css file
-        // minimize: true,
+        plugins: [
+          url({
+            url: 'inline',
+            maxSize: 10,
+            fallback: 'copy',
+          }),
+        ],
         use: [
           [
             'sass',

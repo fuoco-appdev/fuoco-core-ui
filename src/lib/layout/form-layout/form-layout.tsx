@@ -51,12 +51,6 @@ export function FormLayout({
     if (align === 'right') {
       containerClasses.push(FormLayoutStyles['sbui-formlayout--flex-right'])
     }
-  } else {
-    containerClasses.push(
-      responsive
-        ? FormLayoutStyles['sbui-formlayout--responsive']
-        : FormLayoutStyles['sbui-formlayout--non-responsive']
-    )
   }
 
   if (className) {
