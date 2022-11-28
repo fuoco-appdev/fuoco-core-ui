@@ -2,6 +2,10 @@
  Side Panel animations imported first as so placement styles are not affected.
 */
 
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
 /* overlay animation */
 .sbui-sidepanel-overlay--enter {
   //@apply ease-out duration-200;

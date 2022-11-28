@@ -1,6 +1,9 @@
 /* 
  Overlay animations imported first as so placement styles are not affected.
 */
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
 
 .sbui-overlay--enter {
 
