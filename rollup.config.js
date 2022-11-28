@@ -4,9 +4,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import external from 'rollup-plugin-peer-deps-external'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
-import postcss from 'rollup-plugin-postcss'
 import copy from 'rollup-plugin-copy'
-import sass from 'node-sass'
+import postcss from 'rollup-plugin-postcss'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
@@ -39,10 +38,18 @@ export default [
       }),
       typescript(),
       postcss({
-        extensions: ['.scss'],
-        extract: true,
-        minimize: true,
         modules: true,
+        inject: true,
+        // extract: true, // uncomment if you want separate css file
+        // minimize: true,
+        use: [
+          [
+            'sass',
+            {
+              includePaths: ['./src', './node_modules']
+            },
+          ],
+        ],
       }),
       copy({
         targets: [
