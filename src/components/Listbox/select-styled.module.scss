@@ -24,16 +24,25 @@
   background-image: none;
   cursor: default;
   background: transparent;
+  align-items: center;
+}
 
-  & :hover {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    border-color: $brand-400;
-  }
+.sbui-listbox:hover {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: $brand-400;
 }
 
 .sbui-listbox:focus {
+  outline: none;
+  box-shadow: none;
+}
 
+.sbui-listbox-icon-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: $mp-3;
 }
 
 .sbui-listbox--error {

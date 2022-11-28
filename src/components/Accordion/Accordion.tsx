@@ -10,7 +10,7 @@ import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
 import AccordionStyles from './accordion.module.scss'
 import { IconChevronUp } from '../icon/icons/icon-chevron-up'
-import { Typography } from '../../index'
+import { Button, Typography } from '../../index'
 import { animated, useSpring, useTransition } from 'react-spring'
 
 type ContextValue = Required<Pick<AccordionProps, 'defaultActiveId'>> &
@@ -112,17 +112,27 @@ export function Item({ children, className, label, id }: ItemProps) {
     <Disclosure defaultOpen={isDefaultActive}>
       {({ open }) => (
         <>
-          <Ripples className={AccordionStyles['accordion-item-ripples']}>
-            <Disclosure.Button
-              onClick={() => setDisclosureOpen(!disclosureOpen)}
-              className={buttonClasses.join(' ')}
+          <div className={AccordionStyles['accordion-top-bar']}>
+            <Typography.Text
+              align={'center'}
+              className={AccordionStyles['accordion-top-bar-label']}
             >
-              <Typography.Text>{label}</Typography.Text>
-              <animated.div style={buttonIconStyle}>
-                <IconChevronUp strokeWidth={2} />
-              </animated.div>
-            </Disclosure.Button>
-          </Ripples>
+              {label}
+            </Typography.Text>
+            <div>
+              <Button
+                type={'text'}
+                icon={
+                  <animated.div
+                    style={buttonIconStyle}
+                    onClick={() => setDisclosureOpen(!disclosureOpen)}
+                  >
+                    <IconChevronUp strokeWidth={2} />
+                  </animated.div>
+                }
+              />
+            </div>
+          </div>
 
           <animated.div style={transitionStyle}>
             <Disclosure.Panel className={panelClasses.join(' ')}>
@@ -135,5 +145,5 @@ export function Item({ children, className, label, id }: ItemProps) {
   )
 }
 
-Accordion.Item = Item;
-export default Accordion;
+Accordion.Item = Item
+export default Accordion

@@ -154,14 +154,7 @@ export const WithIcon = (args: any) => {
       ref={ref}
       label="Language"
       layout="vertical"
-      icon={
-        <IconGlobe
-          stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'}
-          style={{
-            marginRight: '8px',
-          }}
-        />
-      }
+      icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
       onChange={(value: string) => console.log(value)}
       onMouseEnter={() => setIsGlobeIconLit(true)}
       onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {

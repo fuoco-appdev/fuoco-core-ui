@@ -15,6 +15,18 @@
   border-style: solid;
 }
 
+.accordion-top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: $mp-4;
+  color: $gray-100;
+}
+
+.accordion-top-bar-label {
+  color: $gray-100;
+}
+
 .accordion-item {
   width: 100%;
 }

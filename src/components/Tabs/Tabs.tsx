@@ -49,6 +49,12 @@ function Tabs({
   const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
   const isInitialRender = useRef(true)
 
+  useEffect(() => {
+    if (type === 'pills') {
+      buttonRefs[selectedId]?.focus()
+    }
+  }, [selectedRect])
+
   const onLeaveTabs = () => {
     setIsInitialHoveredElement(true)
     setHoveredTabIndex(null)

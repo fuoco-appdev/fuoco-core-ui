@@ -7,8 +7,9 @@
   display: flex;
   background-color: $gray-100;
   border-radius: $rounded-md;
-  padding: $mp-4 $mp-4;
+  padding: $mp-2 $mp-2;
   box-shadow: $shadow-6;
+  width: fit-content;
 }
 
 .sbui-card-head {

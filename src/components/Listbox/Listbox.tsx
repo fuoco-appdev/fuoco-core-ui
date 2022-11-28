@@ -93,7 +93,6 @@ function Listbox(
 
   let selectClasses = [SelectStyles['sbui-listbox']]
   if (error) selectClasses.push(SelectStyles['sbui-listbox--error'])
-  if (icon) selectClasses.push(SelectStyles['sbui-listbox--with-icon'])
   if (borderless) selectClasses.push(SelectStyles['sbui-listbox--borderless'])
 
   return (
@@ -118,7 +117,13 @@ function Listbox(
               <div ref={anchorRef}>
                 <Ripples className={SelectStyles['sbui-listbox-ripple']}>
                   <HeadlessListbox.Button className={selectClasses.join(' ')}>
-                    {icon && <InputIconContainer icon={icon} />}
+                    {icon && (
+                      <div
+                        className={SelectStyles['sbui-listbox-icon-container']}
+                      >
+                        {icon}
+                      </div>
+                    )}
                     {selectedProps?.addOnBefore && (
                       <span
                         className={SelectStyles['sbui-listbox-addonbefore']}
