@@ -44,7 +44,6 @@ export default [
         plugins: [
           url({
             url: 'inline',
-            maxSize: 10,
             fallback: 'copy',
           }),
         ],
@@ -52,7 +51,7 @@ export default [
           [
             'sass',
             {
-              includePaths: ['./src', './node_modules']
+              includePaths: ['./src', './node_modules'],
             },
           ],
         ],
