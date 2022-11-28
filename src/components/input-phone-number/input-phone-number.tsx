@@ -897,6 +897,7 @@ function InputPhoneNumber({
         error={error}
         descriptionText={descriptionText}
         style={formStyle}
+        size={'medium'}
       >
         <div
           className={classesContainer.join(' ')}

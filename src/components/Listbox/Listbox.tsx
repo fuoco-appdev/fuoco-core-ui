@@ -105,6 +105,7 @@ function Listbox(
       descriptionText={descriptionText}
       className={className}
       style={style}
+      size={'medium'}
     >
       <div
         className={SelectStyles['sbui-listbox-container']}

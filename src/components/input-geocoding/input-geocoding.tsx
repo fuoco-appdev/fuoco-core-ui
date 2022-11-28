@@ -39,7 +39,6 @@ export interface Props {
   >
   containerStyle?: React.CSSProperties
   inputStyle?: React.CSSProperties
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
   shakeInterpolationCount?: number
   shakeDistance?: number
   classes?: {
@@ -91,7 +90,6 @@ function InputGeocoding({
   onKeyDown,
   onEnterKeyPress,
   isValid,
-  size = 'medium',
 }: Props) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -212,7 +210,7 @@ function InputGeocoding({
         error={error}
         descriptionText={descriptionText}
         style={formStyle}
-        size={size}
+        size={'medium'}
       >
         <div
           ref={inputRef}
@@ -248,7 +246,7 @@ function InputGeocoding({
                 InputGeocodingStyles['sbui-inputgeocoding-actions-container']
               }
             >
-              {error && <InputErrorIcon size={size} />}
+              {error && <InputErrorIcon />}
             </div>
           ) : null}
         </div>
