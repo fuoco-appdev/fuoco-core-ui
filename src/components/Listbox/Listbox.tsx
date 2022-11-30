@@ -24,7 +24,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export interface Props {
+export interface ListboxProps {
   options: OptionProps[]
   defaultIndex?: number
   className?: string
@@ -65,7 +65,7 @@ function Listbox(
     onMouseLeave,
     onFocus,
     onBlur,
-  }: Props,
+  }: ListboxProps,
   ref: React.ForwardedRef<any>
 ) {
   const [childRefs] = useState<Record<string, React.MutableRefObject<any>>>({})
