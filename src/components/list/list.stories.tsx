@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import List, { ListItemProps } from './list'
+import List from './list'
 import shuffle from 'lodash.shuffle'
 import { RenderStrategy } from '@headlessui/react/dist/utils/render'
 
