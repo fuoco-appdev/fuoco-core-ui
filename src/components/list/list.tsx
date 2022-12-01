@@ -69,7 +69,7 @@ function List({ items }: ListProps) {
             }}
           >
             <div style={{ height: item.elementHeight }}>
-              {items[item.index].element()}
+              {items[item.index]?.element()}
             </div>
           </animated.div>
         )
