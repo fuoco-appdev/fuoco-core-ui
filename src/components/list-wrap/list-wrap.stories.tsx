@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import List from './list'
+import ListWrap from './list-wrap'
 import shuffle from 'lodash.shuffle'
 
 export default {
-  title: 'List/List',
-  component: List,
+  title: 'List/ListWrap',
+  component: ListWrap,
 }
 
 const ListItemElement = (color: string) => {
   return (
     <div
       style={{
-        height: '80px',
+        height: '300px',
+        width: '300px',
         borderRadius: '4px',
         boxShadow: '0px 10px 25px -10px rgba(0, 0, 0, 0.2)',
         backgroundColor: color,
@@ -31,17 +32,47 @@ export const Default = (args: any) => {
   >([
     {
       key: '1',
-      height: 100,
+      height: 316,
       element: () => ListItemElement('red'),
     },
     {
       key: '2',
-      height: 100,
+      height: 316,
       element: () => ListItemElement('blue'),
     },
     {
       key: '3',
-      height: 100,
+      height: 316,
+      element: () => ListItemElement('green'),
+    },
+    {
+      key: '4',
+      height: 316,
+      element: () => ListItemElement('red'),
+    },
+    {
+      key: '5',
+      height: 316,
+      element: () => ListItemElement('blue'),
+    },
+    {
+      key: '6',
+      height: 316,
+      element: () => ListItemElement('green'),
+    },
+    {
+      key: '7',
+      height: 316,
+      element: () => ListItemElement('red'),
+    },
+    {
+      key: '8',
+      height: 316,
+      element: () => ListItemElement('blue'),
+    },
+    {
+      key: '9',
+      height: 316,
       element: () => ListItemElement('green'),
     },
   ])
@@ -50,5 +81,5 @@ export const Default = (args: any) => {
     return () => clearInterval(t)
   }, [])
 
-  return <List items={children} />
+  return <ListWrap items={children} />
 }

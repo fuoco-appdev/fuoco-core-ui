@@ -3,19 +3,20 @@ import React from 'react'
 import CardStyles from './card.module.scss'
 
 interface CardProps {
+  key?: React.Key
   children?: React.ReactNode
   className?: string
   hoverable?: boolean
   style?: React.CSSProperties
 }
 
-function Card({ children, className, hoverable, style }: CardProps) {
+function Card({ key, children, className, hoverable, style }: CardProps) {
   let classes = [CardStyles['sbui-card']]
   if (hoverable) classes.push(CardStyles['sbui-card--hoverable'])
   if (className) classes.push(className)
 
   return (
-    <div className={classes.join(' ')} style={style}>
+    <div key={key} className={classes.join(' ')} style={style}>
       {children}
     </div>
   )

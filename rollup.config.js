@@ -39,8 +39,9 @@ export default [
       }),
       typescript(),
       postcss({
+        extract: true,
+        minimize: true,
         modules: true,
-        inject: true,
         plugins: [
           url({
             url: 'inline',
@@ -51,6 +52,7 @@ export default [
           [
             'sass',
             {
+              data: '@import "./styles.scss"; ',
               includePaths: ['./src', './node_modules'],
             },
           ],

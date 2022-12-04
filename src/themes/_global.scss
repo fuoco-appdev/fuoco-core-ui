@@ -1,62 +1,127 @@
-$rounded-sm: 0.125rem/* 2px */ !default;
-$rounded-base: 0.25rem/* 4px */ !default;
-$rounded-md: 0.375rem/* 6px */ !default;
-$rounded-lg: 0.5rem/* 8px */ !default;
-$rounded-xl: 0.625rem/* */ !default;
-$rounded-full: 9999px !default;
+:root {
+  --rounded-sm: 0.125rem /* 2px */;
+  --rounded-base: 0.25rem /* 4px */;
+  --rounded-md: 0.375rem /* 6px */;
+  --rounded-lg: 0.5rem /* 8px */;
+  --rounded-xl: 0.625rem /* */;
+  --rounded-full: 9999px;
 
-$border-2: 2px !default;
+  --border-2: 2px;
 
-$font-family: Poppins;
+  --font-family: Poppins;
 
-$font-weight-normal: 400 !default;
-$font-weight-medium: 500 !default;
-$font-weight-bold: 600 !default;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
 
-$font-size-xs: 0.75rem/* 12px */;
-$font-size-sm: 0.875rem/* 14px */ !default;
-$font-size-base: 1rem !default;
-$font-size-lg: 1.125/* 24px */ !default;
+  --font-size-xs: 0.75rem /* 12px */;
+  --font-size-sm: 0.875rem /* 14px */;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125 /* 24px */;
 
-$font-line-height-xs: 1rem/* 16px */ !default;
-$font-line-height-sm: 1.25rem/* 20px */ !default;
-$font-line-height-base: 1.5rem !default;
-$font-line-height-lg: 1.75rem/* 28px */ !default; 
+  --font-line-height-xs: 1rem /* 16px */;
+  --font-line-height-sm: 1.25rem /* 20px */;
+  --font-line-height-base: 1.5rem;
+  --font-line-height-lg: 1.75rem /* 28px */;
 
-$shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default;
-$shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !default;
-$shadow-3: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !default;
-$shadow-4: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !default;
-$shadow-5: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !default;
-$shadow-6: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !default;
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow-3: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow-4: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --shadow-5: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  --shadow-6: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-$opacity-1: 0.1 !default;
-$opacity-15: 0.15 !default;
-$opacity-2: 0.2 !default;
-$opacity-25: 0.25 !default;
-$opacity-3: 0.3 !default;
-$opacity-35: 0.35 !default;
-$opacity-4: 0.4 !default;
-$opacity-45: 0.45 !default;
-$opacity-5: 0.5 !default;
-$opacity-55: 0.55 !default;
-$opacity-6: 0.6 !default;
-$opacity-65: 0.65 !default;
-$opacity-7: 0.7 !default;
-$opacity-75: 0.75 !default;
-$opacity-8: 0.8 !default;
-$opacity-85: 0.85 !default;
-$opacity-9: 0.9 !default;
-$opacity-95: 0.95 !default;
+  --opacity-1: 0.1;
+  --opacity-15: 0.15;
+  --opacity-2: 0.2;
+  --opacity-25: 0.25;
+  --opacity-3: 0.3;
+  --opacity-35: 0.35;
+  --opacity-4: 0.4;
+  --opacity-45: 0.45;
+  --opacity-5: 0.5;
+  --opacity-55: 0.55;
+  --opacity-6: 0.6;
+  --opacity-65: 0.65;
+  --opacity-7: 0.7;
+  --opacity-75: 0.75;
+  --opacity-8: 0.8;
+  --opacity-85: 0.85;
+  --opacity-9: 0.9;
+  --opacity-95: 0.95;
 
-$transition-standard-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
-$transition-decelerated-easing: cubic-bezier(0.0, 0.0, 0.2, 1);
-$transition-accelerated-easing: cubic-bezier(0.4, 0.0, 1, 1);
+  --transition-standard-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-decelerated-easing: cubic-bezier(0, 0, 0.2, 1);
+  --transition-accelerated-easing: cubic-bezier(0.4, 0, 1, 1);
 
-$duration-expand-sm: 100ms;
-$duration-collapse-smm: 100ms;
-$duration-expand-md: 250ms;
-$duration-collapse-md: 200ms;
-$duration-expand-lg: 300ms;
-$duration-collapse-lg: 250ms;
-$duration-small: 100ms;
+  --duration-expand-sm: 100ms;
+  --duration-collapse-sm: 100ms;
+  --duration-expand-md: 250ms;
+  --duration-collapse-md: 200ms;
+  --duration-expand-lg: 300ms;
+  --duration-collapse-lg: 250ms;
+  --duration-small: 100ms;
+}
+
+$rounded-sm: var(--rounded-sm) !default;
+$rounded-base: var(--rounded-base) !default;
+$rounded-md: var(--rounded-md) !default;
+$rounded-lg: var(--rounded-lg) !default;
+$rounded-xl: var(--rounded-xl) !default;
+$rounded-full: var(--rounded-full) !default;
+
+$border-2: var(--border-2) !default;
+
+$font-family: var(--font-family) !default;
+
+$font-weight-normal: var(--font-weight-normal) !default;
+$font-weight-medium: var(--font-weight-medium) !default;
+$font-weight-bold: var(--font-weight-bold) !default;
+
+$font-size-xs: var(--font-size-xs) !default;
+$font-size-sm: var(--font-size-sm) !default;
+$font-size-base: var(--font-size-base) !default;
+$font-size-lg: var(--font-size-lg) !default;
+
+$font-line-height-xs: var(--font-line-height-xs) !default;
+$font-line-height-sm: var(--font-line-height-sm) !default;
+$font-line-height-base: var(--font-line-height-base) !default;
+$font-line-height-lg: var(--font-line-height-lg) /* 28px */ !default;
+
+$shadow-1: var(--shadow-1) !default;
+$shadow-2: var(--shadow-2) !default;
+$shadow-3: var(--shadow-3) !default;
+$shadow-4: var(--shadow-4) !default;
+$shadow-5: var(--shadow-5) !default;
+$shadow-6: var(--shadow-6) !default;
+
+$opacity-1: var(--opacity-1) !default;
+$opacity-15: var(--opacity-15) !default;
+$opacity-2: var(--opacity-2) !default;
+$opacity-25: var(--opacity-25) !default;
+$opacity-3: var(--opacity-3) !default;
+$opacity-35: var(--opacity-35) !default;
+$opacity-4: var(--opacity-4) !default;
+$opacity-45: var(--opacity-45) !default;
+$opacity-5: var(--opacity-5) !default;
+$opacity-55: var(--opacity-55) !default;
+$opacity-6: var(--opacity-6) !default;
+$opacity-65: var(--opacity-65) !default;
+$opacity-7: var(--opacity-7) !default;
+$opacity-75: var(--opacity-75) !default;
+$opacity-8: var(--opacity-8) !default;
+$opacity-85: var(--opacity-85) !default;
+$opacity-9: var(--opacity-9) !default;
+$opacity-95: var(--opacity-95) !default;
+
+$transition-standard-easing: var(--transition-standard-easing) !default;
+$transition-decelerated-easing: var(--transition-decelerated-easing) !default;
+$transition-accelerated-easing: var(--transition-accelerated-easing) !default;
+
+$duration-expand-sm: var(--duration-expand-sm) !default;
+$duration-collapse-sm: var(--duration-collapse-sm) !default;
+$duration-expand-md: var(--duration-expand-md) !default;
+$duration-collapse-md: var(--duration-collapse-md) !default;
+$duration-expand-lg: var(--duration-expand-lg) !default;
+$duration-collapse-lg: var(--duration-collapse-lg) !default;
+$duration-small: var(--duration-small) !default;
