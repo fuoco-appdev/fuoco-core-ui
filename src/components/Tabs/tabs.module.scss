@@ -57,7 +57,7 @@
   top: 0;
   left: 0;
   border-radius: $rounded-md;
-  background-color: rgba($gray-200, $opacity-35);
+  background-color: $brand-500;
   transition: width $transition-accelerated-easing;
   transition-timing-function: $duration-expand-md;
 }
@@ -68,7 +68,7 @@
   top: 0;
   left: 0;
   border-radius: $rounded-full;
-  background-color: rgba($gray-200, $opacity-35);
+  background-color: $brand-500;
   transition: width $transition-accelerated-easing;
   transition-timing-function: $duration-expand-md;
 }
@@ -79,5 +79,5 @@
   bottom: 0;
   left: 0;
   height: $mp-0-5;
-  background-color: $brand-400;
+  background-color: $brand-100;
 }

@@ -17,12 +17,12 @@
 
 @keyframes spin {
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 .sbui-loading-spinner {
-  color: $brand-800;
+  color: $brand-500;
   margin: auto;
   position: absolute;
   top: 0;

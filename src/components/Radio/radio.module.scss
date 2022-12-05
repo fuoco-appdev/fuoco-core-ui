@@ -24,7 +24,7 @@
 }
 
 .sbui-radio-container--card--active {
-  background-color: rgba($brand-100, $opacity-2);
+  background-color: $gray-600;
   border-color: $brand-200;
   z-index: 10;
 }
@@ -73,12 +73,12 @@
   border-radius: $rounded-full;
   border-width: 1px;
   border-style: solid;
-  color: $brand-600;
+  color: $brand-500;
   cursor: pointer;
   border-color: $gray-500;
 
   & :hover {
-    border-color: $brand-700;
+    border-color: $brand-600;
     outline: 2px solid transparent;
     outline-offset: 2px;
   }

@@ -12,7 +12,7 @@
   overflow: visible !important;
 }
 
-.sbui-checkbox[type="checkbox"] {
+.sbui-checkbox[type='checkbox'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -31,7 +31,6 @@
   flex-shrink: 0;
   height: 20px;
   width: 20px;
-  color: #2563eb;
   background-color: transparent;
   border-color: #6b7280;
   border-width: 1px;
@@ -45,7 +44,7 @@
   border-color: $gray-300;
 
   & :hover {
-    border-color: $brand-700;
+    border-color: $brand-500;
   }
 
   & :focus {
@@ -54,12 +53,12 @@
   }
 }
 
-.sbui-checkbox[type="checkbox"]:checked:hover {
-  background-color: $brand-800;
+.sbui-checkbox[type='checkbox']:checked:hover {
+  background-color: $brand-500;
 }
 
-.sbui-checkbox[type="checkbox"]:checked {
-  background-color: $brand-800;
+.sbui-checkbox[type='checkbox']:checked {
+  background-color: $brand-500;
   border-color: transparent;
   background-size: 100% 100%;
   background-position: center;

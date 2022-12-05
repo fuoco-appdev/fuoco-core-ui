@@ -3,7 +3,6 @@
 @import '../../themes/margins-paddings';
 
 .sbui-listbox-container {
-
 }
 
 .sbui-listbox {
@@ -32,7 +31,7 @@
 .sbui-listbox:hover {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: $brand-400;
+  border-color: $brand-200;
 }
 
 .sbui-listbox:focus {
@@ -57,7 +56,7 @@
   box-shadow: none;
 }
 
-.sbui-listbox-ripple { 
+.sbui-listbox-ripple {
   display: flex !important;
   height: inherit;
   width: inherit;
@@ -213,7 +212,7 @@
 }
 
 .sbui-listbox-option__check--active {
-  color: $brand-400;
+  color: $brand-200;
 }
 
 .sbui-listbox-option__check__icon {
@@ -226,7 +225,6 @@
 */
 
 .sbui-listbox-transition--leave {
-
 }
 
 .sbui-listbox-transition--leave-from {

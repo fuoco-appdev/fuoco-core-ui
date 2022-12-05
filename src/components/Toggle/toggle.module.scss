@@ -10,6 +10,7 @@
   height: 1.5rem;
   width: 2.75rem;
   border-width: 2px;
+  background-color: $gray-500;
   border-color: transparent;
   border-radius: $rounded-full;
   cursor: pointer;
@@ -22,20 +23,18 @@
 }
 
 .sbui-toggle--active {
-  background-color: $brand-600;
+  background-color: $brand-500;
 }
 
 .sbui-toggle__handle {
   display: inline-block;
-  height: 1.25rem/* 20px */;
-  width: 1.25rem/* 20px */;
+  height: 1.25rem /* 20px */;
+  width: 1.25rem /* 20px */;
   border-radius: $rounded-full;
   background: white;
-
 }
 
 .sbui-toggle__handle--active {
-
 }
 
 .sbui-toggle:disabled {
@@ -51,45 +50,43 @@
 /* tiny */
 
 .sbui-toggle--tiny {
-  height: 1rem/* 16px */;
-  width: 1.75rem/* 28px */;
+  height: 1rem /* 16px */;
+  width: 1.75rem /* 28px */;
 }
 .sbui-toggle--tiny .sbui-toggle__handle {
-  height: 0.75rem/* 12px */;
-  width: 0.75rem/* 12px */;
+  height: 0.75rem /* 12px */;
+  width: 0.75rem /* 12px */;
 }
 .sbui-toggle--tiny .sbui-toggle__handle--active {
-
 }
 
 /* small and medium */
 
 .sbui-toggle--small,
 .sbui-toggle--medium {
-  height: 1.5rem/* 24px */;
-  width: 2.75rem/* 44px */;
+  height: 1.5rem /* 24px */;
+  width: 2.75rem /* 44px */;
 }
 .sbui-toggle--small .sbui-toggle__handle,
 .sbui-toggle--medium .sbui-toggle__handle {
-  height: 1.25rem/* 20px */;
-  width: 1.25rem/* 20px */;
+  height: 1.25rem /* 20px */;
+  width: 1.25rem /* 20px */;
 }
 .sbui-toggle--small .sbui-toggle__handle--active,
 .sbui-toggle--medium .sbui-toggle__handle--active {
-
 }
 
 /* large and xlarge */
 
 .sbui-toggle--large,
 .sbui-toggle--xlarge {
-  height: 1.75rem/* 28px */;
-  width: 3rem/* 48px */;
+  height: 1.75rem /* 28px */;
+  width: 3rem /* 48px */;
 }
 .sbui-toggle--large .sbui-toggle__handle,
 .sbui-toggle--xlarge .sbui-toggle__handle {
-  height: 1.5rem/* 24px */;
-  width: 1.5rem/* 24px */;
+  height: 1.5rem /* 24px */;
+  width: 1.5rem /* 24px */;
 }
 .sbui-toggle--large .sbui-toggle__handle--active,
 .sbui-toggle--xlarge .sbui-toggle__handle--active {

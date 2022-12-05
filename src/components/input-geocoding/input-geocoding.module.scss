@@ -3,51 +3,51 @@
 @import '../../themes/margins-paddings';
 
 .sbui-inputgeocoding-container {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-    border-radius: $rounded-md;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $gray-100;
-    padding: 0 $mp-3;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  border-radius: $rounded-md;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $gray-100;
+  padding: 0 $mp-3;
 }
 
 .sbui-inputgeocoding-container:hover {
-  border-color: $brand-400;
+  border-color: $brand-200;
 }
 
 .sbui-inputgeocoding {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    border: 0;
-    box-shadow: none !important;
-    font-family: inherit;
-    appearance: textfield;
-    float: left;
-    background: transparent;
-    padding: $mp-3 0;
-    width: 100%;
-    font-size: $font-size-sm;
-    line-height: $font-line-height-sm;
-    color: $gray-100;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  box-shadow: none !important;
+  font-family: inherit;
+  appearance: textfield;
+  float: left;
+  background: transparent;
+  padding: $mp-3 0;
+  width: 100%;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: $gray-100;
 }
 
 .sbui-inputgeocoding-dropdown {
-    position: absolute;
-    border-radius: $rounded-base;
-    border-width: 1px;
-    border-color: $gray-100;
-    color: white;
-    border-radius: 0.25rem !important;
-    top: 36px;
-    height: inherit;
-    width: inherit;
+  position: absolute;
+  border-radius: $rounded-base;
+  border-width: 1px;
+  border-color: $gray-100;
+  color: white;
+  border-radius: 0.25rem !important;
+  top: 36px;
+  height: inherit;
+  width: inherit;
 }
 
 .sbui-inputgeocoding-dropdown li span {
-    font-family: $font-family !important;
+  font-family: $font-family !important;
 }
 
 .sbui-inputgeocoding-search-container {
@@ -95,14 +95,14 @@
 }
 
 .sbui-inputgeocoding-map-pin-icon {
-    top: 0px;
-    bottom: 0px;
-    right: $mp-3;
-    padding-right: $mp-2;
-    padding-left: $mp-2;
-    display: flex;
-    align-items: center;
-    pointer-events: none;
+  top: 0px;
+  bottom: 0px;
+  right: $mp-3;
+  padding-right: $mp-2;
+  padding-left: $mp-2;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }
 
 .sbui-inputgeocoding::-webkit-inner-spin-button,
@@ -112,17 +112,17 @@
 }
 
 .sbui-inputgeocoding:focus {
-    box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
-    outline: 0;
+  box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
+  outline: 0;
 }
 
 .sbui-inputgeocoding--error {
-    border-color: $red-500;
+  border-color: $red-500;
 }
 
 .sbui-inputgeocoding--borderless {
-    border-color: transparent;
-    box-shadow: none;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .sbui-inputgeocoding-actions-container {
@@ -135,14 +135,15 @@
   align-items: center;
 }
 
+.hide {
+  display: none;
+}
+.v-hide {
+  visibility: hidden;
+}
 
-  .hide {
-    display: none;
-  }
-  .v-hide {
-    visibility: hidden;
-  }
+#sbui-dropdown-button {
+}
 
-  #sbui-dropdown-button {}
-
-  #sbui-basic-menu {}
+#sbui-basic-menu {
+}

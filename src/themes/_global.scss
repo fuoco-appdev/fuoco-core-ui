@@ -125,3 +125,7 @@ $duration-collapse-md: var(--duration-collapse-md) !default;
 $duration-expand-lg: var(--duration-expand-lg) !default;
 $duration-collapse-lg: var(--duration-collapse-lg) !default;
 $duration-small: var(--duration-small) !default;
+
+@function safeRgba($hex, $opacity) {
+  @return unquote('rgba(#{$hex}, #{$opacity})');
+}

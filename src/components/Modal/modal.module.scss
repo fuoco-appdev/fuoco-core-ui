@@ -60,19 +60,15 @@
 }
 
 .sbui-modal--tiny {
-
 }
 
 .sbui-modal--small {
-
 }
 
 .sbui-modal--medium {
-
 }
 
 .sbui-modal--large {
-
 }
 
 .sbui-modal-content {
@@ -108,8 +104,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3rem/* 48px */;
-  width: 3rem/* 48px */;
+  height: 3rem /* 48px */;
+  width: 3rem /* 48px */;
   border-radius: $rounded-full;
 }
 
@@ -124,8 +120,8 @@
 }
 
 .sbui-modal-icon-container--success {
-  color: $brand-400;
-  background-color: rgba($brand-400, $opacity-2);
+  color: $brand-100;
+  background-color: $brand-100;
 }
 
 .sbui-modal-close-container {
@@ -135,9 +131,9 @@
 }
 
 .sbui-modal-close-button {
- width: 42px;
- height: 42px;
- border-radius: $rounded-full;
+  width: 42px;
+  height: 42px;
+  border-radius: $rounded-full;
 }
 
 .sbui-modal-close-container button,
