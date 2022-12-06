@@ -39,7 +39,7 @@ export default [
       }),
       typescript(),
       postcss({
-        extract: true,
+        extract: false,
         minimize: true,
         modules: true,
         plugins: [
