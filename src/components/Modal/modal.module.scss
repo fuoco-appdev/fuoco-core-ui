@@ -32,7 +32,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba($gray-900, $opacity-35);
+  background-color: rgba(#000, 0.35);
 }
 
 .sbui-modal-div-trick {
@@ -111,12 +111,10 @@
 
 .sbui-modal-icon-container--danger {
   color: $red-600;
-  background-color: rgba($red-600, $opacity-2);
 }
 
 .sbui-modal-icon-container--warning {
   color: $yellow-600;
-  background-color: rgba($yellow-600, $opacity-2);
 }
 
 .sbui-modal-icon-container--success {

@@ -2,68 +2,76 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-avatar {
+.avatar {
+  position: relative;
+  border-radius: $rounded-full;
+  background-color: $gray-200;
+  height: 56px;
+  width: 56px;
+  user-select: none;
+
+  & .edit-image-button {
+    position: absolute;
     border-radius: $rounded-full;
+    background-color: $gray-500;
+    bottom: 0;
+    right: 0;
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+    box-shadow: $shadow-1;
+
+    & .edit-image-button-ripple {
+      border-radius: $rounded-full;
+      height: inherit;
+      width: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
-.sbui-avatar-type-rounded {
-    border-radius: 10%;
+.avatar-type-rounded {
+  border-radius: 10%;
 }
 
-.sbui-avatar-type-square {
-    border-radius: 0;
+.avatar-type-square {
+  border-radius: 0;
 }
 
-.sbui-avatar-image {
-    object-fit: 'contain';
-    border-radius: '50%';
-    height: 3rem;
-    width: 3rem;
+.avatar-image {
+  object-fit: 'contain';
+  border-radius: '50%';
 }
 
-.sbui-avatar-children {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.avatar-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.sbui-avatar-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: cadetblue;
-    height: 3rem;
-    width: 3rem;
+.avatar-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.sbui-avatar-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: cadetblue;
-    float: left;
-    height: 3rem;
-    width: 3rem;
+.avatar-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  font-weight: $font-weight-bold;
 }
 
-.sbui-avatar-fallback {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: cadetblue;
-    height: 3rem;
-    width: 3rem;
+.avatar-single {
 }
 
-.sbui-avatar-single {
-
+.avatar-multiple {
 }
 
-.sbui-avatar-multiple {
-
-}
-
-.sbui-image-responsive {
-    width: 100%;
-    height: auto;  
+.image-responsive {
+  width: 100%;
+  height: auto;
 }

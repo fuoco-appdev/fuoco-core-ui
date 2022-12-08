@@ -6,7 +6,7 @@ import { IconX } from '../icon/icons/icon-x'
 import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
 
-export interface Props {
+export interface ModalProps {
   children?: React.ReactNode
   customFooter?: React.ReactNode
   closable?: boolean
@@ -62,7 +62,7 @@ const Modal = ({
   className = '',
   overlayClassName,
   triggerElement,
-}: Props) => {
+}: ModalProps) => {
   const [open, setOpen] = React.useState(visible ? visible : false)
 
   useEffect(() => {

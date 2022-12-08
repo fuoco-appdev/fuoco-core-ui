@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IconAirplay } from '../icon/icons/icon-airplay'
 
 import Avatar from './avatar'
@@ -32,29 +32,32 @@ export const Icon = (args: any) => {
   )
 }
 
-export const Fallback = (args: any) => {
+export const Edit = (args: any) => {
+  const [imageURL, setImageURL] = useState<string | undefined>()
   return (
     <>
-      <Avatar {...args} />
+      <Avatar
+        {...args}
+        onChange={(url: string) => setImageURL(url)}
+        src={imageURL}
+      />
     </>
   )
 }
 
 Image.args = {
-  active: true,
   src: 'https://via.placeholder.com/150',
 }
 
 Text.args = {
-  active: true,
   text: 'Shoury',
 }
 
 Icon.args = {
-  active: true,
-  Icon: IconAirplay,
+  AvatarIcon: IconAirplay,
 }
 
-Fallback.args = {
-  active: true,
+Edit.args = {
+  AvatarIcon: IconAirplay,
+  editMode: true,
 }
