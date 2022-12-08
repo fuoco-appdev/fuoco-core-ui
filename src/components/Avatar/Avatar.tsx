@@ -44,7 +44,7 @@ export default function Avatar({
   let scale = 1.0
   const [cropScale, setCropScale] = useState<number>(scale)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedImage, setSelectedImage] = useState<string | File>('')
   const [imageURL, setImageURL] = useState<string | null>(null)
   const classes = [styles['avatar']]
   classes.push(className)
@@ -101,7 +101,7 @@ export default function Avatar({
 
   const onCropConfirmed = () => {
     setIsModalVisible(false)
-    setSelectedImage(null)
+    setSelectedImage('')
 
     if (editorRef?.current) {
       const canvas = editorRef?.current.getImage().toDataURL()
@@ -112,7 +112,7 @@ export default function Avatar({
   }
 
   const onCropCanceled = () => {
-    setSelectedImage(null)
+    setSelectedImage('')
     setIsModalVisible(false)
   }
 
@@ -127,7 +127,6 @@ export default function Avatar({
   }, [])
 
   useEffect(() => {
-    console.log(imageURL)
     if (imageURL) {
       onChange?.(imageURL)
     }
