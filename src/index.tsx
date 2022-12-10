@@ -10,6 +10,7 @@ export * from './components/crop-image'
 // DISPLAYS
 
 export * from './components/card'
+export * from './components/card-swipe'
 export * from './components/badge'
 export * from './components/tabs'
 export * from './components/alert'
