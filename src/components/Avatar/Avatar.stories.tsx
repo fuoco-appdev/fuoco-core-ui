@@ -38,7 +38,10 @@ export const Edit = (args: any) => {
     <>
       <Avatar
         {...args}
-        onChange={(url: string) => setImageURL(url)}
+        onChange={(blob: Blob) => {
+          console.log(blob)
+          setImageURL(URL.createObjectURL(blob))
+        }}
         src={imageURL}
       />
     </>

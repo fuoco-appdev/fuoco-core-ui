@@ -3,13 +3,13 @@ import { Modal, ModalProps } from '../modal'
 import AvatarEditor, { AvatarEditorProps } from 'react-avatar-editor'
 
 export interface CropProps {
-  isVisible: boolean
-  src: string | File
+  isVisible?: boolean
+  src: File
   modalProps?: ModalProps
   editorProps?: AvatarEditorProps
   onConfirmed?: () => void
   onCanceled?: () => void
-  onChange?: (url: string) => void
+  onChange?: (blob: Blob) => void
 }
 
 export default function CropImage({
@@ -36,7 +36,6 @@ export default function CropImage({
   let cursorPosition: { x: number; y: number } = { x: 0, y: 0 }
   let scale = 1.0
   const [cropScale, setCropScale] = useState<number>(scale)
-  const [imageURL, setImageURL] = useState<string | null>(null)
 
   const onMouseMove = (event: MouseEvent) => {
     cursorPosition.x = event.clientX
@@ -70,7 +69,7 @@ export default function CropImage({
       const canvas = editorRef?.current.getImage().toDataURL()
       fetch(canvas)
         .then((res) => res.blob())
-        .then((blob) => setImageURL(URL.createObjectURL(blob)))
+        .then((blob) => onChange?.(blob))
     }
   }
 
@@ -88,16 +87,10 @@ export default function CropImage({
     }
   }, [])
 
-  useEffect(() => {
-    if (imageURL) {
-      onChange?.(imageURL)
-    }
-  }, [imageURL])
-
   return (
     <Modal
       {...modalProps}
-      visible={isVisible}
+      visible={isVisible ?? false}
       onConfirm={onCropConfirmed}
       onCancel={onCropCanceled}
     >

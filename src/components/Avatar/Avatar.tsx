@@ -9,7 +9,7 @@ import { CropImage } from '../crop-image'
 
 export interface AvatarProps {
   children?: React.ReactNode
-  src?: string | undefined
+  src?: string
   style?: React.CSSProperties
   className?: string
   alt?: string
@@ -18,7 +18,7 @@ export interface AvatarProps {
   AvatarIcon?: Icon
   rippleProps?: RipplesProps
   modalProps?: ModalProps
-  onChange?: (url: string) => void
+  onChange?: (blob: Blob) => void
 }
 
 export default function Avatar({
@@ -39,7 +39,7 @@ export default function Avatar({
 }: AvatarProps) {
   const fileRef = useRef<HTMLInputElement | null>(null)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<string | File>('')
+  const [selectedImage, setSelectedImage] = useState<File | undefined>()
   const classes = [styles['avatar']]
   classes.push(className)
 
@@ -63,18 +63,17 @@ export default function Avatar({
       return
     }
 
-    const url = URL.createObjectURL(file)
-    setSelectedImage(url)
+    setSelectedImage(file)
     setIsModalVisible(true)
   }
 
   const onCropConfirmed = () => {
     setIsModalVisible(false)
-    setSelectedImage('')
+    setSelectedImage(undefined)
   }
 
   const onCropCanceled = () => {
-    setSelectedImage('')
+    setSelectedImage(undefined)
     setIsModalVisible(false)
   }
 
@@ -104,7 +103,7 @@ export default function Avatar({
           </div>
         )}
       </div>
-      {editMode && (
+      {editMode && selectedImage && (
         <CropImage
           src={selectedImage}
           isVisible={isModalVisible}
