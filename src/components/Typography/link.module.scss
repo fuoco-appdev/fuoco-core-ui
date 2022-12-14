@@ -4,9 +4,11 @@
 
 a.sbui-typography-link {
   font-size: $font-size-sm;
-  color: $brand-700;
+  font-weight: $font-weight-medium;
+  color: $brand-400;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   cursor: pointer !important;
+  text-decoration: none;
 }

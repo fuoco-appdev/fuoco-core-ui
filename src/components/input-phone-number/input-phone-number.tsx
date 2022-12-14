@@ -227,7 +227,24 @@ function InputPhoneNumber({
           }
           return selectedCountry
         },
-        { ...selectedCountry!, dialCode: '', priority: 10001 }
+        {
+          ...(selectedCountry ?? {
+            name: '',
+            localName: '',
+            countryCode: '',
+            regions: [],
+            format: '',
+            iso2: '',
+            dialCode: '',
+            mainCode: false,
+            hasAreaCodes: false,
+            isAreaCode: false,
+            priority: 0,
+            areaCodeLength: 0,
+          }),
+          dialCode: '',
+          priority: 10001,
+        }
       )
 
       if (!bestGuess?.name) return secondBestGuess
@@ -425,7 +442,6 @@ function InputPhoneNumber({
     if (value.length > 0) {
       // before entering the number in new format, lets check if the dial code now matches some other country
       const inputNumber = value.replace(/\D/g, '')
-
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
@@ -472,20 +488,26 @@ function InputPhoneNumber({
 
     const lastChar = newFormattedNumber.charAt(newFormattedNumber.length - 1)
     if (lastChar === ')') {
+      numberInputRef?.current?.blur()
       numberInputRef?.current?.setSelectionRange(
         newFormattedNumber.length - 1,
         newFormattedNumber.length - 1
       )
+      numberInputRef?.current?.focus()
     } else if (
       caretPosition > 0 &&
       oldFormattedText.length >= newFormattedNumber.length
     ) {
+      numberInputRef?.current?.blur()
       numberInputRef?.current?.setSelectionRange(caretPosition, caretPosition)
+      numberInputRef?.current?.focus()
     } else if (oldCaretPosition < oldFormattedText.length) {
+      numberInputRef?.current?.blur()
       numberInputRef?.current?.setSelectionRange(
         oldCaretPosition,
         oldCaretPosition
       )
+      numberInputRef?.current?.focus()
     }
 
     onChange?.(
@@ -905,6 +927,7 @@ function InputPhoneNumber({
           ref={inputRef}
         >
           <Button
+            tabIndex={-1}
             className={InputPhoneNumberStyles['sbui-inputphonenumber-button']}
             htmlType={'button'}
             size={'tiny'}

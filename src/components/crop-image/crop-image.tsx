@@ -4,12 +4,12 @@ import AvatarEditor, { AvatarEditorProps } from 'react-avatar-editor'
 
 export interface CropProps {
   isVisible?: boolean
-  src: File
+  src: FileList
   modalProps?: ModalProps
   editorProps?: AvatarEditorProps
-  onConfirmed?: () => void
+  onConfirmed?: (index: number) => void
   onCanceled?: () => void
-  onChange?: (blob: Blob) => void
+  onChange?: (index: number, blob: Blob) => void
 }
 
 export default function CropImage({
@@ -36,6 +36,7 @@ export default function CropImage({
   let cursorPosition: { x: number; y: number } = { x: 0, y: 0 }
   let scale = 1.0
   const [cropScale, setCropScale] = useState<number>(scale)
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const onMouseMove = (event: MouseEvent) => {
     cursorPosition.x = event.clientX
@@ -63,13 +64,17 @@ export default function CropImage({
   }
 
   const onCropConfirmed = () => {
-    onConfirmed?.()
-
     if (editorRef?.current) {
       const canvas = editorRef?.current.getImage().toDataURL()
       fetch(canvas)
         .then((res) => res.blob())
-        .then((blob) => onChange?.(blob))
+        .then((blob) => onChange?.(selectedIndex, blob))
+    }
+
+    onConfirmed?.(selectedIndex)
+
+    if (selectedIndex < src.length - 1) {
+      setSelectedIndex(selectedIndex + 1)
     }
   }
 
@@ -98,7 +103,7 @@ export default function CropImage({
         <AvatarEditor
           {...editorProps}
           ref={editorRef}
-          image={src}
+          image={src[selectedIndex]}
           scale={cropScale}
           rotate={0}
         />

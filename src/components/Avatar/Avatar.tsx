@@ -18,7 +18,7 @@ export interface AvatarProps {
   AvatarIcon?: Icon
   rippleProps?: RipplesProps
   modalProps?: ModalProps
-  onChange?: (blob: Blob) => void
+  onChange?: (index: number, blob: Blob) => void
 }
 
 export default function Avatar({
@@ -39,7 +39,7 @@ export default function Avatar({
 }: AvatarProps) {
   const fileRef = useRef<HTMLInputElement | null>(null)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<File | undefined>()
+  const [selectedImages, setSelectedImages] = useState<FileList | undefined>()
   const classes = [styles['avatar']]
   classes.push(className)
 
@@ -58,22 +58,22 @@ export default function Avatar({
   }
 
   const onFileChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0]
-    if (!file) {
+    const files = event.target.files && event.target.files
+    if (!files || (files && files.length <= 0)) {
       return
     }
 
-    setSelectedImage(file)
+    setSelectedImages(files)
     setIsModalVisible(true)
   }
 
   const onCropConfirmed = () => {
     setIsModalVisible(false)
-    setSelectedImage(undefined)
+    setSelectedImages(undefined)
   }
 
   const onCropCanceled = () => {
-    setSelectedImage(undefined)
+    setSelectedImages(undefined)
     setIsModalVisible(false)
   }
 
@@ -103,9 +103,9 @@ export default function Avatar({
           </div>
         )}
       </div>
-      {editMode && selectedImage && (
+      {editMode && selectedImages && (
         <CropImage
-          src={selectedImage}
+          src={selectedImages}
           isVisible={isModalVisible}
           onChange={onChange}
           onConfirmed={onCropConfirmed}

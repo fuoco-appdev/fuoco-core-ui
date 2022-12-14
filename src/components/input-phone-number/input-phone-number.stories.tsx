@@ -31,7 +31,6 @@ Default.args = {
   layout: 'vertical',
   country: 'ca',
   defaultValue: '11234567890',
-  onChange: (value: string) => console.log(value),
 }
 
 DefaultWithError.args = {

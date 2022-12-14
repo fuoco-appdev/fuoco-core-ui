@@ -27,13 +27,27 @@ function CardSwipe({
   })
 
   const onDragX = ({
-    down,
-    delta: [xDelta],
+    active,
     direction: [xDir],
+    movement: [mx],
     distance: [xDis],
+    cancel,
   }: any) => {
+    if (!ref.current) {
+      return
+    }
+
     if (orientation !== 'horizontal') {
       return
+    }
+
+    if (active && xDis > ref.current.clientWidth / 2) {
+      index.current = clamp(
+        index.current + (xDir > 0 ? -1 : 1),
+        0,
+        items.length - 1
+      )
+      cancel()
     }
 
     api.start((i) => {
@@ -41,29 +55,35 @@ function CardSwipe({
         return
       }
 
-      if (down && xDis > ref.current.clientWidth / 2) {
-        index.current = clamp(
-          index.current + (xDir > 0 ? -1 : 1),
-          0,
-          items.length - 1
-        )
-      }
-
       const x =
-        (i - index.current) * ref.current.clientWidth + (down ? xDelta : 0)
-      const sc = down ? 1 - xDis / ref.current.clientWidth / 3 : 1
+        (i - index.current) * ref.current.clientWidth + (active ? mx : 0)
+      const sc = active ? 1 - xDis / ref.current.clientWidth / 3 : 1
       return { x, y: 0, ...(allowScale && { sc }) }
     })
   }
 
   const onDragY = ({
-    down,
-    delta: [xDelta, yDelta],
+    active,
+    movement: [mx, my],
     direction: [xDir, yDir],
     distance: [xDis, yDis],
+    cancel,
   }: any) => {
+    if (!ref.current) {
+      return
+    }
+
     if (orientation !== 'vertical') {
       return
+    }
+
+    if (active && yDis > ref.current.clientHeight / 2) {
+      index.current = clamp(
+        index.current + (yDir > 0 ? -1 : 1),
+        0,
+        items.length - 1
+      )
+      cancel()
     }
 
     api.start((i) => {
@@ -71,18 +91,10 @@ function CardSwipe({
         return
       }
 
-      if (down && yDis > ref.current.clientHeight / 2) {
-        index.current = clamp(
-          index.current + (yDir > 0 ? -1 : 1),
-          0,
-          items.length - 1
-        )
-      }
-
       const y =
-        (i - index.current) * ref.current.clientHeight + (down ? yDelta : 0)
-      const sc = down ? 1 - yDis / ref.current.clientHeight / 3 : 1
-      return { y, x: 0, ...(allowScale && { sc }) }
+        (i - index.current) * ref.current.clientHeight + (active ? my : 0)
+      const sc = active ? 1 - yDis / ref.current.clientHeight / 3 : 1
+      return { x: 0, y, ...(allowScale && { sc }) }
     })
   }
 
