@@ -1,5 +1,5 @@
 import { clamp } from 'lodash'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { animated, useSprings } from 'react-spring'
 import { useDrag } from '@use-gesture/react'
 // @ts-ignore
@@ -100,6 +100,23 @@ function CardSwipe({
 
   const bindX = useDrag(onDragX, { axis: 'x' })
   const bindY = useDrag(onDragY, { axis: 'y' })
+
+  useEffect(() => {
+    index.current = 0
+    api.start((i) => {
+      return {
+        y:
+          orientation === 'vertical'
+            ? i * (ref.current?.clientHeight ?? window.innerHeight)
+            : 0,
+        x:
+          orientation === 'horizontal'
+            ? i * (ref.current?.clientWidth ?? window.innerWidth)
+            : 0,
+        sc: 1,
+      }
+    })
+  }, [items])
 
   return (
     <div ref={ref} className={styles['root']}>
