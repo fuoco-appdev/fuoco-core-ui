@@ -37,6 +37,7 @@ export * from './components/divider'
 
 export * from './components/select'
 export * from './components/list'
+export * from './components/draggable-list'
 export * from './components/listbox'
 export * from './components/checkbox'
 export * from './components/input'

@@ -18,7 +18,6 @@ export interface ListboxProps {
   options: OptionProps[]
   defaultIndex?: number
   classNames?: {
-    root?: string
     formLayout?: FormLayoutClasses
     listbox?: string
     error?: string

@@ -1,0 +1,13 @@
+.root {
+  position: relative;
+  width: inherit;
+  height: inherit;
+
+  & .item {
+    position: absolute;
+    transform-origin: 50% 50% 0px;
+    text-transform: uppercase;
+    touch-action: none;
+    width: 100%;
+  }
+}

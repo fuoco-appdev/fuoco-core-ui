@@ -1,0 +1,86 @@
+import React, { useRef } from 'react'
+import { useSprings, animated } from 'react-spring'
+import { useDrag } from '@use-gesture/react'
+import { clamp } from 'lodash'
+// @ts-ignore
+import move from 'lodash-move'
+// @ts-ignore
+import styles from './draggable-list.module.scss'
+
+export interface DraggableListItem {
+  id: string
+  height: number
+  element: React.ReactElement
+}
+
+const fn =
+  (
+    order: number[],
+    items: DraggableListItem[],
+    active = false,
+    originalIndex = 0,
+    curIndex = 0,
+    y = 0
+  ) =>
+  (index: number) =>
+    active && index === originalIndex
+      ? {
+          y: curIndex * items[curIndex].height + y,
+          scale: 1.1,
+          zIndex: 1,
+          shadow: 15,
+          immediate: (key: string) => key === 'y' || key === 'zIndex',
+        }
+      : {
+          y: order.indexOf(index) * items[index].height,
+          scale: 1,
+          zIndex: 0,
+          shadow: 0,
+          immediate: false,
+        }
+
+export interface DraggableListProps {
+  items: DraggableListItem[]
+  onChanged?: (items: string[]) => void
+}
+
+function DraggableList({ items, onChanged }: DraggableListProps) {
+  const order = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
+  const [springs, api] = useSprings(items.length, fn(order.current, items)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
+  const bind = useDrag(({ args: [originalIndex], active, movement: [, y] }) => {
+    const curIndex = order.current.indexOf(originalIndex)
+    const curRow = clamp(
+      Math.round((curIndex * 100 + y) / 100),
+      0,
+      items.length - 1
+    )
+    const newOrder = move(order.current, curIndex, curRow)
+    api.start(fn(newOrder, items, active, originalIndex, curIndex, y)) // Feed springs new style data, they'll animate the view without causing a single render
+    if (!active) {
+      order.current = newOrder
+      onChanged?.(newOrder.map((index: number) => items[index].id))
+    }
+  })
+  return (
+    <div className={styles['root']}>
+      {springs.map(({ zIndex, shadow, y, scale }, i) => (
+        <animated.div
+          {...bind(i)}
+          key={i}
+          className={styles['item']}
+          style={{
+            zIndex,
+            boxShadow: shadow.to(
+              (s) => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`
+            ),
+            y,
+            scale,
+          }}
+          children={items[i].element}
+        />
+      ))}
+    </div>
+  )
+}
+
+export default DraggableList
