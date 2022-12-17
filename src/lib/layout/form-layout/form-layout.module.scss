@@ -2,7 +2,7 @@
 @import '../../../themes/colors';
 @import '../../../themes/margins-paddings';
 
-.sbui-formlayout {
+.formlayout {
   display: grid;
   gap: $mp-2;
   margin-bottom: $mp-4;
@@ -10,74 +10,74 @@
   user-select: none;
 }
 
-.sbui-formlayout--flex {
+.formlayout-flex {
   display: flex;
   justify-content: space-between;
 }
 
-.sbui-formlayout--flex-right div:last-child {
+.formlayout-flex-right div:last-child {
   text-align: right;
 }
 
-.sbui-formlayout--flex-left div:first-child {
+.formlayout-flex-left div:first-child {
   order: 2;
 }
 
-.sbui-formlayout--flex-left div:last-child {
+.formlayout-flex-left div:last-child {
   order: 1;
 }
 
-.sbui-formlayout__label-container-horizontal {
+.formlayout-label-container-horizontal {
   justify-content: space-between;
   grid-column: span 12 / span 12;
 }
 
-.sbui-formlayout__label-container-vertical {
+.formlayout-label-container-vertical {
   grid-column: span 4 / span 4;
 }
 
-.sbui-formlayout__content-container-horizontal {
+.formlayout-content-container-horizontal {
   grid-column: span 12 / span 12;
 }
 
-.sbui-formlayout__content-container-vertical {
+.formlayout-content-container-vertical {
   grid-column: span 8 / span 8;
 }
 
-.sbui-formlayout__content-container-vertical--align-right {
+.formlayout-content-container-vertical-align-right {
   text-align: right;
 }
 
-.sbui-formlayout__label {
+.formlayout-label {
   display: block;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   color: $gray-100;
 }
 
-.sbui-formlayout__label-opt,
-.sbui-formlayout__label .sbui-formlayout__label-before,
-.sbui-formlayout__label .sbui-formlayout__label-after {
+.formlayout-label-opt,
+.formlayout-label .formlayout-label-before,
+.formlayout-label .formlayout-label-after {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   color: $gray-100;
 }
 
-.sbui-formlayout__error {
+.formlayout-error {
   margin-top: $mp-2;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   color: $red-500;
 }
 
-.sbui-formlayout__description {
+.formlayout-description {
   margin-top: $mp-2;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   color: $gray-100;
 }
 
-/* .sbui-formlayout__content-container--width-25 {
+/* .formlayout-content-container-width-25 {
   width: 
 } */
 
@@ -85,38 +85,38 @@
   Layout sizes
 */
 
-.sbui-formlayout--tiny .sbui-formlayout__label,
-.sbui-formlayout--tiny .sbui-formlayout__label-opt,
-.sbui-formlayout--tiny .sbui-formlayout__error,
-.sbui-formlayout--tiny .sbui-formlayout__description {
+.formlayout-tiny .formlayout-label,
+.formlayout-tiny .formlayout-label-opt,
+.formlayout-tiny .formlayout-error,
+.formlayout-tiny .formlayout-description {
   font-size: $font-size-xs;
   line-height: $font-line-height-xs;
 }
-.sbui-formlayout--small .sbui-formlayout__label,
-.sbui-formlayout--small .sbui-formlayout__label-opt,
-.sbui-formlayout--small .sbui-formlayout__error,
-.sbui-formlayout--small .sbui-formlayout__description {
+.formlayout-small .formlayout-label,
+.formlayout-small .formlayout-label-opt,
+.formlayout-small .formlayout-error,
+.formlayout-small .formlayout-description {
   font-size: $font-size-sm;
   line-height: $font-line-height-xs;
 }
-.sbui-formlayout--medium .sbui-formlayout__label,
-.sbui-formlayout--medium .sbui-formlayout__label-opt,
-.sbui-formlayout--medium .sbui-formlayout__error,
-.sbui-formlayout--medium .sbui-formlayout__description {
+.formlayout-medium .formlayout-label,
+.formlayout-medium .formlayout-label-opt,
+.formlayout-medium .formlayout-error,
+.formlayout-medium .formlayout-description {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
-.sbui-formlayout--large .sbui-formlayout__label,
-.sbui-formlayout--large .sbui-formlayout__label-opt,
-.sbui-formlayout--large .sbui-formlayout__error,
-.sbui-formlayout--large .sbui-formlayout__description {
+.formlayout-large .formlayout-label,
+.formlayout-large .formlayout-label-opt,
+.formlayout-large .formlayout-error,
+.formlayout-large .formlayout-description {
   font-size: $font-size-base;
   line-height: $font-line-height-base;
 }
-.sbui-formlayout--xlarge .sbui-formlayout__label,
-.sbui-formlayout--xlarge .sbui-formlayout__label-opt,
-.sbui-formlayout--xlarge .sbui-formlayout__error,
-.sbui-formlayout--xlarge .sbui-formlayout__description {
+.formlayout-xlarge .formlayout-label,
+.formlayout-xlarge .formlayout-label-opt,
+.formlayout-xlarge .formlayout-error,
+.formlayout-xlarge .formlayout-description {
   font-size: $font-size-base;
   line-height: $font-line-height-base;
 }

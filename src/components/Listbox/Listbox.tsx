@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, { useRef, useState } from 'react'
 import { Listbox as HeadlessListbox } from '@headlessui/react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
 import SelectStyles from './select-styled.module.scss'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
@@ -19,17 +19,18 @@ export interface ListboxProps {
   defaultIndex?: number
   classNames?: {
     root?: string
+    formLayout?: FormLayoutClasses
     listbox?: string
-    listboxError?: string
-    listboxBorderless?: string
-    listboxContainer?: string
-    listboxRipple?: string
-    listboxIconContainer?: string
-    listboxAddonbefore?: string
-    listboxLabel?: string
-    listboxActionsContainer?: string
-    listboxChevronContainer?: string
-    listboxChevron?: string
+    error?: string
+    borderless?: string
+    container?: string
+    ripple?: string
+    iconContainer?: string
+    addonbefore?: string
+    label?: string
+    actionsContainer?: string
+    chevronContainer?: string
+    chevron?: string
   }
   descriptionText?: string
   error?: string
@@ -85,14 +86,11 @@ function Listbox({
 
   let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
   if (error)
-    selectClasses.concat([
-      SelectStyles['listbox-error'],
-      classNames?.listboxError,
-    ])
+    selectClasses.concat([SelectStyles['listbox-error'], classNames?.error])
   if (borderless)
     selectClasses.concat([
       SelectStyles['listbox-borderless'],
-      classNames?.listboxBorderless,
+      classNames?.borderless,
     ])
 
   return (
@@ -103,14 +101,14 @@ function Listbox({
       id={id}
       error={error}
       descriptionText={descriptionText}
-      className={classNames?.root}
+      classNames={classNames?.formLayout}
       style={style}
       size={'medium'}
     >
       <div
         className={[
           SelectStyles['listbox-container'],
-          classNames?.listboxContainer,
+          classNames?.container,
         ].join(' ')}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -128,7 +126,7 @@ function Listbox({
                   <Ripples
                     className={[
                       SelectStyles['listbox-ripple'],
-                      classNames?.listboxRipple,
+                      classNames?.ripple,
                     ].join(' ')}
                   >
                     <HeadlessListbox.Button className={selectClasses.join(' ')}>
@@ -136,7 +134,7 @@ function Listbox({
                         <div
                           className={[
                             SelectStyles['listbox-icon-container'],
-                            classNames?.listboxIconContainer,
+                            classNames?.iconContainer,
                           ].join(' ')}
                         >
                           {icon}
@@ -146,7 +144,7 @@ function Listbox({
                         <span
                           className={[
                             SelectStyles['listbox-addonbefore'],
-                            classNames?.listboxAddonbefore,
+                            classNames?.addonbefore,
                           ].join(' ')}
                         >
                           {selectedProps.addOnBefore(selectedProps?.value)}
@@ -155,7 +153,7 @@ function Listbox({
                       <span
                         className={[
                           SelectStyles['listbox-label'],
-                          classNames?.listboxLabel,
+                          classNames?.label,
                         ].join(' ')}
                       >
                         {selectedProps?.value}
@@ -164,7 +162,7 @@ function Listbox({
                         <div
                           className={[
                             SelectStyles['listbox-actions-container'],
-                            classNames?.listboxActionsContainer,
+                            classNames?.actionsContainer,
                           ].join(' ')}
                         >
                           {error && <InputErrorIcon />}
@@ -173,13 +171,13 @@ function Listbox({
                       <span
                         className={[
                           SelectStyles['listbox-chevron-container'],
-                          classNames?.listboxChevronContainer,
+                          classNames?.chevronContainer,
                         ].join(' ')}
                       >
                         <svg
                           className={[
                             SelectStyles['listbox-chevron'],
-                            classNames?.listboxChevron,
+                            classNames?.chevron,
                           ].join(' ')}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
@@ -232,8 +230,8 @@ export interface OptionProps {
   value: string
   id?: string
   classNames?: {
-    listboxOption?: string
-    listboxOptionInner?: string
+    option?: string
+    optionInner?: string
   }
   children?: ({ selected }: any) => React.ReactNode | React.ReactNode | any
   addOnBefore?: ({ selected }: any) => React.ReactNode
@@ -257,13 +255,13 @@ export function ListboxOption({
           <div
             className={[
               SelectStyles['listbox-option'],
-              classNames?.listboxOption,
+              classNames?.option,
             ].join(' ')}
           >
             <div
               className={[
                 SelectStyles['listbox-option-inner'],
-                classNames?.listboxOptionInner,
+                classNames?.optionInner,
               ].join(' ')}
             >
               {addOnBefore &&

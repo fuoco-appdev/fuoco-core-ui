@@ -2,10 +2,28 @@ import React from 'react'
 // @ts-ignore
 import FormLayoutStyles from './form-layout.module.scss'
 
+export interface FormLayoutClasses {
+  root?: string
+  flex?: string
+  flexLeft?: string
+  flexRight?: string
+  labelContainerHorizontal?: string
+  labelContainerVertical?: string
+  label?: string
+  labelBefore?: string
+  labelAfter?: string
+  labelOpt?: string
+  contentContainerHorizontal?: string
+  contentContainerVertical?: string
+  contentContainerVerticalAlignRight?: string
+  error?: string
+  description?: string
+}
+
 type Props = {
   align?: string
   children?: any
-  className?: string
+  classNames?: FormLayoutClasses
   descriptionText?: string
   error?: string
   id?: string
@@ -23,7 +41,7 @@ type Props = {
 export function FormLayout({
   align,
   children,
-  className,
+  classNames,
   descriptionText,
   error,
   id,
@@ -37,24 +55,29 @@ export function FormLayout({
   beforeLabel,
   afterLabel,
 }: Props) {
-  let containerClasses = [FormLayoutStyles['sbui-formlayout']]
+  let containerClasses = [FormLayoutStyles['formlayout'], classNames?.root]
 
   if (size) {
-    containerClasses.push(FormLayoutStyles[`sbui-formlayout--${size}`])
+    containerClasses.push(FormLayoutStyles[`formlayout-${size}`])
   }
 
   if (flex) {
-    containerClasses.push(FormLayoutStyles['sbui-formlayout--flex'])
+    containerClasses.concat([
+      FormLayoutStyles['formlayout-flex'],
+      classNames?.flex,
+    ])
     if (align === 'left') {
-      containerClasses.push(FormLayoutStyles['sbui-formlayout--flex-left'])
+      containerClasses.concat([
+        FormLayoutStyles['formlayout-flex-left'],
+        classNames?.flexLeft,
+      ])
     }
     if (align === 'right') {
-      containerClasses.push(FormLayoutStyles['sbui-formlayout--flex-right'])
+      containerClasses.concat([
+        FormLayoutStyles['formlayout-flex-right'],
+        classNames?.flexRight,
+      ])
     }
-  }
-
-  if (className) {
-    containerClasses.push(className)
   }
 
   const labelled = Boolean(label || beforeLabel || afterLabel)
@@ -66,18 +89,30 @@ export function FormLayout({
           className={
             '' +
             (layout !== 'horizontal' && !flex
-              ? FormLayoutStyles['sbui-formlayout__label-container-horizontal']
-              : FormLayoutStyles['sbui-formlayout__label-container-vertical'])
+              ? [
+                  FormLayoutStyles['formlayout-label-container-horizontal'],
+                  classNames?.labelContainerHorizontal,
+                ].join(' ')
+              : [
+                  FormLayoutStyles['formlayout-label-container-vertical'],
+                  classNames?.labelContainerVertical,
+                ].join(' '))
           }
         >
           {labelled && (
             <label
-              className={FormLayoutStyles['sbui-formlayout__label']}
+              className={[
+                FormLayoutStyles['formlayout-label'],
+                classNames?.label,
+              ].join(' ')}
               htmlFor={id}
             >
               {beforeLabel && (
                 <span
-                  className={FormLayoutStyles['sbui-formlayout__label-before']}
+                  className={[
+                    FormLayoutStyles['formlayout-label-before'],
+                    classNames?.labelBefore,
+                  ].join(' ')}
                   id={id + '-before'}
                 >
                   {beforeLabel}
@@ -86,7 +121,10 @@ export function FormLayout({
               {label}
               {afterLabel && (
                 <span
-                  className={FormLayoutStyles['sbui-formlayout__label-after']}
+                  className={[
+                    FormLayoutStyles['formlayout-label-after'],
+                    classNames?.labelAfter,
+                  ].join(' ')}
                   id={id + '-after'}
                 >
                   {afterLabel}
@@ -96,7 +134,10 @@ export function FormLayout({
           )}
           {labelOptional && (
             <span
-              className={FormLayoutStyles['sbui-formlayout__label-opt']}
+              className={[
+                FormLayoutStyles['formlayout-label-opt'],
+                classNames?.labelOpt,
+              ].join(' ')}
               id={id + '-optional'}
             >
               {labelOptional}
@@ -107,21 +148,42 @@ export function FormLayout({
       <div
         className={
           layout !== 'horizontal'
-            ? FormLayoutStyles['sbui-formlayout__content-container-horizontal']
-            : FormLayoutStyles['sbui-formlayout__content-container-vertical'] +
+            ? [
+                FormLayoutStyles['formlayout-content-container-horizontal'],
+                classNames?.contentContainerHorizontal,
+              ].join(' ')
+            : [
+                FormLayoutStyles['formlayout-content-container-vertical'],
+                classNames?.contentContainerVertical,
+              ].join(' ') +
               (align === 'right'
-                ? ` ${FormLayoutStyles['sbui-formlayout__content-container-vertical--align-right']}`
+                ? ` ${[
+                    FormLayoutStyles[
+                      'formlayout-content-container-vertical-align-right'
+                    ],
+                    classNames?.contentContainerVerticalAlignRight,
+                  ].join(' ')}`
                 : '')
         }
         style={style}
       >
         {children}
         {error && (
-          <p className={FormLayoutStyles['sbui-formlayout__error']}>{error}</p>
+          <p
+            className={[
+              FormLayoutStyles['formlayout-error'],
+              classNames?.error,
+            ].join(' ')}
+          >
+            {error}
+          </p>
         )}
         {descriptionText && (
           <p
-            className={FormLayoutStyles['sbui-formlayout__description']}
+            className={[
+              FormLayoutStyles['formlayout-description'],
+              classNames?.description,
+            ].join(' ')}
             id={id + '-description'}
           >
             {descriptionText}

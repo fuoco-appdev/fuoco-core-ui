@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { Button, Typography } from '../../index'
 import { IconCopy } from '../icon/icons/icon-copy'
@@ -9,18 +9,21 @@ import { IconEyeOff } from '../icon/icons/icon-eye-off'
 import InputStyles from './input.module.scss'
 import { animated, useSpring } from 'react-spring'
 
-export interface Props
+export interface InputClasses {
+  root?: string
+  container?: string
+  error?: string
+  withIcon?: string
+  borderless?: string
+  iconContainer?: string
+  input?: string
+  actionsContainer?: string
+  formLayout?: FormLayoutClasses
+}
+
+export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  classNames?: {
-    root?: string
-    inputContainer?: string
-    inputError?: string
-    inputWithIcon?: string
-    inputBorderless?: string
-    iconContainer?: string
-    input?: string
-    inputActionsContainer?: string
-  }
+  classNames?: InputClasses
   copy?: boolean
   password?: boolean
   defaultValue?: string | number
@@ -75,7 +78,7 @@ function Input({
   shakeInterpolationCount = 3,
   shakeDistance = 6,
   ...props
-}: Props) {
+}: InputProps) {
   const [copyLabel, setCopyLabel] = useState('Copy')
   const [hidden, setHidden] = useState(true)
 
@@ -86,22 +89,22 @@ function Input({
 
   let inputContainerClasses = [
     InputStyles['input-container'],
-    classNames?.inputContainer,
+    classNames?.container,
   ]
   if (error)
     inputContainerClasses.concat([
       InputStyles['input-error'],
-      classNames?.inputError,
+      classNames?.error,
     ])
   if (icon)
     inputContainerClasses.concat([
       InputStyles['input-with-icon'],
-      classNames?.inputWithIcon,
+      classNames?.withIcon,
     ])
   if (borderless)
     inputContainerClasses.concat([
       InputStyles['input-borderless'],
-      classNames?.inputBorderless,
+      classNames?.borderless,
     ])
 
   function onCopy(value: any) {
@@ -157,6 +160,7 @@ function Input({
         error={error}
         descriptionText={descriptionText}
         style={style}
+        classNames={classNames?.formLayout}
       >
         <div className={inputContainerClasses.join(' ')}>
           {icon && (
@@ -191,7 +195,7 @@ function Input({
             <div
               className={[
                 InputStyles['input-actions-container'],
-                classNames?.inputActionsContainer,
+                classNames?.actionsContainer,
               ].join(' ')}
             >
               {reveal ? (
@@ -224,17 +228,19 @@ function Input({
   )
 }
 
+export interface TextAreaClasses {
+  root?: string
+  formLayout?: TextAreaClasses
+  inputContainer?: string
+  input?: string
+  inputError?: string
+  inputWithIcon?: string
+  inputBorderless?: string
+  inputActionsContainer?: string
+}
+
 export interface TextAreaProps {
-  classNames?: {
-    root?: string
-    formLayout?: string
-    inputContainer?: string
-    input?: string
-    inputError?: string
-    inputWithIcon?: string
-    inputBorderless?: string
-    inputActionsContainer?: string
-  }
+  classNames?: TextAreaClasses
   autoComplete?: boolean
   autofocus?: boolean
   descriptionText?: string
@@ -354,7 +360,7 @@ function TextArea({
       }}
     >
       <FormLayout
-        className={classNames?.formLayout}
+        classNames={classNames?.formLayout}
         label={label}
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
