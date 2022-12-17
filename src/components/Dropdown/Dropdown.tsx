@@ -74,7 +74,6 @@ function Dropdown({
       const dropdownHeight =
         containerRef.current?.getBoundingClientRect().height ?? 0
       const dropdownY = anchorY + anchorHeight
-      const dropdownTop = anchorTop + anchorHeight
       const dropdownBottom = dropdownY + dropdownHeight * 2
       const anchorLeft = anchorRef?.current?.clientLeft ?? 0
       const anchorWidth = anchorRef?.current?.getBoundingClientRect().width ?? 0
@@ -83,7 +82,7 @@ function Dropdown({
       if (dropdownBottom > parentBottom && parentHeight > anchorHeight) {
         setTop(anchorTop - dropdownHeight * 2)
       } else {
-        setTop(dropdownTop)
+        setTop(anchorTop)
       }
 
       if (align === DropdownAlignment.Left) {

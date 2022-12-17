@@ -18,7 +18,7 @@ export interface ListboxProps {
   options: OptionProps[]
   defaultIndex?: number
   classNames?: {
-    listboxLayout?: string
+    root?: string
     listbox?: string
     listboxError?: string
     listboxBorderless?: string
@@ -100,7 +100,7 @@ function Listbox({
       id={id}
       error={error}
       descriptionText={descriptionText}
-      className={classNames?.listboxLayout}
+      className={classNames?.root}
       style={style}
       size={'medium'}
     >
