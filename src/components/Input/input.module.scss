@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-input-container {
+.input-container {
   position: relative;
   display: flex;
   box-sizing: border-box;
@@ -16,11 +16,11 @@
   padding: 0 $mp-3;
 }
 
-.sbui-input-container:hover {
+.input-container:hover {
   border-color: $brand-200;
 }
 
-.sbui-input {
+.input {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -64,20 +64,20 @@ input[type='date']::-webkit-calendar-picker-indicator {
     center/80% no-repeat;
 }
 
-.sbui-input:focus {
+.input:focus {
   box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
 }
 
-.sbui-input--error {
+.input-error {
   border-color: $red-500;
 }
 
-.sbui-input--borderless {
+.input-borderless {
   border-color: transparent;
   box-shadow: none;
 }
 
-.sbui-input-actions-container {
+.input-actions-container {
   display: flex;
   align-items: center;
   top: 0px;

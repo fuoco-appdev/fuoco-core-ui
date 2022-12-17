@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
-import InputIconContainer from '../../lib/layout/input-icon-container'
 import { Button, Typography } from '../../index'
 import { IconCopy } from '../icon/icons/icon-copy'
 import { IconEye } from '../icon/icons/icon-eye'
@@ -12,6 +11,16 @@ import { animated, useSpring } from 'react-spring'
 
 export interface Props
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  classNames?: {
+    root?: string
+    inputContainer?: string
+    inputError?: string
+    inputWithIcon?: string
+    inputBorderless?: string
+    iconContainer?: string
+    input?: string
+    inputActionsContainer?: string
+  }
   copy?: boolean
   password?: boolean
   defaultValue?: string | number
@@ -36,7 +45,7 @@ export interface Props
 function Input({
   autoComplete,
   autoFocus,
-  className,
+  classNames,
   copy,
   password,
   defaultValue,
@@ -75,11 +84,25 @@ function Input({
     type = 'text'
   }
 
-  let inputContainerClasses = [InputStyles['sbui-input-container']]
-  if (error) inputContainerClasses.push(InputStyles['sbui-input--error'])
-  if (icon) inputContainerClasses.push(InputStyles['sbui-input--with-icon'])
+  let inputContainerClasses = [
+    InputStyles['input-container'],
+    classNames?.inputContainer,
+  ]
+  if (error)
+    inputContainerClasses.push(
+      InputStyles['input-error'],
+      classNames?.inputError
+    )
+  if (icon)
+    inputContainerClasses.push(
+      InputStyles['input-with-icon'],
+      classNames?.inputWithIcon
+    )
   if (borderless)
-    inputContainerClasses.push(InputStyles['sbui-input--borderless'])
+    inputContainerClasses.push(
+      InputStyles['input-borderless'],
+      classNames?.inputBorderless
+    )
 
   function onCopy(value: any) {
     navigator.clipboard.writeText(value).then(
@@ -119,7 +142,7 @@ function Input({
 
   return (
     <animated.div
-      className={className}
+      className={classNames?.root}
       style={{
         x: x.to([0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1], interpolation),
       }}
@@ -136,7 +159,16 @@ function Input({
         style={style}
       >
         <div className={inputContainerClasses.join(' ')}>
-          {icon && <div className={InputStyles['icon-container']}>{icon}</div>}
+          {icon && (
+            <div
+              className={[
+                InputStyles['icon-container'],
+                classNames?.iconContainer,
+              ].join(' ')}
+            >
+              {icon}
+            </div>
+          )}
           <input
             {...props}
             autoComplete={autoComplete}
@@ -153,10 +185,15 @@ function Input({
             ref={inputRef}
             type={password ? (hidden ? 'password' : type) : type}
             value={value}
-            className={InputStyles['sbui-input']}
+            className={[InputStyles['input'], classNames?.input].join(' ')}
           />
           {copy || error || actions || password ? (
-            <div className={InputStyles['sbui-input-actions-container']}>
+            <div
+              className={[
+                InputStyles['input-actions-container'],
+                classNames?.inputActionsContainer,
+              ].join(' ')}
+            >
               {reveal ? (
                 <Button
                   htmlType={'button'}
@@ -188,7 +225,16 @@ function Input({
 }
 
 export interface TextAreaProps {
-  className?: string
+  classNames?: {
+    root?: string
+    formLayout?: string
+    inputContainer?: string
+    input?: string
+    inputError?: string
+    inputWithIcon?: string
+    inputBorderless?: string
+    inputActionsContainer?: string
+  }
   autoComplete?: boolean
   autofocus?: boolean
   descriptionText?: string
@@ -220,7 +266,7 @@ export interface TextAreaProps {
 function TextArea({
   autoComplete,
   autofocus,
-  className,
+  classNames,
   descriptionText,
   disabled,
   error,
@@ -248,11 +294,13 @@ function TextArea({
 }: TextAreaProps) {
   const [charLength, setCharLength] = useState(0)
 
-  let classes = [InputStyles['sbui-input']]
-  if (error) classes.push(InputStyles['sbui-input--error'])
-  if (icon) classes.push(InputStyles['sbui-input--with-icon'])
-  if (size) classes.push(InputStyles[`sbui-input--${size}`])
-  if (borderless) classes.push(InputStyles['sbui-input--borderless'])
+  let classes = [InputStyles['input'], classNames?.input]
+  if (error) classes.push(InputStyles['input-error'], classNames?.inputError)
+  if (icon)
+    classes.push(InputStyles['input-with-icon'], classNames?.inputWithIcon)
+  if (size) classes.push(InputStyles[`input-${size}`])
+  if (borderless)
+    classes.push(InputStyles['input-borderless'], classNames?.inputBorderless)
 
   function onInputChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setCharLength(e.target.value.length)
@@ -267,12 +315,26 @@ function TextArea({
     config: { mass: 1, tension: 500, friction: 100 },
   })
 
-  let inputContainerClasses = [InputStyles['sbui-input-container']]
-  if (error) inputContainerClasses.push(InputStyles['sbui-input--error'])
-  if (icon) inputContainerClasses.push(InputStyles['sbui-input--with-icon'])
-  if (size) inputContainerClasses.push(InputStyles[`sbui-input--${size}`])
+  let inputContainerClasses = [
+    InputStyles['input-container'],
+    classNames?.inputContainer,
+  ]
+  if (error)
+    inputContainerClasses.push(
+      InputStyles['input-error'],
+      classNames?.inputError
+    )
+  if (icon)
+    inputContainerClasses.push(
+      InputStyles['input-with-icon'],
+      classNames?.inputWithIcon
+    )
+  if (size) inputContainerClasses.push(InputStyles[`input-${size}`])
   if (borderless)
-    inputContainerClasses.push(InputStyles['sbui-input--borderless'])
+    inputContainerClasses.push(
+      InputStyles['input-borderless'],
+      classNames?.inputBorderless
+    )
 
   const interpolation: number[] = []
   interpolation.push(0)
@@ -286,13 +348,13 @@ function TextArea({
 
   return (
     <animated.div
-      className={className}
+      className={classNames?.root}
       style={{
         x: x.to([0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1], interpolation),
       }}
     >
       <FormLayout
-        className={className}
+        className={classNames?.formLayout}
         label={label}
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
@@ -320,13 +382,18 @@ function TextArea({
             onBlur={onBlur ? (event) => onBlur(event) : undefined}
             onKeyDown={onKeyDown ? (event) => onKeyDown(event) : undefined}
             value={value}
-            className={InputStyles['sbui-input']}
+            className={[InputStyles['input'], classNames?.input].join(' ')}
             maxLength={limit}
           >
             {value}
           </textarea>
           {error ? (
-            <div className={InputStyles['sbui-input-actions-container']}>
+            <div
+              className={[
+                InputStyles['input-actions-container'],
+                classNames?.inputActionsContainer,
+              ].join(' ')}
+            >
               {error && <InputErrorIcon size={size} />}
             </div>
           ) : null}

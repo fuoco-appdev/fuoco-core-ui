@@ -14,7 +14,7 @@ export const Default = (args: any) => {
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Button
         ref={buttonRef}
         as="span"
