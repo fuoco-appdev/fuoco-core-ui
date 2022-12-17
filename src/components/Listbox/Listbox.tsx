@@ -1,33 +1,36 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, {
-  Fragment,
-  ReactNode,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-  Children,
-} from 'react'
-import { Listbox as HeadlessListbox, Transition } from '@headlessui/react'
+import React, { useRef, useState } from 'react'
+import { Listbox as HeadlessListbox } from '@headlessui/react'
 import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
 import SelectStyles from './select-styled.module.scss'
-
-import InputIconContainer from '../../lib/layout/input-icon-container'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
-import { IconCheck } from '../icon/icons/icon-check'
 import Ripples from 'react-ripples'
 import { Dropdown } from '../dropdown'
 import { DropdownAlignment } from '../dropdown/dropdown'
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
+const ListboxContext = React.createContext<{
+  selectedItem?: string
+  setSelectedItem?: (value: string) => void
+}>({})
 
 export interface ListboxProps {
   options: OptionProps[]
   defaultIndex?: number
-  className?: string
+  classNames?: {
+    listboxLayout?: string
+    listbox?: string
+    listboxError?: string
+    listboxBorderless?: string
+    listboxContainer?: string
+    listboxRipple?: string
+    listboxIconContainer?: string
+    listboxAddonbefore?: string
+    listboxLabel?: string
+    listboxActionsContainer?: string
+    listboxChevronContainer?: string
+    listboxChevron?: string
+  }
   descriptionText?: string
   error?: string
   icon?: any
@@ -46,54 +49,48 @@ export interface ListboxProps {
   onBlur?: () => void
 }
 
-function Listbox(
-  {
-    defaultIndex = 0,
-    options,
-    className,
-    descriptionText,
-    error,
-    icon,
-    id,
-    label,
-    labelOptional,
-    layout,
-    onChange,
-    style,
-    borderless = false,
-    onMouseEnter,
-    onMouseLeave,
-    onFocus,
-    onBlur,
-  }: ListboxProps,
-  ref: React.ForwardedRef<any>
-) {
+function Listbox({
+  defaultIndex = 0,
+  options,
+  classNames,
+  descriptionText,
+  error,
+  icon,
+  id,
+  label,
+  labelOptional,
+  layout,
+  onChange,
+  style,
+  borderless = false,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
+}: ListboxProps) {
   const [childRefs] = useState<Record<string, React.MutableRefObject<any>>>({})
-  const [selectedProps, setSelectedProps] = useState<OptionProps | null>(
+  const [selectedProps, setSelectedProps] = useState<OptionProps | undefined>(
     options[defaultIndex]
   )
   const anchorRef = useRef<HTMLDivElement | null>(null)
 
   function handleOnChange(e: any) {}
 
-  useImperativeHandle(ref, () => ({
-    addRef(id: string, ref: React.MutableRefObject<any>) {
-      childRefs[id] = ref
-    },
-    setSelected(props: OptionProps) {
-      setSelectedProps(props)
+  const setSelectedItem = (value: string) => {
+    const props = options.find((option) => option.value === value)
+    setSelectedProps(props)
 
-      if (onChange) onChange(props?.value)
+    if (onChange) onChange(value)
+  }
 
-      for (const key in childRefs) {
-        childRefs[key]?.current?.updateSelectedValue(props?.value)
-      }
-    },
-  }))
-
-  let selectClasses = [SelectStyles['sbui-listbox']]
-  if (error) selectClasses.push(SelectStyles['sbui-listbox--error'])
-  if (borderless) selectClasses.push(SelectStyles['sbui-listbox--borderless'])
+  let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
+  if (error)
+    selectClasses.push(SelectStyles['listbox-error'], classNames?.listboxError)
+  if (borderless)
+    selectClasses.push(
+      SelectStyles['listbox-borderless'],
+      classNames?.listboxBorderless
+    )
 
   return (
     <FormLayout
@@ -103,91 +100,123 @@ function Listbox(
       id={id}
       error={error}
       descriptionText={descriptionText}
-      className={className}
+      className={classNames?.listboxLayout}
       style={style}
       size={'medium'}
     >
       <div
-        className={SelectStyles['sbui-listbox-container']}
+        className={[
+          SelectStyles['listbox-container'],
+          classNames?.listboxContainer,
+        ].join(' ')}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
         <HeadlessListbox value={selectedProps?.value} onChange={handleOnChange}>
           {({ open }) => {
             return (
-              <div ref={anchorRef}>
-                <Ripples className={SelectStyles['sbui-listbox-ripple']}>
-                  <HeadlessListbox.Button className={selectClasses.join(' ')}>
-                    {icon && (
-                      <div
-                        className={SelectStyles['sbui-listbox-icon-container']}
-                      >
-                        {icon}
-                      </div>
-                    )}
-                    {selectedProps?.addOnBefore && (
+              <ListboxContext.Provider
+                value={{
+                  selectedItem: selectedProps?.value,
+                  setSelectedItem: setSelectedItem,
+                }}
+              >
+                <div ref={anchorRef}>
+                  <Ripples
+                    className={[
+                      SelectStyles['listbox-ripple'],
+                      classNames?.listboxRipple,
+                    ].join(' ')}
+                  >
+                    <HeadlessListbox.Button className={selectClasses.join(' ')}>
+                      {icon && (
+                        <div
+                          className={[
+                            SelectStyles['listbox-icon-container'],
+                            classNames?.listboxIconContainer,
+                          ].join(' ')}
+                        >
+                          {icon}
+                        </div>
+                      )}
+                      {selectedProps?.addOnBefore && (
+                        <span
+                          className={[
+                            SelectStyles['listbox-addonbefore'],
+                            classNames?.listboxAddonbefore,
+                          ].join(' ')}
+                        >
+                          {selectedProps.addOnBefore(selectedProps?.value)}
+                        </span>
+                      )}
                       <span
-                        className={SelectStyles['sbui-listbox-addonbefore']}
+                        className={[
+                          SelectStyles['listbox-label'],
+                          classNames?.listboxLabel,
+                        ].join(' ')}
                       >
-                        {selectedProps.addOnBefore(selectedProps?.value)}
+                        {selectedProps?.value}
                       </span>
-                    )}
-                    <span className={SelectStyles['sbui-listbox-label']}>
-                      {selectedProps?.value}
-                    </span>
-                    {error && (
-                      <div
-                        className={
-                          SelectStyles['sbui-listbox-actions-container']
-                        }
+                      {error && (
+                        <div
+                          className={[
+                            SelectStyles['listbox-actions-container'],
+                            classNames?.listboxActionsContainer,
+                          ].join(' ')}
+                        >
+                          {error && <InputErrorIcon />}
+                        </div>
+                      )}
+                      <span
+                        className={[
+                          SelectStyles['listbox-chevron-container'],
+                          classNames?.listboxChevronContainer,
+                        ].join(' ')}
                       >
-                        {error && <InputErrorIcon />}
-                      </div>
-                    )}
-                    <span
-                      className={SelectStyles['sbui-listbox-chevron-container']}
-                    >
-                      <svg
-                        className={SelectStyles['sbui-listbox-chevron']}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </HeadlessListbox.Button>
-                </Ripples>
-                <Dropdown
-                  style={{
-                    width: anchorRef?.current?.getClientRects()[0].width,
-                  }}
-                  onOpen={() => {
-                    onFocus?.()
-                    for (const key in childRefs) {
-                      childRefs[key]?.current?.updateSelectedValue(
-                        selectedProps?.value
-                      )
-                    }
-                  }}
-                  onClose={() => {
-                    console.log('blur')
-                    onBlur?.()
-                  }}
-                  align={DropdownAlignment.Right}
-                  open={open}
-                  anchorRef={anchorRef}
-                >
-                  {options.map((option) => {
-                    return <ListboxOption {...option} />
-                  })}
-                </Dropdown>
-              </div>
+                        <svg
+                          className={[
+                            SelectStyles['listbox-chevron'],
+                            classNames?.listboxChevron,
+                          ].join(' ')}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </HeadlessListbox.Button>
+                  </Ripples>
+                  <Dropdown
+                    style={{
+                      width: anchorRef?.current?.getClientRects()[0].width,
+                    }}
+                    onOpen={() => {
+                      onFocus?.()
+                      for (const key in childRefs) {
+                        childRefs[key]?.current?.updateSelectedValue(
+                          selectedProps?.value
+                        )
+                      }
+                    }}
+                    onClose={() => {
+                      onBlur?.()
+                    }}
+                    align={DropdownAlignment.Right}
+                    open={open}
+                    anchorRef={anchorRef}
+                  >
+                    {options.map((option) => {
+                      return <ListboxOption {...option} />
+                    })}
+                  </Dropdown>
+                </div>
+              </ListboxContext.Provider>
             )
           }}
         </HeadlessListbox>
@@ -197,54 +226,58 @@ function Listbox(
 }
 
 export interface OptionProps {
-  parentRef: React.MutableRefObject<any>
   value: string
   id?: string
-  className?: string
+  classNames?: {
+    listboxOption?: string
+    listboxOptionInner?: string
+  }
   children?: ({ selected }: any) => React.ReactNode | React.ReactNode | any
   addOnBefore?: ({ selected }: any) => React.ReactNode
   disabled?: boolean
 }
 
-export const ListboxOption = React.forwardRef(
-  (props: OptionProps, ref: React.ForwardedRef<any>) => {
-    ref = React.createRef()
-
-    const [selectedItem, setSelectedItem] = useState<string | undefined>()
-    useImperativeHandle(ref, () => ({
-      updateSelectedValue(value: string) {
-        setSelectedItem(value)
-      },
-    }))
-
-    useEffect(() => {
-      props.parentRef?.current?.addRef(props.value, ref)
-    }, [])
-
-    return (
-      <Dropdown.Item
-        key={props.id}
-        onClick={() => {
-          props.parentRef?.current?.setSelected(props)
-        }}
-      >
-        <div
-          ref={ref}
-          className={classNames(SelectStyles['sbui-listbox-option'])}
+export function ListboxOption({
+  id,
+  classNames,
+  addOnBefore,
+  children,
+  value,
+}: OptionProps) {
+  return (
+    <ListboxContext.Consumer>
+      {(selectedProps) => (
+        <Dropdown.Item
+          key={id}
+          onClick={() => selectedProps?.setSelectedItem?.(value)}
         >
-          <div className={SelectStyles['sbui-listbox-option__inner']}>
-            {props.addOnBefore &&
-              props.addOnBefore?.({ selected: selectedItem === props.value })}
-            <span>
-              {typeof props.children === 'function'
-                ? props.children?.({ selected: selectedItem })
-                : props.children}
-            </span>
+          <div
+            className={[
+              SelectStyles['listbox-option'],
+              classNames?.listboxOption,
+            ].join(' ')}
+          >
+            <div
+              className={[
+                SelectStyles['listbox-option-inner'],
+                classNames?.listboxOptionInner,
+              ].join(' ')}
+            >
+              {addOnBefore &&
+                addOnBefore?.({
+                  selected: value === selectedProps?.selectedItem,
+                })}
+              <span>
+                {typeof children === 'function'
+                  ? children?.({ selected: selectedProps?.selectedItem })
+                  : children}
+              </span>
+            </div>
           </div>
-        </div>
-      </Dropdown.Item>
-    )
-  }
-)
+        </Dropdown.Item>
+      )}
+    </ListboxContext.Consumer>
+  )
+}
 
-export default React.forwardRef(Listbox)
+export default Listbox

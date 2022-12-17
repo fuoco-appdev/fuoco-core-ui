@@ -2,10 +2,10 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-listbox-container {
+.listbox-container {
 }
 
-.sbui-listbox {
+.listbox {
   display: flex;
   width: 100%;
   padding: $mp-3 $mp-3;
@@ -15,7 +15,7 @@
   color: $gray-100;
   border-width: 1px;
   border-style: solid;
-  border-color: $gray-300;
+  border-color: $gray-100;
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
@@ -28,35 +28,35 @@
   box-shadow: none;
 }
 
-.sbui-listbox:hover {
+.listbox:hover {
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: $brand-200;
 }
 
-.sbui-listbox:focus {
+.listbox:focus {
   outline: none;
   box-shadow: none;
 }
 
-.sbui-listbox-icon-container {
+.listbox-icon-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin-right: $mp-3;
 }
 
-.sbui-listbox--error {
+.listbox-error {
   color: $red-500;
   border-color: $red-500;
 }
 
-.sbui-listbox--borderless {
+.listbox-borderless {
   border-color: transparent;
   box-shadow: none;
 }
 
-.sbui-listbox-ripple {
+.listbox-ripple {
   display: flex !important;
   height: inherit;
   width: inherit;
@@ -64,42 +64,7 @@
   justify-content: flex-start;
 }
 
-/*
-  Select sizes
-*/
-
-.sbui-listbox--tiny {
-  padding: $mp-1-5 $mp-2-5;
-  font-size: $font-size-xs;
-  line-height: $font-line-height-xs;
-  align-items: center;
-}
-.sbui-listbox--small {
-  padding: $mp-2 $mp-3;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-xs;
-  align-items: center;
-}
-.sbui-listbox--medium {
-  padding: $mp-2 $mp-3;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
-  align-items: center;
-}
-.sbui-listbox--large {
-  padding: $mp-3 $mp-3;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
-  align-items: center;
-}
-.sbui-listbox--xlarge {
-  padding: $mp-3 $mp-6;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
-  align-items: center;
-}
-
-.sbui-listbox-actions-container {
+.listbox-actions-container {
   display: flex;
   align-items: center;
   top: 0px;
@@ -112,13 +77,13 @@
   Add on before
 */
 
-.sbui-listbox-addonbefore {
+.listbox-addonbefore {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.sbui-listbox-label {
+.listbox-label {
   display: flex;
   flex-grow: 1;
   overflow: hidden;
@@ -131,7 +96,7 @@
   Select Chevron
 */
 
-.sbui-listbox-chevron-container {
+.listbox-chevron-container {
   display: flex;
   align-items: center;
   pointer-events: none;
@@ -140,7 +105,7 @@
   right: 0px;
 }
 
-.sbui-listbox-chevron {
+.listbox-chevron {
   height: $mp-5;
   width: $mp-5;
   color: $gray-100;
@@ -150,7 +115,7 @@
   Option
 */
 
-.sbui-listbox-option-container {
+.listbox-option-container {
   position: absolute;
   list-style-type: none;
   padding: $mp-1 0;
@@ -175,7 +140,7 @@
   }
 }
 
-.sbui-listbox-option {
+.listbox-option {
   position: relative;
   width: inherit;
   cursor: pointer;
@@ -184,53 +149,9 @@
   color: $gray-900;
 }
 
-.sbui-listbox-option--active {
-  color: $gray-600;
-  background-color: rgba($gray-600, $opacity-2);
-}
-
-.sbui-listbox-option--disabled {
-  cursor: not-allowed;
-  opacity: $opacity-5;
-}
-
-.sbui-listbox-option__inner {
+.listbox-option-inner {
   display: flex;
   align-items: center;
   margin-right: $mp-3;
   margin-left: $mp-3;
-}
-
-.sbui-listbox-option__check {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  padding-right: $mp-3;
-}
-
-.sbui-listbox-option__check--active {
-  color: $brand-200;
-}
-
-.sbui-listbox-option__check__icon {
-  height: $mp-5;
-  width: $mp-5;
-}
-
-/*
-  Transition
-*/
-
-.sbui-listbox-transition--leave {
-}
-
-.sbui-listbox-transition--leave-from {
-  opacity: 1;
-}
-
-.sbui-listbox-transition--leave-to {
-  opacity: 0;
 }

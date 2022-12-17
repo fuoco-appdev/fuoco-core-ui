@@ -63,7 +63,7 @@ export const Bottom = (args: any) => {
         flexDirection: 'column',
       }}
     >
-      <div>
+      <div style={{ position: 'relative' }}>
         <Button
           ref={buttonRef}
           as="span"
@@ -78,30 +78,29 @@ export const Bottom = (args: any) => {
         >
           Click for dropdown
         </Button>
+        <Dropdown
+          parentRef={parentRef}
+          anchorRef={buttonRef}
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false)
+          }}
+        >
+          <Dropdown.Item onClick={() => console.log('clicked')}>
+            <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          </Dropdown.Item>
+          <Divider light />
+          <Dropdown.Item>
+            <Dropdown.Icon>
+              <IconLogIn size="tiny" />
+            </Dropdown.Icon>
+            <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          </Dropdown.Item>
+        </Dropdown>
       </div>
-
-      <Dropdown
-        parentRef={parentRef}
-        anchorRef={buttonRef}
-        open={isOpen}
-        onClose={() => {
-          setIsOpen(false)
-        }}
-      >
-        <Dropdown.Item onClick={() => console.log('clicked')}>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
-        </Dropdown.Item>
-        <Dropdown.Item>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
-        </Dropdown.Item>
-        <Divider light />
-        <Dropdown.Item>
-          <Dropdown.Icon>
-            <IconLogIn size="tiny" />
-          </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
-        </Dropdown.Item>
-      </Dropdown>
     </div>
   )
 }

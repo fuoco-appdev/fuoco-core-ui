@@ -16,11 +16,9 @@ const defaultOptions = [
 ]
 
 export const Default = (args: any) => {
-  const ref = useRef<any | null>(null)
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
     options.push({
-      parentRef: ref,
       id: option.label,
       value: option.value,
       children: () => (
@@ -29,13 +27,14 @@ export const Default = (args: any) => {
     })
   }
   return (
-    <Listbox
-      label="Default listbox"
-      ref={ref}
-      defaultIndex={0}
-      options={options}
-      onChange={(value: string) => console.log(value)}
-    />
+    <div style={{ height: '80vh' }}>
+      <Listbox
+        label="Default listbox"
+        defaultIndex={0}
+        options={options}
+        onChange={(value: string) => console.log(value)}
+      />
+    </div>
   )
 }
 
@@ -97,7 +96,6 @@ export const People = (args: any) => {
   const options: OptionProps[] = []
   for (const person of people) {
     options.push({
-      parentRef: ref,
       value: person.value,
       addOnBefore: () => (
         <img
@@ -128,7 +126,6 @@ export const People = (args: any) => {
 
   return (
     <Listbox
-      ref={ref}
       label="Choose a person"
       layout="horizontal"
       descriptionText="Choose a person for this role"
@@ -151,7 +148,6 @@ export const WithIcon = (args: any) => {
   const [isGlobeIconLit, setIsGlobeIconLit] = useState<boolean>(false)
   return (
     <Listbox
-      ref={ref}
       label="Language"
       layout="vertical"
       icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
@@ -166,7 +162,6 @@ export const WithIcon = (args: any) => {
       onBlur={() => setIsGlobeIconLit(false)}
       options={[
         {
-          parentRef: ref,
           value: 'English',
           children: ({ selected }: any) => {
             return (
@@ -180,7 +175,6 @@ export const WithIcon = (args: any) => {
           },
         },
         {
-          parentRef: ref,
           value: 'French',
           children: ({ selected }: any) => {
             return (
@@ -205,11 +199,9 @@ WithIcon.args = {
 }
 
 export const ErrorState = (args: any) => {
-  const ref = useRef<any>(null)
   const options: OptionProps[] = []
   for (const person of people) {
     options.push({
-      parentRef: ref,
       value: person.value,
       addOnBefore: ({ selected }: any) => (
         <img

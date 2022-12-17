@@ -9,7 +9,14 @@ export default {
 }
 
 export const Horizontal = (args: any) => (
-  <div style={{ height: '50vh', width: '50vw' }}>
+  <div
+    style={{
+      height: '50vh',
+      width: '50vw',
+      position: 'relative',
+      overflow: 'hidden',
+    }}
+  >
     <CardSwipe
       {...args}
       items={[
@@ -37,7 +44,14 @@ export const Horizontal = (args: any) => (
 )
 
 export const Vertical = (args: any) => (
-  <div style={{ height: '50vh', width: '50vw' }}>
+  <div
+    style={{
+      height: '50vh',
+      width: '50vw',
+      position: 'relative',
+      overflow: 'hidden',
+    }}
+  >
     <CardSwipe
       {...args}
       items={[
@@ -65,7 +79,14 @@ export const Vertical = (args: any) => (
 )
 
 export const Scale = (args: any) => (
-  <div style={{ height: '50vh', width: '50vw' }}>
+  <div
+    style={{
+      height: '50vh',
+      width: '50vw',
+      position: 'relative',
+      overflow: 'hidden',
+    }}
+  >
     <CardSwipe
       {...args}
       items={[
@@ -161,6 +182,7 @@ export const WithCrop = (args: any) => {
           height: 'calc((383px / 3) * 2)',
           width: '383px',
           userSelect: 'none',
+          overflow: 'hidden',
         }}
       >
         <CardSwipe items={coverImages} />

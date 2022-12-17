@@ -63,18 +63,23 @@ function Dropdown({
 
   useEffect(() => {
     if (open) {
-      const parentHeight = parentRef?.current?.getClientRects()[0].height ?? 0
-      const parentTop = parentRef?.current?.getClientRects()[0].y ?? 0
-      const parentBottom = parentTop + parentHeight
-      const anchorTop = anchorRef?.current?.getClientRects()[0].y ?? 0
-      const anchorHeight = anchorRef?.current?.getClientRects()[0].height ?? 0
+      const parentHeight =
+        parentRef?.current?.getBoundingClientRect().height ?? 0
+      const parentY = parentRef?.current?.getBoundingClientRect().y ?? 0
+      const parentBottom = parentY + parentHeight
+      const anchorY = anchorRef?.current?.getBoundingClientRect().y ?? 0
+      const anchorTop = anchorRef?.current?.clientTop ?? 0
+      const anchorHeight =
+        anchorRef?.current?.getBoundingClientRect().height ?? 0
       const dropdownHeight =
-        containerRef.current?.getClientRects()[0].height ?? 0
+        containerRef.current?.getBoundingClientRect().height ?? 0
+      const dropdownY = anchorY + anchorHeight
       const dropdownTop = anchorTop + anchorHeight
-      const dropdownBottom = dropdownTop + dropdownHeight * 2
-      const anchorLeft = anchorRef?.current?.getClientRects()[0].x ?? 0
-      const anchorWidth = anchorRef?.current?.getClientRects()[0].width ?? 0
-      const dropdownWidth = containerRef.current?.getClientRects()[0].width ?? 0
+      const dropdownBottom = dropdownY + dropdownHeight * 2
+      const anchorLeft = anchorRef?.current?.clientLeft ?? 0
+      const anchorWidth = anchorRef?.current?.getBoundingClientRect().width ?? 0
+      const dropdownWidth =
+        containerRef.current?.getBoundingClientRect().width ?? 0
       if (dropdownBottom > parentBottom && parentHeight > anchorHeight) {
         setTop(anchorTop - dropdownHeight * 2)
       } else {
@@ -122,8 +127,8 @@ function Dropdown({
             ...style,
             position: 'absolute',
             zIndex: 24,
-            top: top,
-            left: left,
+            y: top,
+            x: left,
           }}
         >
           <ul
