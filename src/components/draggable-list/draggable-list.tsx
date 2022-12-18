@@ -71,7 +71,7 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
   }, [items])
 
   useEffect(() => {
-    onChanged?.(order.map((index: number) => items[index].id))
+    onChanged?.(order.map((index: number) => items[index]?.id ?? -1))
   }, [order])
   return (
     <div className={styles['root']} style={{ height: totalHeight }}>
