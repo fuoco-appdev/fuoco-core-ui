@@ -25,7 +25,7 @@ const fn =
   (index: number) =>
     active && index === originalIndex
       ? {
-          y: curIndex * (items[curIndex]?.height ?? 0) + y,
+          y: curIndex * items[curIndex].height + y,
           zIndex: 1,
           shadow: 15,
           immediate: (key: string) => key === 'y' || key === 'zIndex',
@@ -44,7 +44,6 @@ export interface DraggableListProps {
 
 function DraggableList({ items, onChanged }: DraggableListProps) {
   const [totalHeight, setTotalHeight] = useState<number>(0)
-  const [order, setOrder] = useState<number[]>(items.map((_, index) => index))
   const orderRef = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
   const [springs, api] = useSprings(items.length, fn(orderRef.current, items)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
   const bind = useDrag(({ args: [originalIndex], active, movement: [, y] }) => {
@@ -58,7 +57,7 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
     api.start(fn(newOrder, items, active, originalIndex, curIndex, y)) // Feed springs new style data, they'll animate the view without causing a single render
     if (!active) {
       orderRef.current = newOrder
-      setOrder(newOrder)
+      onChanged?.(newOrder.map((index: number) => items[index].id))
     }
   })
 
@@ -68,11 +67,10 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
       height += value.height
     })
     setTotalHeight(height)
+
+    orderRef.current = items.map((_, index) => index)
   }, [items])
 
-  useEffect(() => {
-    onChanged?.(order.map((index: number) => items[index]?.id ?? -1))
-  }, [order])
   return (
     <div className={styles['root']} style={{ height: totalHeight }}>
       {springs.map(({ zIndex, shadow, y }, i) => (
