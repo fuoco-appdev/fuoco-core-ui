@@ -35,7 +35,6 @@ export * from './components/divider'
 
 // DATA ENTRY
 
-export * from './components/select'
 export * from './components/list'
 export * from './components/draggable-list'
 export * from './components/listbox'

@@ -1,11 +1,27 @@
 import React from 'react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import { CheckboxContext } from './checkbox-context'
 // @ts-ignore
 import CheckboxStyles from './checkbox.module.scss'
 import Ripples, { RipplesProps } from 'react-ripples'
 
-interface InputProps {
+export interface CheckboxGroupClasses {
+  formLayout: FormLayoutClasses
+}
+
+export interface CheckboxClasses {
+  container?: string
+  rippleButton?: string
+  checkbox?: string
+  labelContainer?: string
+  labelContainerLabel?: string
+  labelContainerLabelSpan?: string
+  beforeLabel?: string
+  afterLabel?: string
+  descriptionLabel?: string
+}
+
+export interface CheckboxProps {
   label: string | JSX.Element
   afterLabel?: string
   beforeLabel?: string
@@ -15,7 +31,7 @@ interface InputProps {
   id?: string
   name?: string
   checked?: boolean
-  className?: string
+  classNames?: CheckboxClasses
   rippleProps?: RipplesProps
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
   onFocus?(x: React.FocusEvent<HTMLInputElement>): void
@@ -23,7 +39,7 @@ interface InputProps {
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
 }
 
-interface GroupProps {
+export interface CheckboxGroupProps {
   id?: any
   layout?: 'horizontal' | 'vertical'
   error?: any
@@ -34,9 +50,9 @@ interface GroupProps {
   labelOptional?: any
   name?: any
   value?: any
-  className?: string
+  classNames?: CheckboxGroupClasses
   children?: React.ReactNode
-  options: Array<InputProps>
+  options: Array<CheckboxProps>
   defaultValue?: string
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
@@ -52,12 +68,12 @@ function Group({
   beforeLabel,
   labelOptional,
   children,
-  className,
+  classNames,
   name,
   options,
   onChange,
   size = 'medium',
-}: GroupProps) {
+}: CheckboxGroupProps) {
   const parentCallback = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) onChange(e)
   }
@@ -72,14 +88,14 @@ function Group({
       id={id}
       error={error}
       descriptionText={descriptionText}
-      className={className}
+      classNames={classNames?.formLayout}
       size={size}
     >
       <CheckboxContext.Provider
         value={{ parentCallback, name, parentSize: size }}
       >
         {options
-          ? options.map((option: InputProps) => {
+          ? options.map((option: CheckboxProps) => {
               return (
                 <Checkbox
                   id={option.id}
@@ -100,7 +116,7 @@ function Group({
 }
 
 export function Checkbox({
-  className,
+  classNames,
   id,
   label,
   afterLabel,
@@ -119,7 +135,7 @@ export function Checkbox({
   size = 'medium',
   disabled = false,
   ...props
-}: InputProps) {
+}: CheckboxProps) {
   const inputName = name
 
   return (
@@ -142,12 +158,12 @@ export function Checkbox({
         const active = checked ?? undefined
 
         let containerClasses = [
-          CheckboxStyles['sbui-checkbox-container'],
+          CheckboxStyles['checkbox-container'],
+          classNames?.container,
           CheckboxStyles[
-            `sbui-checkbox-container--${parentSize ? parentSize : size}`
+            `checkbox-container-${parentSize ? parentSize : size}`
           ],
         ]
-        if (className) containerClasses.push(className)
 
         const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           // '`onChange` callback for parent component
@@ -160,13 +176,19 @@ export function Checkbox({
           <div className={containerClasses.join(' ')}>
             <Ripples
               {...rippleProps}
-              className={CheckboxStyles['sbui-ripple-button']}
+              className={[
+                CheckboxStyles['ripple-button'],
+                classNames?.rippleButton,
+              ].join(' ')}
             >
               <input
                 id={markupId}
                 name={markupName}
                 type="checkbox"
-                className={CheckboxStyles['sbui-checkbox']}
+                className={[
+                  CheckboxStyles['checkbox'],
+                  classNames?.checkbox,
+                ].join(' ')}
                 onChange={onInputChange}
                 onFocus={onFocus ? (event) => onFocus(event) : undefined}
                 onBlur={onBlur ? (event) => onBlur(event) : undefined}
@@ -176,25 +198,31 @@ export function Checkbox({
                 {...props}
               />
             </Ripples>
-            <div className={CheckboxStyles['sbui-checkbox__label-container']}>
+            <div
+              className={[
+                CheckboxStyles['checkbox-label-container'],
+                classNames?.labelContainer,
+              ].join(' ')}
+            >
               <label
-                className={
-                  CheckboxStyles['sbui-checkbox__label-container__label']
-                }
+                className={[
+                  CheckboxStyles['checkbox-label-container-label'],
+                  classNames?.labelContainerLabel,
+                ].join(' ')}
                 htmlFor={markupId}
               >
                 <span
-                  className={
-                    CheckboxStyles[
-                      'sbui-checkbox__label-container__label__span'
-                    ]
-                  }
+                  className={[
+                    CheckboxStyles['checkbox-label-container-label-span'],
+                    classNames?.labelContainerLabelSpan,
+                  ].join(' ')}
                 >
                   {beforeLabel && (
                     <span
-                      className={
-                        CheckboxStyles['sbui-checkbox__label-text-before']
-                      }
+                      className={[
+                        CheckboxStyles['checkbox-before-label'],
+                        classNames?.beforeLabel,
+                      ].join(' ')}
                     >
                       {beforeLabel}
                     </span>
@@ -202,9 +230,10 @@ export function Checkbox({
                   {label}
                   {afterLabel && (
                     <span
-                      className={
-                        CheckboxStyles['sbui-checkbox__label-text-after']
-                      }
+                      className={[
+                        CheckboxStyles['checkbox-after-label'],
+                        classNames?.afterLabel,
+                      ].join(' ')}
                     >
                       {afterLabel}
                     </span>
@@ -213,9 +242,10 @@ export function Checkbox({
 
                 {description && (
                   <p
-                    className={
-                      CheckboxStyles['sbui-checkbox__label-container__label__p']
-                    }
+                    className={[
+                      CheckboxStyles['checkbox-description-label'],
+                      classNames?.descriptionLabel,
+                    ].join(' ')}
                   >
                     {description}
                   </p>
