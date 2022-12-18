@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSprings, animated } from 'react-spring'
 import { useDrag } from '@use-gesture/react'
 import { clamp } from 'lodash'
@@ -25,14 +25,14 @@ const fn =
   (index: number) =>
     active && index === originalIndex
       ? {
-          y: curIndex * items[curIndex].height + y,
+          y: curIndex * (items[curIndex]?.height ?? 0) + y,
           scale: 1.1,
           zIndex: 1,
           shadow: 15,
           immediate: (key: string) => key === 'y' || key === 'zIndex',
         }
       : {
-          y: order.indexOf(index) * items[index].height,
+          y: order.indexOf(index) * (items[index]?.height ?? 0),
           scale: 1,
           zIndex: 0,
           shadow: 0,
@@ -45,6 +45,7 @@ export interface DraggableListProps {
 }
 
 function DraggableList({ items, onChanged }: DraggableListProps) {
+  const [totalHeight, setTotalHeight] = useState<number>(0)
   const order = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
   const [springs, api] = useSprings(items.length, fn(order.current, items)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
   const bind = useDrag(({ args: [originalIndex], active, movement: [, y] }) => {
@@ -61,8 +62,16 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
       onChanged?.(newOrder.map((index: number) => items[index].id))
     }
   })
+
+  useEffect(() => {
+    let height = 0
+    items.map((value) => {
+      height += value.height
+    })
+    setTotalHeight(height)
+  }, [items])
   return (
-    <div className={styles['root']}>
+    <div className={styles['root']} style={{ height: totalHeight }}>
       {springs.map(({ zIndex, shadow, y, scale }, i) => (
         <animated.div
           {...bind(i)}
