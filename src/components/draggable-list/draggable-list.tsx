@@ -69,6 +69,7 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
     setTotalHeight(height)
 
     orderRef.current = items.map((_, index) => index)
+    api.start(fn(orderRef.current, items))
   }, [items])
 
   return (
