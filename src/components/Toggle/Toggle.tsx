@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
 import ToggleStyles from './toggle.module.scss'
 
-interface Props {
+export interface ToggleClasses {
+  formLayout?: FormLayoutClasses
+}
+
+export interface ToggleProps {
   disabled?: boolean
   id?: string
   layout?: 'horizontal' | 'vertical'
@@ -14,7 +18,7 @@ interface Props {
   beforeLabel?: string
   labelOptional?: string
   onChange?(x: boolean): void
-  className?: any
+  classNames?: ToggleClasses
   defaultChecked?: boolean
   checked?: boolean
   align?: 'right' | 'left'
@@ -34,10 +38,10 @@ function Toggle({
   onChange,
   defaultChecked,
   checked,
-  className,
+  classNames,
   align = 'right',
   size = 'medium',
-}: Props) {
+}: ToggleProps) {
   const [intChecked, setIntChecked] = useState(
     (defaultChecked || checked) ?? false
   )
@@ -63,7 +67,7 @@ function Toggle({
 
   return (
     <FormLayout
-      className={className}
+      classNames={classNames?.formLayout}
       label={label}
       afterLabel={afterLabel}
       beforeLabel={beforeLabel}
