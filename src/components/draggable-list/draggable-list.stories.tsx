@@ -82,8 +82,16 @@ const items: DraggableListItem[] = [
 
 export const Default = (args: any) => {
   return (
-    <div style={{ height: '80vh', width: '80vw' }}>
-      <DraggableList items={items} />
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height: '80vh',
+        width: '80vw',
+      }}
+    >
+      <DraggableList items={items} onChanged={(items) => console.log(items)} />
     </div>
   )
 }

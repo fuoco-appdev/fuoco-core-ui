@@ -26,14 +26,12 @@ const fn =
     active && index === originalIndex
       ? {
           y: curIndex * (items[curIndex]?.height ?? 0) + y,
-          scale: 1.1,
           zIndex: 1,
           shadow: 15,
           immediate: (key: string) => key === 'y' || key === 'zIndex',
         }
       : {
           y: order.indexOf(index) * (items[index]?.height ?? 0),
-          scale: 1,
           zIndex: 0,
           shadow: 0,
           immediate: false,
@@ -46,20 +44,21 @@ export interface DraggableListProps {
 
 function DraggableList({ items, onChanged }: DraggableListProps) {
   const [totalHeight, setTotalHeight] = useState<number>(0)
-  const order = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
-  const [springs, api] = useSprings(items.length, fn(order.current, items)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
+  const [order, setOrder] = useState<number[]>(items.map((_, index) => index))
+  const orderRef = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
+  const [springs, api] = useSprings(items.length, fn(orderRef.current, items)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
   const bind = useDrag(({ args: [originalIndex], active, movement: [, y] }) => {
-    const curIndex = order.current.indexOf(originalIndex)
+    const curIndex = orderRef.current.indexOf(originalIndex)
     const curRow = clamp(
       Math.round((curIndex * 100 + y) / 100),
       0,
       items.length - 1
     )
-    const newOrder = move(order.current, curIndex, curRow)
+    const newOrder = move(orderRef.current, curIndex, curRow)
     api.start(fn(newOrder, items, active, originalIndex, curIndex, y)) // Feed springs new style data, they'll animate the view without causing a single render
     if (!active) {
-      order.current = newOrder
-      onChanged?.(newOrder.map((index: number) => items[index].id))
+      orderRef.current = newOrder
+      setOrder(newOrder)
     }
   })
 
@@ -70,9 +69,13 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
     })
     setTotalHeight(height)
   }, [items])
+
+  useEffect(() => {
+    onChanged?.(order.map((index: number) => items[index].id))
+  }, [order])
   return (
     <div className={styles['root']} style={{ height: totalHeight }}>
-      {springs.map(({ zIndex, shadow, y, scale }, i) => (
+      {springs.map(({ zIndex, shadow, y }, i) => (
         <animated.div
           {...bind(i)}
           key={i}
@@ -83,7 +86,6 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
               (s) => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`
             ),
             y,
-            scale,
           }}
           children={items[i].element}
         />
