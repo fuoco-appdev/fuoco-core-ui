@@ -38,7 +38,7 @@ export interface ListboxProps {
   label?: string
   labelOptional?: string
   layout?: 'horizontal' | 'vertical'
-  onChange?(value: string): void
+  onChange?: (index: number, id: string, value: string) => void
   style?: React.CSSProperties
   reveal?: boolean
   actions?: React.ReactNode
@@ -78,9 +78,12 @@ function Listbox({
 
   const setSelectedItem = (value: string) => {
     const props = options.find((option) => option.value === value)
-    setSelectedProps(props)
+    if (props) {
+      const index = options.indexOf(props)
+      setSelectedProps(props)
 
-    if (onChange) onChange(value)
+      if (onChange) onChange?.(index, props?.id ?? value, value)
+    }
   }
 
   let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
