@@ -20,7 +20,7 @@
   border-radius: $rounded-md;
   display: flex;
   align-items: center;
-  padding: $mp-2 $mp-4;
+  padding: $mp-2 $mp-2;
   z-index: 20;
   background-color: transparent;
   margin-right: $mp-2;
@@ -34,6 +34,10 @@
   border: 0;
 }
 
+.tab-button-with-text {
+  padding: $mp-2 $mp-4;
+}
+
 .tab-button:focus {
   outline: none;
   border: none;
@@ -43,7 +47,6 @@
 .tab-icon {
   display: flex;
   justify-content: center;
-  padding: $mp-2 0;
 }
 
 .tab-icon-space {

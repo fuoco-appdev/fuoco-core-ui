@@ -152,10 +152,15 @@ function Tabs({
           iconClasses.push(TabsStyles['tab-icon-space'])
         }
 
+        const buttonClasses = [TabsStyles['tab-button']]
+        if (item.label) {
+          buttonClasses.push(TabsStyles['tab-button-with-text'])
+        }
+
         return (
           <button
             key={i}
-            className={TabsStyles['tab-button']}
+            className={buttonClasses.join(' ')}
             ref={(el) => (buttonRefs[item.id ?? ''] = el)}
             onPointerEnter={(e) => onEnterTab(e, i)}
             onFocus={(e) => onEnterTab(e, i)}
