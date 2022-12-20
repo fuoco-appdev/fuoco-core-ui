@@ -193,16 +193,16 @@ function Radio({
           RadioStyles[`radio-container-${parentSize ? parentSize : size}`],
         ]
         if (type === 'cards') {
-          classes.concat([
+          classes.push(
             RadioStyles['radio-container-card'],
-            classNames?.containerCard,
-          ])
+            classNames?.containerCard
+          )
         }
         if (type === 'cards' && active) {
-          classes.concat([
+          classes.push(
             RadioStyles['radio-container-card-active'],
-            classNames?.containerCardActive,
-          ])
+            classNames?.containerCardActive
+          )
         }
 
         function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {

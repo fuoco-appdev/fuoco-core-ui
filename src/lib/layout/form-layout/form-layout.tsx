@@ -62,21 +62,18 @@ export function FormLayout({
   }
 
   if (flex) {
-    containerClasses.concat([
-      FormLayoutStyles['formlayout-flex'],
-      classNames?.flex,
-    ])
+    containerClasses.push(FormLayoutStyles['formlayout-flex'], classNames?.flex)
     if (align === 'left') {
-      containerClasses.concat([
+      containerClasses.push(
         FormLayoutStyles['formlayout-flex-left'],
-        classNames?.flexLeft,
-      ])
+        classNames?.flexLeft
+      )
     }
     if (align === 'right') {
-      containerClasses.concat([
+      containerClasses.push(
         FormLayoutStyles['formlayout-flex-right'],
-        classNames?.flexRight,
-      ])
+        classNames?.flexRight
+      )
     }
   }
 

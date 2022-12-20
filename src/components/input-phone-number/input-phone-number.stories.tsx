@@ -19,7 +19,11 @@ export const Default = (args: any) => {
         height: '80vh',
       }}
     >
-      <InputPhoneNumber {...args} parentRef={containerRef} />
+      <InputPhoneNumber
+        {...args}
+        parentRef={containerRef}
+        onChange={(value) => console.log(value)}
+      />
     </div>
   )
 }

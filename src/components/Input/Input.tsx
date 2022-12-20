@@ -92,20 +92,17 @@ function Input({
     classNames?.container,
   ]
   if (error)
-    inputContainerClasses.concat([
-      InputStyles['input-error'],
-      classNames?.error,
-    ])
+    inputContainerClasses.push(InputStyles['input-error'], classNames?.error)
   if (icon)
-    inputContainerClasses.concat([
+    inputContainerClasses.push(
       InputStyles['input-with-icon'],
-      classNames?.withIcon,
-    ])
+      classNames?.withIcon
+    )
   if (borderless)
-    inputContainerClasses.concat([
+    inputContainerClasses.push(
       InputStyles['input-borderless'],
-      classNames?.borderless,
-    ])
+      classNames?.borderless
+    )
 
   function onCopy(value: any) {
     navigator.clipboard.writeText(value).then(

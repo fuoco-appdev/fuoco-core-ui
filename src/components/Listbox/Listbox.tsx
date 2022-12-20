@@ -88,12 +88,12 @@ function Listbox({
 
   let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
   if (error)
-    selectClasses.concat([SelectStyles['listbox-error'], classNames?.error])
+    selectClasses.push(SelectStyles['listbox-error'], classNames?.error)
   if (borderless)
-    selectClasses.concat([
+    selectClasses.push(
       SelectStyles['listbox-borderless'],
-      classNames?.borderless,
-    ])
+      classNames?.borderless
+    )
 
   return (
     <FormLayout

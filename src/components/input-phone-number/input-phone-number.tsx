@@ -213,19 +213,19 @@ function InputPhoneNumber({
       if (inputNumber.trim() === '') return secondBestGuess
 
       const bestGuess: CountryDataProps | undefined = onlyCountries.reduce(
-        (selectedCountry, country) => {
+        (selected, country) => {
           if (startsWith(inputNumber, country.dialCode)) {
-            if (country.dialCode.length > selectedCountry.dialCode.length) {
+            if (country.dialCode.length > selected.dialCode.length) {
               return country
             }
             if (
-              country.dialCode.length === selectedCountry.dialCode.length &&
-              country.priority < selectedCountry.priority
+              country.dialCode.length === selected.dialCode.length &&
+              country.priority < selected.priority
             ) {
               return country
             }
           }
-          return selectedCountry
+          return selected
         },
         {
           ...(selectedCountry ?? {
@@ -258,25 +258,9 @@ function InputPhoneNumber({
   const [hiddenAreaCodesData, setHiddenAreaCodesData] = useState<
     CountryDataProps[]
   >(countryData.hiddenAreaCodes)
-
-  const inputNumber = defaultValue ? defaultValue.replace(/\D/g, '') : ''
-  let countryGuess: CountryDataProps | null = null
-  if (disableInitialCountryGuess) {
-    countryGuess = null
-  } else if (inputNumber.length > 1) {
-    // Country detect by phone
-    countryGuess =
-      guessSelectedCountry(
-        inputNumber.substring(0, 6),
-        country,
-        countryData.onlyCountries,
-        countryData.hiddenAreaCodes
-      ) || null
-  } else if (country) {
-    // Default country
-    countryGuess =
-      countryData.onlyCountries.find((o) => o.iso2 === country) || null
-  }
+  const [countryGuess, setCountryGuess] = useState<CountryDataProps | null>(
+    null
+  )
 
   const formatNumber = (
     text: string,
@@ -355,20 +339,7 @@ function InputPhoneNumber({
     return formattedNumber
   }
 
-  const dialCode =
-    inputNumber.length < 2 &&
-    countryGuess &&
-    !startsWith(inputNumber, countryGuess.dialCode)
-      ? countryGuess.dialCode
-      : ''
-  const [formattedNumber, setFormattedNumber] = useState<string>(
-    inputNumber === '' && countryGuess === null
-      ? ''
-      : formatNumber(
-          (disableCountryCode ? '' : dialCode) + inputNumber,
-          countryGuess!
-        )
-  )
+  const [formattedNumber, setFormattedNumber] = useState<string>('')
   const [highlightCountryIndex, setHighlightCountryIndex] = useState<number>(
     countryData.onlyCountries.findIndex((o) => o === countryGuess)
   )
@@ -376,7 +347,7 @@ function InputPhoneNumber({
     CountryDataProps[]
   >(countryData.preferredCountries)
   const [selectedCountry, setSelectedCountry] =
-    useState<CountryDataProps | null>(countryGuess)
+    useState<CountryDataProps | null>(null)
   const [queryString, setQueryString] = useState<string>('')
   const [freezeSelection, setFreezeSelection] = useState<boolean>(false)
   const [debouncedQueryStingSearcher, setDebouncedQueryStingSearcher] =
@@ -871,8 +842,41 @@ function InputPhoneNumber({
   }, [country])
 
   useEffect(() => {
-    updateFormattedNumber(defaultValue)
+    const inputNumber = defaultValue ? defaultValue.replace(/\D/g, '') : ''
+    let guess: CountryDataProps | null = null
+    if (disableInitialCountryGuess) {
+      guess = null
+    } else if (inputNumber.length > 1) {
+      // Country detect by phone
+      guess =
+        guessSelectedCountry(
+          inputNumber.substring(0, 6),
+          country,
+          countryData.onlyCountries,
+          countryData.hiddenAreaCodes
+        ) || null
+    } else if (country) {
+      // Default country
+      guess = countryData.onlyCountries.find((o) => o.iso2 === country) || null
+    }
+
+    const dialCode =
+      inputNumber.length < 2 &&
+      guess &&
+      !startsWith(inputNumber, guess.dialCode)
+        ? guess.dialCode
+        : ''
+    const number = formatNumber(
+      (disableCountryCode ? '' : dialCode) + inputNumber,
+      guess
+    )
+    setCountryGuess(guess)
+    setFormattedNumber(number)
   }, [])
+
+  useEffect(() => {
+    setSelectedCountry(countryGuess)
+  }, [countryGuess])
 
   const { x } = useSpring({
     from: { x: 0 },
