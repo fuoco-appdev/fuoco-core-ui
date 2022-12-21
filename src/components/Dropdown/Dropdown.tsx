@@ -46,9 +46,15 @@ function Dropdown({
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event: MouseEvent) {
+      const elementRect = containerRef?.current?.getBoundingClientRect()
       if (
-        anchorRef?.current &&
-        !anchorRef?.current.contains(event.target as Node)
+        elementRect &&
+        !(
+          event.clientX >= elementRect.left &&
+          event.clientX <= elementRect.left + elementRect.width &&
+          event.clientY >= elementRect.top &&
+          event.clientY <= elementRect.top + elementRect.height
+        )
       ) {
         onClose?.()
       }
