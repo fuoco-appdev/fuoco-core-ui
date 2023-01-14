@@ -7,8 +7,15 @@ import Ripples, { RipplesProps } from 'react-ripples'
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   block?: boolean
-  className?: any
+  classNames?: {
+    container?: string
+    button?: string
+    leftIconContainer?: string
+    rightIconContainer?: string
+    children?: string
+  }
   children?: React.ReactNode
+  touchScreen?: boolean
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   icon?: React.ReactNode
@@ -16,7 +23,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   loadingCentered?: boolean
   shadow?: boolean
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
+  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'full'
   style?: React.CSSProperties
   type?:
     | 'primary'
@@ -45,10 +52,11 @@ export interface RefHandle {
 function Button(
   {
     block,
-    className,
+    classNames,
     children,
     danger,
     disabled = false,
+    touchScreen = false,
     onClick,
     icon,
     iconRight,
@@ -73,45 +81,59 @@ function Button(
   // styles
   const showIcon = loading || icon
 
-  let classes = [ButtonStyles['sbui-btn']]
-  classes.push(ButtonStyles[`sbui-btn-${type}`])
-  let containerClasses = [ButtonStyles['sbui-btn-ripple']]
-  containerClasses.push(className)
+  let classes = [
+    ButtonStyles['button'],
+    ButtonStyles[`button-${type}`],
+    classNames?.button,
+  ]
+  if (!touchScreen) {
+    classes.push(
+      ButtonStyles['button-desktop'],
+      ButtonStyles[`button-${type}-desktop`]
+    )
+  }
+  let containerClasses = [ButtonStyles['button-ripple'], classNames?.container]
 
   if (block) {
-    containerClasses.push(ButtonStyles['sbui-btn--w-full'])
-    classes.push(ButtonStyles['sbui-btn--w-full'])
+    containerClasses.push(ButtonStyles['button-w-full'])
+    classes.push(ButtonStyles['button-w-full'])
   }
 
   if (danger) {
-    classes.push(ButtonStyles['sbui-btn--danger'])
+    classes.push(ButtonStyles['button-danger'])
   }
 
   if (shadow && type !== 'link' && type !== 'text') {
-    classes.push(ButtonStyles['sbui-btn-container--shadow'])
+    classes.push(ButtonStyles['button-container-shadow'])
   }
 
   if (size) {
-    classes.push(ButtonStyles[`sbui-btn-${size}`])
+    classes.push(ButtonStyles[`button-${size}`])
   }
 
-  const iconLoaderClasses = [ButtonStyles['sbui-btn--anim--spin']]
+  const iconLoaderClasses = [ButtonStyles['button-anim-spin']]
 
   if (loadingCentered) {
-    iconLoaderClasses.push(ButtonStyles[`sbui-btn-loader--center`])
+    iconLoaderClasses.push(ButtonStyles[`button-loader-center`])
   }
   if (loading && loadingCentered) {
-    classes.push(ButtonStyles[`sbui-btn--text-fade-out`])
+    classes.push(ButtonStyles[`button-text-fade-out`])
   }
 
-  classes.push(ButtonStyles[`sbui-btn-text-align-${textAlign}`])
+  classes.push(ButtonStyles[`button-text-align-${textAlign}`])
 
-  const leftIconClasses = [ButtonStyles['icon-container']]
+  const leftIconClasses = [
+    ButtonStyles['icon-container'],
+    classNames?.leftIconContainer,
+  ]
   if (children) {
     leftIconClasses.push(ButtonStyles['left-icon-space'])
   }
 
-  const rightIconClasses = [ButtonStyles['icon-container']]
+  const rightIconClasses = [
+    ButtonStyles['icon-container'],
+    classNames?.rightIconContainer,
+  ]
   if (children) {
     rightIconClasses.push(ButtonStyles['right-icon-space'])
   }
@@ -139,7 +161,11 @@ function Button(
             </IconContext.Provider>
           ) : null)}
         {children && (
-          <span className={ButtonStyles['sbui-btn-children']}>{children}</span>
+          <span
+            className={(ButtonStyles['button-children'], classNames?.children)}
+          >
+            {children}
+          </span>
         )}
         {iconRight && !loading && (
           <IconContext.Provider value={{ contextSize: size }}>

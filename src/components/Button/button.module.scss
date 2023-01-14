@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-btn {
+.button {
   position: relative;
   display: inline-flex;
   font-family: inherit;
@@ -16,9 +16,11 @@
   border-radius: $rounded-base;
   cursor: pointer;
   color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.sbui-btn-ripple {
+.button-ripple {
   display: flex;
   height: inherit;
   width: inherit;
@@ -27,7 +29,7 @@
   border-radius: $rounded-base;
 }
 
-.sbui-btn-children {
+.button-children {
   display: flex;
   flex-direction: row;
   white-space: nowrap;
@@ -35,25 +37,26 @@
   width: inherit;
 }
 
-.sbui-btn:focus {
+.button-desktop:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
-.sbui-btn-container--shadow {
+.button-container-shadow {
   box-shadow: $shadow-2;
 }
 
-.sbui-btn--w-full {
+.button-w-full {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 100%;
 }
 
-.sbui-btn:disabled {
+.button:disabled {
   pointer-events: none;
-  opacity: $opacity-75;
+  opacity: 0.75;
   cursor: not-allowed;
 }
 
@@ -61,78 +64,82 @@
   Button sizes
 */
 
-.sbui-btn-tiny {
+.button-tiny {
   padding: $mp-1-5 $mp-2-5;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
-.sbui-btn-small {
+.button-small {
   padding: $mp-2 $mp-3;
   font-size: $font-size-sm;
   line-height: $font-line-height-xs;
 }
-.sbui-btn-medium {
+.button-medium {
   padding: $mp-2 $mp-4;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
-.sbui-btn-large {
+.button-large {
   padding: $mp-2-5 $mp-4;
   font-size: $font-size-base;
   line-height: $font-line-height-base;
 }
-.sbui-btn-xlarge {
+.button-xlarge {
   padding: $mp-3 $mp-6;
   font-size: $font-size-base;
   line-height: $font-line-height-base;
+}
+.button-full {
+  width: 100%;
+  height: 100%;
 }
 
 /*
   Button varients
 */
-.sbui-btn-primary {
+.button-primary {
   background-color: $brand-500;
   color: $gray-100;
 }
 
-.sbui-btn-primary:hover {
+.button-primary-desktop:hover {
   background-color: $brand-600;
 }
 
-.sbui-btn-default {
+.button-default {
   color: $gray-500;
   background-color: $gray-100;
   border-color: $gray-200;
 }
 
-.sbui-btn-default:hover {
+.button-default-desktop:hover {
   color: $gray-500;
   background-color: $gray-100;
   border-color: $gray-200;
 }
 
-.dark .sbui-btn-default {
+.dark .button-default {
   text-shadow: $shadow-1;
 }
 
-.sbui-btn-secondary {
+.button-secondary {
   color: $gray-100;
   background-color: $gray-600;
 }
 
-.sbui-btn-secondary:hover {
+.button-secondary-desktop:hover {
   background-color: $gray-100;
 
-  & .sbui-btn-children {
+  & .button-children {
     color: $gray-900;
   }
 }
 
-.dark .sbui-btn-secondary {
+.dark .button-secondary {
   text-shadow: $shadow-1;
 }
 
-.sbui-btn-outline {
+.button-outline {
   border-width: 1px;
   color: $gray-100;
   background-color: transparent;
@@ -140,13 +147,13 @@
   border-style: solid;
 }
 
-.sbui-btn-outline:hover {
+.button-outline-desktop:hover {
   background-color: white;
   color: $gray-500;
   border-color: $gray-600;
 }
 
-.sbui-btn-dashed {
+.button-dashed {
   border-width: 1px;
   color: $gray-500;
   background-color: transparent;
@@ -154,54 +161,54 @@
   border-style: dashed;
 }
 
-.sbui-btn-dashed:hover {
+.button-dashed-desktop:hover {
   color: $gray-100;
   border-color: $gray-600;
 }
 
-.sbui-btn-link {
+.button-link {
   background-color: transparent;
   color: $brand-800;
 }
 
-.sbui-btn-link:hover {
+.button-link-desktop:hover {
   background-color: $brand-100;
 }
 
-.sbui-btn-text {
+.button-text {
   color: $gray-100;
   background-color: transparent;
 }
 
-.sbui-btn-text:hover {
+.button-text-desktop:hover {
   background-color: rgba(#fff, 0.15);
 }
 
-.sbui-btn--danger {
+.button-danger {
   border-color: $red-500;
   color: $red-500;
 }
 
-.dark .sbui-btn--danger {
+.dark .button-danger {
   text-shadow: $shadow-1;
 }
 
-.sbui-btn-primary.sbui-btn--danger {
+.button-primary.button-danger {
   background-color: $red-500;
   color: white;
 }
 
-.sbui-btn-primary.sbui-btn--danger:hover {
+.button-primary-desktop.button-danger:hover {
   background-color: $red-600;
   border-color: $red-600;
 }
 
-.sbui-btn-default.sbui-btn--danger,
-.sbui-btn-secondary.sbui-btn--danger,
-.sbui-btn-outline.sbui-btn--danger,
-.sbui-btn-dashed.sbui-btn--danger,
-.sbui-btn-link.sbui-btn--danger,
-.sbui-btn-text.sbui-btn--danger {
+.button-default.button-danger,
+.button-secondary.button-danger,
+.button-outline.button-danger,
+.button-dashed.button-danger,
+.button-link.button-danger,
+.button-text.button-danger {
   & :hover {
     background-color: $red-600;
     color: white;
@@ -215,7 +222,7 @@
 /* 
   Animation for icon
 */
-.sbui-btn--anim--spin {
+.button-anim-spin {
   stroke: currentColor;
   animation-name: spin;
   animation-duration: 1500ms;
@@ -237,7 +244,7 @@
   }
 }
 
-.sbui-btn-loader--center {
+.button-loader-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -249,19 +256,19 @@
   height: inherit;
 }
 
-.sbui-btn--text-fade-out span {
+.button-text-fade-out span {
   opacity: 0%;
 }
 
-.sbui-btn--text-align-left {
+.button-text-align-left {
   justify-content: flex-start;
 }
 
-.sbui-btn--text-align-right {
+.button-text-align-right {
   justify-content: flex-end;
 }
 
-.sbui-btn-text-align-center {
+.button-text-align-center {
   width: inherit;
 }
 

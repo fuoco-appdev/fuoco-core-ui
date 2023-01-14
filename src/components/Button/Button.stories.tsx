@@ -158,6 +158,72 @@ export const allButtons = (args: any) => (
           Button text
         </Button>
       </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%',
+          height: '56px',
+        }}
+      >
+        <Button {...args} size="full" block={true} touchScreen={true}>
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="secondary"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="default"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="link"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="text"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="dashed"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+        <Button
+          {...args}
+          size="full"
+          type="outline"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
+      </div>
     </div>
   </>
 )
