@@ -64,25 +64,32 @@ function Accordion({
 
 interface ItemProps {
   children?: React.ReactNode
-  className?: string
+  classNames?: {
+    panel?: string
+    button?: string
+    topBar?: string
+    topBarLabel?: string
+  }
   label: string
   id?: string | number
 }
 
-export function Item({ children, className, label, id }: ItemProps) {
+export function Item({ children, classNames, label, id }: ItemProps) {
   const { defaultActiveId, onChange, bordered } = useContext(AccordionContext)
   const isDefaultActive = id ? defaultActiveId?.includes(id) : false
   const [disclosureOpen, setDisclosureOpen] = useState<boolean>(isDefaultActive)
 
-  let panelClasses = [AccordionStyles['accordion-item-panel']]
+  let panelClasses = [
+    AccordionStyles['accordion-item-panel'],
+    classNames?.panel,
+  ]
 
-  let buttonClasses = [AccordionStyles['accordion-item-button']]
+  let buttonClasses = [
+    AccordionStyles['accordion-item-button'],
+    classNames?.button,
+  ]
   if (bordered) {
     buttonClasses.push(AccordionStyles['accordion-item-bordered'])
-  }
-
-  if (className) {
-    buttonClasses.push(className)
   }
 
   useEffect(() => {
@@ -112,10 +119,18 @@ export function Item({ children, className, label, id }: ItemProps) {
     <Disclosure defaultOpen={isDefaultActive}>
       {({ open }) => (
         <>
-          <div className={AccordionStyles['accordion-top-bar']}>
+          <div
+            className={[
+              AccordionStyles['accordion-top-bar'],
+              classNames?.topBar,
+            ].join(' ')}
+          >
             <Typography.Text
               align={'center'}
-              className={AccordionStyles['accordion-top-bar-label']}
+              className={[
+                AccordionStyles['accordion-top-bar-label'],
+                classNames?.topBarLabel,
+              ].join(' ')}
             >
               {label}
             </Typography.Text>
