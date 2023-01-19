@@ -30,6 +30,28 @@ export const Default = (args: any) => {
 
 export const DefaultWithError = (args: any) => <InputPhoneNumber {...args} />
 
+export const TouchScreen = (args: any) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexDirection: 'column',
+        height: '80vh',
+      }}
+    >
+      <InputPhoneNumber
+        {...args}
+        touchScreen={true}
+        parentRef={containerRef}
+        onChange={(value) => console.log(value)}
+      />
+    </div>
+  )
+}
+
 Default.args = {
   label: 'Phone number',
   layout: 'vertical',

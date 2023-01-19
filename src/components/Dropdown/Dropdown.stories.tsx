@@ -31,14 +31,29 @@ export const Default = (args: any) => {
           setIsOpen(false)
         }}
       >
-        <Dropdown.Item onClick={() => console.log('clicked')}>
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
           <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
         </Dropdown.Item>
-        <Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
           <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
         </Dropdown.Item>
         <Divider light />
-        <Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
           <Dropdown.Icon>
             <IconLogIn size="tiny" />
           </Dropdown.Icon>
@@ -101,6 +116,60 @@ export const Bottom = (args: any) => {
           </Dropdown.Item>
         </Dropdown>
       </div>
+    </div>
+  )
+}
+
+export const TouchScreen = (args: any) => {
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  return (
+    <div style={{ position: 'relative' }}>
+      <Button
+        ref={buttonRef}
+        as="span"
+        type="outline"
+        iconRight={<IconChevronDown />}
+        onClick={(e) => setIsOpen(true)}
+      >
+        Click for dropdown
+      </Button>
+      <Dropdown
+        touchScreen={true}
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false)
+        }}
+      >
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
+          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
+          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+        </Dropdown.Item>
+        <Divider light />
+        <Dropdown.Item
+          onClick={() => {
+            setIsOpen(false)
+            console.log('clicked')
+          }}
+        >
+          <Dropdown.Icon>
+            <IconLogIn size="tiny" />
+          </Dropdown.Icon>
+          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+        </Dropdown.Item>
+      </Dropdown>
     </div>
   )
 }

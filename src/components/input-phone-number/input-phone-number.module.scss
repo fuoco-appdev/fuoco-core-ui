@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-inputphonenumber-container {
+.container {
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -13,14 +13,14 @@
   padding-right: $mp-3;
 }
 
-.sbui-inputphonenumber-container:hover {
+.container:hover {
   border-color: $brand-200;
 }
 
-.sbui-inputphonenumber-button {
+.button {
 }
 
-.sbui-inputphonenumber {
+.inputphonenumber {
   border: 0;
   padding: $mp-3 $mp-2;
   width: 100%;
@@ -35,7 +35,7 @@
   line-height: 1.25rem;
 }
 
-.sbui-inputphonenumber-dropdown {
+.dropdown {
   height: inherit;
   width: inherit;
   border-radius: $rounded-base;
@@ -50,21 +50,26 @@
   color: $gray-600;
 }
 
-.sbui-inputphonenumber-dropdown li span {
+.dropdown li span {
   font-family: $font-family !important;
 }
 
-.sbui-inputphonenumber-search-container {
-  position: relative;
+.search-root {
+  width: 100%;
+  padding-left: $mp-4;
+  padding-right: $mp-4;
+  padding-bottom: $mp-3;
+  z-index: 1;
+}
+
+.search-container {
   display: flex;
-  margin-left: $mp-3;
-  margin-right: $mp-3;
-  margin-bottom: $mp-2;
   padding: 0 $mp-2;
   border-width: 1px;
   border-style: solid;
   border-radius: $rounded-full;
   border-color: $gray-100;
+  background-color: white;
 
   & :hover {
     border-color: $gray-100;
@@ -75,7 +80,7 @@
   }
 }
 
-.sbui-inputphonenumber-search {
+.search {
   padding: $mp-1 $mp-2;
   width: 100%;
   font-size: $font-size-sm;
@@ -91,45 +96,48 @@
   border-style: none;
 }
 
-.inputphonenumber-search-icon {
+.search-icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.sbui-inputphonenumber-search:focus {
+.search:focus {
   border-style: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
-.sbui-inputphonenumber-search--with-icon {
+.search--with-icon {
   padding: $mp-0-5;
   color: $gray-600;
 }
 
-.sbui-inputphonenumber::-webkit-inner-spin-button,
-.sbui-inputphonenumber::-webkit-outer-spin-button {
+.dropdown-list {
+}
+
+.inputphonenumber::-webkit-inner-spin-button,
+.inputphonenumber::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.sbui-inputphonenumber:focus {
+.inputphonenumber:focus {
   box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
   outline: 0;
 }
 
-.sbui-inputphonenumber--error {
+.-error {
   color: $red-500;
   border-color: $red-500;
 }
 
-.sbui-inputphonenumber--borderless {
+.-borderless {
   border-color: transparent;
   box-shadow: none;
 }
 
-.sbui-inputphonenumber-actions-container {
+.actions-container {
   display: flex;
   align-items: center;
   top: 0px;
@@ -139,7 +147,7 @@
   padding-right: $mp-1;
 }
 
-.sbui-flag {
+.flag {
   width: 25px;
   height: 20px;
   margin-bottom: 4px;
@@ -880,8 +888,8 @@
   visibility: hidden;
 }
 
-#sbui-dropdown-button {
+#dropdown-button {
 }
 
-#sbui-basic-menu {
+#basic-menu {
 }

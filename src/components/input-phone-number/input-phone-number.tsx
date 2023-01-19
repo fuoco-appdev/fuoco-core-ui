@@ -13,11 +13,13 @@ import { IconSearch } from '../icon/icons/icon-search'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
+import { Typography } from '../typography'
 
 export interface Props {
   id?: string
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
+  touchScreen?: boolean
   error?: string
   label?: string
   afterLabel?: string
@@ -35,7 +37,6 @@ export interface Props {
   excludeCountries?: string[]
   enableAreaCodes?: string[]
   enableTerritories?: boolean
-  enableSearch?: boolean
   regions?: string[]
   preferredCountries?: string[]
   preserveOrder?: string[]
@@ -109,6 +110,7 @@ function InputPhoneNumber({
   id,
   parentRef,
   className,
+  touchScreen = false,
   error,
   label,
   afterLabel,
@@ -123,7 +125,6 @@ function InputPhoneNumber({
   country = '',
   enableAreaCodes = [],
   enableTerritories = false,
-  enableSearch = true,
   regions = [],
   onlyCountries = [],
   excludeCountries = [],
@@ -145,7 +146,7 @@ function InputPhoneNumber({
   jumpCursorToEnd = true,
   defaultPlaceholder = '1 (702) 123-4567',
   searchNotFound = 'No entries to show',
-  searchPlaceholder = 'search',
+  searchPlaceholder = 'Search',
   autocompleteSearch = false,
   classes,
   inputProps,
@@ -593,7 +594,7 @@ function InputPhoneNumber({
 
     let countryDropdownList = searchedCountries.map((country, index) => {
       const inputFlagClasses = [
-        InputPhoneNumberStyles['sbui-flag'],
+        InputPhoneNumberStyles['flag'],
         InputPhoneNumberStyles[country?.iso2],
       ].join(' ')
       return (
@@ -620,27 +621,19 @@ function InputPhoneNumber({
     const dashedLi = <Divider light />
     // let's insert a dashed line in between preffered countries and the rest
     preferredCountriesData.length > 0 &&
-      (!enableSearch || (enableSearch && !searchValue.trim())) &&
+      !searchValue.trim() &&
       countryDropdownList.splice(preferredCountriesData.length, 0, dashedLi)
 
     return (
       <div>
-        {enableSearch && (
+        <div className={InputPhoneNumberStyles['search-root']}>
           <div
             key={'flag-search'}
-            className={
-              InputPhoneNumberStyles['sbui-inputphonenumber-search-container']
-            }
+            className={InputPhoneNumberStyles['search-container']}
           >
-            <div
-              className={InputPhoneNumberStyles['inputphonenumber-search-icon']}
-            >
+            <div className={InputPhoneNumberStyles['search-icon']}>
               <IconSearch
-                className={
-                  InputPhoneNumberStyles[
-                    'sbui-inputphonenumber-search--with-icon'
-                  ]
-                }
+                className={InputPhoneNumberStyles['search--with-icon']}
               />
             </div>
             <input
@@ -651,19 +644,21 @@ function InputPhoneNumber({
               onChange={handleSearchChange}
               placeholder={searchPlaceholder}
               value={searchValue}
-              className={[
-                InputPhoneNumberStyles['sbui-inputphonenumber-search'],
-              ].join(' ')}
+              className={[InputPhoneNumberStyles['search']].join(' ')}
             />
           </div>
-        )}
-        {countryDropdownList.length > 0 ? (
-          countryDropdownList
-        ) : (
-          <Dropdown.Item>
-            <span>{searchNotFound}</span>
-          </Dropdown.Item>
-        )}
+        </div>
+        <div className={InputPhoneNumberStyles['dropdown-list']}>
+          {countryDropdownList.length > 0 ? (
+            countryDropdownList
+          ) : (
+            <Dropdown.Item>
+              <span className={InputPhoneNumberStyles['country-name']}>
+                {searchNotFound}
+              </span>
+            </Dropdown.Item>
+          )}
+        </div>
       </div>
     )
   }
@@ -706,9 +701,7 @@ function InputPhoneNumber({
     let newScrollTop = elementTop - containerTop + container.scrollTop
     const middleOffset = containerHeight / 2 - elementHeight / 2
 
-    if (
-      enableSearch ? elementTop < containerTop + 32 : elementTop < containerTop
-    ) {
+    if (elementTop < containerTop + 32) {
       // scroll up
       if (middle) {
         newScrollTop -= middleOffset
@@ -770,6 +763,8 @@ function InputPhoneNumber({
       e,
       formattedNumber
     )
+
+    numberInputRef.current?.focus()
   }
 
   const getSearchFilteredCountries = () => {
@@ -781,7 +776,7 @@ function InputPhoneNumber({
       .trim()
       .toLowerCase()
       .replace('+', '')
-    if (enableSearch && sanitizedSearchValue) {
+    if (sanitizedSearchValue) {
       // [...new Set()] to get rid of duplicates
       // firstly search by iso2 code
       if (/^\d+$/.test(sanitizedSearchValue)) {
@@ -894,16 +889,11 @@ function InputPhoneNumber({
 
   interpolation.push(0)
 
-  const classesContainer: string[] = [
-    InputPhoneNumberStyles['sbui-inputphonenumber-container'],
-  ]
-  if (error)
-    classesContainer.push(
-      InputPhoneNumberStyles['sbui-inputphonenumber--error']
-    )
+  const classesContainer: string[] = [InputPhoneNumberStyles['container']]
+  if (error) classesContainer.push(InputPhoneNumberStyles['-error'])
 
   const inputFlagClasses = [
-    InputPhoneNumberStyles['sbui-flag'],
+    InputPhoneNumberStyles['flag'],
     InputPhoneNumberStyles[selectedCountry?.iso2],
   ].join(' ')
   return (
@@ -932,7 +922,7 @@ function InputPhoneNumber({
         >
           <Button
             tabIndex={-1}
-            className={InputPhoneNumberStyles['sbui-inputphonenumber-button']}
+            className={InputPhoneNumberStyles['button']}
             htmlType={'button'}
             size={'tiny'}
             type={'text'}
@@ -943,6 +933,7 @@ function InputPhoneNumber({
           />
           <Dropdown
             className={classes?.dropdown}
+            touchScreen={touchScreen}
             parentRef={parentRef}
             anchorRef={inputRef}
             align={DropdownAlignment.Left}
@@ -955,7 +946,7 @@ function InputPhoneNumber({
             {getCountryDropdownList()}
           </Dropdown>
           <input
-            className={InputPhoneNumberStyles['sbui-inputphonenumber']}
+            className={InputPhoneNumberStyles['inputphonenumber']}
             style={inputStyle}
             onChange={handleInput}
             onFocus={handleInputFocus}
@@ -967,13 +958,7 @@ function InputPhoneNumber({
             ref={numberInputRef}
           />
           {error ? (
-            <div
-              className={
-                InputPhoneNumberStyles[
-                  'sbui-inputphonenumber-actions-container'
-                ]
-              }
-            >
+            <div className={InputPhoneNumberStyles['actions-container']}>
               {error && <InputErrorIcon />}
             </div>
           ) : null}

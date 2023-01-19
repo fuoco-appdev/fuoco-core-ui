@@ -31,6 +31,7 @@ export interface ListboxProps {
     chevronContainer?: string
     chevron?: string
   }
+  touchScreen?: boolean
   descriptionText?: string
   error?: string
   icon?: any
@@ -53,6 +54,7 @@ function Listbox({
   defaultIndex = 0,
   options,
   classNames,
+  touchScreen = false,
   descriptionText,
   error,
   icon,
@@ -199,6 +201,7 @@ function Listbox({
                     style={{
                       width: anchorRef?.current?.getClientRects()[0].width,
                     }}
+                    touchScreen={touchScreen}
                     onOpen={() => {
                       onFocus?.()
                       for (const key in childRefs) {

@@ -74,6 +74,23 @@ export const DefaultCoordinates = (args: any) => {
 
 export const DefaultWithError = (args: any) => <InputGeocoding {...args} />
 
+export const TouchScreen = (args: any) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexDirection: 'column',
+        height: '80vh',
+      }}
+    >
+      <InputGeocoding {...args} parentRef={containerRef} touchScreen={true} />
+    </div>
+  )
+}
+
 Default.args = {
   mapboxAccessToken:
     'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
@@ -99,7 +116,18 @@ DefaultCoordinates.args = {
   onLocationChanged: (value: string, feature: any) => console.log(feature),
 }
 
+TouchScreen.args = {
+  mapboxAccessToken:
+    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
+  label: 'Location',
+  layout: 'vertical',
+  defaultCoordinates: [-74.587974, 46.132518],
+  onLocationChanged: (value: string, feature: any) => console.log(feature),
+}
+
 DefaultWithError.args = {
+  mapboxAccessToken:
+    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
   label: 'Location',
   layout: 'vertical',
   error: 'Not a valid location',

@@ -7,12 +7,18 @@ import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
 import InputIconContainer from '../../lib/layout/input-icon-container'
+import { IconSearch } from '../icon'
 
-export interface Props {
-  id?: string
+export interface InputGeocodingProps {
   mapboxAccessToken: string
+  id?: string
+  touchScreen?: boolean
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
+  strings?: {
+    searchNotFound: string
+    searchPlaceholder: string
+  }
   icon?: JSX.Element
   afterLabel?: string
   beforeLabel?: string
@@ -58,10 +64,15 @@ export interface Props {
 
 function InputGeocoding({
   id,
+  touchScreen = false,
   mapboxAccessToken,
   parentRef,
   icon,
   className,
+  strings = {
+    searchNotFound: 'No entries to show',
+    searchPlaceholder: 'Search',
+  },
   error,
   label,
   afterLabel,
@@ -90,7 +101,7 @@ function InputGeocoding({
   onKeyDown,
   onEnterKeyPress,
   isValid,
-}: Props) {
+}: InputGeocodingProps) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const inputRef = useRef<HTMLInputElement | null>(null)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
@@ -187,11 +198,8 @@ function InputGeocoding({
 
   interpolation.push(0)
 
-  const classesContainer: string[] = [
-    InputGeocodingStyles['sbui-inputgeocoding-container'],
-  ]
-  if (error)
-    classesContainer.push(InputGeocodingStyles['sbui-inputgeocoding--error'])
+  const classesContainer: string[] = [InputGeocodingStyles['container']]
+  if (error) classesContainer.push(InputGeocodingStyles['error'])
 
   return (
     <animated.div
@@ -224,9 +232,15 @@ function InputGeocoding({
           )}
           <input
             {...inputProps}
-            className={InputGeocodingStyles['sbui-inputgeocoding']}
+            className={InputGeocodingStyles['inputgeocoding']}
             style={inputStyle}
-            onChange={handleChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (touchScreen) {
+                return
+              }
+
+              handleChange(event)
+            }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onFocus={onFocus}
@@ -234,18 +248,15 @@ function InputGeocoding({
             value={value}
             placeholder={placeholder}
             disabled={disabled}
-          />
-          <div
-            className={
-              InputGeocodingStyles['sbui-inputgeocoding-actions-container']
-            }
-          ></div>
-          {error ? (
-            <div
-              className={
-                InputGeocodingStyles['sbui-inputgeocoding-actions-container']
+            onClick={() => {
+              if (touchScreen) {
+                setShowDropdown(true)
               }
-            >
+            }}
+          />
+          <div className={InputGeocodingStyles['actions-container']}></div>
+          {error ? (
+            <div className={InputGeocodingStyles['actions-container']}>
               {error && <InputErrorIcon />}
             </div>
           ) : null}
@@ -253,6 +264,7 @@ function InputGeocoding({
       </FormLayout>
       <Dropdown
         className={classes?.dropdown}
+        touchScreen={touchScreen}
         parentRef={parentRef}
         anchorRef={inputRef}
         align={DropdownAlignment.Left}
@@ -262,21 +274,58 @@ function InputGeocoding({
           setShowDropdown(false)
         }}
       >
-        {features?.map((feature, index) => {
-          return (
-            <Dropdown.Item
-              onClick={(e) => handleFeatureItemClick(feature, e)}
-              ref={(el: HTMLLIElement) =>
-                (dropdownRefs[`feature_${index}`] = el)
-              }
-              key={`feature_${index}`}
+        {touchScreen && (
+          <div className={InputGeocodingStyles['search-root']}>
+            <div
+              key={'flag-search'}
+              className={InputGeocodingStyles['search-container']}
             >
-              <span className={InputGeocodingStyles['place-name']}>
-                {feature['place_name']}
-              </span>
-            </Dropdown.Item>
-          )
-        })}
+              <div className={InputGeocodingStyles['search-icon']}>
+                <IconSearch
+                  className={InputGeocodingStyles['search--with-icon']}
+                />
+              </div>
+              <input
+                autoFocus={true}
+                disabled={disabled}
+                id={id}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  if (!touchScreen) {
+                    return
+                  }
+
+                  handleChange(event)
+                }}
+                placeholder={strings?.searchPlaceholder}
+                value={value}
+                className={[InputGeocodingStyles['search']].join(' ')}
+              />
+            </div>
+          </div>
+        )}
+        {features.length > 0
+          ? features?.map((feature, index) => {
+              return (
+                <Dropdown.Item
+                  onClick={(e) => handleFeatureItemClick(feature, e)}
+                  ref={(el: HTMLLIElement) =>
+                    (dropdownRefs[`feature_${index}`] = el)
+                  }
+                  key={`feature_${index}`}
+                >
+                  <span className={InputGeocodingStyles['place-name']}>
+                    {feature['place_name']}
+                  </span>
+                </Dropdown.Item>
+              )
+            })
+          : value.length > 0 && (
+              <Dropdown.Item>
+                <span className={InputGeocodingStyles['place-name']}>
+                  {strings?.searchNotFound}
+                </span>
+              </Dropdown.Item>
+            )}
       </Dropdown>
     </animated.div>
   )

@@ -32,7 +32,9 @@ export const Default = (args: any) => {
         label="Default listbox"
         defaultIndex={0}
         options={options}
-        onChange={(value: string) => console.log(value)}
+        onChange={(index: number, id: string, value: string) =>
+          console.log(value)
+        }
       />
     </div>
   )
@@ -131,7 +133,9 @@ export const People = (args: any) => {
       descriptionText="Choose a person for this role"
       defaultIndex={0}
       options={options}
-      onChange={(value: string) => console.log(value)}
+      onChange={(index: number, id: string, value: string) =>
+        console.log(value)
+      }
     />
   )
 }
@@ -151,7 +155,9 @@ export const WithIcon = (args: any) => {
       label="Language"
       layout="vertical"
       icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
-      onChange={(value: string) => console.log(value)}
+      onChange={(index: number, id: string, value: string) =>
+        console.log(value)
+      }
       onMouseEnter={() => setIsGlobeIconLit(true)}
       onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
         if (document.activeElement !== e.currentTarget) {
@@ -233,8 +239,36 @@ export const ErrorState = (args: any) => {
       descriptionText="Choose a person for this role"
       error="I am an error"
       options={options}
-      onChange={(value: string) => console.log(value)}
+      onChange={(index: number, id: string, value: string) =>
+        console.log(value)
+      }
     />
+  )
+}
+
+export const TouchScreen = (args: any) => {
+  const options: OptionProps[] = []
+  for (const option of defaultOptions) {
+    options.push({
+      id: option.label,
+      value: option.value,
+      children: () => (
+        <span style={{ fontSize: '0.875rem' }}>{option.label}</span>
+      ),
+    })
+  }
+  return (
+    <div style={{ height: '80vh' }}>
+      <Listbox
+        label="Default listbox"
+        touchScreen={true}
+        defaultIndex={0}
+        options={options}
+        onChange={(index: number, id: string, value: string) =>
+          console.log(value)
+        }
+      />
+    </div>
   )
 }
 
