@@ -213,7 +213,7 @@ function Listbox({
                     onClose={() => {
                       onBlur?.()
                     }}
-                    align={DropdownAlignment.Right}
+                    align={DropdownAlignment.Left}
                     open={open}
                     anchorRef={anchorRef}
                   >

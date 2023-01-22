@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 // @ts-ignore
 import InputGeocodingStyles from './input-geocoding.module.scss'
@@ -151,7 +151,7 @@ function InputGeocoding({
     return () => clearTimeout(timeout)
   }, [value])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateLocationAsync = new Promise<void>(async (resolve, reject) => {
       let selectedLongitude = 0
       let selectedLatitude = 0
