@@ -2,7 +2,7 @@ import React from 'react'
 // @ts-ignore
 import CardStyles from './card.module.scss'
 
-interface CardProps {
+export interface CardProps {
   ref?: React.RefObject<HTMLDivElement>
   key?: React.Key
   children?: React.ReactNode
