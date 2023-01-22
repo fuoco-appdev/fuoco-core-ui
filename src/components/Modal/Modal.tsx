@@ -14,6 +14,8 @@ export interface ModalProps {
     modalFlexContainer?: string
     modal?: string
     modalContent?: string
+    modalTitle?: string
+    modalDescription?: string
     modalCloseContainer?: string
     modalCloseButton?: string
     modalFooter?: string
@@ -23,6 +25,7 @@ export interface ModalProps {
   children?: React.ReactNode
   customFooter?: React.ReactNode
   closable?: boolean
+  description?: string
   hideFooter?: boolean
   alignFooter?: 'right' | 'left'
   layout?: 'horizontal' | 'vertical'
@@ -34,6 +37,7 @@ export interface ModalProps {
   confirmText?: string
   showIcon?: boolean
   footerBackground?: boolean
+  title?: string
   variant?: 'danger' | 'warning' | 'success'
   visible: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large'
@@ -51,6 +55,7 @@ const Modal = ({
   children,
   customFooter = undefined,
   closable,
+  description,
   hideFooter = false,
   alignFooter = 'left',
   layout = 'horizontal',
@@ -60,6 +65,7 @@ const Modal = ({
   onCancel = () => {},
   confirmText = 'Confirm',
   showIcon = false,
+  title,
   footerBackground,
   icon,
   variant = 'success',
@@ -217,7 +223,37 @@ const Modal = ({
                               ].join(' ')}
                               style={contentStyle}
                             >
-                              {children}
+                              {title || description || icon ? (
+                                <div className={ModalStyles['modal-text']}>
+                                  {icon ? icon : null}
+                                  <span>
+                                    {title && (
+                                      <Typography.Title
+                                        className={[
+                                          ModalStyles['modal-title'],
+                                          classNames?.modalTitle,
+                                        ].join(' ')}
+                                        level={4}
+                                      >
+                                        {title}
+                                      </Typography.Title>
+                                    )}
+                                    {description && (
+                                      <Typography.Text
+                                        className={[
+                                          ModalStyles['modal-description'],
+                                          classNames?.modalDescription,
+                                        ].join(' ')}
+                                      >
+                                        {description}
+                                      </Typography.Text>
+                                    )}
+                                  </span>
+                                  {children}
+                                </div>
+                              ) : (
+                                children
+                              )}
                             </div>
                             {!footerBackground && !hideFooter && footerContent}
                             {!hideFooter && footerBackground && (

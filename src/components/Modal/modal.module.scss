@@ -92,6 +92,21 @@
 .modal-large {
 }
 
+.modal-text {
+  padding: $mp-4;
+  background-color: #fff;
+}
+
+.modal-title {
+  padding-bottom: $mp-4;
+  font-weight: $font-weight-bold;
+  color: $gray-800;
+}
+
+.modal-description {
+  color: $gray-800;
+}
+
 .modal-footer {
   justify-content: flex-end;
 }
