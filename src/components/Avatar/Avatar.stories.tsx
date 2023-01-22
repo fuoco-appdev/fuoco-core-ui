@@ -48,6 +48,23 @@ export const Edit = (args: any) => {
   )
 }
 
+export const TouchScreen = (args: any) => {
+  const [imageURL, setImageURL] = useState<string | undefined>()
+  return (
+    <>
+      <Avatar
+        {...args}
+        onChange={(index: number, blob: Blob) => {
+          console.log(blob)
+          setImageURL(URL.createObjectURL(blob))
+        }}
+        src={imageURL}
+        touchScreen={true}
+      />
+    </>
+  )
+}
+
 Image.args = {
   src: 'https://via.placeholder.com/150',
 }
@@ -61,6 +78,11 @@ Icon.args = {
 }
 
 Edit.args = {
+  AvatarIcon: IconAirplay,
+  editMode: true,
+}
+
+TouchScreen.args = {
   AvatarIcon: IconAirplay,
   editMode: true,
 }

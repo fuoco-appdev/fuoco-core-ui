@@ -12,14 +12,11 @@
 
   & .edit-image-button {
     position: absolute;
-    border-radius: $rounded-full;
-    background-color: $gray-500;
     bottom: 0;
     right: 0;
     height: 28px;
     width: 28px;
-    cursor: pointer;
-    box-shadow: $shadow-1;
+    -webkit-tap-highlight-color: transparent;
 
     & .edit-image-button-ripple {
       border-radius: $rounded-full;
@@ -28,6 +25,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      box-shadow: $shadow-1;
+      cursor: pointer;
+
+      & .edit-image-button {
+        background-color: $gray-500;
+      }
     }
   }
 }

@@ -2,18 +2,28 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-card {
+.card {
   display: flex;
   background-color: $gray-100;
   border-radius: $rounded-md;
-  box-shadow: $shadow-6;
+  box-shadow: $shadow-2;
   width: fit-content;
+  transition: all $duration-expand-md;
+  transition-timing-function: $transition-standard-easing;
 }
 
-.sbui-card-head {
+.card-hoverable:hover {
+  box-shadow: $shadow-6;
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-head {
   justify-content: space-between;
 }
 
-.sbui-card-content {
+.card-content {
   padding-bottom: $mp-2;
 }

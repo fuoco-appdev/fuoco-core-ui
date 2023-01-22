@@ -10,7 +10,7 @@ export default {
 }
 
 export const Default = (args: any) => (
-  <Card {...args}>
+  <Card {...args} style={{ width: '10vw', height: '10vh' }}>
     <Typography.Title level={5} style={{ color: 'black' }}>
       Card content
     </Typography.Title>
@@ -23,13 +23,26 @@ export const Default = (args: any) => (
   </Card>
 )
 
-export const withHover = (args: any) => <Card {...args}></Card>
+export const WithHover = (args: any) => (
+  <Card
+    {...args}
+    style={{ width: '10vw', height: '10vh' }}
+    hoverable={true}
+  ></Card>
+)
 
-Default.args = {
-  title: 'I am a title',
-  titleExtra: <Typography.Link>Learn more</Typography.Link>,
-}
+export const Clickable = (args: any) => (
+  <Card
+    {...args}
+    style={{ width: '10vw', height: '10vh' }}
+    hoverable={true}
+    clickable={true}
+    onClick={() => console.log('click')}
+  ></Card>
+)
 
-withHover.args = {
-  hoverable: true,
-}
+Default.args = {}
+
+WithHover.args = {}
+
+Clickable.args = {}

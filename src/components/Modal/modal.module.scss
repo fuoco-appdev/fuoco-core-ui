@@ -1,11 +1,8 @@
-/* 
- Modal animations imported first as so placement styles are not affected.
-*/
 @import '../../themes/global';
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-modal-flex-container {
+.modal-flex-container {
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -16,14 +13,14 @@
   text-align: center;
 }
 
-.sbui-modal-overlay-container {
+.modal-overlay-container {
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
 }
 
-.sbui-modal-overlay {
+.modal-overlay {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -36,69 +33,78 @@
   background-color: rgba(#000, 0.35);
 }
 
-.sbui-modal-div-trick {
+.modal-div-trick {
   display: none;
 }
 
-.sbui-modal {
+.modal-container {
+}
+
+.modal {
+  position: relative;
   display: inline-block;
-  background-color: white;
-  border-color: $gray-400;
-  border-top: $rounded-lg;
-  border-style: solid;
-  border-width: 1px;
+  border-radius: $rounded-base;
+  border: 0;
   text-align: left;
   overflow: hidden;
   box-shadow: $shadow-6;
   vertical-align: middle;
+  z-index: 24;
 }
 
-.sbui-footer-container {
+.modal-background {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: $rounded-base;
+}
+
+.modal-content {
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 56px;
+  background-color: $brand-900;
+}
+
+.footer-button-container {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  padding: 8px;
+  gap: $mp-2;
+  padding: $mp-2;
 }
 
-.sbui-modal--tiny {
+.modal-tiny {
 }
 
-.sbui-modal--small {
+.modal-small {
 }
 
-.sbui-modal--medium {
+.modal-medium {
 }
 
-.sbui-modal--large {
+.modal-large {
 }
 
-.sbui-modal-content {
-  padding: 28px $mp-6;
-}
-
-.sbui-modal-title {
-  padding-bottom: $mp-4;
-  font-weight: $font-weight-bold;
-  color: $gray-800;
-}
-
-.sbui-modal-description {
-  color: $gray-800;
-}
-
-.sbui-modal-footer {
+.modal-footer {
   justify-content: flex-end;
 }
 
-.sbui-footer-cancel-text {
+.footer-cancel-text {
   color: $gray-800;
 }
 
-.sbui-modal-footer--with-bg {
+.modal-footer-with-bg {
   justify-content: flex-end;
 }
 
-.sbui-modal-icon-container {
+.modal-icon-container {
   margin-left: auto;
   margin-right: auto;
   flex-shrink: 0;
@@ -110,33 +116,33 @@
   border-radius: $rounded-full;
 }
 
-.sbui-modal-icon-container--danger {
+.modal-icon-container-danger {
   color: $red-600;
 }
 
-.sbui-modal-icon-container--warning {
+.modal-icon-container-warning {
   color: $yellow-600;
 }
 
-.sbui-modal-icon-container--success {
+.modal-icon-container-success {
   color: $brand-100;
   background-color: $brand-100;
 }
 
-.sbui-modal-close-container {
+.modal-close-container {
   position: absolute;
   right: $mp-1;
   top: $mp-1;
 }
 
-.sbui-modal-close-button {
+.modal-close-button {
   width: 42px;
   height: 42px;
   border-radius: $rounded-full;
 }
 
-.sbui-modal-close-container button,
-.dark .sbui-modal-close-container button {
+.modal-close-container button,
+.dark .modal-close-container button {
   color: $gray-400;
 
   & :hover {
@@ -145,7 +151,7 @@
   }
 }
 
-.sbui-sidepanel__trigger {
+.sidepanel__trigger {
   border-style: none;
   background-color: transparent;
   padding: 0px;

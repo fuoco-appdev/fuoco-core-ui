@@ -6,11 +6,13 @@ import Ripples, { RipplesProps } from 'react-ripples'
 import { IconCamera } from '../icon'
 import { ModalProps } from '../modal'
 import { CropImage } from '../crop-image'
+import { Button } from '../button'
 
 export interface AvatarProps {
   children?: React.ReactNode
   src?: string
   style?: React.CSSProperties
+  touchScreen?: boolean
   className?: string
   alt?: string
   text?: string
@@ -24,6 +26,7 @@ export interface AvatarProps {
 export default function Avatar({
   src,
   style,
+  touchScreen = false,
   className,
   alt,
   text,
@@ -37,6 +40,7 @@ export default function Avatar({
   },
   onChange,
 }: AvatarProps) {
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
   const fileRef = useRef<HTMLInputElement | null>(null)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   const [selectedImages, setSelectedImages] = useState<FileList | undefined>()
@@ -93,13 +97,19 @@ export default function Avatar({
               style={{ display: 'none' }}
               onChange={onFileChanged}
             />
-            <Ripples
-              {...rippleProps}
-              className={styles['edit-image-button-ripple']}
+            <Button
+              ref={buttonRef}
+              block={true}
+              classNames={{
+                container: styles['edit-image-button-ripple'],
+                button: styles['edit-image-button'],
+              }}
+              rippleProps={rippleProps}
+              icon={
+                <IconCamera strokeWidth={2} stroke={'#fff'} size={'tiny'} />
+              }
               onClick={onEditFileClick}
-            >
-              <IconCamera strokeWidth={2} stroke={'#fff'} size={'tiny'} />
-            </Ripples>
+            />
           </div>
         )}
       </div>
@@ -111,6 +121,8 @@ export default function Avatar({
           onConfirmed={onCropConfirmed}
           onCanceled={onCropCanceled}
           modalProps={modalProps}
+          touchScreen={touchScreen}
+          anchorRef={buttonRef}
         />
       )}
     </div>

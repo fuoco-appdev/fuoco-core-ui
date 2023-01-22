@@ -6,7 +6,7 @@
   position: relative;
   display: inline-flex;
   font-family: inherit;
-  font-weight: inherit;
+  font-weight: $font-weight-medium;
   padding: $mp-2 $mp-4;
   align-items: center;
   text-align: center;
@@ -18,6 +18,8 @@
   color: inherit;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  text-transform: uppercase;
+  font-size: $font-size-xs;
 }
 
 .button-ripple {
@@ -66,27 +68,22 @@
 
 .button-tiny {
   padding: $mp-1-5 $mp-2-5;
-  font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
 .button-small {
-  padding: $mp-2 $mp-3;
-  font-size: $font-size-sm;
+  padding: $mp-2 $mp-4;
   line-height: $font-line-height-xs;
 }
 .button-medium {
-  padding: $mp-2 $mp-4;
-  font-size: $font-size-sm;
+  padding: $mp-2 $mp-6;
   line-height: $font-line-height-sm;
 }
 .button-large {
-  padding: $mp-2-5 $mp-4;
-  font-size: $font-size-base;
+  padding: $mp-2 $mp-8;
   line-height: $font-line-height-base;
 }
 .button-xlarge {
-  padding: $mp-3 $mp-6;
-  font-size: $font-size-base;
+  padding: $mp-3 $mp-10;
   line-height: $font-line-height-base;
 }
 .button-full {

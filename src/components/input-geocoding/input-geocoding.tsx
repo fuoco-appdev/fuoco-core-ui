@@ -177,7 +177,7 @@ function InputGeocoding({
       const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${defaultLongitude},${defaultLatitude}.json?access_token=${mapboxAccessToken}&types=${placeType}`
       const response = await fetch(endpoint)
       const results = await response.json()
-      if (results.features.length > 0) {
+      if (results.features?.length > 0) {
         const feature = results.features[0]
         setSelectedFeature(feature)
         setValue(feature['place_name'])
@@ -303,7 +303,7 @@ function InputGeocoding({
             </div>
           </div>
         )}
-        {features.length > 0
+        {features?.length > 0
           ? features?.map((feature, index) => {
               return (
                 <Dropdown.Item

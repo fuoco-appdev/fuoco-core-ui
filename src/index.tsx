@@ -22,6 +22,7 @@ export * from './components/menu'
 
 // OVERLAYS
 
+export * from './components/overlay'
 export * from './components/modal'
 export * from './components/side-panel'
 export * from './components/dropdown'

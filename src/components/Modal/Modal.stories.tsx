@@ -19,13 +19,15 @@ export default {
 
 export const Default = (args: any) => (
   <Modal {...args}>
-    <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
-      Modal content is inserted here, if you need to insert anything into the
-      Modal you can do so via{' '}
-      <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
-        {'{children}'}
+    <div style={{ backgroundColor: '#fff', height: '100%' }}>
+      <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
+        Modal content is inserted here, if you need to insert anything into the
+        Modal you can do so via{' '}
+        <Typography.Text code style={{ color: 'rgb(15,15,15)' }}>
+          {'{children}'}
+        </Typography.Text>
       </Typography.Text>
-    </Typography.Text>
+    </div>
   </Modal>
 )
 

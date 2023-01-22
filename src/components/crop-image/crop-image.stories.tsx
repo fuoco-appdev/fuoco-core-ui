@@ -8,12 +8,28 @@ export default {
 export const Default = (args: any) => {
   return (
     <>
-      <CropImage {...args} />
+      <CropImage
+        {...args}
+        isVisible={true}
+        src={['https://miro.medium.com/max/1200/1*jIwBKde_hz5cDOVw6tyA4Q.jpeg']}
+      />
     </>
   )
 }
 
-Default.args = {
-  isVisible: true,
-  src: 'https://via.placeholder.com/150',
+export const TouchScreen = (args: any) => {
+  return (
+    <>
+      <CropImage
+        {...args}
+        isVisible={true}
+        src={['https://miro.medium.com/max/1200/1*jIwBKde_hz5cDOVw6tyA4Q.jpeg']}
+        touchScreen={true}
+      />
+    </>
+  )
 }
+
+Default.args = {}
+
+TouchScreen.args = {}

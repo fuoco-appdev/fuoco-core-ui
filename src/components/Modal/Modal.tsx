@@ -7,10 +7,22 @@ import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
 
 export interface ModalProps {
+  classNames?: {
+    modalOverlayContainer?: string
+    modalOverlay?: string
+    modalContainer?: string
+    modalFlexContainer?: string
+    modal?: string
+    modalContent?: string
+    modalCloseContainer?: string
+    modalCloseButton?: string
+    modalFooter?: string
+    footerContainer?: string
+    footerCancelText?: string
+  }
   children?: React.ReactNode
   customFooter?: React.ReactNode
   closable?: boolean
-  description?: string
   hideFooter?: boolean
   alignFooter?: 'right' | 'left'
   layout?: 'horizontal' | 'vertical'
@@ -22,14 +34,12 @@ export interface ModalProps {
   confirmText?: string
   showIcon?: boolean
   footerBackground?: boolean
-  title?: string
   variant?: 'danger' | 'warning' | 'success'
   visible: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large'
   style?: React.CSSProperties
   overlayStyle?: React.CSSProperties
   contentStyle?: React.CSSProperties
-  className?: string
   overlayClassName?: string
   transition?: AnimationTailwindClasses
   transitionOverlay?: AnimationTailwindClasses
@@ -37,10 +47,10 @@ export interface ModalProps {
 }
 
 const Modal = ({
+  classNames,
   children,
   customFooter = undefined,
   closable,
-  description,
   hideFooter = false,
   alignFooter = 'left',
   layout = 'horizontal',
@@ -50,7 +60,6 @@ const Modal = ({
   onCancel = () => {},
   confirmText = 'Confirm',
   showIcon = false,
-  title,
   footerBackground,
   icon,
   variant = 'success',
@@ -59,7 +68,6 @@ const Modal = ({
   style,
   overlayStyle,
   contentStyle,
-  className = '',
   overlayClassName,
   triggerElement,
 }: ModalProps) => {
@@ -73,36 +81,48 @@ const Modal = ({
     e.stopPropagation()
   }
 
-  let footerClasses = [ModalStyles['sbui-modal-footer']]
+  let footerClasses = [ModalStyles['modal-footer'], classNames?.modalFooter]
   if (footerBackground) {
-    footerClasses.push(ModalStyles['sbui-modal-footer--with-bg'])
+    footerClasses.push(ModalStyles['modal-footer-with-bg'])
   }
 
   let modalClasses = [
-    ModalStyles[`sbui-modal`],
-    ModalStyles[`sbui-modal--${size}`],
+    ModalStyles[`modal`],
+    ModalStyles[`modal-${size}`],
+    classNames?.modal,
   ]
-  if (className) modalClasses.push(className)
 
-  let overlayClasses = [ModalStyles['sbui-modal-overlay']]
+  let overlayClasses = [ModalStyles['modal-overlay'], classNames?.modalOverlay]
   if (overlayClassName) overlayClasses.push(overlayClassName)
 
   const footerContent = customFooter ? (
     customFooter
   ) : (
-    <div className={ModalStyles['sbui-footer-container']}>
-      <Button type="outline" onClick={onCancel} disabled={loading}>
-        <span className={ModalStyles['sbui-footer-cancel-text']}>
-          {cancelText}
-        </span>
-      </Button>
-      <Button
-        onClick={onConfirm}
-        loading={loading}
-        danger={variant === 'danger'}
-      >
-        {confirmText}
-      </Button>
+    <div
+      className={[
+        ModalStyles['footer-container'],
+        classNames?.footerContainer,
+      ].join(' ')}
+    >
+      <div className={ModalStyles['footer-button-container']}>
+        <Button type={'default'} onClick={onCancel} disabled={loading}>
+          <span
+            className={[
+              ModalStyles['footer-cancel-text'],
+              classNames?.footerCancelText,
+            ].join(' ')}
+          >
+            {cancelText}
+          </span>
+        </Button>
+        <Button
+          onClick={onConfirm}
+          loading={loading}
+          danger={variant === 'danger'}
+        >
+          {confirmText}
+        </Button>
+      </div>
     </div>
   )
 
@@ -157,7 +177,12 @@ const Modal = ({
     (transitionStyle, item) =>
       item && (
         <animated.div style={transitionStyle}>
-          <div className={ModalStyles['sbui-modal-overlay-container']}>
+          <div
+            className={[
+              ModalStyles['modal-overlay-container'],
+              classNames?.modalOverlayContainer,
+            ].join(' ')}
+          >
             <div className={overlayClasses.join(' ')} style={overlayStyle}>
               {transition(
                 (transitionStyle, item) =>
@@ -165,13 +190,16 @@ const Modal = ({
                     <animated.div style={transitionStyle}>
                       <div
                         className={[
-                          ModalStyles['sbui-modal-container'],
-                          className,
+                          ModalStyles['modal-container'],
+                          classNames?.modalContainer,
                         ].join(' ')}
                         onClick={() => (onCancel ? onCancel() : null)}
                       >
                         <div
-                          className={ModalStyles['sbui-modal-flex-container']}
+                          className={[
+                            ModalStyles['modal-flex-container'],
+                            classNames?.modalFlexContainer,
+                          ].join(' ')}
                         >
                           <div
                             className={modalClasses.join(' ')}
@@ -181,31 +209,14 @@ const Modal = ({
                             onClick={stopPropagation}
                             style={style}
                           >
+                            <div className={ModalStyles['modal-background']} />
                             <div
-                              className={ModalStyles['sbui-modal-content']}
+                              className={[
+                                ModalStyles['modal-content'],
+                                classNames?.modalContent,
+                              ].join(' ')}
                               style={contentStyle}
                             >
-                              {icon ? icon : null}
-                              <span style={{ width: 'inherit' }}>
-                                {title && (
-                                  <Typography.Title
-                                    className={ModalStyles['sbui-modal-title']}
-                                    level={4}
-                                  >
-                                    {title}
-                                  </Typography.Title>
-                                )}
-                                {description && (
-                                  <Typography.Text
-                                    className={
-                                      ModalStyles['sbui-modal-description']
-                                    }
-                                  >
-                                    {description}
-                                  </Typography.Text>
-                                )}
-                              </span>
-
                               {children}
                             </div>
                             {!footerBackground && !hideFooter && footerContent}
@@ -216,14 +227,16 @@ const Modal = ({
                             )}
                             {closable && (
                               <div
-                                className={
-                                  ModalStyles['sbui-modal-close-container']
-                                }
+                                className={[
+                                  ModalStyles['modal-close-container'],
+                                  classNames?.modalCloseContainer,
+                                ].join(' ')}
                               >
                                 <Button
-                                  className={
-                                    ModalStyles['sbui-modal-close-button']
-                                  }
+                                  className={[
+                                    ModalStyles['modal-close-button'],
+                                    classNames?.modalCloseButton,
+                                  ].join(' ')}
                                   onClick={onCancel}
                                   type="text"
                                   shadow={false}

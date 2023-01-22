@@ -52,6 +52,7 @@ export interface RefHandle {
 function Button(
   {
     block,
+    className,
     classNames,
     children,
     danger,
@@ -92,7 +93,11 @@ function Button(
       ButtonStyles[`button-${type}-desktop`]
     )
   }
-  let containerClasses = [ButtonStyles['button-ripple'], classNames?.container]
+  let containerClasses = [
+    ButtonStyles['button-ripple'],
+    className,
+    classNames?.container,
+  ]
 
   if (block) {
     containerClasses.push(ButtonStyles['button-w-full'])

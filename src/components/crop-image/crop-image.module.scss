@@ -1,0 +1,38 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 56px;
+  width: 100%;
+  background-color: $brand-900;
+  padding-left: $mp-4;
+  padding-right: $mp-2;
+  align-items: center;
+
+  & .top-bar-title {
+    line-height: 56px;
+  }
+
+  & .exit-button-container {
+    border-radius: $rounded-full;
+
+    & .exit-button {
+      padding: $mp-3 !important;
+    }
+  }
+}
+
+.avatar-editor-container {
+  display: flex;
+}
+
+.save-button-container {
+  position: absolute;
+  padding: $mp-2;
+  width: 100%;
+  bottom: 0;
+}

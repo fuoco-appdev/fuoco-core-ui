@@ -3,23 +3,38 @@ import React from 'react'
 import CardStyles from './card.module.scss'
 
 interface CardProps {
+  ref?: React.RefObject<HTMLDivElement>
   key?: React.Key
   children?: React.ReactNode
   className?: string
   hoverable?: boolean
+  clickable?: boolean
   style?: React.CSSProperties
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
-function Card({ key, children, className, hoverable, style }: CardProps) {
-  let classes = [CardStyles['sbui-card']]
-  if (hoverable) classes.push(CardStyles['sbui-card--hoverable'])
+function Card(
+  { key, children, className, hoverable, clickable, style, onClick }: CardProps,
+  ref: React.ForwardedRef<any>
+) {
+  let classes = [CardStyles['card']]
+  if (hoverable) classes.push(CardStyles['card-hoverable'])
+  if (clickable) {
+    classes.push(CardStyles['card-clickable'])
+  }
   if (className) classes.push(className)
 
   return (
-    <div key={key} className={classes.join(' ')} style={style}>
+    <div
+      ref={ref}
+      key={key}
+      className={classes.join(' ')}
+      style={style}
+      onClick={onClick}
+    >
       {children}
     </div>
   )
 }
 
-export default Card
+export default React.forwardRef(Card)
