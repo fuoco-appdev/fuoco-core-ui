@@ -8,17 +8,18 @@ import { animated, useTransition } from 'react-spring'
 
 export interface ModalProps {
   classNames?: {
-    modalOverlayContainer?: string
-    modalOverlay?: string
-    modalContainer?: string
-    modalFlexContainer?: string
+    overlayContainer?: string
+    overlay?: string
+    container?: string
+    flexContainer?: string
+    background?: string
     modal?: string
-    modalContent?: string
-    modalTitle?: string
-    modalDescription?: string
-    modalCloseContainer?: string
-    modalCloseButton?: string
-    modalFooter?: string
+    content?: string
+    title?: string
+    description?: string
+    closeContainer?: string
+    closeButton?: string
+    footer?: string
     footerContainer?: string
     footerCancelText?: string
   }
@@ -87,7 +88,7 @@ const Modal = ({
     e.stopPropagation()
   }
 
-  let footerClasses = [ModalStyles['modal-footer'], classNames?.modalFooter]
+  let footerClasses = [ModalStyles['modal-footer'], classNames?.footer]
   if (footerBackground) {
     footerClasses.push(ModalStyles['modal-footer-with-bg'])
   }
@@ -98,7 +99,7 @@ const Modal = ({
     classNames?.modal,
   ]
 
-  let overlayClasses = [ModalStyles['modal-overlay'], classNames?.modalOverlay]
+  let overlayClasses = [ModalStyles['modal-overlay'], classNames?.overlay]
   if (overlayClassName) overlayClasses.push(overlayClassName)
 
   const footerContent = customFooter ? (
@@ -186,7 +187,7 @@ const Modal = ({
           <div
             className={[
               ModalStyles['modal-overlay-container'],
-              classNames?.modalOverlayContainer,
+              classNames?.overlayContainer,
             ].join(' ')}
           >
             <div className={overlayClasses.join(' ')} style={overlayStyle}>
@@ -197,14 +198,14 @@ const Modal = ({
                       <div
                         className={[
                           ModalStyles['modal-container'],
-                          classNames?.modalContainer,
+                          classNames?.container,
                         ].join(' ')}
                         onClick={() => (onCancel ? onCancel() : null)}
                       >
                         <div
                           className={[
                             ModalStyles['modal-flex-container'],
-                            classNames?.modalFlexContainer,
+                            classNames?.flexContainer,
                           ].join(' ')}
                         >
                           <div
@@ -215,11 +216,16 @@ const Modal = ({
                             onClick={stopPropagation}
                             style={style}
                           >
-                            <div className={ModalStyles['modal-background']} />
+                            <div
+                              className={[
+                                ModalStyles['modal-background'],
+                                classNames?.background,
+                              ].join(' ')}
+                            />
                             <div
                               className={[
                                 ModalStyles['modal-content'],
-                                classNames?.modalContent,
+                                classNames?.content,
                               ].join(' ')}
                               style={contentStyle}
                             >
@@ -231,7 +237,7 @@ const Modal = ({
                                       <Typography.Title
                                         className={[
                                           ModalStyles['modal-title'],
-                                          classNames?.modalTitle,
+                                          classNames?.title,
                                         ].join(' ')}
                                         level={4}
                                       >
@@ -242,7 +248,7 @@ const Modal = ({
                                       <Typography.Text
                                         className={[
                                           ModalStyles['modal-description'],
-                                          classNames?.modalDescription,
+                                          classNames?.description,
                                         ].join(' ')}
                                       >
                                         {description}
@@ -265,13 +271,13 @@ const Modal = ({
                               <div
                                 className={[
                                   ModalStyles['modal-close-container'],
-                                  classNames?.modalCloseContainer,
+                                  classNames?.closeContainer,
                                 ].join(' ')}
                               >
                                 <Button
                                   className={[
                                     ModalStyles['modal-close-button'],
-                                    classNames?.modalCloseButton,
+                                    classNames?.closeButton,
                                   ].join(' ')}
                                   onClick={onCancel}
                                   type="text"

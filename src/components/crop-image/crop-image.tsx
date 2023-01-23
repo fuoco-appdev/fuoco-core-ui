@@ -195,6 +195,9 @@ export default function CropImage({
       visible={isVisible ?? false}
       onConfirm={onCropConfirmed}
       onCancel={onCropCanceled}
+      classNames={{
+        footerContainer: styles['modal-footer-container'],
+      }}
     >
       <div className={styles['top-bar']}>
         <Typography.Title className={styles['top-bar-title']} level={4}>

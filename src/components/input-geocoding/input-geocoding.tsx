@@ -303,29 +303,22 @@ function InputGeocoding({
             </div>
           </div>
         )}
-        {features?.length > 0
-          ? features?.map((feature, index) => {
-              return (
-                <Dropdown.Item
-                  onClick={(e) => handleFeatureItemClick(feature, e)}
-                  ref={(el: HTMLLIElement) =>
-                    (dropdownRefs[`feature_${index}`] = el)
-                  }
-                  key={`feature_${index}`}
-                >
-                  <span className={InputGeocodingStyles['place-name']}>
-                    {feature['place_name']}
-                  </span>
-                </Dropdown.Item>
-              )
-            })
-          : value.length > 0 && (
-              <Dropdown.Item>
+        {features?.length > 0 &&
+          features?.map((feature, index) => {
+            return (
+              <Dropdown.Item
+                onClick={(e) => handleFeatureItemClick(feature, e)}
+                ref={(el: HTMLLIElement) =>
+                  (dropdownRefs[`feature_${index}`] = el)
+                }
+                key={`feature_${index}`}
+              >
                 <span className={InputGeocodingStyles['place-name']}>
-                  {strings?.searchNotFound}
+                  {feature['place_name']}
                 </span>
               </Dropdown.Item>
-            )}
+            )
+          })}
       </Dropdown>
     </animated.div>
   )
