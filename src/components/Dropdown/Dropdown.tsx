@@ -195,7 +195,13 @@ function Dropdown({
             style={overlayStyle}
             className={DropdownStyles['touchscreen-overlay']}
           >
-            <animated.div style={touchScreenProps}>
+            <animated.div
+              style={{
+                ...touchScreenProps,
+                position: 'absolute',
+                width: '100%',
+              }}
+            >
               <ul
                 ref={uListRef}
                 className={[

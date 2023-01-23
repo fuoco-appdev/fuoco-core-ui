@@ -11,7 +11,7 @@ import {
   IconMail,
   IconKey,
   IconLock,
-  IconInbox
+  IconInbox,
 } from '../../index'
 import { UserContextProvider, useUser } from './user-context'
 import * as SocialIcons from './icons'
@@ -46,10 +46,17 @@ type ViewType =
 
 type RedirectTo = undefined | string
 
+export enum AuthErrorType {
+  BadAuthentication,
+  BadLinkRedirect,
+  ConfirmPasswordNoMatch,
+}
+
 export interface AuthStrings {
   orContinueWith?: string
   emailAddress?: string
   password?: string
+  confirmPassword?: string
   rememberMe?: string
   forgotYourPassword?: string
   signIn?: string
@@ -91,6 +98,7 @@ export interface Props {
   privacyPolicy?: JSX.Element
   emailErrorMessage?: string
   passwordErrorMessage?: string
+  confirmPasswordErrorMessage?: string
   onForgotPasswordRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onTermsOfServiceRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onPrivacyPolicyRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
@@ -102,37 +110,38 @@ export interface Props {
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
   onResetPasswordSent?: (e?: React.FormEvent<HTMLFormElement>) => void
   onMagicLinkSent?: (e?: React.FormEvent<HTMLFormElement>) => void
-  onSigninError?: (error: ApiError) => void
-  onSignupError?: (error: ApiError) => void
-  onUpdatePasswordError?: (error: ApiError) => void
-  onResetPasswordError?: (error: ApiError) => void
-  onMagicLinkError?: (error: ApiError) => void
+  onSigninError?: (error: ApiError, type: AuthErrorType) => void
+  onSignupError?: (error: ApiError, type: AuthErrorType) => void
+  onUpdatePasswordError?: (error: ApiError, type: AuthErrorType) => void
+  onResetPasswordError?: (error: ApiError, type: AuthErrorType) => void
+  onMagicLinkError?: (error: ApiError, type: AuthErrorType) => void
 }
 
 const defaultStrings: AuthStrings = {
-  orContinueWith: "or continue with",
-  emailAddress: "Email address",
-  password: "Password",
-  rememberMe: "Remember me",
-  forgotYourPassword: "Forgot your password?",
-  signIn: "Sign in",
-  signInWith: "Sign in with",
-  signUp: "Sign up",
-  signUpWith: "Sign up with",
-  doYouHaveAnAccount: "Do you have an account? Sign in",
+  orContinueWith: 'or continue with',
+  emailAddress: 'Email address',
+  password: 'Password',
+  confirmPassword: 'Confirm password',
+  rememberMe: 'Remember me',
+  forgotYourPassword: 'Forgot your password?',
+  signIn: 'Sign in',
+  signInWith: 'Sign in with',
+  signUp: 'Sign up',
+  signUpWith: 'Sign up with',
+  doYouHaveAnAccount: 'Do you have an account? Sign in',
   dontHaveAnAccount: "Don't have an account? Sign up",
-  newPassword: "New password",
-  resetPassword: "Reset password",
-  updatePassword: "Update password",
-  enterYourNewPassword: "Enter your new password",
-  agreeToThe: "I agree to the",
-  termsOfService: "Terms of Service",
-  privacyPolicy: "Privacy Policy",
-  yourEmailAddress: "Your email address",
-  sendResetPasswordInstructions: "Send reset password instructions",
-  goBackToSignIn: "Go back to sign in",
-  sendMagicLink: "Send magic link",
-  signInWithPassword: "Sign in with password"
+  newPassword: 'New password',
+  resetPassword: 'Reset password',
+  updatePassword: 'Update password',
+  enterYourNewPassword: 'Enter your new password',
+  agreeToThe: 'I agree to the',
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
+  yourEmailAddress: 'Your email address',
+  sendResetPasswordInstructions: 'Send reset password instructions',
+  goBackToSignIn: 'Go back to sign in',
+  sendMagicLink: 'Send magic link',
+  signInWithPassword: 'Sign in with password',
 }
 
 function Auth({
@@ -147,6 +156,7 @@ function Auth({
   view = 'sign_in',
   emailErrorMessage,
   passwordErrorMessage,
+  confirmPasswordErrorMessage,
   redirectTo,
   onlyThirdPartyProviders = false,
   magicLink = false,
@@ -167,7 +177,7 @@ function Auth({
   onSignupError,
   onUpdatePasswordError,
   onResetPasswordError,
-  onMagicLinkError
+  onMagicLinkError,
 }: Props): JSX.Element | null {
   const [authView, setAuthView] = useState(view)
   const [defaultEmail, setDefaultEmail] = useState('')
@@ -183,27 +193,27 @@ function Auth({
   const Container = (props: any) => (
     <div className={containerClasses.join(' ')} style={style}>
       <SocialAuth
-          view={view}
-          strings={{...defaultStrings, ...strings}}
-          supabaseClient={supabaseClient}
-          verticalSocialLayout={verticalSocialLayout}
-          providers={providers}
-          socialLayout={socialLayout}
-          socialButtonSize={socialButtonSize}
-          socialColors={socialColors}
-          redirectTo={redirectTo}
-          onlyThirdPartyProviders={onlyThirdPartyProviders}
-          magicLink={magicLink}
-          onForgotPasswordRedirect={onForgotPasswordRedirect}
-          onTermsOfServiceRedirect={onTermsOfServiceRedirect}
-          onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
-          onMagicLinkRedirect={onMagicLinkRedirect}
-          onSignupRedirect={onSignupRedirect}
-          onSigninRedirect={onSigninRedirect}
-          onAuthenticating={onAuthenticating}
-          onEmailConfirmationSent={onEmailConfirmationSent}
-        />
-        {!onlyThirdPartyProviders && props.children}
+        view={view}
+        strings={{ ...defaultStrings, ...strings }}
+        supabaseClient={supabaseClient}
+        verticalSocialLayout={verticalSocialLayout}
+        providers={providers}
+        socialLayout={socialLayout}
+        socialButtonSize={socialButtonSize}
+        socialColors={socialColors}
+        redirectTo={redirectTo}
+        onlyThirdPartyProviders={onlyThirdPartyProviders}
+        magicLink={magicLink}
+        onForgotPasswordRedirect={onForgotPasswordRedirect}
+        onTermsOfServiceRedirect={onTermsOfServiceRedirect}
+        onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
+        onMagicLinkRedirect={onMagicLinkRedirect}
+        onSignupRedirect={onSignupRedirect}
+        onSigninRedirect={onSigninRedirect}
+        onAuthenticating={onAuthenticating}
+        onEmailConfirmationSent={onEmailConfirmationSent}
+      />
+      {!onlyThirdPartyProviders && props.children}
     </div>
   )
 
@@ -219,7 +229,7 @@ function Auth({
         <Container>
           <EmailAuth
             id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
-            strings={{...defaultStrings, ...strings}}
+            strings={{ ...defaultStrings, ...strings }}
             supabaseClient={supabaseClient}
             authView={authView}
             setAuthView={setAuthView}
@@ -229,6 +239,7 @@ function Auth({
             setDefaultPassword={setDefaultPassword}
             emailErrorMessage={emailErrorMessage}
             passwordErrorMessage={passwordErrorMessage}
+            confirmPasswordErrorMessage={confirmPasswordErrorMessage}
             redirectTo={redirectTo}
             magicLink={magicLink}
             onForgotPasswordRedirect={onForgotPasswordRedirect}
@@ -248,7 +259,7 @@ function Auth({
       return (
         <Container>
           <ForgottenPassword
-            strings={{...defaultStrings, ...strings}}
+            strings={{ ...defaultStrings, ...strings }}
             supabaseClient={supabaseClient}
             redirectTo={redirectTo}
             emailErrorMessage={emailErrorMessage}
@@ -262,7 +273,7 @@ function Auth({
       return (
         <Container>
           <MagicLink
-            strings={{...defaultStrings, ...strings}}
+            strings={{ ...defaultStrings, ...strings }}
             supabaseClient={supabaseClient}
             setAuthView={setAuthView}
             redirectTo={redirectTo}
@@ -276,7 +287,7 @@ function Auth({
       return (
         <Container>
           <UpdatePassword
-            strings={{...defaultStrings, ...strings}}
+            strings={{ ...defaultStrings, ...strings }}
             supabaseClient={supabaseClient}
             passwordErrorMessage={passwordErrorMessage}
             onUpdatePasswordError={onUpdatePasswordError}
@@ -313,7 +324,7 @@ function SocialButton({
   provider: Provider
   strings: AuthStrings
   verticalSocialLayout: any
-  socialButtonSize: "tiny" | "small" | "medium" | "large" | "xlarge" | undefined
+  socialButtonSize: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | undefined
   signLabel: string
   socialColors: boolean
   handleProviderSignIn: (provider: Provider) => void
@@ -432,12 +443,18 @@ function SocialButton({
         type="default"
         shadow
         size={socialButtonSize}
-        style={socialColors ? (isHover ? buttonHoverStyles[provider] : buttonStyles[provider]) : {}}
+        style={
+          socialColors
+            ? isHover
+              ? buttonHoverStyles[provider]
+              : buttonStyles[provider]
+            : {}
+        }
         onClick={() => handleProviderSignIn(provider)}
         rippleProps={{
           color: 'rgba(0, 0, 0, .3)',
           during: 250,
-        }}  
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -481,14 +498,21 @@ function SocialAuth({
         { provider },
         { redirectTo }
       )
-      if (error) (props.view === 'sign_in') ? onSigninError?.(error) : onSignupError?.(error)
-      else {
-        onAuthenticating ? onAuthenticating() : null
-      }
+      if (error)
+        if (props.view == 'sign_in') {
+          onSigninError?.(error, AuthErrorType.BadAuthentication)
+        } else if (props.view === 'sign_up') {
+          onSignupError?.(error, AuthErrorType.BadAuthentication)
+        } else {
+          onAuthenticating ? onAuthenticating() : null
+        }
     }, rippleProps.during)
   }
 
-  const signLabel = props.view === 'sign_up' ? `${strings?.signUpWith} ` : `${strings?.signInWith} `
+  const signLabel =
+    props.view === 'sign_up'
+      ? `${strings?.signUpWith} `
+      : `${strings?.signInWith} `
   return (
     <div>
       {providers && providers.length > 0 && (
@@ -496,19 +520,26 @@ function SocialAuth({
           <div className={AuthStyles['button-root']}>
             <div className={AuthStyles['button-container']}>
               {providers.map((provider) => {
-                return (<SocialButton
-                  key={`${provider}-button`}
-                  provider={provider}
-                  verticalSocialLayout={verticalSocialLayout}
-                  socialButtonSize={socialButtonSize}
-                  signLabel={signLabel}
-                  socialColors={socialColors}
-                  strings={strings!}
-                  handleProviderSignIn={handleProviderSignIn}/>)
+                return (
+                  <SocialButton
+                    key={`${provider}-button`}
+                    provider={provider}
+                    verticalSocialLayout={verticalSocialLayout}
+                    socialButtonSize={socialButtonSize}
+                    signLabel={signLabel}
+                    socialColors={socialColors}
+                    strings={strings!}
+                    handleProviderSignIn={handleProviderSignIn}
+                  />
+                )
               })}
             </div>
           </div>
-          {!onlyThirdPartyProviders && <Divider className={AuthStyles['divider']}>{strings?.orContinueWith}</Divider>}
+          {!onlyThirdPartyProviders && (
+            <Divider className={AuthStyles['divider']}>
+              {strings?.orContinueWith}
+            </Divider>
+          )}
         </React.Fragment>
       )}
     </div>
@@ -526,6 +557,7 @@ function EmailAuth({
   magicLink,
   emailErrorMessage,
   passwordErrorMessage,
+  confirmPasswordErrorMessage,
   onForgotPasswordRedirect,
   onTermsOfServiceRedirect,
   onPrivacyPolicyRedirect,
@@ -535,7 +567,7 @@ function EmailAuth({
   onAuthenticating,
   onEmailConfirmationSent,
   onSigninError,
-  onSignupError
+  onSignupError,
 }: {
   authView: ViewType
   strings: AuthStrings
@@ -550,6 +582,7 @@ function EmailAuth({
   magicLink?: boolean
   emailErrorMessage?: string
   passwordErrorMessage?: string
+  confirmPasswordErrorMessage?: string
   onForgotPasswordRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onTermsOfServiceRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onPrivacyPolicyRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
@@ -558,16 +591,18 @@ function EmailAuth({
   onSigninRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onAuthenticating?: (e?: React.FormEvent<HTMLFormElement>) => void
   onEmailConfirmationSent?: (e: React.FormEvent<HTMLFormElement>) => void
-  onSigninError?: (error: ApiError) => void
-  onSignupError?: (error: ApiError) => void
+  onSigninError?: (error: ApiError, type: AuthErrorType) => void
+  onSignupError?: (error: ApiError, type: AuthErrorType) => void
 }) {
   const isMounted = useRef<boolean>(true)
   const [email, setEmail] = useState(defaultEmail)
   const [password, setPassword] = useState(defaultPassword)
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
   const [emailIconLit, setEmailIconLit] = useState(false)
   const [passwordIconLit, setPasswordIconLit] = useState(false)
+  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   useEffect(() => {
     setEmail(defaultEmail)
@@ -591,7 +626,7 @@ function EmailAuth({
           const {
             user: signInUser,
             session: signInSession,
-            error: signInError 
+            error: signInError,
           } = await supabaseClient.auth.signIn(
             {
               email,
@@ -599,7 +634,8 @@ function EmailAuth({
             },
             { redirectTo }
           )
-          if (signInError) onSigninError?.(signInError) 
+          if (signInError)
+            onSigninError?.(signInError, AuthErrorType.BadAuthentication)
           else if (signInUser && !signInSession)
             onEmailConfirmationSent ? onEmailConfirmationSent(e) : null
           else {
@@ -607,6 +643,17 @@ function EmailAuth({
           }
           break
         case 'sign_up':
+          if (password !== confirmPassword) {
+            onSigninError?.(
+              {
+                message: 'Confirm password does not match',
+                status: 401,
+              },
+              AuthErrorType.ConfirmPasswordNoMatch
+            )
+            break
+          }
+
           const {
             user: signUpUser,
             session: signUpSession,
@@ -618,7 +665,8 @@ function EmailAuth({
             },
             { redirectTo }
           )
-          if (signUpError) onSignupError?.(signUpError)
+          if (signUpError)
+            onSignupError?.(signUpError, AuthErrorType.BadAuthentication)
           // Check if session is null -> email confirmation setting is turned on
           else if (signUpUser && !signUpSession)
             onEmailConfirmationSent ? onEmailConfirmationSent(e) : null
@@ -682,12 +730,39 @@ function EmailAuth({
             onFocus={() => setPasswordIconLit(true)}
             onBlur={() => setPasswordIconLit(false)}
           />
+          {authView === VIEWS.SIGN_UP && (
+            <Input
+              label={strings.confirmPassword}
+              error={confirmPasswordErrorMessage}
+              reveal={true}
+              password={true}
+              defaultValue={confirmPassword}
+              autoComplete="current-password"
+              icon={
+                <IconKey
+                  size={21}
+                  stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
+                />
+              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setConfirmPassword(e.target.value)
+              }
+              onMouseEnter={() => setConfirmPasswordIconLit(true)}
+              onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
+                if (document.activeElement !== e.currentTarget) {
+                  setConfirmPasswordIconLit(false)
+                }
+              }}
+              onFocus={() => setConfirmPasswordIconLit(true)}
+              onBlur={() => setConfirmPasswordIconLit(false)}
+            />
+          )}
         </div>
         <div className={AuthStyles['button-container']}>
           <div className={AuthStyles['remember-me-container']}>
             {authView === VIEWS.SIGN_IN && (
               <Checkbox
-                label={strings.rememberMe ?? ""}
+                label={strings.rememberMe ?? ''}
                 name="remember_me"
                 id="remember_me"
                 onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
@@ -757,14 +832,19 @@ function EmailAuth({
               block
               rippleProps={rippleProps}
             >
-              <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+              <div
+                className={[
+                  AuthStyles['button-content'],
+                  AuthStyles['email-button-content'],
+                ].join(' ')}
+              >
                 <div className={AuthStyles['button-icon']}>
                   <IconLock size={21} />
                 </div>
                 {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
             </Button>
-          </div> 
+          </div>
         </div>
         <div className={AuthStyles['link-container']}>
           {authView === VIEWS.SIGN_IN && magicLink && (
@@ -816,16 +896,16 @@ function MagicLink({
   },
   emailErrorMessage,
   onMagicLinkSent,
-  onMagicLinkError
+  onMagicLinkError,
 }: {
   setAuthView: any
   strings: AuthStrings
   supabaseClient: SupabaseClient
   redirectTo?: RedirectTo
   emailErrorMessage?: string
-  rippleProps?: RipplesProps,
+  rippleProps?: RipplesProps
   onMagicLinkSent?: (e: React.FormEvent<HTMLFormElement>) => void
-  onMagicLinkError?: (error: ApiError) => void
+  onMagicLinkError?: (error: ApiError, type: AuthErrorType) => void
 }) {
   const [email, setEmail] = useState('')
   const [emailIconLit, setEmailIconLit] = useState(false)
@@ -837,7 +917,7 @@ function MagicLink({
         { email },
         { redirectTo }
       )
-      if (error) onMagicLinkError?.(error)
+      if (error) onMagicLinkError?.(error, AuthErrorType.BadLinkRedirect)
       else onMagicLinkSent?.(e)
     }, rippleProps?.during ?? 0)
   }
@@ -874,7 +954,12 @@ function MagicLink({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+            <div
+              className={[
+                AuthStyles['button-content'],
+                AuthStyles['email-button-content'],
+              ].join(' ')}
+            >
               <div className={AuthStyles['button-icon']}>
                 <IconInbox size={21} />
               </div>
@@ -907,7 +992,7 @@ function ForgottenPassword({
   },
   onSigninRedirect,
   onResetPasswordError,
-  onResetPasswordSent
+  onResetPasswordSent,
 }: {
   strings: AuthStrings
   supabaseClient: SupabaseClient
@@ -915,7 +1000,7 @@ function ForgottenPassword({
   emailErrorMessage?: string
   rippleProps?: RipplesProps
   onSigninRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
-  onResetPasswordError?: (error: ApiError) => void
+  onResetPasswordError?: (error: ApiError, type: AuthErrorType) => void
   onResetPasswordSent?: (e: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [email, setEmail] = useState('')
@@ -928,7 +1013,7 @@ function ForgottenPassword({
         email,
         { redirectTo }
       )
-      if (error) onResetPasswordError?.(error)
+      if (error) onResetPasswordError?.(error, AuthErrorType.BadAuthentication)
       else onResetPasswordSent?.(e)
     }, rippleProps?.during ?? 0)
   }
@@ -959,12 +1044,13 @@ function ForgottenPassword({
             onFocus={() => setEmailIconLit(true)}
             onBlur={() => setEmailIconLit(false)}
           />
-          <Button
-            block
-            size="large"
-            htmlType="submit"
-          >
-            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+          <Button block size="large" htmlType="submit">
+            <div
+              className={[
+                AuthStyles['button-content'],
+                AuthStyles['email-button-content'],
+              ].join(' ')}
+            >
               <div className={AuthStyles['button-icon']}>
                 <IconInbox size={21} />
               </div>
@@ -996,14 +1082,14 @@ function ResetPassword({
     during: 250,
   },
   onResetPasswordError,
-  onPasswordUpdated
+  onPasswordUpdated,
 }: {
   supabaseClient: SupabaseClient
   accessToken: string
   strings?: AuthStrings
   passwordErrorMessage?: string
   rippleProps?: RipplesProps
-  onResetPasswordError?: (error: ApiError) => void
+  onResetPasswordError?: (error: ApiError, type: AuthErrorType) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [password, setPassword] = useState('')
@@ -1012,16 +1098,15 @@ function ResetPassword({
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
-      const { error } = await supabaseClient.auth.api.updateUser(
-        accessToken,
-        {password},
-      )
-      if (error) onResetPasswordError?.(error)
+      const { error } = await supabaseClient.auth.api.updateUser(accessToken, {
+        password,
+      })
+      if (error) onResetPasswordError?.(error, AuthErrorType.BadAuthentication)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
   }
 
-  strings = {...defaultStrings, ...strings}
+  strings = { ...defaultStrings, ...strings }
 
   return (
     <form id="auth-reset-password" onSubmit={handlePasswordReset}>
@@ -1057,7 +1142,12 @@ function ResetPassword({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+            <div
+              className={[
+                AuthStyles['button-content'],
+                AuthStyles['email-button-content'],
+              ].join(' ')}
+            >
               <div className={AuthStyles['button-icon']}>
                 <IconKey size={21} />
               </div>
@@ -1079,13 +1169,13 @@ function UpdatePassword({
     during: 250,
   },
   onUpdatePasswordError,
-  onPasswordUpdated
+  onPasswordUpdated,
 }: {
   supabaseClient: SupabaseClient
   strings: AuthStrings
   passwordErrorMessage?: string
   rippleProps?: RipplesProps
-  onUpdatePasswordError?: (error: ApiError) => void
+  onUpdatePasswordError?: (error: ApiError, type: AuthErrorType) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [password, setPassword] = useState('')
@@ -1095,12 +1185,12 @@ function UpdatePassword({
     e.preventDefault()
     setTimeout(async () => {
       const { error } = await supabaseClient.auth.update({ password })
-      if (error) onUpdatePasswordError?.(error)
+      if (error) onUpdatePasswordError?.(error, AuthErrorType.BadAuthentication)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
   }
 
-  strings = {...defaultStrings, ...strings}
+  strings = { ...defaultStrings, ...strings }
 
   return (
     <form id="auth-update-password" onSubmit={handlePasswordReset}>
@@ -1136,7 +1226,12 @@ function UpdatePassword({
             htmlType="submit"
             rippleProps={rippleProps}
           >
-            <div className={[AuthStyles['button-content'], AuthStyles['email-button-content']].join(' ')}>
+            <div
+              className={[
+                AuthStyles['button-content'],
+                AuthStyles['email-button-content'],
+              ].join(' ')}
+            >
               <div className={AuthStyles['button-icon']}>
                 <IconKey size={21} />
               </div>

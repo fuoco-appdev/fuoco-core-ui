@@ -73,14 +73,13 @@
 }
 
 .touchscreen-dropdown {
-  position: absolute;
   height: auto;
   max-height: 75vh;
   width: 100%;
   border-top-left-radius: $rounded-base;
   border-top-right-radius: $rounded-base;
   padding-top: $mp-3;
-  padding-bottom: $mp-3;
+  padding-bottom: $mp-4;
   padding-left: 0;
   background-color: white;
   overflow-y: auto;

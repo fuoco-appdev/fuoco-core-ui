@@ -1,10 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Auth } from '.'
 import { ApiError, createClient } from '@supabase/supabase-js'
 // @ts-ignore
 import { Typography, Button } from '../../index'
 import ReactMarkdown from 'react-markdown'
+import { AuthErrorType } from './auth'
 const gfm = require('remark-gfm')
 
 const supabase = createClient(
@@ -32,155 +33,346 @@ const Container = (props: any) => {
 }
 
 export const Default = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
-export const withSocialAuth = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const WithSocialAuth = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
-export const withAllSocialAuth = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const WithAllSocialAuth = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
-export const withSocialLargeButtons = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const WithSocialLargeButtons = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
-export const withColouredSocialAuth = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const WithColouredSocialAuth = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
-export const withSocialAuthHorizontal = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const WithSocialAuthHorizontal = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UserContextProvider {...args}>
       <Container {...args}>
         <Auth
           {...args}
-          emailErrorMessage={
-            error ? 'You must provide a valid email address' : null
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          onSigninError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          passwordErrorMessage={
-            error ? 'You must provide a valid password' : null
+          onSignupError={(error: ApiError, type: AuthErrorType) =>
+            setErrorType(type)
           }
-          onSigninError={(error: ApiError) => setError(error)}
-          onSignupError={(error: ApiError) => setError(error)}
         />
       </Container>
     </Auth.UserContextProvider>
   )
 }
 
-export const resetPassword = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const ResetPassword = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  )
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | null>(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(null)
+      setPasswordErrorMessage(null)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.ResetPassword
       {...args}
       accessToken={''}
-      passwordErrorMessage={error ? 'You must provide a valid password' : null}
-      onPasswordUpdated={() => setError(null)}
-      onResetPasswordError={(error: ApiError) => setError(error)}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onPasswordUpdated={() => setErrorType(null)}
+      onResetPasswordError={(error: ApiError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
     />
   )
 }
 
-export const updatePassword = (args: any) => {
-  const [error, setError] = useState<ApiError | null>(null)
+export const UpdatePassword = (args: any) => {
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >(null)
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setPasswordErrorMessage(null)
+    }
+  }, [errorType])
 
   return (
     <Auth.UpdatePassword
       {...args}
-      passwordErrorMessage={error ? 'You must provide a valid password' : null}
-      onPasswordUpdated={() => setError(null)}
-      onUpdatePasswordError={(error: ApiError) => setError(error)}
+      passwordErrorMessage={passwordErrorMessage}
+      onPasswordUpdated={() => setErrorType(null)}
+      onUpdatePasswordError={(error: ApiError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
     />
   )
 }
@@ -196,14 +388,31 @@ export const ChangeViewState = (args: any) => {
   >('sign_in')
 
   const [md, setMd] = useState<string>('')
-  const [signinError, setSigninError] = useState<ApiError | null>(null)
-  const [signupError, setSignupError] = useState<ApiError | null>(null)
-  const [updatePasswordError, setUpdatePasswordError] =
-    useState<ApiError | null>(null)
-  const [resetPasswordError, setResetPasswordError] = useState<ApiError | null>(
-    null
-  )
-  const [magicLinkError, setMagicLinkError] = useState<ApiError | null>(null)
+  const [errorType, setErrorType] = useState<AuthErrorType | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<
+    string | undefined
+  >()
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | undefined
+  >()
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] =
+    useState<string | undefined>()
+
+  useEffect(() => {
+    if (errorType === AuthErrorType.BadAuthentication) {
+      setEmailErrorMessage('You must provide a valid email address')
+      setPasswordErrorMessage('You must provide a valid password')
+    } else {
+      setEmailErrorMessage(undefined)
+      setPasswordErrorMessage(undefined)
+    }
+
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setConfirmPasswordErrorMessage('Confirm password does not match')
+    } else {
+      setConfirmPasswordErrorMessage(undefined)
+    }
+  }, [errorType])
 
   fetch('../../lib/MarkdownSample.md')
     .then((res) => res.text())
@@ -214,41 +423,41 @@ export const ChangeViewState = (args: any) => {
   return (
     <div>
       <Button
-          type={view === 'sign_up' ? 'primary' : 'default'}
-          onClick={() => setView('sign_up')}
-        >
-          Sign up
-        </Button>
-        <Button
-          type={view === 'sign_in' ? 'primary' : 'default'}
-          onClick={() => setView('sign_in')}
-        >
-          Sign in
-        </Button>
-        <Button
-          type={view === 'forgotten_password' ? 'primary' : 'default'}
-          onClick={() => setView('forgotten_password')}
-        >
-          Forgotten password
-        </Button>
-        <Button
-          type={view === 'magic_link' ? 'primary' : 'default'}
-          onClick={() => setView('magic_link')}
-        >
-          Magic link
-        </Button>
-        <Button
-          type={view === 'terms_of_service' ? 'primary' : 'default'}
-          onClick={() => setView('terms_of_service')}
-        >
-          Terms of Service
-        </Button>
-        <Button
-          type={view === 'privacy_policy' ? 'primary' : 'default'}
-          onClick={() => setView('privacy_policy')}
-        >
-          Privacy Policy
-        </Button>
+        type={view === 'sign_up' ? 'primary' : 'default'}
+        onClick={() => setView('sign_up')}
+      >
+        Sign up
+      </Button>
+      <Button
+        type={view === 'sign_in' ? 'primary' : 'default'}
+        onClick={() => setView('sign_in')}
+      >
+        Sign in
+      </Button>
+      <Button
+        type={view === 'forgotten_password' ? 'primary' : 'default'}
+        onClick={() => setView('forgotten_password')}
+      >
+        Forgotten password
+      </Button>
+      <Button
+        type={view === 'magic_link' ? 'primary' : 'default'}
+        onClick={() => setView('magic_link')}
+      >
+        Magic link
+      </Button>
+      <Button
+        type={view === 'terms_of_service' ? 'primary' : 'default'}
+        onClick={() => setView('terms_of_service')}
+      >
+        Terms of Service
+      </Button>
+      <Button
+        type={view === 'privacy_policy' ? 'primary' : 'default'}
+        onClick={() => setView('privacy_policy')}
+      >
+        Privacy Policy
+      </Button>
       <Auth.UserContextProvider supabaseClient={supabase}>
         <Container supabaseClient={supabase}>
           <Auth
@@ -264,25 +473,24 @@ export const ChangeViewState = (args: any) => {
                 <ReactMarkdown remarkPlugins={[gfm]} children={md} />
               </Typography>
             }
-            emailErrorMessage={
-              signinError || signupError || resetPasswordError || magicLinkError
-                ? 'You must provide a valid email address'
-                : undefined
+            emailErrorMessage={emailErrorMessage}
+            passwordErrorMessage={passwordErrorMessage}
+            confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+            onSigninError={(error: ApiError, type: AuthErrorType) =>
+              setErrorType(type)
             }
-            passwordErrorMessage={
-              signinError || signupError || updatePasswordError
-                ? 'You must provide a valid password'
-                : undefined
+            onSignupError={(error: ApiError, type: AuthErrorType) =>
+              setErrorType(type)
             }
-            onSigninError={(error: ApiError) => setSigninError(error)}
-            onSignupError={(error: ApiError) => setSignupError(error)}
-            onUpdatePasswordError={(error: ApiError) =>
-              setUpdatePasswordError(error)
+            onUpdatePasswordError={(error: ApiError, type: AuthErrorType) =>
+              setErrorType(type)
             }
-            onResetPasswordError={(error: ApiError) =>
-              setResetPasswordError(error)
+            onResetPasswordError={(error: ApiError, type: AuthErrorType) =>
+              setErrorType(type)
             }
-            onMagicLinkError={(error: ApiError) => setMagicLinkError(error)}
+            onMagicLinkError={(error: ApiError, type: AuthErrorType) =>
+              setErrorType(type)
+            }
           />
         </Container>
       </Auth.UserContextProvider>
@@ -296,14 +504,14 @@ Default.args = {
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-withSocialAuth.args = {
+WithSocialAuth.args = {
   supabaseClient: supabase,
   providers: ['facebook', 'google'],
   onAuthenticating: () => console.log('Authenticating!'),
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-withAllSocialAuth.args = {
+WithAllSocialAuth.args = {
   supabaseClient: supabase,
   providers: [
     'apple',
@@ -321,7 +529,7 @@ withAllSocialAuth.args = {
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-withSocialLargeButtons.args = {
+WithSocialLargeButtons.args = {
   supabaseClient: supabase,
   providers: [
     'apple',
@@ -340,7 +548,7 @@ withSocialLargeButtons.args = {
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-withColouredSocialAuth.args = {
+WithColouredSocialAuth.args = {
   supabaseClient: supabase,
   socialColors: true,
   providers: [
@@ -359,7 +567,7 @@ withColouredSocialAuth.args = {
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-withSocialAuthHorizontal.args = {
+WithSocialAuthHorizontal.args = {
   supabaseClient: supabase,
   providers: ['facebook', 'google'],
   socialLayout: 'horizontal',
@@ -367,11 +575,11 @@ withSocialAuthHorizontal.args = {
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
 }
 
-resetPassword.args = {
+ResetPassword.args = {
   supabaseClient: supabase,
 }
 
-updatePassword.args = {
+UpdatePassword.args = {
   supabaseClient: supabase,
   onAuthenticating: () => console.log('Authenticating!'),
   onEmailConfirmationSent: () => console.log('Email confirmation sent!'),
