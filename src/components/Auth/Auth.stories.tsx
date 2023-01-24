@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect, useState } from 'react'
 import { Auth } from '.'
-import { ApiError, createClient } from '@supabase/supabase-js'
+import { createClient, AuthError } from '@supabase/supabase-js'
 // @ts-ignore
 import { Typography, Button } from '../../index'
 import ReactMarkdown from 'react-markdown'
@@ -16,20 +16,6 @@ const supabase = createClient(
 export default {
   title: 'Auth/Auth',
   component: Auth,
-}
-
-const Container = (props: any) => {
-  const { user } = Auth.useUser()
-  if (user)
-    return (
-      <>
-        <Typography.Text>Signed in: {user.email}</Typography.Text>
-        <Button block onClick={() => props.supabaseClient.auth.signOut()}>
-          Sign out
-        </Button>
-      </>
-    )
-  return props.children
 }
 
 export const Default = (args: any) => {
@@ -60,22 +46,18 @@ export const Default = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 export const WithSocialAuth = (args: any) => {
@@ -106,22 +88,18 @@ export const WithSocialAuth = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 export const WithAllSocialAuth = (args: any) => {
@@ -152,22 +130,18 @@ export const WithAllSocialAuth = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 export const WithSocialLargeButtons = (args: any) => {
@@ -198,22 +172,18 @@ export const WithSocialLargeButtons = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 export const WithColouredSocialAuth = (args: any) => {
@@ -244,22 +214,18 @@ export const WithColouredSocialAuth = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 export const WithSocialAuthHorizontal = (args: any) => {
@@ -290,22 +256,18 @@ export const WithSocialAuthHorizontal = (args: any) => {
   }, [errorType])
 
   return (
-    <Auth.UserContextProvider {...args}>
-      <Container {...args}>
-        <Auth
-          {...args}
-          emailErrorMessage={emailErrorMessage}
-          passwordErrorMessage={passwordErrorMessage}
-          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-          onSigninError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-          onSignupError={(error: ApiError, type: AuthErrorType) =>
-            setErrorType(type)
-          }
-        />
-      </Container>
-    </Auth.UserContextProvider>
+    <Auth
+      {...args}
+      emailErrorMessage={emailErrorMessage}
+      passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+      onSigninError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+      onSignupError={(error: AuthError, type: AuthErrorType) =>
+        setErrorType(type)
+      }
+    />
   )
 }
 
@@ -344,7 +306,7 @@ export const ResetPassword = (args: any) => {
       passwordErrorMessage={passwordErrorMessage}
       confirmPasswordErrorMessage={confirmPasswordErrorMessage}
       onPasswordUpdated={() => setErrorType(null)}
-      onResetPasswordError={(error: ApiError, type: AuthErrorType) =>
+      onResetPasswordError={(error: AuthError, type: AuthErrorType) =>
         setErrorType(type)
       }
     />
@@ -370,7 +332,7 @@ export const UpdatePassword = (args: any) => {
       {...args}
       passwordErrorMessage={passwordErrorMessage}
       onPasswordUpdated={() => setErrorType(null)}
-      onUpdatePasswordError={(error: ApiError, type: AuthErrorType) =>
+      onUpdatePasswordError={(error: AuthError, type: AuthErrorType) =>
         setErrorType(type)
       }
     />
@@ -458,42 +420,38 @@ export const ChangeViewState = (args: any) => {
       >
         Privacy Policy
       </Button>
-      <Auth.UserContextProvider supabaseClient={supabase}>
-        <Container supabaseClient={supabase}>
-          <Auth
-            supabaseClient={supabase}
-            view={view}
-            termsOfService={
-              <Typography tag="article">
-                <ReactMarkdown remarkPlugins={[gfm]} children={md} />
-              </Typography>
-            }
-            privacyPolicy={
-              <Typography tag="article">
-                <ReactMarkdown remarkPlugins={[gfm]} children={md} />
-              </Typography>
-            }
-            emailErrorMessage={emailErrorMessage}
-            passwordErrorMessage={passwordErrorMessage}
-            confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-            onSigninError={(error: ApiError, type: AuthErrorType) =>
-              setErrorType(type)
-            }
-            onSignupError={(error: ApiError, type: AuthErrorType) =>
-              setErrorType(type)
-            }
-            onUpdatePasswordError={(error: ApiError, type: AuthErrorType) =>
-              setErrorType(type)
-            }
-            onResetPasswordError={(error: ApiError, type: AuthErrorType) =>
-              setErrorType(type)
-            }
-            onMagicLinkError={(error: ApiError, type: AuthErrorType) =>
-              setErrorType(type)
-            }
-          />
-        </Container>
-      </Auth.UserContextProvider>
+      <Auth
+        supabaseClient={supabase}
+        view={view}
+        termsOfService={
+          <Typography tag="article">
+            <ReactMarkdown remarkPlugins={[gfm]} children={md} />
+          </Typography>
+        }
+        privacyPolicy={
+          <Typography tag="article">
+            <ReactMarkdown remarkPlugins={[gfm]} children={md} />
+          </Typography>
+        }
+        emailErrorMessage={emailErrorMessage}
+        passwordErrorMessage={passwordErrorMessage}
+        confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+        onSigninError={(error: AuthError, type: AuthErrorType) =>
+          setErrorType(type)
+        }
+        onSignupError={(error: AuthError, type: AuthErrorType) =>
+          setErrorType(type)
+        }
+        onUpdatePasswordError={(error: AuthError, type: AuthErrorType) =>
+          setErrorType(type)
+        }
+        onResetPasswordError={(error: AuthError, type: AuthErrorType) =>
+          setErrorType(type)
+        }
+        onMagicLinkError={(error: AuthError, type: AuthErrorType) =>
+          setErrorType(type)
+        }
+      />
     </div>
   )
 }
