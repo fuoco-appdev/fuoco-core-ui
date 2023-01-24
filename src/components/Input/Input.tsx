@@ -197,6 +197,7 @@ function Input({
             >
               {reveal ? (
                 <Button
+                  tabIndex={-1}
                   htmlType={'button'}
                   size={'tiny'}
                   type={'text'}
@@ -207,6 +208,7 @@ function Input({
               {error && <InputErrorIcon />}
               {copy && !(reveal && hidden) ? (
                 <Button
+                  tabIndex={-1}
                   htmlType={'button'}
                   size="tiny"
                   type="default"
