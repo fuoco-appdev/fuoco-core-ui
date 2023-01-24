@@ -141,7 +141,6 @@ function InputGeocoding({
         const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxAccessToken}&autocomplete=true&types=${placeType}`
         const response = await fetch(endpoint)
         const results = await response.json()
-        setShowDropdown(true)
         setFeatures(results?.features)
       } catch (error) {
         console.error('Error fetching data, ', error)
@@ -241,6 +240,7 @@ function InputGeocoding({
 
               handleChange(event)
             }}
+            onInput={() => setShowDropdown(true)}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onFocus={onFocus}

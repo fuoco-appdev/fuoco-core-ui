@@ -34,6 +34,21 @@
   color: $gray-100;
 }
 
+.inputgeocoding::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $gray-300;
+}
+
+.inputgeocoding:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $gray-300;
+}
+
+.inputgeocoding::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $gray-300;
+}
+
 .dropdown {
   position: absolute;
   border-radius: $rounded-base;

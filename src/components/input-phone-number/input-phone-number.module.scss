@@ -35,6 +35,21 @@
   line-height: 1.25rem;
 }
 
+.inputphonenumber::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $gray-300;
+}
+
+.inputphonenumber:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $gray-300;
+}
+
+.inputphonenumber::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $gray-300;
+}
+
 .dropdown {
   height: inherit;
   width: inherit;
