@@ -7,6 +7,7 @@ import typescript from 'rollup-plugin-typescript2'
 import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
 import url from 'postcss-url'
+import json from '@rollup/plugin-json'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
@@ -69,6 +70,7 @@ export default [
         exclude: 'node_modules/**',
         extensions,
       }),
+      json(),
     ],
   },
 ]
