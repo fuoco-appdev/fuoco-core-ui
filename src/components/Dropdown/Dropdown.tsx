@@ -89,7 +89,7 @@ function Dropdown({
     },
     config: {
       tension: 1000,
-      friction: 30,
+      friction: 80,
       bounce: 0,
     },
   }))

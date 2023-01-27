@@ -2,8 +2,8 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-toast-root {
-  position: absolute;
+.toast-root {
+  position: fixed;
   height: inherit;
   width: inherit;
   z-index: 24;
@@ -11,28 +11,39 @@
   overflow: none;
 }
 
-.sbui-toast-overlay-container {
+.toast-overlay-container {
   height: inherit;
   width: inherit;
   display: flex;
   flex-direction: column-reverse;
-  align-items: flex-end;
   gap: 8px;
   padding: 16px;
   overflow: none;
 }
 
-.sbui-toast-content {
+.toast-overlay-container-left {
+  align-items: flex-start;
+}
+
+.toast-overlay-container-right {
+  align-items: flex-end;
+}
+
+.toast-overlay-container-center {
+  align-items: center;
+}
+
+.toast-content {
   display: flex;
   justify-content: space-between;
   flex: 1;
 }
 
-.sbui-toast-text-container {
+.toast-text-container {
   width: 100%;
 }
 
-.sbui-toast-container {
+.toast-container {
   position: relative;
   box-shadow: $shadow-6;
   border-radius: $rounded-md;
@@ -47,56 +58,60 @@
   border-color: $gray-400;
 }
 
-.sbui-toast-container--sm {
+.toast-container-touchscreen {
+  width: calc(100vw - $mp-8);
+}
+
+.toast-container-sm {
   max-width: 24rem;
 }
 
-.sbui-toast-container--md {
+.toast-container-md {
   max-width: 28rem;
 }
 
-.sbui-toast-container.sbui-toast-container--success {
+.toast-container.toast-container-success {
   border-width: 1px;
   border-style: solid;
   border-color: $green-500;
 }
-.sbui-toast-container.sbui-toast-container--error {
+.toast-container.toast-container-error {
   border-width: 1px;
   border-style: solid;
   border-color: $red-500;
 }
 
-.sbui-toast-container > div {
+.toast-container > div {
   display: flex;
   align-items: flex-start;
 }
 
-.sbui-toast-icon-container {
+.toast-icon-container {
   flex-shrink: 0;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
 
-.sbui-toast-details {
+.toast-details {
   display: flex;
   flex: 1;
   margin-left: $mp-3;
 }
 
-.sbui-toast-details--actions-bottom {
+.toast-details-actions-bottom {
   flex-direction: column;
 }
 
-.sbui-toast-details--actions-bottom .sbui-toast-details__actions {
+.toast-details-actions-bottom .toast-details__actions {
   margin-top: $mp-4;
 }
 
-.sbui-toast-details__content {
+.toast-details__content {
   display: flex;
   flex-direction: column;
 }
 
-.sbui-toast-message {
+.toast-message {
   margin: 0px;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
@@ -104,7 +119,7 @@
   color: $gray-100;
 }
 
-.sbui-toast-description {
+.toast-description {
   margin: 0px;
   margin-top: $mp-1;
   font-size: $font-size-sm;
@@ -113,19 +128,19 @@
   color: $gray-300;
 }
 
-.sbui-toast-details__actions {
+.toast-details__actions {
   display: flex;
   margin-right: $mp-4;
   margin-left: $mp-4;
 }
 
-.sbui-toast-close-container {
+.toast-close-container {
   display: flex;
   flex-shrink: 0;
   margin-left: $mp-4;
 }
 
-.sbui-toast-close-button {
+.toast-close-button {
   display: inline-flex;
   background-color: transparent;
   border-radius: $rounded-md;
@@ -143,15 +158,15 @@
   }
 }
 
-.sbui-toast-container--success .sbui-toast-icon-container {
+.toast-container-success .toast-icon-container {
   color: $green-500;
 }
 
-.sbui-toast-container--error .sbui-toast-icon-container {
+.toast-container-error .toast-icon-container {
   color: $red-500;
 }
 
-.sbui-alert--anim--spin {
+.alert-anim-spin {
   stroke: currentColor;
   animation-name: spin;
   animation-duration: 1500ms;
@@ -173,11 +188,11 @@
   }
 }
 
-.sbui-toast-life {
+.toast-life {
   position: absolute;
   bottom: 0;
   left: 0px;
   width: auto;
-  background-image: linear-gradient(130deg, #00b4e6, #10DADA);
+  background-image: linear-gradient(130deg, #00b4e6, #10dada);
   height: 5px;
 }

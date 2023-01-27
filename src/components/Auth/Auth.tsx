@@ -65,9 +65,11 @@ export interface AuthStrings {
   doYouHaveAnAccount?: string
   dontHaveAnAccount?: string
   newPassword?: string
+  confirmNewPassword?: string
   resetPassword?: string
   updatePassword?: string
   enterYourNewPassword?: string
+  confirmNewPasswordPlaceholder?: string
   agreeToThe?: string
   termsOfService?: string
   privacyPolicy?: string
@@ -78,7 +80,7 @@ export interface AuthStrings {
   signInWithPassword?: string
 }
 
-export interface Props {
+export interface AuthProps {
   supabaseClient: SupabaseClient
   className?: string
   children?: React.ReactNode
@@ -130,9 +132,11 @@ const defaultStrings: AuthStrings = {
   doYouHaveAnAccount: 'Do you have an account? Sign in',
   dontHaveAnAccount: "Don't have an account? Sign up",
   newPassword: 'New password',
+  confirmNewPassword: 'Confirm new password',
   resetPassword: 'Reset password',
   updatePassword: 'Update password',
   enterYourNewPassword: 'Enter your new password',
+  confirmNewPasswordPlaceholder: 'Confirm your new password',
   agreeToThe: 'I agree to the',
   termsOfService: 'Terms of Service',
   privacyPolicy: 'Privacy Policy',
@@ -177,7 +181,7 @@ function Auth({
   onUpdatePasswordError,
   onResetPasswordError,
   onMagicLinkError,
-}: Props): JSX.Element | null {
+}: AuthProps): JSX.Element | null {
   const [authView, setAuthView] = useState(view)
   const [defaultEmail, setDefaultEmail] = useState('')
   const [defaultPassword, setDefaultPassword] = useState('')
@@ -486,7 +490,7 @@ function SocialAuth({
   onSigninError,
   onSignupError,
   ...props
-}: Props) {
+}: AuthProps) {
   const rippleProps: RipplesProps = {
     color: 'rgba(0, 0, 0, .3)',
     during: 250,
@@ -750,6 +754,7 @@ function EmailAuth({
             )}
             {authView === VIEWS.SIGN_IN && (
               <Typography.Link
+                className={AuthStyles['link']}
                 href={'#'}
                 onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   onForgotPasswordRedirect ? onForgotPasswordRedirect(e) : null
@@ -947,6 +952,7 @@ function MagicLink({
           </Button>
         </div>
         <Typography.Link
+          className={AuthStyles['link']}
           href="#auth-sign-in"
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault()
@@ -1037,6 +1043,7 @@ function ForgottenPassword({
           </Button>
         </div>
         <Typography.Link
+          className={AuthStyles['link']}
           href={'#'}
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             onSigninRedirect ? onSigninRedirect(e) : null
@@ -1054,6 +1061,7 @@ function ResetPassword({
   supabaseClient,
   strings,
   passwordErrorMessage,
+  confirmPasswordErrorMessage,
   rippleProps = {
     color: 'rgba(0, 0, 0, .3)',
     during: 250,
@@ -1064,16 +1072,27 @@ function ResetPassword({
   supabaseClient: SupabaseClient
   strings?: AuthStrings
   passwordErrorMessage?: string
+  confirmPasswordErrorMessage?: string
   rippleProps?: RipplesProps
   onResetPasswordError?: (error: AuthError, type: AuthErrorType) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [password, setPassword] = useState('')
   const [passwordIconLit, setPasswordIconLit] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      if (password !== confirmPassword) {
+        onResetPasswordError?.(
+          new AuthError('Confirm password does not match', 401),
+          AuthErrorType.ConfirmPasswordNoMatch
+        )
+        return
+      }
+
       const { error } = await supabaseClient.auth.updateUser({
         password,
       })
@@ -1111,6 +1130,30 @@ function ResetPassword({
             }}
             onFocus={() => setPasswordIconLit(true)}
             onBlur={() => setPasswordIconLit(false)}
+          />
+          <Input
+            label={strings?.confirmNewPassword}
+            placeholder={strings?.confirmNewPasswordPlaceholder}
+            reveal={true}
+            password={true}
+            error={confirmPasswordErrorMessage}
+            icon={
+              <IconKey
+                size={21}
+                stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
+              />
+            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setConfirmPassword(e.target.value)
+            }
+            onMouseEnter={() => setConfirmPasswordIconLit(true)}
+            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
+              if (document.activeElement !== e.currentTarget) {
+                setConfirmPasswordIconLit(false)
+              }
+            }}
+            onFocus={() => setConfirmPasswordIconLit(true)}
+            onBlur={() => setConfirmPasswordIconLit(false)}
           />
           <Button
             block

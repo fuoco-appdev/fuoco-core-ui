@@ -32,6 +32,7 @@ export interface ToastProps {
   width?: 'xs' | 'sm' | 'md'
   disableLife?: boolean
   life?: SpringValue<string>
+  touchScreen?: boolean
 }
 
 function Message({
@@ -39,7 +40,7 @@ function Message({
   ...props
 }: ComponentProps<typeof Typography.Text>) {
   return (
-    <Typography.Text className={ToastStyles['sbui-toast-message']} {...props}>
+    <Typography.Text className={ToastStyles['toast-message']} {...props}>
       {children}
     </Typography.Text>
   )
@@ -50,67 +51,66 @@ function Description({
   ...props
 }: ComponentProps<typeof Typography.Text>) {
   return (
-    <Typography.Text
-      className={ToastStyles['sbui-toast-description']}
-      {...props}
-    >
+    <Typography.Text className={ToastStyles['toast-description']} {...props}>
       {children}
     </Typography.Text>
   )
 }
 
 function Toast(props: ToastProps) {
-  let containerClasses = [ToastStyles['sbui-toast-container']]
+  let containerClasses = [ToastStyles['toast-container']]
   if (props.type) {
-    containerClasses.push(ToastStyles[`sbui-toast-container--${props.type}`])
+    containerClasses.push(ToastStyles[`toast-container-${props.type}`])
   }
+  if (props.touchScreen) {
+    containerClasses.push(ToastStyles['toast-container-touchscreen'])
+  }
+
   if (props.width === 'sm' || props.width === 'md') {
-    containerClasses.push(ToastStyles[`sbui-toast-container--${props.width}`])
+    containerClasses.push(ToastStyles[`toast-container-${props.width}`])
   }
 
-  let closeButtonClasses = [ToastStyles['sbui-toast-close-button']]
+  let closeButtonClasses = [ToastStyles['toast-close-button']]
   if (props.type) {
-    closeButtonClasses.push(
-      ToastStyles[`sbui-toast-close-button--${props.type}`]
-    )
+    closeButtonClasses.push(ToastStyles[`toast-close-button-${props.type}`])
   }
 
-  let detailsClasses = [ToastStyles['sbui-toast-details']]
+  let detailsClasses = [ToastStyles['toast-details']]
   if (props.actionsPosition === 'bottom') {
-    detailsClasses.push(ToastStyles[`sbui-toast-details--actions-bottom`])
+    detailsClasses.push(ToastStyles[`toast-details-actions-bottom`])
   }
 
   return (
     <div ref={props?.refCallback} className={containerClasses.join(' ')}>
-      <div className={ToastStyles['sbui-toast-content']}>
-        <Typography.Text className={ToastStyles['sbui-toast-icon-container']}>
+      <div className={ToastStyles['toast-content']}>
+        <Typography.Text className={ToastStyles['toast-icon-container']}>
           {props.type === 'loading' ? (
             <IconLoader
               size="medium"
               strokeWidth={2}
-              className={ToastStyles['sbui-alert--anim--spin']}
+              className={ToastStyles['alert-anim-spin']}
             />
           ) : (
             props.icon || icons[props.type ?? 'blank']
           )}
         </Typography.Text>
-        <div className={ToastStyles['sbui-toast-text-container']}>
+        <div className={ToastStyles['toast-text-container']}>
           <div className={detailsClasses.join(' ')}>
-            <div className={ToastStyles['sbui-toast-details__content']}>
+            <div className={ToastStyles['toast-details__content']}>
               <Message>{props.message}</Message>
               {props.description && (
                 <Description>{props.description}</Description>
               )}
             </div>
             {props.actions && (
-              <div className={ToastStyles['sbui-toast-details__actions']}>
+              <div className={ToastStyles['toast-details__actions']}>
                 {props.actions}
               </div>
             )}
           </div>
         </div>
         {props.closable && (
-          <div className={ToastStyles['sbui-toast-close-container']}>
+          <div className={ToastStyles['toast-close-container']}>
             <Button
               type={'text'}
               className={closeButtonClasses.join(' ')}
@@ -129,7 +129,7 @@ function Toast(props: ToastProps) {
       </div>
       {!props.disableLife && props.life && (
         <animated.div
-          className={ToastStyles['sbui-toast-life']}
+          className={ToastStyles['toast-life']}
           style={{ right: props.life }}
         />
       )}
@@ -139,10 +139,17 @@ function Toast(props: ToastProps) {
 
 interface ToastOverlayProps {
   toasts: ToastProps[]
-  timeout: number
+  timeout?: number
+  align?: 'left' | 'right' | 'center'
+  touchScreen?: boolean
 }
 
-export function ToastOverlay({ toasts, timeout = 6000 }: ToastOverlayProps) {
+export function ToastOverlay({
+  toasts,
+  timeout = 6000,
+  align = 'right',
+  touchScreen = false,
+}: ToastOverlayProps) {
   const refMap = useMemo(() => new WeakMap<any, HTMLDivElement>(), [])
   const cancelMap = useMemo(() => new WeakMap<any, any>(), [])
   const [items, setItems] = useState<ToastProps[]>(toasts)
@@ -179,12 +186,18 @@ export function ToastOverlay({ toasts, timeout = 6000 }: ToastOverlayProps) {
   }, [toasts])
 
   return (
-    <div className={ToastStyles['sbui-toast-root']}>
-      <div className={ToastStyles['sbui-toast-overlay-container']}>
+    <div className={ToastStyles['toast-root']}>
+      <div
+        className={[
+          ToastStyles['toast-overlay-container'],
+          ToastStyles[`toast-overlay-container-${align}`],
+        ].join(' ')}
+      >
         {transitions(({ life, ...style }, item) => (
           <animated.div style={style}>
             <Toast
               {...item}
+              touchScreen={touchScreen}
               life={life}
               onClose={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation()

@@ -152,3 +152,42 @@ export const Loading = (args: any) => {
     </div>
   )
 }
+
+export const TouchScreen = (args: any) => {
+  const [toasts, setToasts] = useState<ToastProps[]>([])
+  return (
+    <div
+      style={{
+        height: '90vh',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }}
+    >
+      <div>
+        <Button
+          type={'primary'}
+          onClick={() => {
+            setToasts([
+              {
+                key: `test-${Math.random()}`,
+                message: 'Test',
+                description: 'This is a test!',
+              },
+            ])
+          }}
+        >
+          Add Toast
+        </Button>
+      </div>
+
+      <Toast.ToastOverlay
+        {...args}
+        toasts={toasts}
+        align={'center'}
+        touchScreen={true}
+      />
+    </div>
+  )
+}
