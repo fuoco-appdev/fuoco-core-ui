@@ -17,16 +17,17 @@
   display: flex;
   flex-direction: column-reverse;
   gap: 8px;
-  padding-right: $mp-10;
   overflow: none;
 }
 
 .toast-overlay-container-left {
   align-items: flex-start;
+  padding-left: $mp-10;
 }
 
 .toast-overlay-container-right {
   align-items: flex-end;
+  padding-right: $mp-10;
 }
 
 .toast-overlay-container-center {
