@@ -4,8 +4,8 @@
 
 .toast-root {
   position: fixed;
-  height: inherit;
-  width: inherit;
+  height: calc(100vh - 56px - $mp-8);
+  width: 100vw;
   z-index: 24;
   pointer-events: none;
   overflow: none;
