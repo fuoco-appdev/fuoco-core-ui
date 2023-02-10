@@ -30,6 +30,29 @@ export const Default = (args: any) => {
   )
 }
 
+export const AlignedRight = (args: any) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        height: '80vh',
+      }}
+    >
+      <LanguageSwitch
+        language={language}
+        parentRef={containerRef}
+        dropdownProps={{ align: DropdownAlignment.Left }}
+        onChange={(value) => setLanguage(value)}
+      />
+    </div>
+  )
+}
+
 export const TouchScreen = (args: any) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)

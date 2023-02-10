@@ -147,7 +147,7 @@ function Dropdown({
         if (align === DropdownAlignment.Left) {
           setLeft(anchorLeft)
         } else if (align === DropdownAlignment.Right) {
-          setLeft(anchorLeft + anchorWidth - dropdownWidth)
+          setLeft(anchorLeft + anchorWidth - dropdownWidth * 2)
         }
 
         onOpen?.()
