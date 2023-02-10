@@ -15,7 +15,7 @@ import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
 import { Typography } from '../typography'
 
-export interface Props {
+export interface InputPhoneNumberProps {
   id?: string
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
@@ -163,7 +163,7 @@ function InputPhoneNumber({
   onEnterKeyPress,
   isValid,
   onMount,
-}: Props) {
+}: InputPhoneNumberProps) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const numberInputRef = useRef<HTMLInputElement | null>(null)
   const inputRef = useRef<HTMLDivElement | null>(null)

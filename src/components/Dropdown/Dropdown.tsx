@@ -10,7 +10,7 @@ export enum DropdownAlignment {
   Right,
 }
 
-interface DropDownProps {
+export interface DropDownProps {
   id?: string
   className?: string
   ref?: React.LegacyRef<HTMLUListElement>
