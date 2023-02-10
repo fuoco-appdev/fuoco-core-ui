@@ -40,6 +40,7 @@ function Dropdown({
   style,
 }: DropDownProps) {
   const uListRef = useRef<HTMLUListElement | null>(null)
+  const divRef = useRef<HTMLDivElement | null>(null)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -82,10 +83,10 @@ function Dropdown({
 
   const [touchScreenProps, touchScreenApi] = useSpring(() => ({
     from: {
-      translateY: window.innerHeight + (uListRef.current?.clientHeight ?? 0),
+      bottom: -window.innerHeight,
     },
     to: {
-      translateY: window.innerHeight - (uListRef.current?.clientHeight ?? 0),
+      bottom: 0,
     },
     config: {
       tension: 1000,
@@ -99,7 +100,10 @@ function Dropdown({
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event: MouseEvent) {
-      const elementRect = uListRef?.current?.getBoundingClientRect()
+      let elementRect = uListRef?.current?.getBoundingClientRect()
+      if (touchScreen) {
+        elementRect = divRef?.current?.getBoundingClientRect()
+      }
       if (
         elementRect &&
         !(
@@ -156,9 +160,7 @@ function Dropdown({
       }
     } else {
       touchScreenApi.start({
-        translateY: open
-          ? window.innerHeight - (uListRef.current?.clientHeight ?? 0)
-          : window.innerHeight + (uListRef.current?.clientHeight ?? 0),
+        bottom: open ? 0 : -window.innerHeight,
       })
     }
   }, [open, children])
@@ -196,10 +198,10 @@ function Dropdown({
             className={DropdownStyles['touchscreen-overlay']}
           >
             <animated.div
+              ref={divRef}
+              className={DropdownStyles['touchscreen-animated-container']}
               style={{
                 ...touchScreenProps,
-                position: 'absolute',
-                width: '100%',
               }}
             >
               <ul

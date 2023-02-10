@@ -70,19 +70,23 @@
   width: 100vw;
   background-color: rgba(#000, 0.35);
   z-index: 24;
+  pointer-events: all;
+}
+
+.touchscreen-animated-container {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-top-left-radius: $rounded-base;
+  border-top-right-radius: $rounded-base;
+  max-height: 75vh;
+  overflow-y: auto;
 }
 
 .touchscreen-dropdown {
-  height: auto;
-  max-height: 75vh;
   width: 100%;
-  border-top-left-radius: $rounded-base;
-  border-top-right-radius: $rounded-base;
   padding-top: $mp-3;
-  padding-bottom: $mp-4;
+  padding-bottom: $mp-3;
   padding-left: 0;
-  background-color: white;
-  overflow-y: auto;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  z-index: 24;
 }
