@@ -1193,50 +1193,50 @@ function LanguageSwitch({
                 </span>
               </div>
             </Ripples>
-            <Dropdown
-              {...dropdownProps}
-              style={{
-                ...(type === 'listbox' && {
-                  width: anchorRef?.current?.getBoundingClientRect().width,
-                }),
-              }}
-              touchScreen={touchScreen}
-              parentRef={parentRef}
-              anchorRef={anchorRef}
-              open={showDropdown}
-              onClose={() => {
-                setShowDropdown(false)
-              }}
-            >
-              {supportedLanguages.map((language, index) => {
-                const inputFlagClasses = [
-                  styles['flag'],
-                  styles[language],
-                ].join(' ')
-                return (
-                  <Dropdown.Item
-                    onClick={(e) => {
-                      onChange?.(language, e)
-                      setShowDropdown(false)
-                    }}
-                    ref={(el: HTMLLIElement) =>
-                      (dropdownRefs[`flag_no_${index}`] = el)
-                    }
-                    key={`flag_no_${index}`}
-                  >
-                    <Dropdown.Icon>
-                      <div className={inputFlagClasses} />
-                    </Dropdown.Icon>
-                    <span className={styles['language-name']}>
-                      {isoLanguages[language]?.nativeName}
-                    </span>
-                  </Dropdown.Item>
-                )
-              })}
-            </Dropdown>
           </div>
         </FormLayout>
       )}
+      <Dropdown
+        {...dropdownProps}
+        style={{
+          ...(type === 'listbox' && {
+            width: anchorRef?.current?.getBoundingClientRect().width,
+            top:
+              (anchorRef?.current?.getBoundingClientRect()?.top ?? 0) +
+              (anchorRef?.current?.getBoundingClientRect()?.height ?? 0),
+          }),
+        }}
+        touchScreen={touchScreen}
+        parentRef={parentRef}
+        anchorRef={anchorRef}
+        open={showDropdown}
+        onClose={() => {
+          setShowDropdown(false)
+        }}
+      >
+        {supportedLanguages.map((language, index) => {
+          const inputFlagClasses = [styles['flag'], styles[language]].join(' ')
+          return (
+            <Dropdown.Item
+              onClick={(e) => {
+                onChange?.(language, e)
+                setShowDropdown(false)
+              }}
+              ref={(el: HTMLLIElement) =>
+                (dropdownRefs[`flag_no_${index}`] = el)
+              }
+              key={`flag_no_${index}`}
+            >
+              <Dropdown.Icon>
+                <div className={inputFlagClasses} />
+              </Dropdown.Icon>
+              <span className={styles['language-name']}>
+                {isoLanguages[language]?.nativeName}
+              </span>
+            </Dropdown.Item>
+          )
+        })}
+      </Dropdown>
     </>
   )
 }
