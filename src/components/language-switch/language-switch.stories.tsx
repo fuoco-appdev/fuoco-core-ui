@@ -53,6 +53,29 @@ export const AlignedRight = (args: any) => {
   )
 }
 
+export const Listbox = (args: any) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '80vh',
+      }}
+    >
+      <LanguageSwitch
+        language={language}
+        parentRef={containerRef}
+        dropdownProps={{ align: DropdownAlignment.Left }}
+        type={'listbox'}
+        onChange={(value) => setLanguage(value)}
+      />
+    </div>
+  )
+}
+
 export const TouchScreen = (args: any) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)

@@ -8,6 +8,91 @@
   color: $gray-600;
 }
 
+.listbox-container {
+}
+
+.listbox {
+  display: flex;
+  width: 100%;
+  padding: $mp-3 $mp-3;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  border-radius: $rounded-md;
+  color: $gray-100;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $gray-100;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  background-image: none;
+  cursor: default;
+  background: transparent;
+  align-items: center;
+  outline: none;
+  box-shadow: none;
+}
+
+.listbox:hover {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: $brand-200;
+}
+
+.listbox:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.listbox-icon-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: $mp-3;
+}
+
+.listbox-ripple {
+  display: flex !important;
+  height: inherit;
+  width: inherit;
+  pointer-events: auto;
+  justify-content: flex-start;
+}
+
+.listbox-actions-container {
+  display: flex;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding-right: $mp-1;
+}
+
+.listbox-label {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $gray-100;
+}
+
+.listbox-chevron-container {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.listbox-chevron {
+  height: $mp-5;
+  width: $mp-5;
+  color: $gray-100;
+}
+
 .flag {
   width: 25px;
   height: 20px;
