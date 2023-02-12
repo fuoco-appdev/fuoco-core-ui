@@ -197,31 +197,31 @@ function Listbox({
                       </span>
                     </HeadlessListbox.Button>
                   </Ripples>
-                  <Dropdown
-                    style={{
-                      width: anchorRef?.current?.getClientRects()[0].width,
-                    }}
-                    touchScreen={touchScreen}
-                    onOpen={() => {
-                      onFocus?.()
-                      for (const key in childRefs) {
-                        childRefs[key]?.current?.updateSelectedValue(
-                          selectedProps?.value
-                        )
-                      }
-                    }}
-                    onClose={() => {
-                      onBlur?.()
-                    }}
-                    align={DropdownAlignment.Left}
-                    open={open}
-                    anchorRef={anchorRef}
-                  >
-                    {options.map((option) => {
-                      return <ListboxOption {...option} />
-                    })}
-                  </Dropdown>
                 </div>
+                <Dropdown
+                  style={{
+                    width: anchorRef?.current?.getClientRects()[0].width,
+                  }}
+                  touchScreen={touchScreen}
+                  onOpen={() => {
+                    onFocus?.()
+                    for (const key in childRefs) {
+                      childRefs[key]?.current?.updateSelectedValue(
+                        selectedProps?.value
+                      )
+                    }
+                  }}
+                  onClose={() => {
+                    onBlur?.()
+                  }}
+                  align={DropdownAlignment.Left}
+                  open={open}
+                  anchorRef={anchorRef}
+                >
+                  {options.map((option) => {
+                    return <ListboxOption {...option} />
+                  })}
+                </Dropdown>
               </ListboxContext.Provider>
             )
           }}

@@ -46,7 +46,7 @@ export const AlignedRight = (args: any) => {
       <LanguageSwitch
         language={language}
         parentRef={containerRef}
-        dropdownProps={{ align: DropdownAlignment.Left }}
+        dropdownProps={{ align: DropdownAlignment.Right }}
         onChange={(value) => setLanguage(value)}
       />
     </div>
