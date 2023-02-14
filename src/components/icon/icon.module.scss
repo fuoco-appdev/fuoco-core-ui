@@ -1,0 +1,61 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.sbui-icon {
+  display: inline;
+}
+
+.sbui-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $rounded-full;
+  padding: $mp-3;
+  flex-shrink: 0;
+}
+
+.sbui-icon-container--brand {
+  background-color: $brand-500;
+  color: $gray-100;
+}
+
+.sbui-icon-container--gray {
+  background-color: $gray-600;
+  color: $gray-500;
+}
+
+.sbui-icon-container--red {
+  background-color: $red-600;
+  color: $red-500;
+}
+
+.sbui-icon-container--yellow {
+  background-color: $yellow-600;
+  color: $yellow-500;
+}
+
+.sbui-icon-container--green {
+  background-color: $green-600;
+  color: $green-500;
+}
+
+.sbui-icon-container--blue {
+  background-color: $blue-600;
+  color: $blue-500;
+}
+
+.sbui-icon-container--indigo {
+  background-color: $indigo-600;
+  color: $indigo-500;
+}
+
+.sbui-icon-container--purple {
+  background-color: $purple-600;
+  color: $purple-500;
+}
+
+.sbui-icon-container--pink {
+  background-color: $pink-600;
+  color: $pink-500;
+}

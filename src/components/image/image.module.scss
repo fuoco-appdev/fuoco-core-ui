@@ -1,0 +1,24 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.sbui-image {
+
+}
+
+.sbui-image-circle {
+    border-radius: $rounded-full;
+}
+
+.sbui-image-normal {
+
+}
+
+.sbui-image-rounded {
+    border-radius: $rounded-base;
+}
+
+.sbui-image-responsive {
+    width: 100%;
+    height: auto;
+}

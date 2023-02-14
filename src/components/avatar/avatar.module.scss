@@ -1,0 +1,80 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.avatar {
+  position: relative;
+  border-radius: $rounded-full;
+  background-color: $gray-200;
+  height: 56px;
+  width: 56px;
+  user-select: none;
+
+  & .edit-image-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 28px;
+    width: 28px;
+    -webkit-tap-highlight-color: transparent;
+
+    & .edit-image-button-ripple {
+      border-radius: $rounded-full;
+      height: inherit;
+      width: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: $shadow-1;
+      cursor: pointer;
+
+      & .edit-image-button {
+        background-color: $gray-500;
+      }
+    }
+  }
+}
+
+.avatar-type-rounded {
+  border-radius: 10%;
+}
+
+.avatar-type-square {
+  border-radius: 0;
+}
+
+.avatar-image {
+  object-fit: 'contain';
+  border-radius: '50%';
+}
+
+.avatar-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  font-weight: $font-weight-bold;
+}
+
+.avatar-single {
+}
+
+.avatar-multiple {
+}
+
+.image-responsive {
+  width: 100%;
+  height: auto;
+}

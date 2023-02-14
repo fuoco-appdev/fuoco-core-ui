@@ -1,0 +1,46 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+svg {
+  display: inline;
+}
+
+.sbui-menu__item {
+  padding: $mp-2 $mp-4;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  & :hover {
+    background-color: $gray-400;
+  }
+}
+
+.sbui-menu__group {
+  padding: $mp-2 $mp-4;
+}
+
+.sbui-menu__content {
+  width: 100%;
+}
+
+.sbui-menu__item--active {
+  background-color: $gray-400;
+  color: $gray-100;
+}
+
+.sbui-menu__item--active .sbui-menu__content {
+  color: $gray-100;
+}
+
+.sbui-menu__item--active--bar {
+  border-left-style: solid;
+  border-left-width: 4px;
+  border-color: $brand-500;
+}
+
+.sbui-menu__item--rounded {
+  border-radius: $rounded-base;
+}

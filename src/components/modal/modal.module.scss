@@ -1,0 +1,171 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.modal-flex-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: $mp-4;
+  padding-left: $mp-6;
+  padding-right: $mp-6;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.modal-overlay-container {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(#000, 0.35);
+}
+
+.modal-div-trick {
+  display: none;
+}
+
+.modal-container {
+}
+
+.modal {
+  position: relative;
+  display: inline-block;
+  border-radius: $rounded-md;
+  border: 0;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: $shadow-6;
+  vertical-align: middle;
+  z-index: 24;
+}
+
+.modal-background {
+  position: absolute;
+  background-color: white;
+  backdrop-filter: blur(6px);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: $rounded-md;
+}
+
+.modal-content {
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 56px;
+}
+
+.footer-button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: $mp-2;
+  padding: $mp-2;
+}
+
+.modal-tiny {
+}
+
+.modal-small {
+}
+
+.modal-medium {
+}
+
+.modal-large {
+}
+
+.modal-text {
+  padding: $mp-4;
+}
+
+.modal-title {
+  padding-bottom: $mp-4;
+  font-weight: $font-weight-bold;
+  color: $gray-800;
+}
+
+.modal-description {
+  color: $gray-800;
+}
+
+.modal-footer {
+  justify-content: flex-end;
+}
+
+.footer-cancel-text {
+  color: $gray-800;
+}
+
+.modal-footer-with-bg {
+  justify-content: flex-end;
+}
+
+.modal-icon-container {
+  margin-left: auto;
+  margin-right: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem /* 48px */;
+  width: 3rem /* 48px */;
+  border-radius: $rounded-full;
+}
+
+.modal-icon-container-danger {
+  color: $red-600;
+}
+
+.modal-icon-container-warning {
+  color: $yellow-600;
+}
+
+.modal-icon-container-success {
+  color: $brand-100;
+  background-color: $brand-100;
+}
+
+.modal-close-container {
+  position: absolute;
+  right: $mp-1;
+  top: $mp-1;
+}
+
+.modal-close-button {
+  width: 42px;
+  height: 42px;
+  border-radius: $rounded-full;
+}
+
+.modal-close-container button,
+.dark .modal-close-container button {
+  color: $gray-400;
+
+  & :hover {
+    color: $gray-900;
+    background-color: transparent;
+  }
+}
+
+.sidepanel__trigger {
+  border-style: none;
+  background-color: transparent;
+  padding: 0px;
+}

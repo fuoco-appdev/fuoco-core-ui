@@ -1,0 +1,16 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.form-textarea:disabled {
+  background-color: $gray-100;
+  cursor: not-allowed;
+}
+
+.form-textarea--error {
+  border-color: $red-500;
+}
+
+.form-textarea--borderless {
+  border-style: none;
+}

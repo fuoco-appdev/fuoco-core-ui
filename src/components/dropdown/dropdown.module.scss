@@ -1,0 +1,93 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.dropdown-item {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item:hover {
+  background-color: $gray-200;
+}
+
+.dropdown-item-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: inherit;
+  color: $gray-300;
+}
+
+.dropdown-item svg {
+  color: $gray-300;
+}
+
+.dropdown-label {
+  display: flex;
+  align-items: center;
+  font-size: $rounded-xl;
+  color: $gray-300;
+  padding: $mp-1-5 $mp-4;
+  margin-right: $mp-2;
+  margin-left: $mp-2;
+}
+
+.dropdown-misc {
+  padding: $mp-1-5 $mp-4;
+}
+
+.dropdown-input {
+  display: flex;
+  align-items: center;
+  padding-left: $mp-8;
+  padding-right: $mp-4;
+}
+
+.dropdown {
+  max-height: 300px;
+  border-radius: $rounded-base;
+  padding-top: $mp-3;
+  padding-bottom: $mp-3;
+  padding-left: 0;
+  background-color: white;
+  overflow-y: auto;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.dropdown-icon {
+  padding-right: $mp-3;
+}
+
+.touchscreen-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(#000, 0.35);
+  z-index: 24;
+  pointer-events: all;
+}
+
+.touchscreen-animated-container {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-top-left-radius: $rounded-base;
+  border-top-right-radius: $rounded-base;
+  max-height: 75vh;
+  min-height: 25vh;
+  overflow-y: auto;
+}
+
+.touchscreen-dropdown {
+  width: 100%;
+  padding-top: $mp-3;
+  padding-bottom: $mp-3;
+  padding-left: 0;
+}

@@ -1,0 +1,29 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.card {
+  display: flex;
+  background-color: $gray-100;
+  border-radius: $rounded-md;
+  box-shadow: $shadow-2;
+  width: fit-content;
+  transition: all $duration-expand-md;
+  transition-timing-function: $transition-standard-easing;
+}
+
+.card-hoverable:hover {
+  box-shadow: $shadow-6;
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-head {
+  justify-content: space-between;
+}
+
+.card-content {
+  padding-bottom: $mp-2;
+}

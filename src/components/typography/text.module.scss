@@ -1,0 +1,88 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.sbui-typography-text {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  color: inherit;
+}
+
+.sbui-typography-text-center {
+  align-self: center;
+}
+
+.sbui-typography-text-left {
+  align-self: flex-start;
+}
+
+.sbui-typography-text-right {
+  align-self: flex-end;
+}
+
+.sbui-typography-text-small {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+.sbui-typography-text-secondary {
+  color: white;
+}
+
+.sbui-typography-text-success {
+  color: $green-500;
+}
+
+.sbui-typography-text-warning {
+  color: $yellow-500;
+}
+
+.sbui-typography-text-danger {
+  color: $red-500;
+}
+
+.sbui-typography-text-disabled {
+  color: $gray-400;
+  cursor: not-allowed;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sbui-typography-text-underline {
+  text-decoration-line: underline;
+}
+
+.sbui-typography-text-strikethrough {
+  text-decoration-line: line-through;
+}
+
+.sbui-typography-text strong {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+mark.sbui-typography-text {
+  padding: 0;
+  background-color: #ffe58f;
+}
+
+code.sbui-typography-text {
+  /* margin: 0 .2em; */
+  padding: 0.2em 0.4em 0.1em;
+  /* font-size: 85%; */
+  background: hsla(0, 0%, 58.8%, 0.1);
+  border: 1px solid hsla(0, 0%, 39.2%, 0.2);
+  border-radius: 3px;
+}
+
+kbd.sbui-typography-text {
+  /* margin: 0 .2em; */
+  padding: 0.15em 0.4em 0.1em;
+  /* font-size: 90%; */
+  background: hsla(0, 0%, 58.8%, 0.06);
+  border: solid hsla(0, 0%, 39.2%, 0.2);
+  border-width: 1px 1px 2px;
+  border-radius: 3px;
+}

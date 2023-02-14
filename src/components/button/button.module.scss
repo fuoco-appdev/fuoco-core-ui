@@ -1,0 +1,283 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.button {
+  position: relative;
+  display: inline-flex;
+  font-family: inherit;
+  font-weight: $font-weight-medium;
+  padding: $mp-2 $mp-4;
+  align-items: center;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: $rounded-base;
+  cursor: pointer;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  text-transform: uppercase;
+  font-size: $font-size-sm;
+}
+
+.button-ripple {
+  display: flex;
+  height: inherit;
+  width: inherit;
+  pointer-events: auto;
+  justify-content: center;
+  border-radius: $rounded-base;
+}
+
+.button-children {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  align-items: center;
+  width: inherit;
+}
+
+.button-desktop:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.button-container-shadow {
+  box-shadow: $shadow-2;
+}
+
+.button-w-full {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.button:disabled {
+  pointer-events: none;
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/*
+  Button sizes
+*/
+
+.button-tiny {
+  padding: $mp-1-5 $mp-2-5;
+  line-height: $font-line-height-sm;
+}
+.button-small {
+  padding: $mp-2 $mp-4;
+  line-height: $font-line-height-xs;
+}
+.button-medium {
+  padding: $mp-2 $mp-6;
+  line-height: $font-line-height-sm;
+}
+.button-large {
+  padding: $mp-2 $mp-8;
+  line-height: $font-line-height-base;
+}
+.button-xlarge {
+  padding: $mp-3 $mp-10;
+  line-height: $font-line-height-base;
+}
+.button-full {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+  Button varients
+*/
+.button-primary {
+  background-color: $brand-500;
+  color: $gray-100;
+}
+
+.button-primary-desktop:hover {
+  background-color: $brand-600;
+}
+
+.button-default {
+  color: $gray-500;
+  background-color: $gray-100;
+  border-color: $gray-200;
+}
+
+.button-default-desktop:hover {
+  color: $gray-500;
+  background-color: $gray-100;
+  border-color: $gray-200;
+}
+
+.dark .button-default {
+  text-shadow: $shadow-1;
+}
+
+.button-secondary {
+  color: $gray-100;
+  background-color: $gray-600;
+}
+
+.button-secondary-desktop:hover {
+  background-color: $gray-100;
+
+  & .button-children {
+    color: $gray-900;
+  }
+}
+
+.dark .button-secondary {
+  text-shadow: $shadow-1;
+}
+
+.button-outline {
+  border-width: 1px;
+  color: $gray-100;
+  background-color: transparent;
+  border-color: $gray-200;
+  border-style: solid;
+}
+
+.button-outline-desktop:hover {
+  background-color: white;
+  color: $gray-500;
+  border-color: $gray-600;
+}
+
+.button-dashed {
+  border-width: 1px;
+  color: $gray-500;
+  background-color: transparent;
+  border-color: $gray-200;
+  border-style: dashed;
+}
+
+.button-dashed-desktop:hover {
+  color: $gray-100;
+  border-color: $gray-600;
+}
+
+.button-link {
+  background-color: transparent;
+  color: $brand-800;
+}
+
+.button-link-desktop:hover {
+  background-color: $brand-100;
+}
+
+.button-text {
+  color: $gray-100;
+  background-color: transparent;
+}
+
+.button-text-desktop:hover {
+  background-color: rgba(#fff, 0.15);
+}
+
+.button-danger {
+  border-color: $red-500;
+  color: $red-500;
+}
+
+.dark .button-danger {
+  text-shadow: $shadow-1;
+}
+
+.button-primary.button-danger {
+  background-color: $red-500;
+  color: white;
+}
+
+.button-primary-desktop.button-danger:hover {
+  background-color: $red-600;
+  border-color: $red-600;
+}
+
+.button-default.button-danger,
+.button-secondary.button-danger,
+.button-outline.button-danger,
+.button-dashed.button-danger,
+.button-link.button-danger,
+.button-text.button-danger {
+  & :hover {
+    background-color: $red-600;
+    color: white;
+    border-color: $red-600;
+  }
+}
+/* {
+  @apply hover:bg-red-600 hover:text-white hover:border-red-600;
+} */
+
+/* 
+  Animation for icon
+*/
+.button-anim-spin {
+  stroke: currentColor;
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */
+  /* transform: rotate(.03turn);  */
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button-loader-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto 0;
+  width: inherit;
+  height: inherit;
+}
+
+.button-text-fade-out span {
+  opacity: 0%;
+}
+
+.button-text-align-left {
+  justify-content: flex-start;
+}
+
+.button-text-align-right {
+  justify-content: flex-end;
+}
+
+.button-text-align-center {
+  width: inherit;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.left-icon-space {
+  margin-right: $mp-2;
+}
+
+.right-icon-space {
+  margin-left: $mp-2;
+}

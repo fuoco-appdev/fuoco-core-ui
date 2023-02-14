@@ -1,0 +1,22 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.sbui-upload-dragger {
+  display: flex;
+  justify-content: center;
+  padding-left: $mp-6;
+  padding-right: $mp-6;
+  padding-top: $mp-5;
+  padding-bottom: $mp-6;
+  border-width: 2px;
+  border-color: $gray-300;
+  border-style: dashed;
+  border-radius: $rounded-md;
+  cursor: pointer;
+  max-width: 32rem/* 512px */;
+}
+
+.sbui-upload-dragger--dragged {
+  background-color: $brand-100;
+}
