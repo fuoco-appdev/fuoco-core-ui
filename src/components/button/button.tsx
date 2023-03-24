@@ -2,7 +2,6 @@ import React from 'react'
 // @ts-ignore
 import ButtonStyles from './button.module.scss'
 import { IconContext } from '../icon/icon-context'
-import { IconLoader } from '../icon/icons/icon-loader'
 import Ripples, { RipplesProps } from 'react-ripples'
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -21,7 +20,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode
   iconRight?: React.ReactNode
   loading?: boolean
-  loadingCentered?: boolean
   shadow?: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'full'
   style?: React.CSSProperties
@@ -62,7 +60,6 @@ function Button(
     icon,
     iconRight,
     loading = false,
-    loadingCentered = false,
     shadow = true,
     size = 'tiny',
     style,
@@ -118,10 +115,7 @@ function Button(
 
   const iconLoaderClasses = [ButtonStyles['button-anim-spin']]
 
-  if (loadingCentered) {
-    iconLoaderClasses.push(ButtonStyles[`button-loader-center`])
-  }
-  if (loading && loadingCentered) {
+  if (loading) {
     classes.push(ButtonStyles[`button-text-fade-out`])
   }
 
@@ -159,7 +153,7 @@ function Button(
       >
         {showIcon &&
           (loading ? (
-            <IconLoader size={size} className={iconLoaderClasses.join(' ')} />
+            <div />
           ) : icon ? (
             <IconContext.Provider value={{ contextSize: size }}>
               <div className={leftIconClasses.join(' ')}>{icon}</div>

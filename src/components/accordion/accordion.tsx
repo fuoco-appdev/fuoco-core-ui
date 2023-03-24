@@ -9,7 +9,7 @@ import Ripples from 'react-ripples'
 import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
 import AccordionStyles from './accordion.module.scss'
-import { IconChevronUp } from '../icon/icons/icon-chevron-up'
+import { ExpandMore } from '../icon/icons/line'
 import { Button, Typography } from '../../index'
 import { animated, useSpring, useTransition } from 'react-spring'
 
@@ -142,7 +142,7 @@ export function Item({ children, classNames, label, id }: ItemProps) {
                     style={buttonIconStyle}
                     onClick={() => setDisclosureOpen(!disclosureOpen)}
                   >
-                    <IconChevronUp strokeWidth={2} />
+                    <ExpandMore />
                   </animated.div>
                 }
               />
