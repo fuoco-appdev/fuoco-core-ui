@@ -21,10 +21,10 @@ const icons: Record<
   'success' | 'danger' | 'warning' | 'info',
   React.ReactElement
 > = {
-  danger: <Error />,
-  success: <CheckCircle />,
-  warning: <Warning />,
-  info: <Info />,
+  danger: <Error size={24} />,
+  success: <CheckCircle size={24} />,
+  warning: <Warning size={24} />,
+  info: <Info size={24} />,
 }
 
 const Alert = ({

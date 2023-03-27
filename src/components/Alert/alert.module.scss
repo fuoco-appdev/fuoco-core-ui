@@ -91,6 +91,9 @@
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   & :hover {
     background: transparent;
