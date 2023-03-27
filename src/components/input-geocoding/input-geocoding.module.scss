@@ -7,6 +7,9 @@
   flex-direction: row;
   box-sizing: border-box;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   border-width: 1px;
   border-style: solid;
   border-color: $gray-100;
@@ -52,10 +55,12 @@
 .dropdown {
   position: absolute;
   border-radius: $rounded-base;
+  -webkit-border-radius: $rounded-base;
+  -moz-border-radius: $rounded-base;
+  -khtml-border-radius: $rounded-base;
   border-width: 1px;
   border-color: $gray-100;
   color: white;
-  border-radius: 0.25rem !important;
   top: 36px;
   height: inherit;
   width: inherit;
@@ -80,6 +85,9 @@
   padding-bottom: $mp-1;
   width: 100%;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   border-width: 1px;
@@ -163,6 +171,9 @@
   border-width: 1px;
   border-style: solid;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   border-color: $gray-100;
   background-color: white;
 

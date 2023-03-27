@@ -9,7 +9,7 @@ import { CountryDataProps, CountryData } from './country-data'
 import { Dropdown } from '../dropdown/index'
 import { Divider } from '../divider'
 import InputIconContainer from '../../lib/layout/input-icon-container'
-import { IconSearch } from '../icon/icons/icon-search'
+import { ErrorOutline, Search } from '../icon/icons/line'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
@@ -632,7 +632,8 @@ function InputPhoneNumber({
             className={InputPhoneNumberStyles['search-container']}
           >
             <div className={InputPhoneNumberStyles['search-icon']}>
-              <IconSearch
+              <Search
+                size={24}
                 className={InputPhoneNumberStyles['search--with-icon']}
               />
             </div>
@@ -959,7 +960,7 @@ function InputPhoneNumber({
           />
           {error ? (
             <div className={InputPhoneNumberStyles['actions-container']}>
-              {error && <InputErrorIcon />}
+              {error && <ErrorOutline size={24} color={'#ff0000'} />}
             </div>
           ) : null}
         </div>

@@ -13,6 +13,9 @@
   border-color: $gray-300;
   border-style: dashed;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   cursor: pointer;
   max-width: 32rem/* 512px */;
 }

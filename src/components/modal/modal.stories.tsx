@@ -5,9 +5,7 @@ import { Modal } from '.'
 import { Typography } from '../../index'
 import { Badge } from '../badge'
 import { Button } from '../button'
-import { IconTrash } from '../icon/icons/icon-trash'
-import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
-import { IconCheck } from '../icon/icons/icon-check'
+import { Delete, Error, CheckCircle } from '../icon/icons/line'
 import { Dropdown } from '../dropdown'
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -361,7 +359,7 @@ withFooterBackground.args = {
   description: 'And i am the description',
 }
 
-const icon = <IconAlertCircle background="brand" size="xlarge" />
+const icon = <Error />
 
 withIcon.args = {
   visible: true,
@@ -449,7 +447,7 @@ customFooterVertical.args = {
       <Button size="medium" block type="secondary">
         Cancel
       </Button>
-      <Button size="medium" block danger icon={<IconTrash />}>
+      <Button size="medium" block danger icon={<Delete />}>
         Delete
       </Button>
     </div>,
@@ -459,7 +457,7 @@ customFooterVertical.args = {
 CustomFooterOneButton.args = {
   visible: true,
   size: 'small',
-  icon: <IconCheck background="brand" size="xxxlarge" />,
+  icon: <CheckCircle />,
   onCancel: action('onCancel'),
   onConfirm: action('onConfirm'),
   title: 'Payment succesful',
@@ -468,7 +466,7 @@ CustomFooterOneButton.args = {
   layout: 'vertical',
   customFooter: [
     <div style={{ width: '100%' }}>
-      <Button size="medium" block icon={<IconCheck />}>
+      <Button size="medium" block icon={<CheckCircle />}>
         Confirm
       </Button>
     </div>,

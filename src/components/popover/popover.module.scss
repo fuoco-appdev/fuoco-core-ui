@@ -10,6 +10,9 @@
   border-width: 1px;
   border-color: $gray-100;
   border-radius: $rounded-base;
+  -webkit-border-radius: $rounded-base;
+  -moz-border-radius: $rounded-base;
+  -khtml-border-radius: $rounded-base;
   box-shadow: $shadow-6;
 }
 

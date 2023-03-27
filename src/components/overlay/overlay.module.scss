@@ -20,9 +20,15 @@
     top: $mp-2;
     right: $mp-2;
     border-radius: $rounded-full;
+    -webkit-border-radius: $rounded-full;
+    -moz-border-radius: $rounded-full;
+    -khtml-border-radius: $rounded-full;
 
     & .exit-button-container {
       border-radius: $rounded-full;
+      -webkit-border-radius: $rounded-full;
+      -moz-border-radius: $rounded-full;
+      -khtml-border-radius: $rounded-full;
 
       & .exit-button {
         padding: $mp-3 !important;

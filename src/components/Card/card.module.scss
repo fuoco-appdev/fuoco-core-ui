@@ -6,6 +6,9 @@
   display: flex;
   background-color: $gray-100;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   box-shadow: $shadow-2;
   width: fit-content;
   transition: all $duration-expand-md;

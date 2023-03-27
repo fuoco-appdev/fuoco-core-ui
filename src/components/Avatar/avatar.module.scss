@@ -5,6 +5,9 @@
 .avatar {
   position: relative;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   background-color: $gray-200;
   height: 56px;
   width: 56px;
@@ -20,6 +23,9 @@
 
     & .edit-image-button-ripple {
       border-radius: $rounded-full;
+      -webkit-border-radius: $rounded-full;
+      -moz-border-radius: $rounded-full;
+      -khtml-border-radius: $rounded-full;
       height: inherit;
       width: inherit;
       display: flex;
@@ -37,6 +43,9 @@
 
 .avatar-type-rounded {
   border-radius: 10%;
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  -khtml-border-radius: 10%;
 }
 
 .avatar-type-square {
@@ -45,7 +54,10 @@
 
 .avatar-image {
   object-fit: 'contain';
-  border-radius: '50%';
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -khtml-border-radius: 50%;
 }
 
 .avatar-children {

@@ -8,6 +8,9 @@
 
 .sbui-image-circle {
     border-radius: $rounded-full;
+    -webkit-border-radius: $rounded-full;
+    -moz-border-radius: $rounded-full;
+    -khtml-border-radius: $rounded-full;
 }
 
 .sbui-image-normal {
@@ -16,6 +19,9 @@
 
 .sbui-image-rounded {
     border-radius: $rounded-base;
+    -webkit-border-radius: $rounded-base;
+    -moz-border-radius: $rounded-base;
+    -khtml-border-radius: $rounded-base;
 }
 
 .sbui-image-responsive {

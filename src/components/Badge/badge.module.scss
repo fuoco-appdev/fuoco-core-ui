@@ -7,6 +7,9 @@
   align-items: center;
   padding: $mp-0-5 $mp-2-5;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   font-weight: $font-weight-medium;
@@ -17,6 +20,9 @@
 .sbui-badge--large {
   padding: $mp-0-5 $mp-3;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }

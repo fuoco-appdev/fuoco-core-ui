@@ -75,6 +75,9 @@ code.sbui-typography-text {
   background: hsla(0, 0%, 58.8%, 0.1);
   border: 1px solid hsla(0, 0%, 39.2%, 0.2);
   border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
 }
 
 kbd.sbui-typography-text {
@@ -85,4 +88,7 @@ kbd.sbui-typography-text {
   border: solid hsla(0, 0%, 39.2%, 0.2);
   border-width: 1px 1px 2px;
   border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
 }

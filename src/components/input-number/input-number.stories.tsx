@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react'
 // import { AutoForm } from 'uniforms'
 
 import { InputNumber } from '.'
-import { IconPackage } from '../icon/icons/icon-package'
+import { ShoppingBasket } from '../icon/icons/line'
 
 export default {
   title: 'Data Input/InputNumber',
@@ -48,7 +48,7 @@ WithIcon.args = {
   layout: 'vertical',
   max: 100,
   min: 0,
-  icon: <IconPackage />,
+  icon: <ShoppingBasket />,
 }
 
 Controlled.args = {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import Listbox, { OptionProps } from './listbox'
-import { IconGlobe } from '../icon/icons/icon-globe'
+import { Language } from '../icon/icons/line'
 
 export default {
   title: 'Data Input/Listbox',
@@ -154,7 +154,9 @@ export const WithIcon = (args: any) => {
     <Listbox
       label="Language"
       layout="vertical"
-      icon={<IconGlobe stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />}
+      icon={
+        <Language size={24} stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />
+      }
       onChange={(index: number, id: string, value: string) =>
         console.log(value)
       }

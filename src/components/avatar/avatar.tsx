@@ -3,7 +3,7 @@ import { Icon } from '../icon/icon-import-handler'
 // @ts-ignore
 import styles from './avatar.module.scss'
 import Ripples, { RipplesProps } from 'react-ripples'
-import { IconCamera } from '../icon'
+import { Camera } from '../icon/icons/line'
 import { ModalProps } from '../modal'
 import { CropImage } from '../crop-image'
 import { Button } from '../button'
@@ -105,9 +105,7 @@ export default function Avatar({
                 button: styles['edit-image-button'],
               }}
               rippleProps={rippleProps}
-              icon={
-                <IconCamera strokeWidth={2} stroke={'#fff'} size={'tiny'} />
-              }
+              icon={<Camera stroke={'#fff'} />}
               onClick={onEditFileClick}
             />
           </div>

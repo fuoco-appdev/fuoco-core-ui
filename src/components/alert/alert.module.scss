@@ -5,6 +5,9 @@
 .sbui-alert-container {
   display: flex;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   flex-direction: row;
   justify-content: space-between;
   box-shadow: $shadow-6;
@@ -81,10 +84,15 @@
 }
 
 .sbui-close-button {
+  height: 40px;
+  width: 40px;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   overflow: hidden;
 
   & :hover {
-    background-color: transparent;
+    background: transparent;
   }
 }

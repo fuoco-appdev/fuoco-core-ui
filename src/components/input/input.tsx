@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
-import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { Button, Typography } from '../../index'
-import { IconCopy } from '../icon/icons/icon-copy'
-import { IconEye } from '../icon/icons/icon-eye'
-import { IconEyeOff } from '../icon/icons/icon-eye-off'
+import {
+  Visibility,
+  VisibilityOff,
+  ContentCopy,
+  ErrorOutline,
+} from '../icon/icons/line'
 // @ts-ignore
 import InputStyles from './input.module.scss'
 import { animated, useSpring } from 'react-spring'
@@ -201,11 +203,23 @@ function Input({
                   htmlType={'button'}
                   size={'tiny'}
                   type={'text'}
-                  icon={hidden ? <IconEye /> : <IconEyeOff />}
+                  icon={
+                    hidden ? (
+                      <Visibility size={24} />
+                    ) : (
+                      <VisibilityOff size={24} />
+                    )
+                  }
                   onClick={onReveal}
                 />
               ) : null}
-              {error && <InputErrorIcon />}
+              {error && (
+                <ErrorOutline
+                  size={24}
+                  color={'#FF0000'}
+                  className={InputStyles['error-icon']}
+                />
+              )}
               {copy && !(reveal && hidden) ? (
                 <Button
                   tabIndex={-1}
@@ -213,7 +227,7 @@ function Input({
                   size="tiny"
                   type="default"
                   onClick={() => onCopy(value)}
-                  icon={<IconCopy />}
+                  icon={<ContentCopy size={24} />}
                 >
                   {copyLabel}
                 </Button>
@@ -399,7 +413,13 @@ function TextArea({
                 classNames?.inputActionsContainer,
               ].join(' ')}
             >
-              {error && <InputErrorIcon size={size} />}
+              {error && (
+                <ErrorOutline
+                  size={24}
+                  color={'#FF0000'}
+                  className={InputStyles['error-icon']}
+                />
+              )}
             </div>
           ) : null}
         </div>

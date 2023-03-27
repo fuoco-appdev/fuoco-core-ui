@@ -1,8 +1,7 @@
 import React from 'react'
 import { FormLayout } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
-import { IconChevronDown } from '../icon/icons/icon-chevron-down'
-import { IconChevronUp } from '../icon/icons/icon-chevron-up'
+import { ExpandMore, ExpandLess, ErrorOutline } from '../icon/icons/line'
 import InputIconContainer from '../../lib/layout/input-icon-container'
 // @ts-ignore
 import InputNumberStyles from './input-number.module.scss'
@@ -157,14 +156,15 @@ function InputNumber({
             max={max}
           />
           <div className={iconNavClasses.join(' ')}>
-            <IconChevronUp
+            <ExpandMore
+              size={24}
               className={iconUpClasses.join(' ')}
               onClick={onClickChevronUp}
               onMouseDown={(e: React.MouseEvent) => {
                 e.preventDefault()
               }}
             />
-            <IconChevronDown
+            <ExpandLess
               className={iconDownClasses.join(' ')}
               onClick={onClickChevronDown}
               onMouseDown={(e: React.MouseEvent) => {
@@ -179,7 +179,7 @@ function InputNumber({
                 InputNumberStyles['sbui-inputnumber-actions-container']
               }
             >
-              {error && <InputErrorIcon size={size} />}
+              {error && <ErrorOutline size={24} color={'#ff0000'} />}
             </div>
           ) : null}
         </div>

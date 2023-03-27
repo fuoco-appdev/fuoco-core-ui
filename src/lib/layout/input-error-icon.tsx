@@ -1,6 +1,5 @@
 import React from 'react'
-// @ts-ignore
-import { IconAlertCircle } from '../../components/icon/icons/icon-alert-circle'
+import { Error } from '../../components/icon/icons/solid'
 // @ts-ignore
 import InputErrorIconStyles from './input-error-icon.module.scss'
 
@@ -15,12 +14,7 @@ export default function InputErrorIcon({ style, size }: Props) {
       className={InputErrorIconStyles['sbui-input-error-icon']}
       style={style}
     >
-      <IconAlertCircle
-        size={size}
-        strokeWidth={2}
-        stroke={'#f56565'}
-        className=""
-      />
+      <Error stroke={'#f56565'} className="" />
     </div>
   )
 }

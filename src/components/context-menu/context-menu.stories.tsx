@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Button } from '../button'
 import { Divider } from '../divider'
-import { IconSettings } from '../icon/icons/icon-settings'
-import { IconLogOut } from '../icon/icons/icon-log-out'
+import { Settings, Logout, Login } from '../icon/icons/line'
 import { Typography } from '../../index'
 import { ContextMenu } from '.'
-import { IconLogIn } from '../icon/icons/icon-log-in'
 
 export default {
   title: 'Navigation/ContextMenu',
@@ -50,9 +48,7 @@ export const Default = (args: any) => (
         </ContextMenu.Item>,
         <ContextMenu.Item>Settings</ContextMenu.Item>,
         <Divider light />,
-        <ContextMenu.Item icon={<IconLogIn size="tiny" />}>
-          Log out
-        </ContextMenu.Item>,
+        <ContextMenu.Item icon={<Login />}>Log out</ContextMenu.Item>,
       ]}
     >
       {triggerArea}
@@ -75,7 +71,7 @@ export const doNotcloseOverlay = (args: any) => (
         <ContextMenu.Item>Account</ContextMenu.Item>,
         <ContextMenu.Item>Settings</ContextMenu.Item>,
         <ContextMenu.Item>
-          <Button icon={<IconLogOut />}>Log out</Button>
+          <Button icon={<Logout />}>Log out</Button>
         </ContextMenu.Item>,
       ]}
     >
@@ -109,7 +105,7 @@ export const withCustomStyles = (args: any) => (
         <ContextMenu.Item>Settings</ContextMenu.Item>,
         <Divider light />,
         <ContextMenu.Item>
-          <Button type="default" icon={<IconLogOut />}>
+          <Button type="default" icon={<Logout />}>
             Log out
           </Button>
         </ContextMenu.Item>,
@@ -130,9 +126,7 @@ export const Checkbox = (args: any) => {
       <ContextMenu
         {...args}
         overlay={[
-          <ContextMenu.Item icon={<IconSettings size="small" />}>
-            Account
-          </ContextMenu.Item>,
+          <ContextMenu.Item icon={<Settings />}>Account</ContextMenu.Item>,
           <ContextMenu.Item>Settings</ContextMenu.Item>,
           <Divider light />,
           // <ContextMenu.Checkbox checked={checked} onChange={setChecked}>

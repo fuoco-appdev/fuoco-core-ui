@@ -18,6 +18,9 @@
 .tab-button {
   position: relative;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   display: flex;
   align-items: center;
   padding: $mp-2 $mp-2;
@@ -61,6 +64,9 @@
   top: 0;
   left: 0;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   background-color: rgba(#fff, 0.15);
   transition: width $transition-accelerated-easing;
   transition-timing-function: $duration-expand-md;
@@ -72,6 +78,9 @@
   top: 0;
   left: 0;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   background-color: $brand-500;
   transition: width $transition-accelerated-easing;
   transition-timing-function: $duration-expand-md;

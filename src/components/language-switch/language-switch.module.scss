@@ -18,6 +18,9 @@
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   color: $gray-100;
   border-width: 1px;
   border-style: solid;

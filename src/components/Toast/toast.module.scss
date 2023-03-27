@@ -48,6 +48,9 @@
   position: relative;
   box-shadow: $shadow-6;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   padding: $mp-2 $mp-4;
   padding-bottom: $mp-4;
   min-width: 344px;
@@ -146,6 +149,9 @@
   display: inline-flex;
   background-color: transparent;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   color: $gray-400;
   cursor: pointer;
   border-width: 0px;

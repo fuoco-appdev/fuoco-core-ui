@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '../button'
-import { IconMail } from '../../components/icon/icons/icon-mail'
+import { Email } from '../icon/icons/line'
 import { Typography } from '../../index'
 
 import { Tabs } from '.'
@@ -48,7 +48,7 @@ export const IconsAndText = (args: any) => (
       {
         id: 'panel-1',
         label: '1st tab',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the first panel</Typography.Text>
         ),
@@ -56,7 +56,7 @@ export const IconsAndText = (args: any) => (
       {
         id: 'panel-2',
         label: '2st tab',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the second panel</Typography.Text>
         ),
@@ -64,7 +64,7 @@ export const IconsAndText = (args: any) => (
       {
         id: 'panel-3',
         label: '3st tab',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the third panel</Typography.Text>
         ),
@@ -80,21 +80,21 @@ export const Vertical = (args: any) => (
     tabs={[
       {
         id: 'panel-1',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the first panel</Typography.Text>
         ),
       },
       {
         id: 'panel-2',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the second panel</Typography.Text>
         ),
       },
       {
         id: 'panel-3',
-        icon: <IconMail />,
+        icon: <Email />,
         children: (
           <Typography.Text>Content for the third panel</Typography.Text>
         ),

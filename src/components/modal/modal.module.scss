@@ -44,6 +44,9 @@
   position: relative;
   display: inline-block;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   border: 0;
   text-align: left;
   overflow: hidden;
@@ -60,6 +63,9 @@
   height: 100%;
   z-index: -1;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
 }
 
 .modal-content {
@@ -127,6 +133,9 @@
   height: 3rem /* 48px */;
   width: 3rem /* 48px */;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
 }
 
 .modal-icon-container-danger {
@@ -152,6 +161,9 @@
   width: 42px;
   height: 42px;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
 }
 
 .modal-close-container button,

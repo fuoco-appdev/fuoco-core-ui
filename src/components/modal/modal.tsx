@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 // @ts-ignore
 import ModalStyles from './modal.module.scss'
 import { Button, Typography } from '../../index'
-import { IconX } from '../icon/icons/icon-x'
+import { Close } from '../icon/icons/line'
 import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
 
@@ -282,7 +282,7 @@ const Modal = ({
                                   onClick={onCancel}
                                   type="text"
                                   shadow={false}
-                                  icon={<IconX size="medium" />}
+                                  icon={<Close size={24} />}
                                 />
                               </div>
                             )}

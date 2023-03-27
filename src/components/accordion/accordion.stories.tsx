@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion } from '.'
 import { Typography } from '../typography'
-import { IconArrowUp } from '../icon/icons/icon-arrow-up'
+import { KeyboardArrowUp } from '../icon/icons/line'
 
 export default {
   title: 'Displays/Accordion',
@@ -48,4 +48,4 @@ export const withDefaultActive = Multiple.bind({ defaultActiveId: [1] })
 
 export const withIconLeft = Multiple.bind({ iconPosition: 'left' })
 
-export const withCustomIcon = Multiple.bind({ icon: <IconArrowUp /> })
+export const withCustomIcon = Multiple.bind({ icon: <KeyboardArrowUp /> })

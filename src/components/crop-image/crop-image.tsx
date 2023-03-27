@@ -6,7 +6,7 @@ import { Overlay } from '../overlay'
 // @ts-ignore
 import styles from './crop-image.module.scss'
 import { Typography } from '../typography'
-import { IconX } from '../icon'
+import { Close } from '../icon/icons/line'
 import { Button } from '../button'
 
 export interface CropProps {
@@ -152,7 +152,7 @@ export default function CropImage({
               button: styles['exit-button'],
             }}
             touchScreen={touchScreen}
-            icon={<IconX strokeWidth={2} stroke={'#fff'} />}
+            icon={<Close stroke={'#fff'} />}
             type={'text'}
             size={'small'}
             onClick={onCanceled}

@@ -1,9 +1,6 @@
 import React from 'react'
-import { IconAlertTriangle } from '../icon/icons/icon-alert-triangle'
-import { IconCheck } from '../icon/icons/icon-check'
-import { IconInfo } from '../icon/icons/icon-info'
-import { IconX } from '../icon/icons/icon-x'
-import { IconXCircle } from '../icon/icons/icon-x-circle'
+import { Close } from '../icon/icons/line'
+import { Warning, Info, Error, CheckCircle } from '../icon/icons/solid'
 import { animated } from 'react-spring'
 // @ts-ignore
 import AlertStyles from './alert.module.scss'
@@ -24,10 +21,10 @@ const icons: Record<
   'success' | 'danger' | 'warning' | 'info',
   React.ReactElement
 > = {
-  danger: <IconXCircle size="medium" />,
-  success: <IconCheck size="medium" />,
-  warning: <IconAlertTriangle size="medium" />,
-  info: <IconInfo size="medium" />,
+  danger: <Error />,
+  success: <CheckCircle />,
+  warning: <Warning />,
+  info: <Info />,
 }
 
 const Alert = ({
@@ -62,7 +59,7 @@ const Alert = ({
           <div className={AlertStyles['sbui-close-root']}>
             <Button
               type={'text'}
-              icon={<IconX size="xlarge" strokeWidth={1.5} stroke={'#fff'} />}
+              icon={<Close stroke={'#fff'} size={24} />}
               onClick={(e) => onCloseClick?.(e)}
               className={AlertStyles['sbui-close-button']}
             />

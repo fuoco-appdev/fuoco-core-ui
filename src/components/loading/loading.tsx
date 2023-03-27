@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconLoader } from '../icon/icons/icon-loader'
+import { Refresh } from '../icon/icons/line'
 // @ts-ignore
 import LoadingStyles from './loading.module.scss'
 
@@ -16,12 +16,7 @@ export default function Loading({ children, active }: Props) {
   return (
     <div className={classNames.join(' ')}>
       <div className={LoadingStyles['sbui-loading-content']}>{children}</div>
-      {active && (
-        <IconLoader
-          size="xlarge"
-          className={LoadingStyles['sbui-loading-spinner']}
-        />
-      )}
+      {active && <Refresh className={LoadingStyles['sbui-loading-spinner']} />}
     </div>
   )
 }

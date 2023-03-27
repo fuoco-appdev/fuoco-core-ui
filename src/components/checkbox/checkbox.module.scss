@@ -40,6 +40,9 @@
   border-width: 1px;
   border-style: solid;
   border-radius: $mp-1;
+  -webkit-border-radius: $mp-1;
+  -moz-border-radius: $mp-1;
+  -khtml-border-radius: $mp-1;
   background-color: transparent;
   border-color: $gray-300;
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import SlidePanelStyles from './side-panel.module.scss'
 import { Button, Typography } from '../../index'
-import { IconX } from '../icon/icons/icon-x'
+import { Close } from '../icon/icons/line'
 import { AnimationTailwindClasses } from '../../types'
 
 import * as Dialog from '@radix-ui/react-dialog'
@@ -199,7 +199,7 @@ const SidePanel = ({
                             type="text"
                             shadow={false}
                             style={{ padding: 0 }}
-                            icon={<IconX size="xlarge" strokeWidth={2} />}
+                            icon={<Close />}
                           />
                         </div>
                       </div>

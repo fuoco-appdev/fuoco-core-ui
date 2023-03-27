@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import { Button } from '../../index'
-import { IconPackage } from '../icon/icons/icon-package'
-import { IconChevronRight } from '../icon/icons/icon-chevron-right'
+import { ChevronRight } from '../icon/icons/line'
 
 export default {
   title: 'General/Button',
@@ -232,7 +231,7 @@ export const withCustomTag = (args: any) => (
   <Button {...args}>Button text</Button>
 )
 
-const icon = <IconPackage />
+const icon = <ChevronRight />
 
 withIcon.args = {
   type: 'primary',
@@ -241,7 +240,7 @@ withIcon.args = {
 
 withIconRight.args = {
   type: 'primary',
-  iconRight: <IconChevronRight strokeWidth={2} />,
+  iconRight: <ChevronRight />,
 }
 
 withStyles.args = {

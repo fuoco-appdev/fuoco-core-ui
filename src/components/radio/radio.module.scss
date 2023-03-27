@@ -71,6 +71,9 @@
   margin-left: 0;
   margin-right: $mp-3-5;
   border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
   border-width: 1px;
   border-style: solid;
   color: $brand-500;
@@ -112,6 +115,9 @@
 .radio-group-contents {
   background-color: transparent;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
 }
 
 /*

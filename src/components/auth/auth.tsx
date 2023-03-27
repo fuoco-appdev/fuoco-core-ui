@@ -2,17 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useEffect, useRef, useState } from 'react'
 import { SupabaseClient, Provider, AuthError } from '@supabase/supabase-js'
-import {
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-  Divider,
-  IconMail,
-  IconKey,
-  IconLock,
-  IconInbox,
-} from '../../index'
+import { Input, Checkbox, Button, Typography, Divider } from '../../index'
+import { Email, Key, Lock, Inbox } from '../icon/icons/line'
 import * as SocialIcons from './icons'
 // @ts-ignore
 import AuthStyles from './auth.module.scss'
@@ -669,10 +660,7 @@ function EmailAuth({
             autoComplete="email"
             defaultValue={email}
             icon={
-              <IconMail
-                size={21}
-                stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -694,10 +682,7 @@ function EmailAuth({
             defaultValue={password}
             autoComplete="current-password"
             icon={
-              <IconKey
-                size={21}
-                stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -720,8 +705,8 @@ function EmailAuth({
               defaultValue={confirmPassword}
               autoComplete="current-password"
               icon={
-                <IconKey
-                  size={21}
+                <Key
+                  size={24}
                   stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
                 />
               }
@@ -821,7 +806,7 @@ function EmailAuth({
                 ].join(' ')}
               >
                 <div className={AuthStyles['button-icon']}>
-                  <IconLock size={21} />
+                  <Lock size={24} />
                 </div>
                 {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
@@ -915,10 +900,7 @@ function MagicLink({
             placeholder={strings.yourEmailAddress}
             error={emailErrorMessage}
             icon={
-              <IconMail
-                size={21}
-                stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -945,7 +927,7 @@ function MagicLink({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <IconInbox size={21} />
+                <Inbox size={24} />
               </div>
               {strings.sendMagicLink}
             </div>
@@ -1011,10 +993,7 @@ function ForgottenPassword({
             placeholder="Your email address"
             error={emailErrorMessage}
             icon={
-              <IconMail
-                size={21}
-                stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -1036,7 +1015,7 @@ function ForgottenPassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <IconInbox size={21} />
+                <Inbox size={24} />
               </div>
               {strings.sendResetPasswordInstructions}
             </div>
@@ -1114,10 +1093,7 @@ function ResetPassword({
             password={true}
             error={passwordErrorMessage}
             icon={
-              <IconKey
-                size={21}
-                stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -1138,8 +1114,8 @@ function ResetPassword({
             password={true}
             error={confirmPasswordErrorMessage}
             icon={
-              <IconKey
-                size={21}
+              <Key
+                size={24}
                 stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
               />
             }
@@ -1168,7 +1144,7 @@ function ResetPassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <IconKey size={21} />
+                <Key size={24} />
               </div>
               {strings?.resetPassword}
             </div>
@@ -1222,10 +1198,7 @@ function UpdatePassword({
             password={true}
             error={passwordErrorMessage}
             icon={
-              <IconKey
-                size={21}
-                stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'}
-              />
+              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -1252,7 +1225,7 @@ function UpdatePassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <IconKey size={21} />
+                <Key size={24} />
               </div>
               {strings?.updatePassword}
             </div>

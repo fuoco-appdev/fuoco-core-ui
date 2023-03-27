@@ -1,8 +1,6 @@
 import React, { ComponentProps, useEffect, useMemo, useState } from 'react'
-import { IconCheck } from '../icon/icons/icon-check'
-import { IconLoader } from '../icon/icons/icon-loader'
-import { IconX } from '../icon/icons/icon-x'
-import { IconAlertCircle } from '../icon/icons/icon-alert-circle'
+import { Refresh, Close } from '../icon/icons/line'
+import { Error, CheckCircle } from '../icon/icons/solid'
 import { Button } from '../button/index'
 // @ts-ignore
 import ToastStyles from './toast.module.scss'
@@ -13,8 +11,8 @@ import { X } from '../icon/icon-import-handler'
 export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
 
 const icons: Partial<{ [key in ToastType]: any }> = {
-  error: <IconAlertCircle size="medium" strokeWidth={2} />,
-  success: <IconCheck size="medium" strokeWidth={2} />,
+  error: <Error size={24} />,
+  success: <CheckCircle size={24} />,
 }
 
 export interface ToastProps {
@@ -85,11 +83,7 @@ function Toast(props: ToastProps) {
       <div className={ToastStyles['toast-content']}>
         <Typography.Text className={ToastStyles['toast-icon-container']}>
           {props.type === 'loading' ? (
-            <IconLoader
-              size="medium"
-              strokeWidth={2}
-              className={ToastStyles['alert-anim-spin']}
-            />
+            <Refresh size={24} className={ToastStyles['alert-anim-spin']} />
           ) : (
             props.icon || icons[props.type ?? 'blank']
           )}
@@ -114,14 +108,7 @@ function Toast(props: ToastProps) {
             <Button
               type={'text'}
               className={closeButtonClasses.join(' ')}
-              icon={
-                <IconX
-                  aria-hidden="true"
-                  size="small"
-                  strokeWidth={2}
-                  stroke={'#fff'}
-                />
-              }
+              icon={<Close size={24} aria-hidden="true" stroke={'#fff'} />}
               onClick={props.onClose}
             />
           </div>

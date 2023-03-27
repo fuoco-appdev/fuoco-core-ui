@@ -1,10 +1,8 @@
 import { Button } from '../button'
 import { Divider } from '../divider'
-import { IconChevronDown } from '../icon/icons/icon-chevron-down'
+import { ExpandMore, Login } from '../icon/icons/line'
 import { Typography } from '../../index'
-
 import { Popover } from '.'
-import { IconLogIn } from '../icon/icons/icon-log-in'
 import { Input } from '../input'
 
 export default {
@@ -49,7 +47,7 @@ export const Default = (args: any) => (
         </>,
       ]}
     >
-      <Button as="span" type="outline" iconRight={<IconChevronDown />}>
+      <Button as="span" type="outline" iconRight={<ExpandMore size={24} />}>
         Click for Popover
       </Button>
     </Popover>

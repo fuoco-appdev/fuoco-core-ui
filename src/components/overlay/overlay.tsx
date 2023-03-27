@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react'
 import { RipplesProps } from 'react-ripples'
 import { animated, useSpring } from 'react-spring'
 import { Button } from '../button'
-import { IconX } from '../icon'
+import { Close } from '../icon/icons/line'
 
 // @ts-ignore
 import styles from './overlay.module.scss'
@@ -120,7 +120,7 @@ function Overlay({
               button: [styles['exit-button'], classNames?.exitButton].join(' '),
             }}
             touchScreen={touchScreen}
-            icon={<IconX strokeWidth={2} stroke={closeIconColor} />}
+            icon={<Close stroke={closeIconColor} />}
             type={'text'}
             size={'small'}
             onClick={onClose}

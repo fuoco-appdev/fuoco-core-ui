@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconAirplay } from '../icon/icons/icon-airplay'
+import { Airplay } from '../icon/icons/solid'
 
 import Avatar from './avatar'
 
@@ -74,15 +74,15 @@ Text.args = {
 }
 
 Icon.args = {
-  AvatarIcon: IconAirplay,
+  AvatarIcon: Airplay,
 }
 
 Edit.args = {
-  AvatarIcon: IconAirplay,
+  AvatarIcon: Airplay,
   editMode: true,
 }
 
 TouchScreen.args = {
-  AvatarIcon: IconAirplay,
+  AvatarIcon: Airplay,
   editMode: true,
 }

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { useRef, useState } from 'react'
 import { InputGeocoding } from '.'
-import { IconMapPin } from '../icon/icons/icon-map-pin'
+import { LocationOn } from '../icon/icons/line'
 
 export default {
   title: 'Data Input/InputGeocoding',
@@ -41,7 +41,7 @@ export const WithIcon = (args: any) => {
       <InputGeocoding
         {...args}
         parentRef={containerRef}
-        icon={<IconMapPin stroke={mapPinIconLit ? '#4AFFFF' : '#d1d5db'} />}
+        icon={<LocationOn stroke={mapPinIconLit ? '#4AFFFF' : '#d1d5db'} />}
         onFocus={() => setMapPinIconLit(true)}
         onBlur={() => setMapPinIconLit(false)}
         onMouseEnter={() => setMapPinIconLit(true)}

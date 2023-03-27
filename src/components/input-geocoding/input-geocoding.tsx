@@ -7,7 +7,7 @@ import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
 import InputIconContainer from '../../lib/layout/input-icon-container'
-import { IconSearch } from '../icon'
+import { ErrorOutline, Search } from '../icon/icons/line'
 
 export interface InputGeocodingProps {
   mapboxAccessToken: string
@@ -257,7 +257,7 @@ function InputGeocoding({
           <div className={InputGeocodingStyles['actions-container']}></div>
           {error ? (
             <div className={InputGeocodingStyles['actions-container']}>
-              {error && <InputErrorIcon />}
+              {error && <ErrorOutline size={24} color={'#ff0000'} />}
             </div>
           ) : null}
         </div>
@@ -281,7 +281,8 @@ function InputGeocoding({
               className={InputGeocodingStyles['search-container']}
             >
               <div className={InputGeocodingStyles['search-icon']}>
-                <IconSearch
+                <Search
+                  size={24}
                   className={InputGeocodingStyles['search--with-icon']}
                 />
               </div>

@@ -142,7 +142,7 @@ export function Item({ children, classNames, label, id }: ItemProps) {
                     style={buttonIconStyle}
                     onClick={() => setDisclosureOpen(!disclosureOpen)}
                   >
-                    <ExpandMore />
+                    <ExpandMore size={24} />
                   </animated.div>
                 }
               />

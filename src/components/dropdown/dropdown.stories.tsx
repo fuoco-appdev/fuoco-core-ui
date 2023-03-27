@@ -1,8 +1,7 @@
 import { Button } from '../button'
 import { Divider } from '../divider'
-import { IconChevronDown } from '../icon/icons/icon-chevron-down'
+import { ExpandMore, Login } from '../icon/icons/line'
 import { Dropdown } from '.'
-import { IconLogIn } from '../icon/icons/icon-log-in'
 import { useEffect, useRef, useState } from 'react'
 
 export default {
@@ -19,7 +18,7 @@ export const Default = (args: any) => {
         ref={buttonRef}
         as="span"
         type="outline"
-        iconRight={<IconChevronDown />}
+        iconRight={<ExpandMore size={24} />}
         onClick={(e) => setIsOpen(true)}
       >
         Click for dropdown
@@ -55,7 +54,7 @@ export const Default = (args: any) => {
           }}
         >
           <Dropdown.Icon>
-            <IconLogIn size="tiny" />
+            <Login size={24} />
           </Dropdown.Icon>
           <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
         </Dropdown.Item>
@@ -83,7 +82,7 @@ export const Bottom = (args: any) => {
           ref={buttonRef}
           as="span"
           type="outline"
-          iconRight={<IconChevronDown />}
+          iconRight={<ExpandMore size={24} />}
           onClick={(e) => setIsOpen(true)}
           style={{
             height: 'fit-content',
@@ -110,7 +109,7 @@ export const Bottom = (args: any) => {
           <Divider light />
           <Dropdown.Item>
             <Dropdown.Icon>
-              <IconLogIn size="tiny" />
+              <Login size={24} />
             </Dropdown.Icon>
             <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
           </Dropdown.Item>
@@ -129,7 +128,7 @@ export const TouchScreen = (args: any) => {
         ref={buttonRef}
         as="span"
         type="outline"
-        iconRight={<IconChevronDown />}
+        iconRight={<ExpandMore size={24} />}
         onClick={(e) => setIsOpen(true)}
       >
         Click for dropdown
@@ -165,7 +164,7 @@ export const TouchScreen = (args: any) => {
           }}
         >
           <Dropdown.Icon>
-            <IconLogIn size="tiny" />
+            <Login size={24} />
           </Dropdown.Icon>
           <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
         </Dropdown.Item>

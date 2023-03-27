@@ -6,6 +6,9 @@
   display: flex;
   flex-direction: column;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
 }
 
 .accordion-item-bordered {
@@ -33,6 +36,9 @@
 
 .accordion-item-ripples {
   border-radius: $rounded-sm;
+  -webkit-border-radius: $rounded-sm;
+  -moz-border-radius: $rounded-sm;
+  -khtml-border-radius: $rounded-sm;
 }
 
 .accordion-item-button {
@@ -43,6 +49,9 @@
   cursor: pointer;
   text-align: left;
   border-radius: $rounded-sm;
+  -webkit-border-radius: $rounded-sm;
+  -moz-border-radius: $rounded-sm;
+  -khtml-border-radius: $rounded-sm;
   border-width: 0;
   font-family: inherit;
   font-weight: inherit;

@@ -43,4 +43,7 @@ svg {
 
 .sbui-menu__item--rounded {
   border-radius: $rounded-base;
+  -webkit-border-radius: $rounded-base;
+  -moz-border-radius: $rounded-base;
+  -khtml-border-radius: $rounded-base;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input } from '../../index'
-import { IconPackage } from '../icon/icons/icon-package'
+import { ShoppingBasket } from '../icon/icons/solid'
 import { Button } from '../button'
 
 export default {
@@ -38,7 +38,7 @@ export const borderless = (args: any) => <Input {...args} />
 
 export const date = (args: any) => <Input {...args} step="12" />
 
-const icon: any = <IconPackage />
+const icon: any = <ShoppingBasket />
 
 Default.args = {
   placeholder: 'Type text here ...',

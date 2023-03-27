@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // import * as RadixContextMenu from '@radix-ui/react-dropdown-menu'
-import { IconCheck } from '../icon/icons/icon-check'
+import { Check } from '../icon/icons/line'
 
 // @ts-ignore
 import ContextMenuStyles from './context-menu.module.scss'
@@ -131,7 +131,7 @@ export function Radio({ children, value, ItemIndicator }: RadioProps) {
       <RadixContextMenu.ItemIndicator
         className={ContextMenuStyles['sbui-contextmenu-input__check']}
       >
-        {ItemIndicator ? ItemIndicator : <IconCheck size="tiny" />}
+        {ItemIndicator ? ItemIndicator : <Check />}
       </RadixContextMenu.ItemIndicator>
       <span>{children}</span>
     </RadixContextMenu.RadioItem>

@@ -1,18 +1,18 @@
 import React from 'react'
 
 import { Typography } from '../../index'
-import { IconMail } from './icons/icon-mail'
+import { Email } from '../icon/icons/line'
 
 export default {
   title: 'General/Icon',
-  component: IconMail,
+  component: Email,
 }
 
 export const Default = (args: any) => (
   <div className="block font-sans">
     <div>
       <Typography.Text>
-        <IconMail {...args} />
+        <Email {...args} />
       </Typography.Text>
     </div>
   </div>

@@ -9,6 +9,9 @@
   border-width: 1px;
   border-style: solid;
   border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: $gray-100;
@@ -100,4 +103,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
   right: 0px;
   padding-left: $mp-3;
   padding-left: $mp-1;
+}
+
+.error-icon {
+  margin-left: $mp-4;
 }
