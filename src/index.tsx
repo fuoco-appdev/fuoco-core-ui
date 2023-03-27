@@ -56,3 +56,6 @@ export * from './components/upload'
 // AUTH
 
 export * from './components/auth'
+
+// ICONS
+export * from './components/icon'
