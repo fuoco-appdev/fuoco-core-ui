@@ -11,12 +11,13 @@ import { X } from '../icon/icon-import-handler'
 export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
 
 const icons: Partial<{ [key in ToastType]: any }> = {
-  error: <Error size={24} />,
-  success: <CheckCircle size={24} />,
+  error: <Error size={24} color={'#f44336'} stroke={'#f44336'} />,
+  success: <CheckCircle size={24} color={'#4caf50'} stroke={'#4caf50'} />,
 }
 
 export interface ToastProps {
   key: string
+  iconColor?: string
   refCallback?: (ref: HTMLDivElement | null) => void
   id?: string
   type?: 'success' | 'error' | 'loading'
@@ -83,7 +84,12 @@ function Toast(props: ToastProps) {
       <div className={ToastStyles['toast-content']}>
         <Typography.Text className={ToastStyles['toast-icon-container']}>
           {props.type === 'loading' ? (
-            <Refresh size={24} className={ToastStyles['alert-anim-spin']} />
+            <Refresh
+              size={24}
+              className={ToastStyles['alert-anim-spin']}
+              stroke={props.iconColor}
+              color={props.iconColor}
+            />
           ) : (
             props.icon || icons[props.type ?? 'blank']
           )}
@@ -108,7 +114,14 @@ function Toast(props: ToastProps) {
             <Button
               type={'text'}
               className={closeButtonClasses.join(' ')}
-              icon={<Close size={24} aria-hidden="true" stroke={'#fff'} />}
+              icon={
+                <Close
+                  size={24}
+                  aria-hidden="true"
+                  stroke={props.iconColor}
+                  color={props.iconColor}
+                />
+              }
               onClick={props.onClose}
             />
           </div>

@@ -26,6 +26,7 @@ export interface InputClasses {
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   classNames?: InputClasses
+  iconColor?: string
   copy?: boolean
   password?: boolean
   defaultValue?: string | number
@@ -51,6 +52,7 @@ function Input({
   autoComplete,
   autoFocus,
   classNames,
+  iconColor = '#ffffff',
   copy,
   password,
   defaultValue,
@@ -205,9 +207,17 @@ function Input({
                   type={'text'}
                   icon={
                     hidden ? (
-                      <Visibility size={24} />
+                      <Visibility
+                        size={24}
+                        color={iconColor}
+                        stroke={iconColor}
+                      />
                     ) : (
-                      <VisibilityOff size={24} />
+                      <VisibilityOff
+                        size={24}
+                        color={iconColor}
+                        stroke={iconColor}
+                      />
                     )
                   }
                   onClick={onReveal}
@@ -227,7 +237,13 @@ function Input({
                   size="tiny"
                   type="default"
                   onClick={() => onCopy(value)}
-                  icon={<ContentCopy size={24} />}
+                  icon={
+                    <ContentCopy
+                      size={24}
+                      color={iconColor}
+                      stroke={iconColor}
+                    />
+                  }
                 >
                   {copyLabel}
                 </Button>

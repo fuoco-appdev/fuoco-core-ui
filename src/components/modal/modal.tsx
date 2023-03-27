@@ -23,6 +23,7 @@ export interface ModalProps {
     footerContainer?: string
     footerCancelText?: string
   }
+  iconColor?: string
   children?: React.ReactNode
   customFooter?: React.ReactNode
   closable?: boolean
@@ -53,6 +54,7 @@ export interface ModalProps {
 
 const Modal = ({
   classNames,
+  iconColor = '#ffffff',
   children,
   customFooter = undefined,
   closable,
@@ -282,7 +284,13 @@ const Modal = ({
                                   onClick={onCancel}
                                   type="text"
                                   shadow={false}
-                                  icon={<Close size={24} />}
+                                  icon={
+                                    <Close
+                                      size={24}
+                                      color={iconColor}
+                                      stroke={iconColor}
+                                    />
+                                  }
                                 />
                               </div>
                             )}

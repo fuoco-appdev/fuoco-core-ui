@@ -22,7 +22,7 @@ const AccordionContext = createContext<ContextValue>({
   onChange: undefined,
 })
 
-interface AccordionProps {
+export interface AccordionProps {
   children?: React.ReactNode
   className?: string
   defaultActiveId?: (string | number)[]
@@ -62,8 +62,9 @@ function Accordion({
   )
 }
 
-interface ItemProps {
+export interface ItemProps {
   children?: React.ReactNode
+  iconColor?: string
   classNames?: {
     panel?: string
     button?: string
@@ -74,7 +75,13 @@ interface ItemProps {
   id?: string | number
 }
 
-export function Item({ children, classNames, label, id }: ItemProps) {
+export function Item({
+  children,
+  iconColor,
+  classNames,
+  label,
+  id,
+}: ItemProps) {
   const { defaultActiveId, onChange, bordered } = useContext(AccordionContext)
   const isDefaultActive = id ? defaultActiveId?.includes(id) : false
   const [disclosureOpen, setDisclosureOpen] = useState<boolean>(isDefaultActive)
@@ -142,7 +149,11 @@ export function Item({ children, classNames, label, id }: ItemProps) {
                     style={buttonIconStyle}
                     onClick={() => setDisclosureOpen(!disclosureOpen)}
                   >
-                    <ExpandMore size={24} />
+                    <ExpandMore
+                      size={24}
+                      stroke={iconColor}
+                      color={iconColor}
+                    />
                   </animated.div>
                 }
               />

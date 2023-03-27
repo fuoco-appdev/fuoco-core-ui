@@ -6,9 +6,10 @@ import { animated } from 'react-spring'
 import AlertStyles from './alert.module.scss'
 import { Button } from '../button'
 
-export interface Props {
+export interface AlertProps {
   variant?: 'success' | 'danger' | 'warning' | 'info'
   className?: string
+  iconColor?: string
   title: string
   withIcon?: boolean
   closable?: boolean
@@ -21,22 +22,23 @@ const icons: Record<
   'success' | 'danger' | 'warning' | 'info',
   React.ReactElement
 > = {
-  danger: <Error size={24} />,
-  success: <CheckCircle size={24} />,
-  warning: <Warning size={24} />,
-  info: <Info size={24} />,
+  danger: <Error size={24} stroke={'#ffffff'} color={'#ffffff'} />,
+  success: <CheckCircle size={24} stroke={'#ffffff'} color={'#ffffff'} />,
+  warning: <Warning size={24} stroke={'#ffffff'} color={'#ffffff'} />,
+  info: <Info size={24} stroke={'#ffffff'} color={'#ffffff'} />,
 }
 
 const Alert = ({
   variant = 'success',
   className,
+  iconColor = '#ffffff',
   title,
   withIcon,
   closable,
   children,
   style,
   onCloseClick,
-}: Props) => {
+}: AlertProps) => {
   let containerClasses = [AlertStyles['sbui-alert-container']]
   containerClasses.push(AlertStyles[`sbui-alert-container--${variant}`])
   if (className) containerClasses.push(className)
@@ -59,7 +61,7 @@ const Alert = ({
           <div className={AlertStyles['sbui-close-root']}>
             <Button
               type={'text'}
-              icon={<Close stroke={'#fff'} size={24} />}
+              icon={<Close stroke={iconColor} color={iconColor} size={24} />}
               onClick={(e) => onCloseClick?.(e)}
               className={AlertStyles['sbui-close-button']}
             />

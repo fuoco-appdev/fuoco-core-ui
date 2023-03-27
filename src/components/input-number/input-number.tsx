@@ -7,6 +7,7 @@ import InputIconContainer from '../../lib/layout/input-icon-container'
 import InputNumberStyles from './input-number.module.scss'
 
 export interface Props {
+  iconColor?: string
   autoComplete?: string
   autofocus?: boolean
   className?: string
@@ -37,6 +38,7 @@ export interface Props {
 }
 
 function InputNumber({
+  iconColor = '#ffffff',
   autoComplete,
   autofocus,
   className,
@@ -158,6 +160,8 @@ function InputNumber({
           <div className={iconNavClasses.join(' ')}>
             <ExpandMore
               size={24}
+              color={iconColor}
+              stroke={iconColor}
               className={iconUpClasses.join(' ')}
               onClick={onClickChevronUp}
               onMouseDown={(e: React.MouseEvent) => {

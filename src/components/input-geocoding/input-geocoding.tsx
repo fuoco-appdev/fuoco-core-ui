@@ -12,6 +12,7 @@ import { ErrorOutline, Search } from '../icon/icons/line'
 export interface InputGeocodingProps {
   mapboxAccessToken: string
   id?: string
+  iconColor?: string
   touchScreen?: boolean
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
@@ -65,6 +66,7 @@ export interface InputGeocodingProps {
 function InputGeocoding({
   id,
   touchScreen = false,
+  iconColor = '#ffffff',
   mapboxAccessToken,
   parentRef,
   icon,
@@ -283,6 +285,8 @@ function InputGeocoding({
               <div className={InputGeocodingStyles['search-icon']}>
                 <Search
                   size={24}
+                  color={iconColor}
+                  stroke={iconColor}
                   className={InputGeocodingStyles['search--with-icon']}
                 />
               </div>

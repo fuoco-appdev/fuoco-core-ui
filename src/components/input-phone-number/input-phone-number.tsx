@@ -17,6 +17,7 @@ import { Typography } from '../typography'
 
 export interface InputPhoneNumberProps {
   id?: string
+  iconColor?: string
   parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
   touchScreen?: boolean
@@ -108,6 +109,7 @@ export interface InputPhoneNumberProps {
 
 function InputPhoneNumber({
   id,
+  iconColor = '#ffffff',
   parentRef,
   className,
   touchScreen = false,
@@ -634,6 +636,8 @@ function InputPhoneNumber({
             <div className={InputPhoneNumberStyles['search-icon']}>
               <Search
                 size={24}
+                color={iconColor}
+                stroke={iconColor}
                 className={InputPhoneNumberStyles['search--with-icon']}
               />
             </div>

@@ -74,6 +74,8 @@ export interface AuthStrings {
 export interface AuthProps {
   supabaseClient: SupabaseClient
   className?: string
+  defaultIconColor?: string
+  litIconColor?: string
   children?: React.ReactNode
   style?: React.CSSProperties
   strings?: AuthStrings
@@ -141,6 +143,8 @@ const defaultStrings: AuthStrings = {
 function Auth({
   supabaseClient,
   className,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   style,
   strings,
   socialLayout = 'vertical',
@@ -189,6 +193,8 @@ function Auth({
       <SocialAuth
         view={view}
         strings={{ ...defaultStrings, ...strings }}
+        defaultIconColor={defaultIconColor}
+        litIconColor={litIconColor}
         supabaseClient={supabaseClient}
         verticalSocialLayout={verticalSocialLayout}
         providers={providers}
@@ -223,6 +229,8 @@ function Auth({
         <Container>
           <EmailAuth
             id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
+            defaultIconColor={defaultIconColor}
+            litIconColor={litIconColor}
             strings={{ ...defaultStrings, ...strings }}
             supabaseClient={supabaseClient}
             authView={authView}
@@ -254,6 +262,8 @@ function Auth({
         <Container>
           <ForgottenPassword
             strings={{ ...defaultStrings, ...strings }}
+            defaultIconColor={defaultIconColor}
+            litIconColor={litIconColor}
             supabaseClient={supabaseClient}
             redirectTo={redirectTo}
             emailErrorMessage={emailErrorMessage}
@@ -268,6 +278,8 @@ function Auth({
         <Container>
           <MagicLink
             strings={{ ...defaultStrings, ...strings }}
+            defaultIconColor={defaultIconColor}
+            litIconColor={litIconColor}
             supabaseClient={supabaseClient}
             setAuthView={setAuthView}
             redirectTo={redirectTo}
@@ -282,6 +294,8 @@ function Auth({
         <Container>
           <UpdatePassword
             strings={{ ...defaultStrings, ...strings }}
+            defaultIconColor={defaultIconColor}
+            litIconColor={litIconColor}
             supabaseClient={supabaseClient}
             passwordErrorMessage={passwordErrorMessage}
             onUpdatePasswordError={onUpdatePasswordError}
@@ -466,6 +480,8 @@ function SocialButton({
 function SocialAuth({
   className,
   style,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   strings,
   supabaseClient,
   children,
@@ -540,6 +556,8 @@ function SocialAuth({
 function EmailAuth({
   authView,
   strings,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   defaultEmail,
   defaultPassword,
   id,
@@ -560,6 +578,8 @@ function EmailAuth({
   onSigninError,
   onSignupError,
 }: {
+  defaultIconColor?: string
+  litIconColor?: string
   authView: ViewType
   strings: AuthStrings
   defaultEmail: string
@@ -660,7 +680,11 @@ function EmailAuth({
             autoComplete="email"
             defaultValue={email}
             icon={
-              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Email
+                size={24}
+                stroke={emailIconLit ? litIconColor : defaultIconColor}
+                color={emailIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -682,7 +706,11 @@ function EmailAuth({
             defaultValue={password}
             autoComplete="current-password"
             icon={
-              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Key
+                size={24}
+                stroke={passwordIconLit ? litIconColor : defaultIconColor}
+                color={passwordIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -707,7 +735,12 @@ function EmailAuth({
               icon={
                 <Key
                   size={24}
-                  stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
+                  stroke={
+                    confirmPasswordIconLit ? litIconColor : defaultIconColor
+                  }
+                  color={
+                    confirmPasswordIconLit ? litIconColor : defaultIconColor
+                  }
                 />
               }
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -806,7 +839,11 @@ function EmailAuth({
                 ].join(' ')}
               >
                 <div className={AuthStyles['button-icon']}>
-                  <Lock size={24} />
+                  <Lock
+                    size={24}
+                    stroke={defaultIconColor}
+                    color={defaultIconColor}
+                  />
                 </div>
                 {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
@@ -855,6 +892,8 @@ function EmailAuth({
 function MagicLink({
   setAuthView,
   strings,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   supabaseClient,
   redirectTo,
   rippleProps = {
@@ -865,6 +904,8 @@ function MagicLink({
   onMagicLinkSent,
   onMagicLinkError,
 }: {
+  defaultIconColor?: string
+  litIconColor?: string
   setAuthView: any
   strings: AuthStrings
   supabaseClient: SupabaseClient
@@ -900,7 +941,11 @@ function MagicLink({
             placeholder={strings.yourEmailAddress}
             error={emailErrorMessage}
             icon={
-              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Email
+                size={24}
+                stroke={emailIconLit ? litIconColor : defaultIconColor}
+                color={emailIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -927,7 +972,11 @@ function MagicLink({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <Inbox size={24} />
+                <Inbox
+                  size={24}
+                  stroke={defaultIconColor}
+                  color={defaultIconColor}
+                />
               </div>
               {strings.sendMagicLink}
             </div>
@@ -950,6 +999,8 @@ function MagicLink({
 
 function ForgottenPassword({
   strings,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   supabaseClient,
   redirectTo,
   emailErrorMessage,
@@ -961,6 +1012,8 @@ function ForgottenPassword({
   onResetPasswordError,
   onResetPasswordSent,
 }: {
+  defaultIconColor?: string
+  litIconColor?: string
   strings: AuthStrings
   supabaseClient: SupabaseClient
   redirectTo?: RedirectTo
@@ -993,7 +1046,11 @@ function ForgottenPassword({
             placeholder="Your email address"
             error={emailErrorMessage}
             icon={
-              <Email size={24} stroke={emailIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Email
+                size={24}
+                stroke={emailIconLit ? litIconColor : defaultIconColor}
+                color={emailIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
@@ -1015,7 +1072,11 @@ function ForgottenPassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <Inbox size={24} />
+                <Inbox
+                  size={24}
+                  stroke={defaultIconColor}
+                  color={defaultIconColor}
+                />
               </div>
               {strings.sendResetPasswordInstructions}
             </div>
@@ -1039,6 +1100,8 @@ function ForgottenPassword({
 function ResetPassword({
   supabaseClient,
   strings,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   passwordErrorMessage,
   confirmPasswordErrorMessage,
   rippleProps = {
@@ -1049,6 +1112,8 @@ function ResetPassword({
   onPasswordUpdated,
 }: {
   supabaseClient: SupabaseClient
+  defaultIconColor?: string
+  litIconColor?: string
   strings?: AuthStrings
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
@@ -1093,7 +1158,11 @@ function ResetPassword({
             password={true}
             error={passwordErrorMessage}
             icon={
-              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Key
+                size={24}
+                stroke={passwordIconLit ? litIconColor : defaultIconColor}
+                color={passwordIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -1116,7 +1185,10 @@ function ResetPassword({
             icon={
               <Key
                 size={24}
-                stroke={confirmPasswordIconLit ? '#4AFFFF' : '#d1d5db'}
+                stroke={
+                  confirmPasswordIconLit ? litIconColor : defaultIconColor
+                }
+                color={confirmPasswordIconLit ? litIconColor : defaultIconColor}
               />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1144,7 +1216,11 @@ function ResetPassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <Key size={24} />
+                <Key
+                  size={24}
+                  stroke={defaultIconColor}
+                  color={defaultIconColor}
+                />
               </div>
               {strings?.resetPassword}
             </div>
@@ -1158,6 +1234,8 @@ function ResetPassword({
 function UpdatePassword({
   supabaseClient,
   strings,
+  defaultIconColor = '#ffffff',
+  litIconColor = '#4AFFFF',
   passwordErrorMessage,
   rippleProps = {
     color: 'rgba(0, 0, 0, .3)',
@@ -1167,6 +1245,8 @@ function UpdatePassword({
   onPasswordUpdated,
 }: {
   supabaseClient: SupabaseClient
+  defaultIconColor?: string
+  litIconColor?: string
   strings: AuthStrings
   passwordErrorMessage?: string
   rippleProps?: RipplesProps
@@ -1198,7 +1278,11 @@ function UpdatePassword({
             password={true}
             error={passwordErrorMessage}
             icon={
-              <Key size={24} stroke={passwordIconLit ? '#4AFFFF' : '#d1d5db'} />
+              <Key
+                size={24}
+                stroke={passwordIconLit ? litIconColor : defaultIconColor}
+                color={passwordIconLit ? litIconColor : defaultIconColor}
+              />
             }
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
@@ -1225,7 +1309,11 @@ function UpdatePassword({
               ].join(' ')}
             >
               <div className={AuthStyles['button-icon']}>
-                <Key size={24} />
+                <Key
+                  size={24}
+                  stroke={defaultIconColor}
+                  color={defaultIconColor}
+                />
               </div>
               {strings?.updatePassword}
             </div>
