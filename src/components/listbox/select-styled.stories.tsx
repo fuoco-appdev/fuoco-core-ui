@@ -155,7 +155,11 @@ export const WithIcon = (args: any) => {
       label="Language"
       layout="vertical"
       icon={
-        <Language size={24} stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'} />
+        <Language
+          size={24}
+          stroke={isGlobeIconLit ? '#4AFFFF' : '#d1d5db'}
+          strokeWidth={0}
+        />
       }
       onChange={(index: number, id: string, value: string) =>
         console.log(value)

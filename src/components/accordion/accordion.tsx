@@ -150,6 +150,7 @@ export function Item({
                     onClick={() => setDisclosureOpen(!disclosureOpen)}
                   >
                     <ExpandMore
+                      strokeWidth={0}
                       size={24}
                       stroke={iconColor}
                       color={iconColor}

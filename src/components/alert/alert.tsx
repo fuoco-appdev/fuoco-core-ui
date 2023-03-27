@@ -22,10 +22,21 @@ const icons: Record<
   'success' | 'danger' | 'warning' | 'info',
   React.ReactElement
 > = {
-  danger: <Error size={24} stroke={'#ffffff'} color={'#ffffff'} />,
-  success: <CheckCircle size={24} stroke={'#ffffff'} color={'#ffffff'} />,
-  warning: <Warning size={24} stroke={'#ffffff'} color={'#ffffff'} />,
-  info: <Info size={24} stroke={'#ffffff'} color={'#ffffff'} />,
+  danger: (
+    <Error size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />
+  ),
+  success: (
+    <CheckCircle
+      size={24}
+      stroke={'#ffffff'}
+      color={'#ffffff'}
+      strokeWidth={0}
+    />
+  ),
+  warning: (
+    <Warning size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />
+  ),
+  info: <Info size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />,
 }
 
 const Alert = ({
@@ -61,7 +72,14 @@ const Alert = ({
           <div className={AlertStyles['sbui-close-root']}>
             <Button
               type={'text'}
-              icon={<Close stroke={iconColor} color={iconColor} size={24} />}
+              icon={
+                <Close
+                  stroke={iconColor}
+                  color={iconColor}
+                  size={24}
+                  strokeWidth={0}
+                />
+              }
               onClick={(e) => onCloseClick?.(e)}
               className={AlertStyles['sbui-close-button']}
             />

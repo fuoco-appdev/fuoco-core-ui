@@ -287,6 +287,7 @@ const Modal = ({
                                   icon={
                                     <Close
                                       size={24}
+                                      strokeWidth={0}
                                       color={iconColor}
                                       stroke={iconColor}
                                     />

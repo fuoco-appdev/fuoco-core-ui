@@ -160,6 +160,7 @@ function InputNumber({
           <div className={iconNavClasses.join(' ')}>
             <ExpandMore
               size={24}
+              strokeWidth={0}
               color={iconColor}
               stroke={iconColor}
               className={iconUpClasses.join(' ')}
@@ -183,7 +184,9 @@ function InputNumber({
                 InputNumberStyles['sbui-inputnumber-actions-container']
               }
             >
-              {error && <ErrorOutline size={24} color={'#ff0000'} />}
+              {error && (
+                <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
+              )}
             </div>
           ) : null}
         </div>

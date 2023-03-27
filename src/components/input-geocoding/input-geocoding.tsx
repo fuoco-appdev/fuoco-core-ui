@@ -259,7 +259,9 @@ function InputGeocoding({
           <div className={InputGeocodingStyles['actions-container']}></div>
           {error ? (
             <div className={InputGeocodingStyles['actions-container']}>
-              {error && <ErrorOutline size={24} color={'#ff0000'} />}
+              {error && (
+                <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
+              )}
             </div>
           ) : null}
         </div>
@@ -285,6 +287,7 @@ function InputGeocoding({
               <div className={InputGeocodingStyles['search-icon']}>
                 <Search
                   size={24}
+                  strokeWidth={0}
                   color={iconColor}
                   stroke={iconColor}
                   className={InputGeocodingStyles['search--with-icon']}

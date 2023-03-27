@@ -11,8 +11,17 @@ import { X } from '../icon/icon-import-handler'
 export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
 
 const icons: Partial<{ [key in ToastType]: any }> = {
-  error: <Error size={24} color={'#f44336'} stroke={'#f44336'} />,
-  success: <CheckCircle size={24} color={'#4caf50'} stroke={'#4caf50'} />,
+  error: (
+    <Error size={24} color={'#f44336'} stroke={'#f44336'} strokeWidth={0} />
+  ),
+  success: (
+    <CheckCircle
+      size={24}
+      color={'#4caf50'}
+      stroke={'#4caf50'}
+      strokeWidth={0}
+    />
+  ),
 }
 
 export interface ToastProps {
@@ -86,9 +95,10 @@ function Toast(props: ToastProps) {
           {props.type === 'loading' ? (
             <Refresh
               size={24}
+              strokeWidth={0}
               className={ToastStyles['alert-anim-spin']}
-              stroke={props.iconColor}
-              color={props.iconColor}
+              stroke={props.iconColor ? props.iconColor : '#ffffff'}
+              color={props.iconColor ? props.iconColor : '#ffffff'}
             />
           ) : (
             props.icon || icons[props.type ?? 'blank']
@@ -117,6 +127,7 @@ function Toast(props: ToastProps) {
               icon={
                 <Close
                   size={24}
+                  strokeWidth={0}
                   aria-hidden="true"
                   stroke={props.iconColor}
                   color={props.iconColor}

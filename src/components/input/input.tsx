@@ -209,12 +209,14 @@ function Input({
                     hidden ? (
                       <Visibility
                         size={24}
+                        strokeWidth={0}
                         color={iconColor}
                         stroke={iconColor}
                       />
                     ) : (
                       <VisibilityOff
                         size={24}
+                        strokeWidth={0}
                         color={iconColor}
                         stroke={iconColor}
                       />
@@ -227,6 +229,7 @@ function Input({
                 <ErrorOutline
                   size={24}
                   color={'#FF0000'}
+                  strokeWidth={0}
                   className={InputStyles['error-icon']}
                 />
               )}
@@ -240,6 +243,7 @@ function Input({
                   icon={
                     <ContentCopy
                       size={24}
+                      strokeWidth={0}
                       color={iconColor}
                       stroke={iconColor}
                     />
@@ -432,6 +436,7 @@ function TextArea({
               {error && (
                 <ErrorOutline
                   size={24}
+                  strokeWidth={0}
                   color={'#FF0000'}
                   className={InputStyles['error-icon']}
                 />

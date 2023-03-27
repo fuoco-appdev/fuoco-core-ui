@@ -682,6 +682,7 @@ function EmailAuth({
             icon={
               <Email
                 size={24}
+                strokeWidth={0}
                 stroke={emailIconLit ? litIconColor : defaultIconColor}
                 color={emailIconLit ? litIconColor : defaultIconColor}
               />
@@ -708,6 +709,7 @@ function EmailAuth({
             icon={
               <Key
                 size={24}
+                strokeWidth={0}
                 stroke={passwordIconLit ? litIconColor : defaultIconColor}
                 color={passwordIconLit ? litIconColor : defaultIconColor}
               />
@@ -735,6 +737,7 @@ function EmailAuth({
               icon={
                 <Key
                   size={24}
+                  strokeWidth={0}
                   stroke={
                     confirmPasswordIconLit ? litIconColor : defaultIconColor
                   }
@@ -841,6 +844,7 @@ function EmailAuth({
                 <div className={AuthStyles['button-icon']}>
                   <Lock
                     size={24}
+                    strokeWidth={0}
                     stroke={defaultIconColor}
                     color={defaultIconColor}
                   />
@@ -943,6 +947,7 @@ function MagicLink({
             icon={
               <Email
                 size={24}
+                strokeWidth={0}
                 stroke={emailIconLit ? litIconColor : defaultIconColor}
                 color={emailIconLit ? litIconColor : defaultIconColor}
               />
@@ -974,6 +979,7 @@ function MagicLink({
               <div className={AuthStyles['button-icon']}>
                 <Inbox
                   size={24}
+                  strokeWidth={0}
                   stroke={defaultIconColor}
                   color={defaultIconColor}
                 />
@@ -1048,6 +1054,7 @@ function ForgottenPassword({
             icon={
               <Email
                 size={24}
+                strokeWidth={0}
                 stroke={emailIconLit ? litIconColor : defaultIconColor}
                 color={emailIconLit ? litIconColor : defaultIconColor}
               />
@@ -1074,6 +1081,7 @@ function ForgottenPassword({
               <div className={AuthStyles['button-icon']}>
                 <Inbox
                   size={24}
+                  strokeWidth={0}
                   stroke={defaultIconColor}
                   color={defaultIconColor}
                 />
@@ -1160,6 +1168,7 @@ function ResetPassword({
             icon={
               <Key
                 size={24}
+                strokeWidth={0}
                 stroke={passwordIconLit ? litIconColor : defaultIconColor}
                 color={passwordIconLit ? litIconColor : defaultIconColor}
               />
@@ -1185,6 +1194,7 @@ function ResetPassword({
             icon={
               <Key
                 size={24}
+                strokeWidth={0}
                 stroke={
                   confirmPasswordIconLit ? litIconColor : defaultIconColor
                 }
@@ -1218,6 +1228,7 @@ function ResetPassword({
               <div className={AuthStyles['button-icon']}>
                 <Key
                   size={24}
+                  strokeWidth={0}
                   stroke={defaultIconColor}
                   color={defaultIconColor}
                 />
@@ -1280,6 +1291,7 @@ function UpdatePassword({
             icon={
               <Key
                 size={24}
+                strokeWidth={0}
                 stroke={passwordIconLit ? litIconColor : defaultIconColor}
                 color={passwordIconLit ? litIconColor : defaultIconColor}
               />
@@ -1311,6 +1323,7 @@ function UpdatePassword({
               <div className={AuthStyles['button-icon']}>
                 <Key
                   size={24}
+                  strokeWidth={0}
                   stroke={defaultIconColor}
                   color={defaultIconColor}
                 />

@@ -41,7 +41,13 @@ export const WithIcon = (args: any) => {
       <InputGeocoding
         {...args}
         parentRef={containerRef}
-        icon={<LocationOn stroke={mapPinIconLit ? '#4AFFFF' : '#d1d5db'} />}
+        icon={
+          <LocationOn
+            stroke={mapPinIconLit ? '#4AFFFF' : '#ffffff'}
+            strokeWidth={0}
+            size={24}
+          />
+        }
         onFocus={() => setMapPinIconLit(true)}
         onBlur={() => setMapPinIconLit(false)}
         onMouseEnter={() => setMapPinIconLit(true)}
