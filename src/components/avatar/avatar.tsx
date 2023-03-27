@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react'
-import { Icon } from '../icon/icon-import-handler'
 // @ts-ignore
 import styles from './avatar.module.scss'
 import Ripples, { RipplesProps } from 'react-ripples'
-import { Camera } from '../icon/icons/line'
+import { Line } from '../icon/icons'
 import { ModalProps } from '../modal'
 import { CropImage } from '../crop-image'
 import { Button } from '../button'
@@ -17,7 +16,7 @@ export interface AvatarProps {
   alt?: string
   text?: string
   editMode?: boolean
-  AvatarIcon?: Icon
+  avatarIcon?: JSX.Element
   rippleProps?: RipplesProps
   modalProps?: ModalProps
   onChange?: (index: number, blob: Blob) => void
@@ -31,7 +30,7 @@ export default function Avatar({
   alt,
   text,
   editMode = false,
-  AvatarIcon,
+  avatarIcon,
   children,
   rippleProps,
   modalProps = {
@@ -49,7 +48,7 @@ export default function Avatar({
 
   if (src) {
     classes.push(styles['avatar-image'])
-  } else if (AvatarIcon) {
+  } else if (avatarIcon) {
     classes.push(styles['avatar-icon'])
   } else if (text) {
     classes.push(styles['avatar-text'])
@@ -84,7 +83,7 @@ export default function Avatar({
   return (
     <div>
       <div className={classes.join(' ')}>
-        {!src && AvatarIcon && <AvatarIcon strokeWidth={2} />}
+        {!src && avatarIcon}
         {!src && text && <p>{text[0]}</p>}
         {src && <img className={classes.join(' ')} src={src} alt={alt} />}
         {children && children}
@@ -105,7 +104,7 @@ export default function Avatar({
                 button: styles['edit-image-button'],
               }}
               rippleProps={rippleProps}
-              icon={<Camera stroke={'#fff'} />}
+              icon={<Line.Camera stroke={'#fff'} />}
               onClick={onEditFileClick}
             />
           </div>
