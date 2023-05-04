@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import { Button } from '../../index'
-import { ChevronRight } from '../icon/icons/line'
+import { ChevronRight, ShoppingBag } from '../icon/icons/line'
 
 export default {
   title: 'General/Button',
@@ -65,6 +65,9 @@ export const allButtons = (args: any) => (
         <Button {...args} size="tiny" type="outline">
           Button text
         </Button>
+        <Button {...args} size="tiny" type="rounded">
+          Button text
+        </Button>
       </div>
 
       <div>
@@ -89,6 +92,9 @@ export const allButtons = (args: any) => (
         <Button {...args} size="small" type="outline">
           Button text
         </Button>
+        <Button {...args} size="small" type="rounded">
+          Button text
+        </Button>
       </div>
       <div>
         <Button {...args}>Button text</Button>
@@ -108,6 +114,9 @@ export const allButtons = (args: any) => (
           Button text
         </Button>
         <Button {...args} size="medium" type="outline">
+          Button text
+        </Button>
+        <Button {...args} size="medium" type="rounded">
           Button text
         </Button>
       </div>
@@ -133,6 +142,9 @@ export const allButtons = (args: any) => (
         <Button {...args} size="large" type="outline">
           Button text
         </Button>
+        <Button {...args} size="large" type="rounded">
+          Button text
+        </Button>
       </div>
       <div>
         <Button {...args} size="xlarge">
@@ -154,6 +166,9 @@ export const allButtons = (args: any) => (
           Button text
         </Button>
         <Button {...args} size="xlarge" type="outline">
+          Button text
+        </Button>
+        <Button {...args} size="xlarge" type="rounded">
           Button text
         </Button>
       </div>
@@ -222,6 +237,15 @@ export const allButtons = (args: any) => (
         >
           Button text
         </Button>
+        <Button
+          {...args}
+          size="full"
+          type="rounded"
+          block={true}
+          touchScreen={true}
+        >
+          Button text
+        </Button>
       </div>
     </div>
   </>
@@ -229,6 +253,10 @@ export const allButtons = (args: any) => (
 
 export const withCustomTag = (args: any) => (
   <Button {...args}>Button text</Button>
+)
+
+export const rounded = (args: any) => (
+  <Button {...args} type={'rounded'} icon={<ShoppingBag size={24} />} />
 )
 
 const icon = <ChevronRight />

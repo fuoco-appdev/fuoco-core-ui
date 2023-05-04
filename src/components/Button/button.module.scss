@@ -73,26 +73,51 @@
 */
 
 .button-tiny {
-  padding: $mp-1-5 $mp-2-5;
+  padding: $mp-2-5 $mp-2-5;
   line-height: $font-line-height-sm;
 }
 .button-small {
-  padding: $mp-2 $mp-4;
+  padding: $mp-4 $mp-4;
   line-height: $font-line-height-xs;
 }
 .button-medium {
-  padding: $mp-2 $mp-6;
+  padding: $mp-6 $mp-6;
   line-height: $font-line-height-sm;
 }
 .button-large {
-  padding: $mp-2 $mp-8;
+  padding: $mp-8 $mp-8;
   line-height: $font-line-height-base;
 }
 .button-xlarge {
-  padding: $mp-3 $mp-10;
+  padding: $mp-10 $mp-10;
   line-height: $font-line-height-base;
 }
 .button-full {
+  width: 100%;
+  height: 100%;
+}
+
+.button-tiny-with-children {
+  padding: $mp-1-5 $mp-2-5;
+  line-height: $font-line-height-sm;
+}
+.button-small-with-children {
+  padding: $mp-2 $mp-4;
+  line-height: $font-line-height-xs;
+}
+.button-medium-with-children {
+  padding: $mp-2 $mp-6;
+  line-height: $font-line-height-sm;
+}
+.button-large-with-children {
+  padding: $mp-2 $mp-8;
+  line-height: $font-line-height-base;
+}
+.button-xlarge-with-children {
+  padding: $mp-3 $mp-10;
+  line-height: $font-line-height-base;
+}
+.button-full-with-children {
   width: 100%;
   height: 100%;
 }
@@ -103,6 +128,10 @@
 .button-primary {
   background-color: $brand-500;
   color: $gray-100;
+}
+
+.button-rounded {
+  border-radius: $rounded-full;
 }
 
 .button-primary-desktop:hover {

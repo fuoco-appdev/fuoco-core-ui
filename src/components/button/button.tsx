@@ -31,6 +31,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | 'dashed'
     | 'link'
     | 'text'
+    | 'round'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   ariaSelected?: boolean
@@ -109,7 +110,9 @@ function Button(
     classes.push(ButtonStyles['button-container-shadow'])
   }
 
-  if (size) {
+  if (size && children) {
+    classes.push(ButtonStyles[`button-${size}-with-children`])
+  } else {
     classes.push(ButtonStyles[`button-${size}`])
   }
 
