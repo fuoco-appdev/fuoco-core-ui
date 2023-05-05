@@ -240,7 +240,7 @@ export const allButtons = (args: any) => (
         <Button
           {...args}
           size="full"
-          type="rounded"
+          rounded={true}
           block={true}
           touchScreen={true}
         >

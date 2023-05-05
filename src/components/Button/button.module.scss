@@ -37,6 +37,13 @@
   -khtml-border-radius: $rounded-base;
 }
 
+.button-ripple-rounded {
+  border-radius: $rounded-full;
+  -webkit-border-radius: $rounded-full;
+  -moz-border-radius: $rounded-full;
+  -khtml-border-radius: $rounded-full;
+}
+
 .button-children {
   display: flex;
   flex-direction: row;
@@ -48,10 +55,6 @@
 .button-desktop:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.button-container-shadow {
-  box-shadow: $shadow-2;
 }
 
 .button-w-full {

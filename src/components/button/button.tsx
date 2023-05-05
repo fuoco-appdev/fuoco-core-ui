@@ -86,9 +86,6 @@ function Button(
     ButtonStyles[`button-${type}`],
     classNames?.button,
   ]
-  if (rounded) {
-    classes.push(ButtonStyles['button-rounded'])
-  }
   if (!touchScreen) {
     classes.push(
       ButtonStyles['button-desktop'],
@@ -100,6 +97,10 @@ function Button(
     className,
     classNames?.container,
   ]
+  if (rounded) {
+    containerClasses.push(ButtonStyles['button-ripple-rounded'])
+    classes.push(ButtonStyles['button-rounded'])
+  }
 
   if (block) {
     containerClasses.push(ButtonStyles['button-w-full'])
