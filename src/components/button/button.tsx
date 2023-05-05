@@ -23,6 +23,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shadow?: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'full'
   style?: React.CSSProperties
+  rounded?: boolean
   type?:
     | 'primary'
     | 'default'
@@ -31,7 +32,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | 'dashed'
     | 'link'
     | 'text'
-    | 'round'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   ariaSelected?: boolean
@@ -64,6 +64,7 @@ function Button(
     shadow = true,
     size = 'tiny',
     style,
+    rounded = false,
     type = 'primary',
     htmlType,
     ariaSelected,
@@ -85,6 +86,9 @@ function Button(
     ButtonStyles[`button-${type}`],
     classNames?.button,
   ]
+  if (rounded) {
+    classes.push(ButtonStyles['button-rounded'])
+  }
   if (!touchScreen) {
     classes.push(
       ButtonStyles['button-desktop'],

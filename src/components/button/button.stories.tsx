@@ -256,7 +256,7 @@ export const withCustomTag = (args: any) => (
 )
 
 export const rounded = (args: any) => (
-  <Button {...args} type={'rounded'} icon={<ShoppingBag size={24} />} />
+  <Button {...args} rounded={true} icon={<ShoppingBag size={24} />} />
 )
 
 const icon = <ChevronRight />
