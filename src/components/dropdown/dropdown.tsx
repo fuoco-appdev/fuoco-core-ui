@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
-import { animated, useSpring, useTransition } from 'react-spring'
+import React, { useRef, useState, useLayoutEffect } from 'react'
+import { animated, useTransition } from 'react-spring'
 import { Button } from '../button/index'
-import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet'
+import { BottomSheet } from 'react-spring-bottom-sheet'
 import 'react-spring-bottom-sheet/dist/style.css'
 
 // @ts-ignore
@@ -15,7 +15,6 @@ export enum DropdownAlignment {
 export interface DropDownProps {
   id?: string
   className?: string
-  ref?: React.LegacyRef<HTMLUListElement>
   align?: DropdownAlignment
   open: boolean
   touchScreen?: boolean
@@ -30,7 +29,6 @@ export interface DropDownProps {
 function Dropdown({
   id,
   className,
-  ref,
   align = DropdownAlignment.Right,
   open = false,
   touchScreen = false,
@@ -43,7 +41,6 @@ function Dropdown({
 }: DropDownProps) {
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
-  const bottomSheetRef = useRef<BottomSheetRef | null>(null)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -159,17 +156,15 @@ function Dropdown({
     )
   } else {
     return (
-      <BottomSheet open={open} ref={bottomSheetRef} onDismiss={onClose}>
-        <div ref={divRef}>
-          <ul
-            ref={uListRef}
-            className={[DropdownStyles['touchscreen-dropdown'], className].join(
-              ' '
-            )}
-          >
-            {children}
-          </ul>
-        </div>
+      <BottomSheet open={open} onDismiss={onClose}>
+        <ul
+          ref={uListRef}
+          className={[DropdownStyles['touchscreen-dropdown'], className].join(
+            ' '
+          )}
+        >
+          {children}
+        </ul>
       </BottomSheet>
     )
   }
