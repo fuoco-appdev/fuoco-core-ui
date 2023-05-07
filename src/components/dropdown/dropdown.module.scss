@@ -52,6 +52,8 @@
   -webkit-border-radius: $rounded-base;
   -moz-border-radius: $rounded-base;
   -khtml-border-radius: $rounded-base;
+  padding-top: $mp-3;
+  padding-bottom: $mp-3;
   padding-left: 0;
   background-color: white;
   overflow-y: auto;
@@ -74,8 +76,40 @@
   pointer-events: all;
 }
 
-.touchscreen-dropdown {
+.touchscreen-animated-container {
+  position: absolute;
   width: 100%;
-  padding-bottom: $mp-3;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-top-left-radius: $rounded-base;
+  border-top-right-radius: $rounded-base;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.touchscreen-dropdown {
+  touch-action: none;
+  margin-top: 0 !important;
+  width: 100%;
   padding-left: 0;
+}
+
+.touchscreen-dropdown-bar {
+  height: $mp-6;
+}
+
+.touchscreen-dropdown-handle-container {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.touchscreen-dropdown-handle {
+  width: 10vw;
+  height: 6px;
+  background-color: $gray-200;
+  border-radius: $rounded-full;
 }

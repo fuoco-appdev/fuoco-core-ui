@@ -1,11 +1,10 @@
-import React, { useRef, useState, useLayoutEffect } from 'react'
-import { animated, useTransition } from 'react-spring'
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import { animated, useSpring, useTransition } from 'react-spring'
 import { Button } from '../button/index'
-import { BottomSheet } from 'react-spring-bottom-sheet'
-import 'react-spring-bottom-sheet/dist/style.css'
 
 // @ts-ignore
 import DropdownStyles from './dropdown.module.scss'
+import { useDrag } from '@use-gesture/react'
 
 export enum DropdownAlignment {
   Left,
@@ -15,8 +14,9 @@ export enum DropdownAlignment {
 export interface DropDownProps {
   id?: string
   className?: string
+  ref?: React.LegacyRef<HTMLUListElement>
   align?: DropdownAlignment
-  open: boolean
+  open?: boolean
   touchScreen?: boolean
   parentRef?: React.RefObject<HTMLElement>
   anchorRef?: React.RefObject<HTMLElement>
@@ -29,8 +29,9 @@ export interface DropDownProps {
 function Dropdown({
   id,
   className,
+  ref,
   align = DropdownAlignment.Right,
-  open = false,
+  open,
   touchScreen = false,
   parentRef,
   anchorRef,
@@ -62,6 +63,52 @@ function Dropdown({
       friction: 40,
       bounce: 0,
     },
+  })
+
+  const touchScreenOverlayTransition = useTransition(open, {
+    from: {
+      opacity: 0,
+    },
+    enter: {
+      opacity: 1,
+    },
+    leave: {
+      opacity: 0,
+    },
+    config: {
+      tension: 1000,
+      friction: 10,
+      bounce: 0,
+    },
+  })
+
+  const [touchScreenProps, touchScreenApi] = useSpring(() => ({
+    from: {
+      bottom: -window.innerHeight,
+    },
+    to: {
+      bottom: 0,
+    },
+    config: {
+      tension: 1000,
+      friction: 80,
+      bounce: 0,
+    },
+  }))
+
+  const bind = useDrag(({ down, movement: [mx, my] }) => {
+    const y = -my
+    if (y < 0) {
+      touchScreenApi.start({
+        bottom: down ? y : 0,
+        immediate: down,
+      })
+    }
+
+    const dropdownHeight = divRef.current?.clientHeight ?? 0
+    if (y < -dropdownHeight) {
+      onClose?.()
+    }
   })
 
   useLayoutEffect(() => {
@@ -127,12 +174,16 @@ function Dropdown({
       } else {
         onClose?.()
       }
+    } else {
+      touchScreenApi.start({
+        bottom: open ? 0 : -window.innerHeight,
+      })
     }
   }, [open, children])
 
   if (!touchScreen) {
     return desktopTransition(
-      (transitionStyle, item) =>
+      (transitionStyle: any, item: any) =>
         item && (
           <animated.div
             style={{
@@ -155,17 +206,44 @@ function Dropdown({
         )
     )
   } else {
-    return (
-      <BottomSheet open={open} onDismiss={onClose}>
-        <ul
-          ref={uListRef}
-          className={[DropdownStyles['touchscreen-dropdown'], className].join(
-            ' '
-          )}
-        >
-          {children}
-        </ul>
-      </BottomSheet>
+    return touchScreenOverlayTransition(
+      (overlayStyle: any, item: any) =>
+        item && (
+          <animated.div
+            style={overlayStyle}
+            className={DropdownStyles['touchscreen-overlay']}
+          >
+            <animated.div
+              ref={divRef}
+              className={DropdownStyles['touchscreen-animated-container']}
+              {...bind()}
+              style={{
+                ...touchScreenProps,
+              }}
+            >
+              <ul
+                ref={uListRef}
+                className={[
+                  DropdownStyles['touchscreen-dropdown'],
+                  className,
+                ].join(' ')}
+              >
+                <div className={DropdownStyles['touchscreen-dropdown-bar']}>
+                  <div
+                    className={
+                      DropdownStyles['touchscreen-dropdown-handle-container']
+                    }
+                  >
+                    <div
+                      className={DropdownStyles['touchscreen-dropdown-handle']}
+                    />
+                  </div>
+                </div>
+                {children}
+              </ul>
+            </animated.div>
+          </animated.div>
+        )
     )
   }
 }
