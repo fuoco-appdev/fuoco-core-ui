@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import { animated, useSpring, useTransition } from 'react-spring'
 import { Button } from '../button/index'
+import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet'
+import 'react-spring-bottom-sheet/dist/style.css'
 
 // @ts-ignore
 import DropdownStyles from './dropdown.module.scss'
@@ -15,7 +17,7 @@ export interface DropDownProps {
   className?: string
   ref?: React.LegacyRef<HTMLUListElement>
   align?: DropdownAlignment
-  open?: boolean
+  open: boolean
   touchScreen?: boolean
   parentRef?: React.RefObject<HTMLElement>
   anchorRef?: React.RefObject<HTMLElement>
@@ -30,7 +32,7 @@ function Dropdown({
   className,
   ref,
   align = DropdownAlignment.Right,
-  open,
+  open = false,
   touchScreen = false,
   parentRef,
   anchorRef,
@@ -41,6 +43,7 @@ function Dropdown({
 }: DropDownProps) {
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
+  const bottomSheetRef = useRef<BottomSheetRef | null>(null)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -63,37 +66,6 @@ function Dropdown({
       bounce: 0,
     },
   })
-
-  const touchScreenOverlayTransition = useTransition(open, {
-    from: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-    },
-    leave: {
-      opacity: 0,
-    },
-    config: {
-      tension: 1000,
-      friction: 10,
-      bounce: 0,
-    },
-  })
-
-  const [touchScreenProps, touchScreenApi] = useSpring(() => ({
-    from: {
-      bottom: -window.innerHeight,
-    },
-    to: {
-      bottom: 0,
-    },
-    config: {
-      tension: 1000,
-      friction: 80,
-      bounce: 0,
-    },
-  }))
 
   useLayoutEffect(() => {
     /**
@@ -158,10 +130,6 @@ function Dropdown({
       } else {
         onClose?.()
       }
-    } else {
-      touchScreenApi.start({
-        bottom: open ? 0 : -window.innerHeight,
-      })
     }
   }, [open, children])
 
@@ -190,32 +158,19 @@ function Dropdown({
         )
     )
   } else {
-    return touchScreenOverlayTransition(
-      (overlayStyle, item) =>
-        item && (
-          <animated.div
-            style={overlayStyle}
-            className={DropdownStyles['touchscreen-overlay']}
+    return (
+      <BottomSheet open={open} ref={bottomSheetRef} onDismiss={onClose}>
+        <div ref={divRef}>
+          <ul
+            ref={uListRef}
+            className={[DropdownStyles['touchscreen-dropdown'], className].join(
+              ' '
+            )}
           >
-            <animated.div
-              ref={divRef}
-              className={DropdownStyles['touchscreen-animated-container']}
-              style={{
-                ...touchScreenProps,
-              }}
-            >
-              <ul
-                ref={uListRef}
-                className={[
-                  DropdownStyles['touchscreen-dropdown'],
-                  className,
-                ].join(' ')}
-              >
-                {children}
-              </ul>
-            </animated.div>
-          </animated.div>
-        )
+            {children}
+          </ul>
+        </div>
+      </BottomSheet>
     )
   }
 }

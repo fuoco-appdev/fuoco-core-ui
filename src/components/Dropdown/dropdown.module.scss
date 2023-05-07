@@ -76,21 +76,28 @@
   pointer-events: all;
 }
 
-.touchscreen-animated-container {
-  position: absolute;
-  width: 100%;
-  background-color: white;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  border-top-left-radius: $rounded-base;
-  border-top-right-radius: $rounded-base;
-  max-height: 75vh;
-  min-height: 25vh;
-  overflow-y: auto;
-}
-
 .touchscreen-dropdown {
   width: 100%;
-  padding-top: $mp-3;
   padding-bottom: $mp-3;
   padding-left: 0;
+}
+
+.touchscreen-dropdown-bar {
+  height: $mp-2;
+}
+
+.touchscreen-dropdown-handle-container {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.touchscreen-dropdown-hand {
+  width: 10vw;
+  height: 8px;
+  background-color: $gray-200;
+  border-radius: $rounded-full;
 }

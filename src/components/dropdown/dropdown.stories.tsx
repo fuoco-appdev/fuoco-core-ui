@@ -142,7 +142,7 @@ export const TouchScreen = (args: any) => {
       >
         <Dropdown.Item
           onClick={() => {
-            setIsOpen(false)
+            //setIsOpen(false)
             console.log('clicked')
           }}
         >
@@ -150,7 +150,7 @@ export const TouchScreen = (args: any) => {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
-            setIsOpen(false)
+            //setIsOpen(false)
             console.log('clicked')
           }}
         >
