@@ -250,16 +250,32 @@ function Dropdown({
 
 interface ItemProps {
   ref?: React.LegacyRef<HTMLLIElement>
+  classNames?: {
+    container?: string
+    button?: {
+      container?: string
+      button?: string
+      leftIconContainer?: string
+      rightIconContainer?: string
+      children?: string
+    }
+  }
   children?: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function Item({ ref, children, onClick }: ItemProps) {
+function Item({ ref, classNames, children, onClick }: ItemProps) {
   return (
-    <li ref={ref} className={DropdownStyles['dropdown-item']}>
+    <li
+      ref={ref}
+      className={[DropdownStyles['dropdown-item'], classNames?.container].join(
+        ' '
+      )}
+    >
       <Button
         classNames={{
           children: DropdownStyles['dropdown-item-content'],
+          ...classNames?.button,
         }}
         type={'text'}
         size={'large'}
