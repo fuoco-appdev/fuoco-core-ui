@@ -88,14 +88,14 @@
 }
 
 .touchscreen-dropdown {
-  touch-action: none;
   margin-top: 0 !important;
   width: 100%;
   padding-left: 0;
 }
 
 .touchscreen-dropdown-bar {
-  height: $mp-6;
+  touch-action: none;
+  height: $mp-8;
 }
 
 .touchscreen-dropdown-handle-container {
