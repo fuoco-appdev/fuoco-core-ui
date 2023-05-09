@@ -282,7 +282,7 @@ function Auth({
   const Container = (props: any) => (
     <div className={containerClasses.join(' ')} style={style}>
       <SocialAuth
-        classNames={classNames?.socialAuth}
+        classNames={classNames}
         view={view}
         strings={{ ...defaultStrings, ...strings }}
         defaultIconColor={defaultIconColor}
