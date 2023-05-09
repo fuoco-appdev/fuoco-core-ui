@@ -1022,12 +1022,7 @@ function EmailAuth({
                     classNames?.buttonIcon,
                   ].join(' ')}
                 >
-                  <Lock
-                    size={24}
-                    strokeWidth={0}
-                    stroke={defaultIconColor}
-                    color={defaultIconColor}
-                  />
+                  <Lock size={24} strokeWidth={0} />
                 </div>
                 {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
