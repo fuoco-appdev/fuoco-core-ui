@@ -17,6 +17,7 @@ import * as SocialIcons from './icons'
 import AuthStyles from './auth.module.scss'
 import { RipplesProps } from 'react-ripples'
 import { ButtonClasses } from '../button/button'
+import { DividerClasses } from '../divider/divider'
 
 const VIEWS: ViewsMap = {
   SIGN_IN: 'sign_in',
@@ -100,7 +101,7 @@ export interface SocialAuthClasses {
   buttonRoot?: string
   buttonContainer?: string
   socialButton?: SocialButtonClasses
-  divider?: string
+  divider?: DividerClasses
 }
 
 export interface EmailAuthClasses {
@@ -676,10 +677,13 @@ function SocialAuth({
           </div>
           {!onlyThirdPartyProviders && (
             <Divider
-              className={[
-                AuthStyles['divider'],
-                classNames?.socialAuth?.divider,
-              ].join(' ')}
+              classNames={{
+                divider: [
+                  AuthStyles['divider'],
+                  classNames?.socialAuth?.divider?.divider,
+                ].join(' '),
+                content: classNames?.socialAuth?.divider?.content,
+              }}
             >
               {strings?.orContinueWith}
             </Divider>

@@ -4,16 +4,21 @@ import DividerStyles from './divider.module.scss'
 
 interface Props {
   children?: React.ReactNode
-  className?: string
+  classNames?: DividerClasses
   light?: boolean
   orientation?: 'left' | 'right' | 'center'
   style?: React.CSSProperties
   type?: 'vertical' | 'horizontal'
 }
 
+export interface DividerClasses {
+  divider?: string
+  content?: string
+}
+
 export default function Divider({
   children,
-  className,
+  classNames,
   light = false,
   orientation = 'center',
   style,
@@ -24,6 +29,7 @@ export default function Divider({
       ? DividerStyles['sbui-divider']
       : DividerStyles['sbui-divider-vertical'],
   ]
+  classes.push(classNames?.divider)
   if (light) classes.push(DividerStyles['sbui-divider--light'])
 
   if (children) {
@@ -32,12 +38,15 @@ export default function Divider({
     classes.push(DividerStyles[`sbui-divider--no-text`])
   }
 
-  if (className) classes.push(className)
-
   return (
     <div className={classes.join(' ')} role="seperator" style={style}>
       {children && (
-        <span className={DividerStyles['sbui-divider__content']}>
+        <span
+          className={[
+            DividerStyles['sbui-divider__content'],
+            classNames?.content,
+          ].join(' ')}
+        >
           {children}
         </span>
       )}
