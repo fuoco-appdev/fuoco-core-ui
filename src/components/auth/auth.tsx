@@ -82,7 +82,6 @@ export interface AuthStrings {
 
 export interface AuthClassNames {
   container?: string
-  socialButton?: SocialButtonClasses
   socialAuth?: SocialAuthClasses
   emailAuth?: EmailAuthClasses
   magicLink?: MagicLinkClasses
@@ -100,7 +99,7 @@ export interface SocialButtonClasses {
 export interface SocialAuthClasses {
   buttonRoot?: string
   buttonContainer?: string
-  socialButton?: SocialAuthClasses
+  socialButton?: SocialButtonClasses
   divider?: string
 }
 
