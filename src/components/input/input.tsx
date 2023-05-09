@@ -10,6 +10,7 @@ import {
 // @ts-ignore
 import InputStyles from './input.module.scss'
 import { animated, useSpring } from 'react-spring'
+import { ButtonClasses } from '../button/button'
 
 export interface InputClasses {
   root?: string
@@ -21,6 +22,7 @@ export interface InputClasses {
   input?: string
   actionsContainer?: string
   formLayout?: FormLayoutClasses
+  revealButton?: ButtonClasses
 }
 
 export interface InputProps
@@ -202,6 +204,7 @@ function Input({
               {reveal ? (
                 <Button
                   tabIndex={-1}
+                  classNames={classNames?.revealButton}
                   htmlType={'button'}
                   size={'tiny'}
                   type={'text'}

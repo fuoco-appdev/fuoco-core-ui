@@ -830,6 +830,7 @@ function EmailAuth({
             error={emailErrorMessage}
             autoComplete="email"
             defaultValue={email}
+            iconColor={defaultIconColor}
             icon={
               <Email
                 size={24}
@@ -856,6 +857,7 @@ function EmailAuth({
             error={passwordErrorMessage}
             reveal={true}
             password={true}
+            iconColor={defaultIconColor}
             defaultValue={password}
             autoComplete="current-password"
             icon={
@@ -883,6 +885,7 @@ function EmailAuth({
               classNames={classNames?.input}
               label={strings.confirmPassword}
               error={confirmPasswordErrorMessage}
+              iconColor={defaultIconColor}
               reveal={true}
               password={true}
               defaultValue={confirmPassword}
@@ -1134,6 +1137,7 @@ function MagicLink({
             label={strings.emailAddress}
             placeholder={strings.yourEmailAddress}
             error={emailErrorMessage}
+            iconColor={defaultIconColor}
             icon={
               <Email
                 size={24}
@@ -1256,6 +1260,7 @@ function ForgottenPassword({
             label="Email address"
             placeholder="Your email address"
             error={emailErrorMessage}
+            iconColor={defaultIconColor}
             icon={
               <Email
                 size={24}
@@ -1388,6 +1393,7 @@ function ResetPassword({
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
             password={true}
+            iconColor={defaultIconColor}
             error={passwordErrorMessage}
             icon={
               <Key
@@ -1415,6 +1421,7 @@ function ResetPassword({
             placeholder={strings?.confirmNewPasswordPlaceholder}
             reveal={true}
             password={true}
+            iconColor={defaultIconColor}
             error={confirmPasswordErrorMessage}
             icon={
               <Key
@@ -1527,6 +1534,7 @@ function UpdatePassword({
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
             password={true}
+            iconColor={defaultIconColor}
             error={passwordErrorMessage}
             icon={
               <Key
