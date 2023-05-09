@@ -2,12 +2,21 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useEffect, useRef, useState } from 'react'
 import { SupabaseClient, Provider, AuthError } from '@supabase/supabase-js'
-import { Input, Checkbox, Button, Typography, Divider } from '../../index'
+import {
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+  Divider,
+  InputClasses,
+  CheckboxClasses,
+} from '../../index'
 import { Email, Key, Lock, Inbox } from '../icon/icons/line'
 import * as SocialIcons from './icons'
 // @ts-ignore
 import AuthStyles from './auth.module.scss'
 import { RipplesProps } from 'react-ripples'
+import { ButtonClasses } from '../button/button'
 
 const VIEWS: ViewsMap = {
   SIGN_IN: 'sign_in',
@@ -71,14 +80,90 @@ export interface AuthStrings {
   signInWithPassword?: string
 }
 
+export interface AuthClassNames {
+  container?: string
+  socialButton?: SocialButtonClasses
+  socialAuth?: SocialAuthClasses
+  emailAuth?: EmailAuthClasses
+  magicLink?: MagicLinkClasses
+  forgottenPassword?: ForgottenPasswordClasses
+  updatePassword?: UpdatePasswordClasses
+}
+
+export interface SocialButtonClasses {
+  buttonContainer?: string
+  button?: ButtonClasses
+  buttonContent?: string
+  buttonIcon?: string
+}
+
+export interface SocialAuthClasses {
+  buttonRoot?: string
+  buttonContainer?: string
+  socialButton?: SocialAuthClasses
+  divider?: string
+}
+
+export interface EmailAuthClasses {
+  input?: InputClasses
+  buttonContainer?: string
+  rememberMeContainer?: string
+  checkbox?: CheckboxClasses
+  linkContainer?: string
+  emailButtonContainer?: string
+  emailButton?: ButtonClasses
+  emailButtonContent?: string
+  buttonIcon?: string
+}
+
+export interface MagicLinkClasses {
+  buttonContainer?: string
+  input?: InputClasses
+  button?: ButtonClasses
+  buttonContent?: string
+  buttonIcon?: string
+  link?: string
+}
+
+export interface ForgottenPasswordClasses {
+  buttonContainer?: string
+  input?: InputClasses
+  button?: ButtonClasses
+  buttonContent?: string
+  buttonIcon?: string
+  link?: string
+}
+
+export interface ResetPasswordClasses {
+  buttonContainer?: string
+  input?: InputClasses
+  button?: ButtonClasses
+  buttonContent?: string
+  buttonIcon?: string
+}
+
+export interface UpdatePasswordClasses {
+  buttonContainer?: string
+  input?: InputClasses
+  button?: ButtonClasses
+  buttonContent?: string
+  buttonIcon?: string
+}
+
+export interface RippleProps {
+  socialButton?: RipplesProps
+  submitButton?: RipplesProps
+}
+
 export interface AuthProps {
   supabaseClient: SupabaseClient
-  className?: string
+  classNames?: AuthClassNames
   defaultIconColor?: string
   litIconColor?: string
   children?: React.ReactNode
   style?: React.CSSProperties
   strings?: AuthStrings
+  rippleProps?: RippleProps
   socialLayout?: 'horizontal' | 'vertical'
   socialColors?: boolean
   socialButtonSize?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
@@ -142,11 +227,21 @@ const defaultStrings: AuthStrings = {
 
 function Auth({
   supabaseClient,
-  className,
+  classNames,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   style,
   strings,
+  rippleProps = {
+    socialButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+    submitButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+  },
   socialLayout = 'vertical',
   socialColors = false,
   socialButtonSize = 'large',
@@ -183,14 +278,11 @@ function Auth({
 
   const verticalSocialLayout = socialLayout === 'vertical' ? true : false
 
-  let containerClasses = [AuthStyles['sbui-auth']]
-  if (className) {
-    containerClasses.push(className)
-  }
-
+  let containerClasses = [AuthStyles['sbui-auth'], classNames?.container]
   const Container = (props: any) => (
     <div className={containerClasses.join(' ')} style={style}>
       <SocialAuth
+        classNames={classNames?.socialAuth}
         view={view}
         strings={{ ...defaultStrings, ...strings }}
         defaultIconColor={defaultIconColor}
@@ -198,6 +290,7 @@ function Auth({
         supabaseClient={supabaseClient}
         verticalSocialLayout={verticalSocialLayout}
         providers={providers}
+        rippleProps={rippleProps}
         socialLayout={socialLayout}
         socialButtonSize={socialButtonSize}
         socialColors={socialColors}
@@ -228,10 +321,12 @@ function Auth({
       return (
         <Container>
           <EmailAuth
+            classNames={classNames?.emailAuth}
             id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
             defaultIconColor={defaultIconColor}
             litIconColor={litIconColor}
             strings={{ ...defaultStrings, ...strings }}
+            rippleProps={rippleProps}
             supabaseClient={supabaseClient}
             authView={authView}
             setAuthView={setAuthView}
@@ -261,6 +356,7 @@ function Auth({
       return (
         <Container>
           <ForgottenPassword
+            classNames={classNames?.forgottenPassword}
             strings={{ ...defaultStrings, ...strings }}
             defaultIconColor={defaultIconColor}
             litIconColor={litIconColor}
@@ -277,6 +373,7 @@ function Auth({
       return (
         <Container>
           <MagicLink
+            classNames={classNames?.magicLink}
             strings={{ ...defaultStrings, ...strings }}
             defaultIconColor={defaultIconColor}
             litIconColor={litIconColor}
@@ -293,6 +390,7 @@ function Auth({
       return (
         <Container>
           <UpdatePassword
+            classNames={classNames?.updatePassword}
             strings={{ ...defaultStrings, ...strings }}
             defaultIconColor={defaultIconColor}
             litIconColor={litIconColor}
@@ -321,16 +419,23 @@ function Auth({
 }
 
 function SocialButton({
+  classNames,
   provider,
   strings,
+  rippleProps = {
+    color: 'rgba(0, 0, 0, .3)',
+    during: 250,
+  },
   verticalSocialLayout,
   socialButtonSize = 'large',
   signLabel,
   socialColors,
   handleProviderSignIn,
 }: {
+  classNames?: SocialButtonClasses
   provider: Provider
   strings: AuthStrings
+  rippleProps?: RipplesProps
   verticalSocialLayout: any
   socialButtonSize: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | undefined
   signLabel: string
@@ -442,32 +547,42 @@ function SocialButton({
 
   return (
     <div
-      className={AuthStyles['button-container']}
+      className={[
+        AuthStyles['button-container'],
+        classNames?.buttonContainer,
+      ].join(' ')}
       key={provider}
       style={!verticalSocialLayout ? { flexGrow: 1 } : {}}
     >
       <Button
         block
+        classNames={classNames?.button}
         type="default"
         shadow
         size={socialButtonSize}
-        style={
-          socialColors
+        style={{
+          ...(socialColors
             ? isHover
               ? buttonHoverStyles[provider]
               : buttonStyles[provider]
-            : {}
-        }
-        onClick={() => handleProviderSignIn(provider)}
-        rippleProps={{
-          color: 'rgba(0, 0, 0, .3)',
-          during: 250,
+            : {}),
         }}
+        onClick={() => handleProviderSignIn(provider)}
+        rippleProps={rippleProps}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className={AuthStyles['button-content']}>
-          <div className={AuthStyles['button-icon']}>
+        <div
+          className={[
+            AuthStyles['button-content'],
+            classNames?.buttonContent,
+          ].join(' ')}
+        >
+          <div
+            className={[AuthStyles['button-icon'], classNames?.buttonIcon].join(
+              ' '
+            )}
+          >
             {AuthIcon ? <AuthIcon /> : ''}
           </div>
           {verticalSocialLayout && signLabel + provider}
@@ -478,11 +593,21 @@ function SocialButton({
 }
 
 function SocialAuth({
-  className,
+  classNames,
   style,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   strings,
+  rippleProps = {
+    socialButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+    submitButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+  },
   supabaseClient,
   children,
   socialLayout = 'vertical',
@@ -498,10 +623,6 @@ function SocialAuth({
   onSignupError,
   ...props
 }: AuthProps) {
-  const rippleProps: RipplesProps = {
-    color: 'rgba(0, 0, 0, .3)',
-    during: 250,
-  }
   const handleProviderSignIn = (provider: Provider) => {
     setTimeout(async () => {
       const { error } = await supabaseClient.auth.signInWithOAuth({ provider })
@@ -513,7 +634,7 @@ function SocialAuth({
         } else {
           onAuthenticating ? onAuthenticating?.() : null
         }
-    }, rippleProps.during)
+    }, rippleProps.submitButton?.during)
   }
 
   const signLabel =
@@ -524,11 +645,22 @@ function SocialAuth({
     <div>
       {providers && providers.length > 0 && (
         <React.Fragment>
-          <div className={AuthStyles['button-root']}>
-            <div className={AuthStyles['button-container']}>
+          <div
+            className={[
+              AuthStyles['button-root'],
+              classNames?.socialAuth?.buttonRoot,
+            ].join(' ')}
+          >
+            <div
+              className={[
+                AuthStyles['button-container'],
+                classNames?.socialAuth?.buttonContainer,
+              ].join(' ')}
+            >
               {providers.map((provider) => {
                 return (
                   <SocialButton
+                    classNames={classNames?.socialAuth?.socialButton}
                     key={`${provider}-button`}
                     provider={provider}
                     verticalSocialLayout={verticalSocialLayout}
@@ -536,6 +668,7 @@ function SocialAuth({
                     signLabel={signLabel}
                     socialColors={socialColors}
                     strings={strings!}
+                    rippleProps={rippleProps.socialButton}
                     handleProviderSignIn={handleProviderSignIn}
                   />
                 )
@@ -543,7 +676,12 @@ function SocialAuth({
             </div>
           </div>
           {!onlyThirdPartyProviders && (
-            <Divider className={AuthStyles['divider']}>
+            <Divider
+              className={[
+                AuthStyles['divider'],
+                classNames?.socialAuth?.divider,
+              ].join(' ')}
+            >
               {strings?.orContinueWith}
             </Divider>
           )}
@@ -554,8 +692,19 @@ function SocialAuth({
 }
 
 function EmailAuth({
+  classNames,
   authView,
   strings,
+  rippleProps = {
+    socialButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+    submitButton: {
+      color: 'rgba(0, 0, 0, .3)',
+      during: 250,
+    },
+  },
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   defaultEmail,
@@ -578,10 +727,12 @@ function EmailAuth({
   onSigninError,
   onSignupError,
 }: {
+  classNames?: EmailAuthClasses
   defaultIconColor?: string
   litIconColor?: string
   authView: ViewType
   strings: AuthStrings
+  rippleProps: RippleProps
   defaultEmail: string
   defaultPassword: string
   id: 'auth-sign-up' | 'auth-sign-in'
@@ -624,10 +775,6 @@ function EmailAuth({
     }
   }, [authView])
 
-  const rippleProps: RipplesProps = {
-    color: 'rgba(0, 0, 0, .3)',
-    during: 250,
-  }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -667,7 +814,7 @@ function EmailAuth({
           }
           break
       }
-    }, rippleProps?.during ?? 0)
+    }, rippleProps?.submitButton?.during ?? 0)
   }
 
   return (
@@ -675,6 +822,7 @@ function EmailAuth({
       <div>
         <div>
           <Input
+            classNames={classNames?.input}
             label={strings.emailAddress}
             error={emailErrorMessage}
             autoComplete="email"
@@ -700,6 +848,7 @@ function EmailAuth({
             onBlur={() => setEmailIconLit(false)}
           />
           <Input
+            classNames={classNames?.input}
             label={strings.password}
             error={passwordErrorMessage}
             reveal={true}
@@ -728,6 +877,7 @@ function EmailAuth({
           />
           {authView === VIEWS.SIGN_UP && (
             <Input
+              classNames={classNames?.input}
               label={strings.confirmPassword}
               error={confirmPasswordErrorMessage}
               reveal={true}
@@ -760,10 +910,21 @@ function EmailAuth({
             />
           )}
         </div>
-        <div className={AuthStyles['button-container']}>
-          <div className={AuthStyles['remember-me-container']}>
+        <div
+          className={[
+            AuthStyles['button-container'],
+            classNames?.buttonContainer,
+          ].join(' ')}
+        >
+          <div
+            className={[
+              AuthStyles['remember-me-container'],
+              classNames?.rememberMeContainer,
+            ].join(' ')}
+          >
             {authView === VIEWS.SIGN_IN && (
               <Checkbox
+                classNames={classNames?.checkbox}
                 label={strings.rememberMe ?? ''}
                 name="remember_me"
                 id="remember_me"
@@ -787,6 +948,7 @@ function EmailAuth({
             )}
             {authView === VIEWS.SIGN_UP && (
               <Checkbox
+                classNames={classNames?.checkbox}
                 label={
                   <span>
                     {strings.agreeToThe} &nbsp;
@@ -824,8 +986,14 @@ function EmailAuth({
               />
             )}
           </div>
-          <div className={AuthStyles['email-button-container']}>
+          <div
+            className={[
+              AuthStyles['email-button-container'],
+              classNames?.emailButtonContainer,
+            ].join(' ')}
+          >
             <Button
+              classNames={classNames?.emailButton}
               htmlType="submit"
               type="primary"
               size="large"
@@ -833,15 +1001,21 @@ function EmailAuth({
                 authView === VIEWS.SIGN_UP ? !termAgreementChecked : false
               }
               block
-              rippleProps={rippleProps}
+              rippleProps={rippleProps?.submitButton}
             >
               <div
                 className={[
                   AuthStyles['button-content'],
                   AuthStyles['email-button-content'],
+                  classNames?.emailButtonContent,
                 ].join(' ')}
               >
-                <div className={AuthStyles['button-icon']}>
+                <div
+                  className={[
+                    AuthStyles['button-icon'],
+                    classNames?.buttonIcon,
+                  ].join(' ')}
+                >
                   <Lock
                     size={24}
                     strokeWidth={0}
@@ -854,7 +1028,12 @@ function EmailAuth({
             </Button>
           </div>
         </div>
-        <div className={AuthStyles['link-container']}>
+        <div
+          className={[
+            AuthStyles['link-container'],
+            classNames?.linkContainer,
+          ].join(' ')}
+        >
           {authView === VIEWS.SIGN_IN && magicLink && (
             <Typography.Link
               href={'#'}
@@ -894,6 +1073,7 @@ function EmailAuth({
 }
 
 function MagicLink({
+  classNames,
   setAuthView,
   strings,
   defaultIconColor = '#ffffff',
@@ -908,6 +1088,7 @@ function MagicLink({
   onMagicLinkSent,
   onMagicLinkError,
 }: {
+  classNames?: MagicLinkClasses
   defaultIconColor?: string
   litIconColor?: string
   setAuthView: any
@@ -939,8 +1120,14 @@ function MagicLink({
   return (
     <form id="auth-magic-link" onSubmit={handleMagicLinkSignIn}>
       <div>
-        <div className={AuthStyles['button-container']}>
+        <div
+          className={[
+            AuthStyles['button-container'],
+            classNames?.buttonContainer,
+          ].join(' ')}
+        >
           <Input
+            classNames={classNames?.input}
             label={strings.emailAddress}
             placeholder={strings.yourEmailAddress}
             error={emailErrorMessage}
@@ -965,6 +1152,7 @@ function MagicLink({
             onBlur={() => setEmailIconLit(false)}
           />
           <Button
+            classNames={classNames?.button}
             block
             size="large"
             htmlType="submit"
@@ -974,9 +1162,15 @@ function MagicLink({
               className={[
                 AuthStyles['button-content'],
                 AuthStyles['email-button-content'],
+                classNames?.buttonContent,
               ].join(' ')}
             >
-              <div className={AuthStyles['button-icon']}>
+              <div
+                className={[
+                  AuthStyles['button-icon'],
+                  classNames?.buttonIcon,
+                ].join(' ')}
+              >
                 <Inbox
                   size={24}
                   strokeWidth={0}
@@ -989,7 +1183,7 @@ function MagicLink({
           </Button>
         </div>
         <Typography.Link
-          className={AuthStyles['link']}
+          className={[AuthStyles['link'], classNames?.link].join(' ')}
           href="#auth-sign-in"
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault()
@@ -1004,6 +1198,7 @@ function MagicLink({
 }
 
 function ForgottenPassword({
+  classNames,
   strings,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
@@ -1018,6 +1213,7 @@ function ForgottenPassword({
   onResetPasswordError,
   onResetPasswordSent,
 }: {
+  classNames?: ForgottenPasswordClasses
   defaultIconColor?: string
   litIconColor?: string
   strings: AuthStrings
@@ -1046,8 +1242,14 @@ function ForgottenPassword({
   return (
     <form id="auth-forgot-password" onSubmit={handlePasswordReset}>
       <div>
-        <div className={AuthStyles['button-container']}>
+        <div
+          className={[
+            AuthStyles['button-container'],
+            classNames?.buttonContainer,
+          ].join(' ')}
+        >
           <Input
+            classNames={classNames?.input}
             label="Email address"
             placeholder="Your email address"
             error={emailErrorMessage}
@@ -1071,14 +1273,25 @@ function ForgottenPassword({
             onFocus={() => setEmailIconLit(true)}
             onBlur={() => setEmailIconLit(false)}
           />
-          <Button block size="large" htmlType="submit">
+          <Button
+            classNames={classNames?.button}
+            block
+            size="large"
+            htmlType="submit"
+          >
             <div
               className={[
                 AuthStyles['button-content'],
                 AuthStyles['email-button-content'],
+                classNames?.buttonContent,
               ].join(' ')}
             >
-              <div className={AuthStyles['button-icon']}>
+              <div
+                className={[
+                  AuthStyles['button-icon'],
+                  classNames?.buttonIcon,
+                ].join(' ')}
+              >
                 <Inbox
                   size={24}
                   strokeWidth={0}
@@ -1091,7 +1304,7 @@ function ForgottenPassword({
           </Button>
         </div>
         <Typography.Link
-          className={AuthStyles['link']}
+          className={[AuthStyles['link'], classNames?.link].join(' ')}
           href={'#'}
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             onSigninRedirect ? onSigninRedirect(e) : null
@@ -1106,6 +1319,7 @@ function ForgottenPassword({
 }
 
 function ResetPassword({
+  classNames,
   supabaseClient,
   strings,
   defaultIconColor = '#ffffff',
@@ -1119,6 +1333,7 @@ function ResetPassword({
   onResetPasswordError,
   onPasswordUpdated,
 }: {
+  classNames?: ResetPasswordClasses
   supabaseClient: SupabaseClient
   defaultIconColor?: string
   litIconColor?: string
@@ -1158,8 +1373,14 @@ function ResetPassword({
   return (
     <form id="auth-reset-password" onSubmit={handlePasswordReset}>
       <div>
-        <div className={AuthStyles['button-container']}>
+        <div
+          className={[
+            AuthStyles['button-container'],
+            classNames?.buttonContainer,
+          ].join(' ')}
+        >
           <Input
+            classNames={classNames?.input}
             label={strings?.newPassword}
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
@@ -1186,6 +1407,7 @@ function ResetPassword({
             onBlur={() => setPasswordIconLit(false)}
           />
           <Input
+            classNames={classNames?.input}
             label={strings?.confirmNewPassword}
             placeholder={strings?.confirmNewPasswordPlaceholder}
             reveal={true}
@@ -1215,6 +1437,7 @@ function ResetPassword({
           />
           <Button
             block
+            classNames={classNames?.button}
             size="large"
             htmlType="submit"
             rippleProps={rippleProps}
@@ -1223,9 +1446,15 @@ function ResetPassword({
               className={[
                 AuthStyles['button-content'],
                 AuthStyles['email-button-content'],
+                classNames?.buttonContent,
               ].join(' ')}
             >
-              <div className={AuthStyles['button-icon']}>
+              <div
+                className={[
+                  AuthStyles['button-icon'],
+                  classNames?.buttonIcon,
+                ].join(' ')}
+              >
                 <Key
                   size={24}
                   strokeWidth={0}
@@ -1243,6 +1472,7 @@ function ResetPassword({
 }
 
 function UpdatePassword({
+  classNames,
   supabaseClient,
   strings,
   defaultIconColor = '#ffffff',
@@ -1255,6 +1485,7 @@ function UpdatePassword({
   onUpdatePasswordError,
   onPasswordUpdated,
 }: {
+  classNames?: UpdatePasswordClasses
   supabaseClient: SupabaseClient
   defaultIconColor?: string
   litIconColor?: string
@@ -1281,8 +1512,14 @@ function UpdatePassword({
   return (
     <form id="auth-update-password" onSubmit={handlePasswordReset}>
       <div>
-        <div className={AuthStyles['button-container']}>
+        <div
+          className={[
+            AuthStyles['button-container'],
+            classNames?.buttonContainer,
+          ].join(' ')}
+        >
           <Input
+            classNames={classNames?.input}
             label={strings?.newPassword}
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
@@ -1310,6 +1547,7 @@ function UpdatePassword({
           />
           <Button
             block
+            classNames={classNames?.button}
             size="large"
             htmlType="submit"
             rippleProps={rippleProps}
@@ -1318,9 +1556,15 @@ function UpdatePassword({
               className={[
                 AuthStyles['button-content'],
                 AuthStyles['email-button-content'],
+                classNames?.buttonContent,
               ].join(' ')}
             >
-              <div className={AuthStyles['button-icon']}>
+              <div
+                className={[
+                  AuthStyles['button-icon'],
+                  classNames?.buttonIcon,
+                ].join(' ')}
+              >
                 <Key
                   size={24}
                   strokeWidth={0}

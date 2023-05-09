@@ -4,15 +4,17 @@ import ButtonStyles from './button.module.scss'
 import { IconContext } from '../icon/icon-context'
 import Ripples, { RipplesProps } from 'react-ripples'
 
+export interface ButtonClasses {
+  container?: string
+  button?: string
+  leftIconContainer?: string
+  rightIconContainer?: string
+  children?: string
+}
+
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   block?: boolean
-  classNames?: {
-    container?: string
-    button?: string
-    leftIconContainer?: string
-    rightIconContainer?: string
-    children?: string
-  }
+  classNames?: ButtonClasses
   children?: React.ReactNode
   touchScreen?: boolean
   disabled?: boolean
