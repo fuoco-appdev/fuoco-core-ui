@@ -11,6 +11,7 @@ import {
 import InputStyles from './input.module.scss'
 import { animated, useSpring } from 'react-spring'
 import { ButtonClasses } from '../button/button'
+import { RipplesProps } from 'react-ripples'
 
 export interface InputClasses {
   root?: string
@@ -28,6 +29,7 @@ export interface InputClasses {
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   classNames?: InputClasses
+  rippleProps?: RipplesProps
   iconColor?: string
   copy?: boolean
   password?: boolean
@@ -54,6 +56,7 @@ function Input({
   autoComplete,
   autoFocus,
   classNames,
+  rippleProps,
   iconColor = '#ffffff',
   copy,
   password,
@@ -204,10 +207,12 @@ function Input({
               {reveal ? (
                 <Button
                   tabIndex={-1}
+                  rippleProps={rippleProps}
                   classNames={classNames?.revealButton}
                   htmlType={'button'}
                   size={'tiny'}
                   type={'text'}
+                  rounded={true}
                   icon={
                     hidden ? (
                       <Visibility
@@ -239,9 +244,11 @@ function Input({
               {copy && !(reveal && hidden) ? (
                 <Button
                   tabIndex={-1}
+                  rippleProps={rippleProps}
                   htmlType={'button'}
                   size="tiny"
                   type="default"
+                  rounded={true}
                   onClick={() => onCopy(value)}
                   icon={
                     <ContentCopy
