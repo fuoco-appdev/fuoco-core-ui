@@ -36,6 +36,34 @@ export const Default = (args: any) => (
           <Typography.Text>Content for the third panel</Typography.Text>
         ),
       },
+      {
+        id: 'panel-4',
+        label: '4th tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-5',
+        label: '5th tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-6',
+        label: '6th tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-7',
+        label: '7th tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
     ]}
   />
 )

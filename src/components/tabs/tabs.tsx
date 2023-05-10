@@ -3,29 +3,38 @@ import React, { useEffect, useRef, useState } from 'react'
 // @ts-ignore
 import TabsStyles from './tabs.module.scss'
 
-interface TabProps {
+export interface TabProps {
   children?: any
   id?: string
   label?: string
   icon?: React.ReactNode
 }
 
-interface TabsProps {
+export interface TabsProps {
+  classNames?: TabsClasses
   tabs?: TabProps[]
   onChange?: (id: string) => void
   type?: 'pills' | 'underlined'
   direction?: 'vertical' | 'horizontal'
   activeId?: string
-  scrollable?: boolean
+}
+
+export interface TabsClasses {
+  nav: string
+  tabIcon: string
+  tabButton: string
+  tabSliderPill: string
+  tabSlider: string
+  tabOutline: string
 }
 
 function Tabs({
+  classNames,
   tabs = [],
   activeId,
   type = 'pills',
   direction = 'horizontal',
   onChange,
-  scrollable,
 }: TabsProps) {
   const [buttonRefs, setButtonRefs] = useState<
     Record<string, HTMLButtonElement | null>
@@ -135,7 +144,7 @@ function Tabs({
     isInitialRender.current = false
   }
 
-  const navClasses = [TabsStyles['nav']]
+  const navClasses = [TabsStyles['nav'], classNames?.nav]
   if (direction === 'vertical') {
     navClasses.push(TabsStyles['nav-verticle'])
   }
@@ -147,12 +156,12 @@ function Tabs({
       onPointerLeave={onLeaveTabs}
     >
       {tabs.map((item, i) => {
-        const iconClasses = [TabsStyles['tab-icon']]
+        const iconClasses = [TabsStyles['tab-icon'], classNames?.tabIcon]
         if (item.label) {
           iconClasses.push(TabsStyles['tab-icon-space'])
         }
 
-        const buttonClasses = [TabsStyles['tab-button']]
+        const buttonClasses = [TabsStyles['tab-button'], classNames?.tabButton]
         if (item.label) {
           buttonClasses.push(TabsStyles['tab-button-with-text'])
         }
@@ -175,14 +184,27 @@ function Tabs({
       })}
       {type === 'pills' ? (
         <div
-          className={TabsStyles['tab-slider-pill']}
+          className={[
+            TabsStyles['tab-slider-pill'],
+            classNames?.tabSliderPill,
+          ].join(' ')}
           style={selectPillStyles}
         />
       ) : (
-        <div className={TabsStyles['tab-slider']} style={hoverStyles} />
+        <div
+          className={[TabsStyles['tab-slider'], classNames?.tabSlider].join(
+            ' '
+          )}
+          style={hoverStyles}
+        />
       )}
       {type === 'underlined' && (
-        <div className={TabsStyles['tab-outline']} style={selectStyles} />
+        <div
+          className={[TabsStyles['tab-outline'], classNames?.tabOutline].join(
+            ' '
+          )}
+          style={selectStyles}
+        />
       )}
     </nav>
   )
