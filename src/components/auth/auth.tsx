@@ -1173,12 +1173,7 @@ function MagicLink({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Inbox
-                  size={24}
-                  strokeWidth={0}
-                  stroke={defaultIconColor}
-                  color={defaultIconColor}
-                />
+                <Inbox size={24} strokeWidth={0} />
               </div>
               {strings.sendMagicLink}
             </div>
@@ -1295,12 +1290,7 @@ function ForgottenPassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Inbox
-                  size={24}
-                  strokeWidth={0}
-                  stroke={defaultIconColor}
-                  color={defaultIconColor}
-                />
+                <Inbox size={24} strokeWidth={0} />
               </div>
               {strings.sendResetPasswordInstructions}
             </div>
@@ -1460,12 +1450,7 @@ function ResetPassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Key
-                  size={24}
-                  strokeWidth={0}
-                  stroke={defaultIconColor}
-                  color={defaultIconColor}
-                />
+                <Key size={24} strokeWidth={0} />
               </div>
               {strings?.resetPassword}
             </div>
@@ -1571,12 +1556,7 @@ function UpdatePassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Key
-                  size={24}
-                  strokeWidth={0}
-                  stroke={defaultIconColor}
-                  color={defaultIconColor}
-                />
+                <Key size={24} strokeWidth={0} />
               </div>
               {strings?.updatePassword}
             </div>
