@@ -20,12 +20,12 @@ export interface TabsProps {
 }
 
 export interface TabsClasses {
-  nav: string
-  tabIcon: string
-  tabButton: string
-  tabSliderPill: string
-  tabSlider: string
-  tabOutline: string
+  nav?: string
+  tabIcon?: string
+  tabButton?: string
+  tabSliderPill?: string
+  tabSlider?: string
+  tabOutline?: string
 }
 
 function Tabs({
