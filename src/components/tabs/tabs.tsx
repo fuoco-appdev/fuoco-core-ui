@@ -23,6 +23,8 @@ export interface TabsClasses {
   nav?: string
   tabIcon?: string
   tabButton?: string
+  selectedTabIcon?: string
+  selectedTabButton?: string
   tabSliderPill?: string
   tabSlider?: string
   tabOutline?: string
@@ -164,6 +166,11 @@ function Tabs({
         const buttonClasses = [TabsStyles['tab-button'], classNames?.tabButton]
         if (item.label) {
           buttonClasses.push(TabsStyles['tab-button-with-text'])
+        }
+
+        if (item.id === selectedId) {
+          buttonClasses.push(classNames?.selectedTabButton)
+          iconClasses.push(classNames?.selectedTabIcon)
         }
 
         return (
