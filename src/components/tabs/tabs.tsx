@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import TabsStyles from './tabs.module.scss'
 import Button, { ButtonClasses } from '../button/button'
 import { Solid } from '../icon'
+import { RipplesProps } from 'react-ripples'
 
 export interface TabProps {
   children?: any
@@ -21,6 +22,7 @@ export interface TabsProps {
   direction?: 'vertical' | 'horizontal'
   activeId?: string
   removable?: boolean
+  removableRippleProps?: RipplesProps
 }
 
 export interface TabsClasses {
@@ -45,6 +47,7 @@ function Tabs({
   direction = 'horizontal',
   onChange,
   removable = false,
+  removableRippleProps,
 }: TabsProps) {
   const [buttonRefs, setButtonRefs] = useState<
     Record<string, HTMLButtonElement | null>
@@ -261,6 +264,7 @@ function Tabs({
               onChange?.('')
               setSelectedId('')
             }}
+            rippleProps={removableRippleProps}
             touchScreen={touchScreen}
             ref={removableRef}
             block={true}
