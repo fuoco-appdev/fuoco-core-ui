@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 
 // @ts-ignore
 import TabsStyles from './tabs.module.scss'
+import Button, { ButtonClasses } from '../button/button'
+import { Solid } from '../icon'
 
 export interface TabProps {
   children?: any
@@ -12,11 +14,13 @@ export interface TabProps {
 
 export interface TabsProps {
   classNames?: TabsClasses
+  touchScreen?: boolean
   tabs?: TabProps[]
   onChange?: (id: string) => void
   type?: 'pills' | 'underlined'
   direction?: 'vertical' | 'horizontal'
   activeId?: string
+  removable?: boolean
 }
 
 export interface TabsClasses {
@@ -28,15 +32,19 @@ export interface TabsClasses {
   tabSliderPill?: string
   tabSlider?: string
   tabOutline?: string
+  removableButtonContainer?: string
+  removableButton?: ButtonClasses
 }
 
 function Tabs({
   classNames,
+  touchScreen = false,
   tabs = [],
   activeId,
   type = 'pills',
   direction = 'horizontal',
   onChange,
+  removable = false,
 }: TabsProps) {
   const [buttonRefs, setButtonRefs] = useState<
     Record<string, HTMLButtonElement | null>
@@ -53,7 +61,9 @@ function Tabs({
   const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
 
   const navRef = useRef<HTMLDivElement>(null)
-  const navRect = navRef?.current?.getBoundingClientRect()
+  const removableRef = useRef<HTMLButtonElement>(null)
+  const removableRect = removableRef?.current?.getBoundingClientRect()
+  const navRect = navRef.current?.getBoundingClientRect()
 
   const selectedRect = buttonRefs[selectedId]?.getBoundingClientRect()
 
@@ -90,6 +100,7 @@ function Tabs({
   }
 
   const onSelectTab = (id: string) => {
+    buttonRefs[selectedId]?.blur()
     onChange?.(id)
     setSelectedId(id)
   }
@@ -140,6 +151,25 @@ function Tabs({
     }px), ${selectedRect.top - navRect.top}px, 0px)`
     selectPillStyles.opacity = 1
     selectPillStyles.transition = isInitialRender.current
+      ? `opacity 150ms 150ms`
+      : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
+
+    isInitialRender.current = false
+  }
+
+  let removableStyles: React.CSSProperties = { opacity: 0 }
+  if (removable && removableRef.current && navRect && selectedRect) {
+    removableStyles.transform = `translate3d(calc(${
+      selectedRect.left -
+      navRect.left +
+      (selectedRect.width - ((removableRect?.width ?? 0) / 3) * 2)
+    }px), ${
+      selectedRect.top -
+      navRect.top -
+      (selectedRect.height - ((removableRect?.width ?? 0) / 3) * 2)
+    }px, 0px)`
+    removableStyles.opacity = 1
+    removableStyles.transition = isInitialRender.current
       ? `opacity 150ms 150ms`
       : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
 
@@ -212,6 +242,34 @@ function Tabs({
           )}
           style={selectStyles}
         />
+      )}
+      {removable && (
+        <div
+          className={[
+            TabsStyles['removable-button-container'],
+            classNames?.removableButtonContainer,
+          ].join(' ')}
+          style={removableStyles}
+        >
+          <Button
+            classNames={{
+              button: TabsStyles['removable-button'],
+              ...classNames?.removableButton,
+            }}
+            onClick={() => {
+              buttonRefs[selectedId]?.blur()
+              onChange?.('')
+              setSelectedId('')
+            }}
+            touchScreen={touchScreen}
+            ref={removableRef}
+            block={true}
+            rounded={true}
+            type={'primary'}
+            size={'tiny'}
+            icon={<Solid.Cancel size={14} />}
+          />
+        </div>
       )}
     </nav>
   )

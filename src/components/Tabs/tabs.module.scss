@@ -95,3 +95,12 @@
   height: $mp-0-5;
   background-color: $brand-400;
 }
+
+.removable-button-container {
+  position: absolute;
+  z-index: 20;
+}
+
+.removable-button {
+  padding: $mp-1;
+}
