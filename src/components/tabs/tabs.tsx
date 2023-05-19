@@ -15,6 +15,7 @@ export interface TabProps {
 
 export interface TabsProps {
   classNames?: TabsClasses
+  flex?: boolean
   touchScreen?: boolean
   tabs?: TabProps[]
   onChange?: (id: string) => void
@@ -40,6 +41,7 @@ export interface TabsClasses {
 
 function Tabs({
   classNames,
+  flex = false,
   touchScreen = false,
   tabs = [],
   activeId,
@@ -199,6 +201,10 @@ function Tabs({
         const buttonClasses = [TabsStyles['tab-button'], classNames?.tabButton]
         if (item.label) {
           buttonClasses.push(TabsStyles['tab-button-with-text'])
+        }
+
+        if (flex) {
+          buttonClasses.push(TabsStyles['tab-button-flex'])
         }
 
         if (item.id === selectedId) {

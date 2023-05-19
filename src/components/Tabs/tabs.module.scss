@@ -39,6 +39,11 @@
   white-space: nowrap;
 }
 
+.tab-button-flex {
+  flex: 1;
+  justify-content: center;
+}
+
 .tab-button-with-text {
   padding: $mp-2 $mp-4;
 }

@@ -220,6 +220,37 @@ export const Removable = (args: any) => (
   />
 )
 
+export const Flex = (args: any) => (
+  <Tabs
+    {...args}
+    flex={true}
+    activeId={'panel-1'}
+    tabs={[
+      {
+        id: 'panel-1',
+        label: '1st tab',
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        label: '2st tab',
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        label: '3st tab',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
+)
+
 Default.args = {}
 IconsAndText.args = {
   type: 'underlined',
@@ -229,5 +260,9 @@ Vertical.args = {
   direction: 'vertical',
 }
 Underlined.args = {
+  type: 'underlined',
+}
+
+Flex.args = {
   type: 'underlined',
 }
