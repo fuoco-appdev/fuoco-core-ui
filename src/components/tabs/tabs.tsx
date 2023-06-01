@@ -7,7 +7,6 @@ import { Solid } from '../icon'
 import { RipplesProps } from 'react-ripples'
 
 export interface TabProps {
-  children?: any
   id?: string
   label?: string
   icon?: React.ReactNode
@@ -74,12 +73,6 @@ function Tabs({
 
   const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
   const isInitialRender = useRef(true)
-
-  useEffect(() => {
-    if (type === 'pills') {
-      buttonRefs[selectedId]?.focus()
-    }
-  }, [selectedRect])
 
   const onLeaveTabs = () => {
     setIsInitialHoveredElement(true)
