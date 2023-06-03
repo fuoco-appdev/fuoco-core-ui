@@ -15,9 +15,16 @@
   height: inherit;
   width: inherit;
   display: flex;
-  flex-direction: column-reverse;
   gap: 8px;
   overflow: none;
+}
+
+.toast-overlay-container-up {
+  flex-direction: column-reverse;
+}
+
+.toast-overlay-container-down {
+  flex-direction: column;
 }
 
 .toast-overlay-container-left {
