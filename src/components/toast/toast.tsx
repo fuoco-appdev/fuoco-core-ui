@@ -227,6 +227,7 @@ export interface ToastOverlayProps {
 export interface ToastOverlayClasses {
   root?: string
   overlayContainer?: string
+  toast?: ToastClasses
 }
 
 export function ToastOverlay({
@@ -294,6 +295,7 @@ export function ToastOverlay({
           <animated.div style={style}>
             <Toast
               {...item}
+              classNames={classNames?.toast}
               touchScreen={touchScreen}
               life={life}
               onClose={(e: React.MouseEvent<HTMLButtonElement>) => {
