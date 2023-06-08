@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
 import InputPhoneNumberStyles from './input-phone-number.module.scss'
 import memoize from 'lodash.memoize'
@@ -8,18 +8,33 @@ import { Button } from '../button'
 import { CountryDataProps, CountryData } from './country-data'
 import { Dropdown } from '../dropdown/index'
 import { Divider } from '../divider'
-import InputIconContainer from '../../lib/layout/input-icon-container'
 import { ErrorOutline, Search } from '../icon/icons/line'
-import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment } from '../dropdown/dropdown'
-import { Typography } from '../typography'
+import ReactCountryFlag from 'react-country-flag'
+
+export interface InputPhoneNumberClasses {
+  countryName?: string
+  dialCode?: string
+  searchRoot?: string
+  searchContainer?: string
+  searchIcon?: string
+  searchWithIcon?: string
+  search?: string
+  dropdownList?: string
+  container?: string
+  button?: string
+  inputPhoneNumber?: string
+  actionsContainer?: string
+  formLayout?: FormLayoutClasses
+  inputContainer?: string
+}
 
 export interface InputPhoneNumberProps {
   id?: string
   iconColor?: string
   parentRef: React.MutableRefObject<HTMLElement | null>
-  className?: string
+  classNames?: InputPhoneNumberClasses
   touchScreen?: boolean
   error?: string
   label?: string
@@ -109,9 +124,9 @@ export interface InputPhoneNumberProps {
 
 function InputPhoneNumber({
   id,
-  iconColor = '#ffffff',
+  iconColor = '#000',
   parentRef,
-  className,
+  classNames,
   touchScreen = false,
   error,
   label,
@@ -595,10 +610,7 @@ function InputPhoneNumber({
     const searchedCountries = getSearchFilteredCountries()
 
     let countryDropdownList = searchedCountries.map((country, index) => {
-      const inputFlagClasses = [
-        InputPhoneNumberStyles['flag'],
-        InputPhoneNumberStyles[country?.iso2],
-      ].join(' ')
+      const inputFlagClasses = [InputPhoneNumberStyles[country?.iso2]].join(' ')
       return (
         <Dropdown.Item
           onClick={(e) => handleFlagItemClick(country, e)}
@@ -606,12 +618,26 @@ function InputPhoneNumber({
           key={`flag_no_${index}`}
         >
           <Dropdown.Icon>
-            <div className={inputFlagClasses} />
+            <ReactCountryFlag
+              countryCode={country.iso2?.toUpperCase() ?? ''}
+              svg={true}
+              style={{ width: 18, height: 18 }}
+            />
           </Dropdown.Icon>
-          <span className={InputPhoneNumberStyles['country-name']}>
+          <span
+            className={[
+              InputPhoneNumberStyles['country-name'],
+              classNames?.countryName,
+            ].join(' ')}
+          >
             {getDropdownCountryName(country)}
           </span>
-          <span className={InputPhoneNumberStyles['dial-code']}>
+          <span
+            className={[
+              InputPhoneNumberStyles['dial-code'],
+              classNames?.dialCode,
+            ].join(' ')}
+          >
             {country.format
               ? formatNumber(country.dialCode, country)
               : prefix + country.dialCode}
@@ -628,18 +654,34 @@ function InputPhoneNumber({
 
     return (
       <div>
-        <div className={InputPhoneNumberStyles['search-root']}>
+        <div
+          className={[
+            InputPhoneNumberStyles['search-root'],
+            classNames?.searchRoot,
+          ].join(' ')}
+        >
           <div
             key={'flag-search'}
-            className={InputPhoneNumberStyles['search-container']}
+            className={[
+              InputPhoneNumberStyles['search-container'],
+              classNames?.searchContainer,
+            ].join(' ')}
           >
-            <div className={InputPhoneNumberStyles['search-icon']}>
+            <div
+              className={[
+                InputPhoneNumberStyles['search-icon'],
+                classNames?.searchIcon,
+              ].join(' ')}
+            >
               <Search
                 size={24}
                 strokeWidth={0}
                 color={iconColor}
                 stroke={iconColor}
-                className={InputPhoneNumberStyles['search--with-icon']}
+                className={[
+                  InputPhoneNumberStyles['search-with-icon'],
+                  classNames?.searchWithIcon,
+                ].join(' ')}
               />
             </div>
             <input
@@ -650,16 +692,29 @@ function InputPhoneNumber({
               onChange={handleSearchChange}
               placeholder={searchPlaceholder}
               value={searchValue}
-              className={[InputPhoneNumberStyles['search']].join(' ')}
+              className={[
+                InputPhoneNumberStyles['search'],
+                classNames?.search,
+              ].join(' ')}
             />
           </div>
         </div>
-        <div className={InputPhoneNumberStyles['dropdown-list']}>
+        <div
+          className={[
+            InputPhoneNumberStyles['dropdown-list'],
+            classNames?.dropdownList,
+          ].join(' ')}
+        >
           {countryDropdownList.length > 0 ? (
             countryDropdownList
           ) : (
             <Dropdown.Item>
-              <span className={InputPhoneNumberStyles['country-name']}>
+              <span
+                className={[
+                  InputPhoneNumberStyles['country-name'],
+                  classNames?.countryName,
+                ].join(' ')}
+              >
                 {searchNotFound}
               </span>
             </Dropdown.Item>
@@ -895,21 +950,15 @@ function InputPhoneNumber({
 
   interpolation.push(0)
 
-  const classesContainer: string[] = [InputPhoneNumberStyles['container']]
-  if (error) classesContainer.push(InputPhoneNumberStyles['-error'])
-
-  const inputFlagClasses = [
-    InputPhoneNumberStyles['flag'],
-    InputPhoneNumberStyles[selectedCountry?.iso2],
-  ].join(' ')
   return (
     <animated.div
-      className={className}
+      className={[classNames?.container].join(' ')}
       style={{
         x: x.to([0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1], interpolation),
       }}
     >
       <FormLayout
+        classNames={classNames?.formLayout}
         label={label}
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
@@ -922,17 +971,31 @@ function InputPhoneNumber({
         size={'medium'}
       >
         <div
-          className={classesContainer.join(' ')}
+          className={[
+            InputPhoneNumberStyles['input-container'],
+            classNames?.inputContainer,
+            error ? InputPhoneNumberStyles['input-container-error'] : undefined,
+          ].join(' ')}
           style={containerStyle}
           ref={inputRef}
         >
           <Button
             tabIndex={-1}
-            className={InputPhoneNumberStyles['button']}
+            className={[
+              InputPhoneNumberStyles['button'],
+              classNames?.button,
+            ].join(' ')}
+            rounded={true}
             htmlType={'button'}
             size={'tiny'}
             type={'text'}
-            icon={<div className={inputFlagClasses} />}
+            icon={
+              <ReactCountryFlag
+                countryCode={selectedCountry?.iso2?.toUpperCase() ?? 'ca'}
+                svg={true}
+                style={{ width: 18, height: 18 }}
+              />
+            }
             onClick={(e) => {
               setShowDropdown(true)
             }}
@@ -952,7 +1015,10 @@ function InputPhoneNumber({
             {getCountryDropdownList()}
           </Dropdown>
           <input
-            className={InputPhoneNumberStyles['inputphonenumber']}
+            className={[
+              InputPhoneNumberStyles['inputphonenumber'],
+              classNames?.inputPhoneNumber,
+            ].join(' ')}
             style={inputStyle}
             onChange={handleInput}
             onFocus={handleInputFocus}
@@ -964,7 +1030,12 @@ function InputPhoneNumber({
             ref={numberInputRef}
           />
           {error ? (
-            <div className={InputPhoneNumberStyles['actions-container']}>
+            <div
+              className={[
+                InputPhoneNumberStyles['actions-container'],
+                classNames?.actionsContainer,
+              ].join(' ')}
+            >
               {error && (
                 <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
               )}
