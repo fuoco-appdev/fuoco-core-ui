@@ -27,6 +27,7 @@ export interface InputPhoneNumberClasses {
   inputPhoneNumber?: string
   actionsContainer?: string
   formLayout?: FormLayoutClasses
+  dropdown?: string
   inputContainer?: string
 }
 
@@ -82,9 +83,6 @@ export interface InputPhoneNumberProps {
   inputStyle?: React.CSSProperties
   shakeInterpolationCount?: number
   shakeDistance?: number
-  classes?: {
-    dropdown?: string
-  }
   onChange?: (
     value: string,
     data: CountryDataProps | {},
@@ -165,7 +163,6 @@ function InputPhoneNumber({
   searchNotFound = 'No entries to show',
   searchPlaceholder = 'Search',
   autocompleteSearch = false,
-  classes,
   inputProps,
   formStyle,
   containerStyle,
@@ -1001,7 +998,7 @@ function InputPhoneNumber({
             }}
           />
           <Dropdown
-            className={classes?.dropdown}
+            className={classNames?.dropdown}
             touchScreen={touchScreen}
             parentRef={parentRef}
             anchorRef={inputRef}

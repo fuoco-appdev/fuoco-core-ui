@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Listbox as HeadlessListbox } from '@headlessui/react'
 import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
@@ -87,6 +87,12 @@ function Listbox({
       if (onChange) onChange?.(index, props?.id ?? value, value)
     }
   }
+
+  useEffect(() => {
+    if (options.length > 0 && !selectedProps) {
+      setSelectedProps(options[defaultIndex])
+    }
+  }, [options])
 
   let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
   if (error)
