@@ -39,7 +39,7 @@ interface onToggleProps {
 }
 
 export const Default = (args: any) => (
-  <Radio.Group {...args} selectedId={'1'} onChange={action('onChange')}>
+  <Radio.Group {...args} activeId={'1'} onChange={action('onChange')}>
     {options.map((x, i) => (
       <Radio
         name="sbui-radiogroup"
@@ -83,7 +83,7 @@ withOptionsObj.args = {
   layout: 'vertical',
   name: 'radiogroup-example-2',
   options: options,
-  selectedId: '1',
+  activeId: '1',
 }
 
 withCards.args = {
@@ -97,7 +97,7 @@ withCards.args = {
   name: 'radiogroup-example-3',
   options: options,
   type: 'cards',
-  selectedId: '1',
+  activeId: '1',
 }
 
 withBeforeAndAfterLabels.args = {
@@ -112,5 +112,5 @@ withBeforeAndAfterLabels.args = {
       description: 'Description',
     },
   ],
-  selectedId: '1',
+  activeId: '1',
 }

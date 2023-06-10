@@ -45,7 +45,7 @@ export interface RadioProps {
 }
 
 export interface RadioGroupProps {
-  selectedId: string
+  activeId?: string
   allowedValues?: string[]
   checkboxes?: any
   id: string
@@ -69,7 +69,7 @@ export interface RadioGroupProps {
 
 function RadioGroup({
   id,
-  selectedId,
+  activeId = '',
   layout,
   rippleProps = {
     during: 350,
@@ -89,15 +89,8 @@ function RadioGroup({
   onChange,
   size = 'medium',
 }: RadioGroupProps) {
-  const [activeId, setActiveId] = useState(selectedId)
-
-  useEffect(() => {
-    setActiveId(selectedId)
-  }, [selectedId])
-
   const parentCallback = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
-    setActiveId(e.target.id)
   }
 
   let classes = [RadioStyles['radio-fieldset']]
