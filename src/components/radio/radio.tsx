@@ -23,6 +23,7 @@ export interface RadioGroupClasses {
   fieldsetCards?: string
   formLayout?: FormLayoutClasses
   groupContents?: string
+  radio: RadioClasses
 }
 
 export interface RadioProps {
@@ -125,7 +126,7 @@ function RadioGroup({
             <div>
               {options
                 ? options.map((option: RadioProps) => {
-                    return <Radio {...option} />
+                    return <Radio {...option} classNames={classNames?.radio} />
                   })
                 : children}
             </div>
