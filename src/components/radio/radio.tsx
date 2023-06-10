@@ -6,6 +6,7 @@ import { RadioContext } from './radio-context'
 
 export interface RadioClasses {
   container?: string
+  labelContainer?: string
   label?: string
   containerCard?: string
   containerCardActive?: string
@@ -14,6 +15,7 @@ export interface RadioClasses {
   labelTextBefore?: string
   labelTextAfter?: string
   labelDescription?: string
+  rightContentContainer?: string
 }
 
 export interface RadioGroupClasses {
@@ -30,6 +32,7 @@ export interface RadioProps {
   beforeLabel?: string
   value: string
   description?: string
+  rightContent?: () => JSX.Element
   disabled?: boolean
   id?: string
   name?: string
@@ -122,16 +125,7 @@ function RadioGroup({
             <div>
               {options
                 ? options.map((option: RadioProps) => {
-                    return (
-                      <Radio
-                        id={option.id}
-                        label={option.label}
-                        beforeLabel={option.beforeLabel}
-                        afterLabel={option.afterLabel}
-                        value={option.value}
-                        description={option.description}
-                      />
-                    )
+                    return <Radio {...option} />
                   })
                 : children}
             </div>
@@ -151,6 +145,7 @@ function Radio({
   afterLabel,
   beforeLabel,
   description,
+  rightContent,
   name,
   checked,
   onChange,
@@ -225,7 +220,12 @@ function Radio({
               onChange={onInputChange}
               onFocus={onFocus ? (event) => onFocus(event) : undefined}
             />
-            <div>
+            <div
+              className={[
+                RadioStyles['radio-label-container'],
+                classNames?.labelContainer,
+              ].join(' ')}
+            >
               <span
                 className={[
                   RadioStyles['radio-label-text'],
@@ -265,6 +265,14 @@ function Radio({
                   {description}
                 </span>
               )}
+            </div>
+            <div
+              className={[
+                RadioStyles['radio-right-content-container'],
+                classNames?.rightContentContainer,
+              ].join(' ')}
+            >
+              {rightContent?.()}
             </div>
           </label>
         )

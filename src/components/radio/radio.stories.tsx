@@ -3,13 +3,15 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 
 import Radio from '.'
+import { RadioProps } from './radio'
 
-const options = [
+const options: RadioProps[] = [
   {
     label: 'Comments',
     description:
       'Get notified when someones posts a comment on a posting. Get notified when someones posts a comment on a posting Get notified when someones posts a comment on a posting.',
     value: '1',
+    rightContent: () => <div style={{}}>$CA20,00</div>,
   },
   {
     label: 'Candidates',
@@ -42,6 +44,7 @@ export const Default = (args: any) => (
         label={x.label}
         description={x.description}
         value={x.value}
+        rightContent={x.rightContent}
       />
     ))}
   </Radio.Group>
@@ -50,6 +53,8 @@ export const Default = (args: any) => (
 export const withOptionsObj = (args: any) => <Radio.Group {...args} />
 
 export const withCards = (args: any) => <Radio.Group {...args} />
+
+export const withCardsRightContent = (args: any) => <Radio.Group {...args} />
 
 export const withBeforeAndAfterLabels = (args: any) => <Radio.Group {...args} />
 
