@@ -3,6 +3,7 @@ import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
 import RadioStyles from './radio.module.scss'
 import { RadioContext } from './radio-context'
+import Ripples, { RipplesProps } from 'react-ripples'
 
 export interface RadioClasses {
   container?: string
@@ -34,31 +35,32 @@ export interface RadioProps {
   value: string
   description?: string
   rightContent?: () => JSX.Element
+  rippleProps?: RipplesProps
   disabled?: boolean
   id?: string
   name?: string
-  checked?: boolean
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
   onFocus?(x: React.FocusEvent<HTMLInputElement>): void
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
 }
 
 export interface RadioGroupProps {
-  allowedValues?: any
+  selectedId: string
+  allowedValues?: string[]
   checkboxes?: any
-  id?: any
+  id: string
   classNames?: RadioGroupClasses
   layout?: 'horizontal' | 'vertical'
   error?: any
   descriptionText?: any
   label?: any
+  rippleProps?: RipplesProps
   afterLabel?: string
   beforeLabel?: string
   labelOptional?: any
   name?: any
   type?: any
   transform?: any
-  value?: any
   children?: React.ReactNode
   options?: Array<RadioProps>
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
@@ -67,7 +69,12 @@ export interface RadioGroupProps {
 
 function RadioGroup({
   id,
+  selectedId,
   layout,
+  rippleProps = {
+    during: 350,
+    color: 'rgba(0,0,0,0.35)',
+  },
   error,
   descriptionText,
   label,
@@ -78,19 +85,18 @@ function RadioGroup({
   classNames,
   type,
   options,
-  value,
   name,
   onChange,
   size = 'medium',
 }: RadioGroupProps) {
-  const [activeId, setActiveId] = useState('')
+  const [activeId, setActiveId] = useState(selectedId)
 
   useEffect(() => {
-    setActiveId(value)
-  }, [value])
+    setActiveId(selectedId)
+  }, [selectedId])
 
   const parentCallback = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) onChange(e)
+    onChange?.(e)
     setActiveId(e.target.id)
   }
 
@@ -126,7 +132,13 @@ function RadioGroup({
             <div>
               {options
                 ? options.map((option: RadioProps) => {
-                    return <Radio {...option} classNames={classNames?.radio} />
+                    return (
+                      <Radio
+                        {...option}
+                        classNames={classNames?.radio}
+                        rippleProps={rippleProps}
+                      />
+                    )
                   })
                 : children}
             </div>
@@ -142,45 +154,20 @@ function Radio({
   classNames,
   disabled,
   value,
+  rippleProps,
   label,
   afterLabel,
   beforeLabel,
   description,
   rightContent,
   name,
-  checked,
   onChange,
   onFocus,
   size = 'medium',
 }: RadioProps) {
-  const inputName = name
   return (
     <RadioContext.Consumer>
       {({ parentCallback, type, name, activeId, parentSize }) => {
-        // if id does not exist, use label
-        const markupId = id
-          ? id
-          : label
-              .toLowerCase()
-              .toLowerCase()
-              .replace(/^[^A-Z0-9]+/gi, '')
-              .replace(/ /g, '-')
-
-        // if name does not exist on Radio then use Context Name from Radio.Group
-        const markupName = inputName ? inputName : name ? name : markupId
-
-        // check if radio id is via parent component
-        // then check if radio checked prop is true or false
-        // if no boolean exists the checkbox will rely on native control
-        const active =
-          activeId === markupId
-            ? true
-            : checked
-            ? true
-            : checked === false
-            ? false
-            : undefined
-
         let classes = [
           RadioStyles['radio-container'],
           classNames?.container,
@@ -194,88 +181,91 @@ function Radio({
             classNames?.containerCard
           )
         }
-        if (type === 'cards' && active) {
+        if (type === 'cards' && activeId === id) {
           classes.push(
             RadioStyles['radio-container-card-active'],
             classNames?.containerCardActive
           )
         }
 
-        function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-          // '`onChange` callback for parent component
-          if (parentCallback) parentCallback(e)
-          // '`onChange` callback for this component
-          if (onChange) onChange(e)
+        const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          parentCallback?.(e)
+          onChange?.(e)
         }
 
         return (
-          <label id={id} className={classes.join(' ')}>
-            <input
-              id={markupId}
-              name={markupName}
-              type="radio"
-              className={[RadioStyles['radio'], classNames?.radio].join(' ')}
-              checked={active}
-              disabled={disabled}
-              value={value ? value : markupId}
-              onChange={onInputChange}
-              onFocus={onFocus ? (event) => onFocus(event) : undefined}
-            />
-            <div
-              className={[
-                RadioStyles['radio-label-container'],
-                classNames?.labelContainer,
-              ].join(' ')}
+          <Ripples {...rippleProps} className={classes.join(' ')}>
+            <label
+              id={id}
+              className={RadioStyles['radio-label-container-card']}
             >
-              <span
+              <input
+                id={id}
+                name={name}
+                type="radio"
+                className={[RadioStyles['radio'], classNames?.radio].join(' ')}
+                checked={activeId === id}
+                disabled={disabled}
+                value={value ? value : activeId}
+                onChange={onInputChange}
+                onFocus={onFocus ? (event) => onFocus(event) : undefined}
+              />
+              <div
                 className={[
-                  RadioStyles['radio-label-text'],
-                  classNames?.labelText,
+                  RadioStyles['radio-label-container'],
+                  classNames?.labelContainer,
                 ].join(' ')}
               >
-                {beforeLabel && (
-                  <span
-                    className={[
-                      RadioStyles['radio-label-text-before'],
-                      classNames?.labelTextBefore,
-                    ].join(' ')}
-                  >
-                    {beforeLabel}
-                  </span>
-                )}
-                {label}
-                {afterLabel && (
-                  <span
-                    className={[
-                      RadioStyles['radio-label-text-after'],
-                      classNames?.labelTextAfter,
-                    ].join(' ')}
-                  >
-                    {afterLabel}
-                  </span>
-                )}
-              </span>
-
-              {description && (
                 <span
                   className={[
-                    RadioStyles['radio-label-description'],
-                    classNames?.labelDescription,
+                    RadioStyles['radio-label-text'],
+                    classNames?.labelText,
                   ].join(' ')}
                 >
-                  {description}
+                  {beforeLabel && (
+                    <span
+                      className={[
+                        RadioStyles['radio-label-text-before'],
+                        classNames?.labelTextBefore,
+                      ].join(' ')}
+                    >
+                      {beforeLabel}
+                    </span>
+                  )}
+                  {label}
+                  {afterLabel && (
+                    <span
+                      className={[
+                        RadioStyles['radio-label-text-after'],
+                        classNames?.labelTextAfter,
+                      ].join(' ')}
+                    >
+                      {afterLabel}
+                    </span>
+                  )}
                 </span>
-              )}
-            </div>
-            <div
-              className={[
-                RadioStyles['radio-right-content-container'],
-                classNames?.rightContentContainer,
-              ].join(' ')}
-            >
-              {rightContent?.()}
-            </div>
-          </label>
+
+                {description && (
+                  <span
+                    className={[
+                      RadioStyles['radio-label-description'],
+                      classNames?.labelDescription,
+                    ].join(' ')}
+                  >
+                    {description}
+                  </span>
+                )}
+              </div>
+              <div
+                className={[
+                  RadioStyles['radio-right-content-container'],
+                  classNames?.rightContentContainer,
+                ].join(' ')}
+              >
+                {rightContent?.()}
+              </div>
+            </label>
+          </Ripples>
         )
       }}
     </RadioContext.Consumer>

@@ -7,6 +7,7 @@ import { RadioProps } from './radio'
 
 const options: RadioProps[] = [
   {
+    id: '1',
     label: 'Comments',
     description:
       'Get notified when someones posts a comment on a posting. Get notified when someones posts a comment on a posting Get notified when someones posts a comment on a posting.',
@@ -14,11 +15,13 @@ const options: RadioProps[] = [
     rightContent: () => <div style={{}}>$CA20,00</div>,
   },
   {
+    id: '2',
     label: 'Candidates',
     description: 'Get notified when a candidate applies for a job.',
     value: '2',
   },
   {
+    id: '3',
     label: 'Offers',
     description: 'Get notified when a candidate accepts or rejects an offer.',
     value: '3',
@@ -36,10 +39,11 @@ interface onToggleProps {
 }
 
 export const Default = (args: any) => (
-  <Radio.Group {...args} onChange={action('onChange')}>
+  <Radio.Group {...args} selectedId={'1'} onChange={action('onChange')}>
     {options.map((x, i) => (
       <Radio
         name="sbui-radiogroup"
+        id={x.id}
         key={i}
         label={x.label}
         description={x.description}
@@ -79,6 +83,7 @@ withOptionsObj.args = {
   layout: 'vertical',
   name: 'radiogroup-example-2',
   options: options,
+  selectedId: '1',
 }
 
 withCards.args = {
@@ -92,6 +97,7 @@ withCards.args = {
   name: 'radiogroup-example-3',
   options: options,
   type: 'cards',
+  selectedId: '1',
 }
 
 withBeforeAndAfterLabels.args = {
@@ -106,4 +112,5 @@ withBeforeAndAfterLabels.args = {
       description: 'Description',
     },
   ],
+  selectedId: '1',
 }
