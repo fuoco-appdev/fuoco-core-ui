@@ -20,6 +20,7 @@
 .radio-label-container-card {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .radio-container-card {
@@ -27,6 +28,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: $gray-200;
+  width: 100%;
 }
 
 .radio-container-card-active {
