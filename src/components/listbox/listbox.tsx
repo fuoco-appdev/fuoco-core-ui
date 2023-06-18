@@ -38,7 +38,6 @@ export interface ListboxProps {
   id?: string
   label?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   onChange?: (index: number, id: string, value: string) => void
   style?: React.CSSProperties
   reveal?: boolean
@@ -61,7 +60,6 @@ function Listbox({
   id,
   label,
   labelOptional,
-  layout,
   onChange,
   style,
   borderless = false,
@@ -107,7 +105,6 @@ function Listbox({
     <FormLayout
       label={label}
       labelOptional={labelOptional}
-      layout={layout}
       id={id}
       error={error}
       descriptionText={descriptionText}

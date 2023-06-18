@@ -52,6 +52,7 @@
   -webkit-border-radius: $rounded-base;
   -moz-border-radius: $rounded-base;
   -khtml-border-radius: $rounded-base;
+  margin: 0;
   padding-top: $mp-3;
   padding-bottom: $mp-3;
   padding-left: 0;
@@ -94,7 +95,6 @@
 }
 
 .touchscreen-dropdown-bar {
-  touch-action: none;
   height: $mp-8;
 }
 

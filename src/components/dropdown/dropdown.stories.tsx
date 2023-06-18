@@ -64,12 +64,10 @@ export const Default = (args: any) => {
 }
 
 export const Bottom = (args: any) => {
-  const parentRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <div
-      ref={parentRef}
       style={{
         height: '80vh',
         display: 'flex',
@@ -93,7 +91,6 @@ export const Bottom = (args: any) => {
           Click for dropdown
         </Button>
         <Dropdown
-          parentRef={parentRef}
           anchorRef={buttonRef}
           open={isOpen}
           onClose={() => {

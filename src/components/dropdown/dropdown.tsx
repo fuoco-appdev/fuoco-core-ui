@@ -14,11 +14,10 @@ export enum DropdownAlignment {
 export interface DropDownProps {
   id?: string
   className?: string
-  ref?: React.LegacyRef<HTMLUListElement>
   align?: DropdownAlignment
+  dropThresholdPercent?: number
   open?: boolean
   touchScreen?: boolean
-  parentRef?: React.RefObject<HTMLElement>
   anchorRef?: React.RefObject<HTMLElement>
   onOpen?: () => void
   onClose?: () => void
@@ -29,19 +28,20 @@ export interface DropDownProps {
 function Dropdown({
   id,
   className,
-  ref,
   align = DropdownAlignment.Right,
+  dropThresholdPercent = 50,
   open,
   touchScreen = false,
-  parentRef,
   anchorRef,
   onOpen,
   onClose,
   children,
   style,
 }: DropDownProps) {
+  const parentRef = useRef<HTMLDivElement | null>(null)
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
+  const [isScrolling, setIsScrolling] = useState<boolean>(true)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -99,46 +99,35 @@ function Dropdown({
   const bind = useDrag(({ down, movement: [mx, my] }) => {
     const y = -my
     if (y < 0) {
+      const scrollTop = divRef.current?.scrollTop ?? 0
+      if (isScrolling && scrollTop <= 0) {
+        setIsScrolling(false)
+      }
       touchScreenApi.start({
         bottom: down ? y : 0,
         immediate: down,
       })
+    } else {
+      if (!isScrolling) {
+        setIsScrolling(true)
+      }
     }
 
-    const dropdownHeight = divRef.current?.clientHeight ?? 0
+    const clientHeight = divRef.current?.clientHeight ?? 0
+    const dropdownHeight =
+      clientHeight - (clientHeight * dropThresholdPercent) / 100
     if (y < -dropdownHeight) {
-      onClose?.()
+      touchScreenApi.start({
+        bottom: -clientHeight,
+        onRest: () => {
+          if (!isScrolling) {
+            setIsScrolling(true)
+          }
+          onClose?.()
+        },
+      })
     }
   })
-
-  useLayoutEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event: MouseEvent) {
-      let elementRect = uListRef?.current?.getBoundingClientRect()
-      if (touchScreen) {
-        elementRect = divRef?.current?.getBoundingClientRect()
-      }
-      if (
-        elementRect &&
-        !(
-          event.clientX >= elementRect.left &&
-          event.clientX <= elementRect.left + elementRect.width &&
-          event.clientY >= elementRect.top &&
-          event.clientY <= elementRect.top + elementRect.height
-        )
-      ) {
-        onClose?.()
-      }
-    }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   useLayoutEffect(() => {
     if (!touchScreen) {
@@ -148,26 +137,25 @@ function Dropdown({
         const parentY = parentRef?.current?.getBoundingClientRect().y ?? 0
         const parentBottom = parentY + parentHeight
         const anchorY = anchorRef?.current?.getBoundingClientRect().y ?? 0
-        const anchorTop = anchorRef?.current?.clientTop ?? 0
+        const anchorX = anchorRef?.current?.getBoundingClientRect().x ?? 0
         const anchorHeight = anchorRef?.current?.clientHeight ?? 0
         const dropdownHeight = uListRef.current?.clientHeight ?? 0
         const dropdownY = anchorY + anchorHeight
         const dropdownBottom = dropdownY + dropdownHeight * 2
-        const anchorLeft = anchorRef?.current?.clientLeft ?? 0
         const anchorWidth =
           anchorRef?.current?.getBoundingClientRect().width ?? 0
         const dropdownWidth =
           uListRef.current?.getBoundingClientRect().width ?? 0
         if (dropdownBottom > parentBottom && parentHeight > anchorHeight) {
-          setTop(anchorTop - anchorHeight * 2 - dropdownHeight)
+          setTop(anchorY - anchorHeight - dropdownHeight)
         } else {
-          setTop(anchorTop)
+          setTop(anchorY + anchorHeight)
         }
 
         if (align === DropdownAlignment.Left) {
-          setLeft(anchorLeft)
+          setLeft(anchorX)
         } else if (align === DropdownAlignment.Right) {
-          setLeft(anchorLeft + anchorWidth - dropdownWidth * 2)
+          setLeft(anchorX + anchorWidth - dropdownWidth * 2)
         }
 
         onOpen?.()
@@ -182,26 +170,40 @@ function Dropdown({
   }, [open, children])
 
   if (!touchScreen) {
-    return desktopTransition(
-      (transitionStyle: any, item: any) =>
+    return touchScreenOverlayTransition(
+      (overlayStyle: any, item: any) =>
         item && (
           <animated.div
-            style={{
-              ...transitionStyle,
-              ...style,
-              position: 'absolute',
-              zIndex: 24,
-              y: top,
-              x: left,
-            }}
+            ref={parentRef}
+            style={overlayStyle}
+            className={DropdownStyles['touchscreen-overlay']}
+            onClick={onClose}
           >
-            <ul
-              ref={uListRef}
-              id={id}
-              className={[DropdownStyles['dropdown'], className].join(' ')}
-            >
-              {children}
-            </ul>
+            {desktopTransition(
+              (transitionStyle: any, item: any) =>
+                item && (
+                  <animated.div
+                    style={{
+                      ...transitionStyle,
+                      ...style,
+                      position: 'absolute',
+                      zIndex: 24,
+                      y: top,
+                      x: left,
+                    }}
+                  >
+                    <ul
+                      ref={uListRef}
+                      id={id}
+                      className={[DropdownStyles['dropdown'], className].join(
+                        ' '
+                      )}
+                    >
+                      {children}
+                    </ul>
+                  </animated.div>
+                )
+            )}
           </animated.div>
         )
     )
@@ -212,13 +214,21 @@ function Dropdown({
           <animated.div
             style={overlayStyle}
             className={DropdownStyles['touchscreen-overlay']}
+            onClick={onClose}
           >
             <animated.div
               ref={divRef}
               className={DropdownStyles['touchscreen-animated-container']}
               {...bind()}
+              onScroll={() => {
+                const scrollTop = divRef.current?.scrollTop ?? 0
+                if (isScrolling && scrollTop <= 0) {
+                  setIsScrolling(false)
+                }
+              }}
               style={{
                 ...touchScreenProps,
+                touchAction: !isScrolling ? 'none' : 'initial',
               }}
             >
               <ul

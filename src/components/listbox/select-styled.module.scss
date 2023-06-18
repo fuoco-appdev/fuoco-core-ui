@@ -87,12 +87,12 @@
 }
 
 .listbox-label {
-  display: flex;
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: $gray-100;
+  text-align: left;
 }
 
 /*
