@@ -20,7 +20,7 @@ export interface FormLayoutClasses {
   description?: string
 }
 
-type Props = {
+export interface FormProps {
   align?: string
   children?: any
   classNames?: FormLayoutClasses
@@ -29,7 +29,6 @@ type Props = {
   id?: string
   label?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   style?: React.CSSProperties
   flex?: boolean
   responsive?: boolean
@@ -47,14 +46,13 @@ export function FormLayout({
   id,
   label,
   labelOptional,
-  layout = 'vertical',
   style,
   flex,
   responsive = true,
   size = 'medium',
   beforeLabel,
   afterLabel,
-}: Props) {
+}: FormProps) {
   let containerClasses = [FormLayoutStyles['formlayout'], classNames?.root]
 
   if (size) {
@@ -81,89 +79,53 @@ export function FormLayout({
 
   return (
     <div className={containerClasses.join(' ')}>
-      {labelled || labelOptional || layout === 'horizontal' ? (
-        <div
-          className={
-            '' +
-            (layout !== 'horizontal' && !flex
-              ? [
-                  FormLayoutStyles['formlayout-label-container-horizontal'],
-                  classNames?.labelContainerHorizontal,
-                ].join(' ')
-              : [
-                  FormLayoutStyles['formlayout-label-container-vertical'],
-                  classNames?.labelContainerVertical,
-                ].join(' '))
-          }
-        >
-          {labelled && (
-            <label
-              className={[
-                FormLayoutStyles['formlayout-label'],
-                classNames?.label,
-              ].join(' ')}
-              htmlFor={id}
-            >
-              {beforeLabel && (
-                <span
-                  className={[
-                    FormLayoutStyles['formlayout-label-before'],
-                    classNames?.labelBefore,
-                  ].join(' ')}
-                  id={id + '-before'}
-                >
-                  {beforeLabel}
-                </span>
-              )}
-              {label}
-              {afterLabel && (
-                <span
-                  className={[
-                    FormLayoutStyles['formlayout-label-after'],
-                    classNames?.labelAfter,
-                  ].join(' ')}
-                  id={id + '-after'}
-                >
-                  {afterLabel}
-                </span>
-              )}
-            </label>
-          )}
-          {labelOptional && (
-            <span
-              className={[
-                FormLayoutStyles['formlayout-label-opt'],
-                classNames?.labelOpt,
-              ].join(' ')}
-              id={id + '-optional'}
-            >
-              {labelOptional}
-            </span>
-          )}
-        </div>
-      ) : null}
-      <div
-        className={
-          layout !== 'horizontal'
-            ? [
-                FormLayoutStyles['formlayout-content-container-horizontal'],
-                classNames?.contentContainerHorizontal,
-              ].join(' ')
-            : [
-                FormLayoutStyles['formlayout-content-container-vertical'],
-                classNames?.contentContainerVertical,
-              ].join(' ') +
-              (align === 'right'
-                ? ` ${[
-                    FormLayoutStyles[
-                      'formlayout-content-container-vertical-align-right'
-                    ],
-                    classNames?.contentContainerVerticalAlignRight,
-                  ].join(' ')}`
-                : '')
-        }
-        style={style}
-      >
+      <>
+        {labelled && (
+          <label
+            className={[
+              FormLayoutStyles['formlayout-label'],
+              classNames?.label,
+            ].join(' ')}
+            htmlFor={id}
+          >
+            {beforeLabel && (
+              <span
+                className={[
+                  FormLayoutStyles['formlayout-label-before'],
+                  classNames?.labelBefore,
+                ].join(' ')}
+                id={id + '-before'}
+              >
+                {beforeLabel}
+              </span>
+            )}
+            {label}
+            {afterLabel && (
+              <span
+                className={[
+                  FormLayoutStyles['formlayout-label-after'],
+                  classNames?.labelAfter,
+                ].join(' ')}
+                id={id + '-after'}
+              >
+                {afterLabel}
+              </span>
+            )}
+          </label>
+        )}
+        {labelOptional && (
+          <span
+            className={[
+              FormLayoutStyles['formlayout-label-opt'],
+              classNames?.labelOpt,
+            ].join(' ')}
+            id={id + '-optional'}
+          >
+            {labelOptional}
+          </span>
+        )}
+      </>
+      <>
         {children}
         {error && (
           <p
@@ -186,7 +148,7 @@ export function FormLayout({
             {descriptionText}
           </p>
         )}
-      </div>
+      </>
     </div>
   )
 }
