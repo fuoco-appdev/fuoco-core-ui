@@ -43,7 +43,6 @@ export interface InputProps
   afterLabel?: string
   beforeLabel?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   name?: string
   reveal?: boolean
   actions?: React.ReactNode
@@ -71,7 +70,6 @@ function Input({
   afterLabel,
   beforeLabel,
   labelOptional,
-  layout,
   name,
   onChange,
   onBlur,
@@ -161,7 +159,6 @@ function Input({
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
         labelOptional={labelOptional}
-        layout={layout}
         id={id}
         error={error}
         descriptionText={descriptionText}
@@ -273,7 +270,7 @@ function Input({
 
 export interface TextAreaClasses {
   root?: string
-  formLayout?: TextAreaClasses
+  formLayout?: FormLayoutClasses
   inputContainer?: string
   input?: string
   inputError?: string
@@ -295,7 +292,6 @@ export interface TextAreaProps {
   afterLabel?: string
   beforeLabel?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   name?: string
   onChange?(x: React.ChangeEvent<HTMLTextAreaElement>): void
   onFocus?(x: React.FocusEvent<HTMLTextAreaElement>): void
@@ -325,7 +321,6 @@ function TextArea({
   afterLabel,
   beforeLabel,
   labelOptional,
-  layout,
   name,
   onChange,
   onFocus,
@@ -408,7 +403,6 @@ function TextArea({
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
         labelOptional={labelOptional}
-        layout={layout}
         id={id}
         error={error}
         descriptionText={descriptionText}
