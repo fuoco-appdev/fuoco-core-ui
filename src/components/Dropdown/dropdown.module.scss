@@ -65,16 +65,20 @@
   padding-right: $mp-3;
 }
 
-.touchscreen-overlay {
+.touchscreen-animated-overlay {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 100%;
   width: 100vw;
-  background-color: rgba(#000, 0.35);
   z-index: 24;
-  pointer-events: all;
+}
+
+.touchscreen-overlay {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(#000, 0.35);
 }
 
 .touchscreen-animated-container {
@@ -86,6 +90,7 @@
   border-top-right-radius: $rounded-base;
   max-height: 75vh;
   overflow-y: auto;
+  z-index: 1;
 }
 
 .touchscreen-dropdown {

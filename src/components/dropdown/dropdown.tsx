@@ -213,9 +213,12 @@ function Dropdown({
         item && (
           <animated.div
             style={overlayStyle}
-            className={DropdownStyles['touchscreen-overlay']}
-            onClick={onClose}
+            className={DropdownStyles['touchscreen-animated-overlay']}
           >
+            <div
+              className={DropdownStyles['touchscreen-overlay']}
+              onClick={onClose}
+            />
             <animated.div
               ref={divRef}
               className={DropdownStyles['touchscreen-animated-container']}
