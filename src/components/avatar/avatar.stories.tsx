@@ -74,15 +74,15 @@ Text.args = {
 }
 
 Icon.args = {
-  AvatarIcon: Airplay,
+  avatarIcon: <Airplay />,
 }
 
 Edit.args = {
-  AvatarIcon: Airplay,
+  avatarIcon: <Airplay />,
   editMode: true,
 }
 
 TouchScreen.args = {
-  AvatarIcon: Airplay,
+  avatarIcon: <Airplay />,
   editMode: true,
 }
