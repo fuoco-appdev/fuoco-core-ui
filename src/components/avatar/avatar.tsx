@@ -6,17 +6,24 @@ import { Line } from '../icon/icons'
 import { ModalProps } from '../modal'
 import { CropImage } from '../crop-image'
 import { Button } from '../button'
+import { ButtonClasses } from '../button/button'
+
+export interface AvatarClasses {
+  container?: string
+  editImageButton?: string
+  button?: ButtonClasses
+}
 
 export interface AvatarProps {
   children?: React.ReactNode
   src?: string
   style?: React.CSSProperties
   touchScreen?: boolean
-  className?: string
+  classNames?: AvatarClasses
   alt?: string
   text?: string
   editMode?: boolean
-  size?: 'small' | 'medium' | 'large'
+  size?: 'custom' | 'small' | 'medium' | 'large'
   avatarIcon?: JSX.Element
   rippleProps?: RipplesProps
   modalProps?: ModalProps
@@ -27,7 +34,7 @@ export default function Avatar({
   src,
   style,
   touchScreen = false,
-  className,
+  classNames,
   alt,
   text,
   editMode = false,
@@ -45,8 +52,11 @@ export default function Avatar({
   const fileRef = useRef<HTMLInputElement | null>(null)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   const [selectedImages, setSelectedImages] = useState<FileList | undefined>()
-  const classes = [styles['avatar'], styles[`avatar-size-${size}`]]
-  classes.push(className)
+  const classes = [
+    styles['avatar'],
+    styles[`avatar-size-${size}`],
+    classNames?.container,
+  ]
 
   if (src) {
     classes.push(styles['avatar-image'])
@@ -94,6 +104,7 @@ export default function Avatar({
             className={[
               styles['edit-image-button'],
               styles[`edit-image-button-size-${size}`],
+              classNames?.editImageButton,
             ].join(' ')}
           >
             <input
@@ -109,6 +120,7 @@ export default function Avatar({
               classNames={{
                 container: styles['edit-image-button-ripple'],
                 button: styles['edit-image-button'],
+                ...classNames?.button,
               }}
               rippleProps={rippleProps}
               icon={<Line.Add stroke={'#fff'} size={24} />}
