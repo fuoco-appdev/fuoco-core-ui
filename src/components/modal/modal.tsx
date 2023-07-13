@@ -6,31 +6,31 @@ import { Close } from '../icon/icons/line'
 import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
 
+export interface ModalClasses {
+  overlayContainer?: string
+  overlay?: string
+  container?: string
+  flexContainer?: string
+  background?: string
+  modal?: string
+  content?: string
+  title?: string
+  description?: string
+  closeContainer?: string
+  closeButton?: string
+  footer?: string
+  footerContainer?: string
+  footerCancelText?: string
+}
+
 export interface ModalProps {
-  classNames?: {
-    overlayContainer?: string
-    overlay?: string
-    container?: string
-    flexContainer?: string
-    background?: string
-    modal?: string
-    content?: string
-    title?: string
-    description?: string
-    closeContainer?: string
-    closeButton?: string
-    footer?: string
-    footerContainer?: string
-    footerCancelText?: string
-  }
+  classNames?: ModalClasses
   iconColor?: string
   children?: React.ReactNode
   customFooter?: React.ReactNode
   closable?: boolean
   description?: string
   hideFooter?: boolean
-  alignFooter?: 'right' | 'left'
-  layout?: 'horizontal' | 'vertical'
   icon?: React.ReactNode
   loading?: boolean
   onCancel?: any
@@ -49,7 +49,6 @@ export interface ModalProps {
   overlayClassName?: string
   transition?: AnimationTailwindClasses
   transitionOverlay?: AnimationTailwindClasses
-  triggerElement?: React.ReactNode
 }
 
 const Modal = ({
@@ -60,14 +59,11 @@ const Modal = ({
   closable,
   description,
   hideFooter = false,
-  alignFooter = 'left',
-  layout = 'horizontal',
   loading = false,
   cancelText = 'Cancel',
   onConfirm = () => {},
   onCancel = () => {},
   confirmText = 'Confirm',
-  showIcon = false,
   title,
   footerBackground,
   icon,
@@ -78,7 +74,6 @@ const Modal = ({
   overlayStyle,
   contentStyle,
   overlayClassName,
-  triggerElement,
 }: ModalProps) => {
   const [open, setOpen] = React.useState(visible ? visible : false)
 

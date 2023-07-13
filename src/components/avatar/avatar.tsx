@@ -4,7 +4,7 @@ import styles from './avatar.module.scss'
 import Ripples, { RipplesProps } from 'react-ripples'
 import { Line } from '../icon/icons'
 import { ModalProps } from '../modal'
-import { CropImage } from '../crop-image'
+import { CropClasses, CropImage } from '../crop-image'
 import { Button } from '../button'
 import { ButtonClasses } from '../button/button'
 
@@ -12,12 +12,12 @@ export interface AvatarClasses {
   container?: string
   editImageButton?: string
   button?: ButtonClasses
+  cropImage?: CropClasses
 }
 
 export interface AvatarProps {
   children?: React.ReactNode
   src?: string
-  style?: React.CSSProperties
   touchScreen?: boolean
   classNames?: AvatarClasses
   alt?: string
@@ -32,7 +32,6 @@ export interface AvatarProps {
 
 export default function Avatar({
   src,
-  style,
   touchScreen = false,
   classNames,
   alt,
@@ -139,6 +138,7 @@ export default function Avatar({
           modalProps={modalProps}
           touchScreen={touchScreen}
           anchorRef={buttonRef}
+          classNames={classNames?.cropImage}
         />
       )}
     </div>

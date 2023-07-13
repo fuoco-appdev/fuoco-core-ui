@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Modal, ModalProps } from '../modal'
+import { Modal, ModalProps, ModalClasses } from '../modal'
 import AvatarEditor, { AvatarEditorProps } from 'react-avatar-editor'
 import { Overlay } from '../overlay'
 
@@ -8,6 +8,18 @@ import styles from './crop-image.module.scss'
 import { Typography } from '../typography'
 import { Close } from '../icon/icons/line'
 import { Button } from '../button'
+import { ButtonClasses } from '../button/button'
+import { RipplesProps } from 'react-ripples'
+
+export interface CropClasses {
+  topBar?: string
+  topBarTitle?: string
+  closeButton?: ButtonClasses
+  saveButtonContainer?: string
+  saveButton?: ButtonClasses
+  modal?: ModalClasses
+  avatarEditorContainer?: string
+}
 
 export interface CropProps {
   src: FileList
@@ -15,6 +27,8 @@ export interface CropProps {
     title?: string
     confirmText?: string
   }
+  classNames?: CropClasses
+  closeRippleProps?: RipplesProps
   anchorRef?: React.RefObject<any>
   isVisible?: boolean
   touchScreen?: boolean
@@ -32,6 +46,8 @@ export default function CropImage({
     title: 'Crop image',
     confirmText: 'Save',
   },
+  classNames,
+  closeRippleProps,
   anchorRef,
   isVisible,
   touchScreen = false,
@@ -39,15 +55,7 @@ export default function CropImage({
     visible: false,
     confirmText: 'Save',
   },
-  editorProps = {
-    image: '',
-    width: 500,
-    height: 500,
-    border: 0,
-    borderRadius: 250,
-    color: [0, 0, 0, 0.35],
-    backgroundColor: '#000',
-  },
+  editorProps,
   cropRatio = [1, 1],
   onConfirmed,
   onCanceled,
@@ -141,30 +149,38 @@ export default function CropImage({
       hideCloseButton={true}
       anchorRef={anchorRef}
     >
-      <div className={styles['top-bar']}>
-        <Typography.Title className={styles['top-bar-title']} level={4}>
+      <div className={[styles['top-bar'], classNames?.topBar].join(' ')}>
+        <div
+          className={[styles['top-bar-title'], classNames?.topBarTitle].join(
+            ' '
+          )}
+        >
           {strings?.title}
-        </Typography.Title>
+        </div>
         <div>
           <Button
             classNames={{
               container: styles['exit-button-container'],
               button: styles['exit-button'],
+              ...classNames?.closeButton,
             }}
             touchScreen={touchScreen}
-            icon={<Close stroke={'#fff'} />}
+            icon={<Close stroke={'#fff'} size={24} />}
             type={'text'}
             size={'small'}
             onClick={onCanceled}
             rippleProps={{
               color: 'rgba(255, 255, 255, 0.35)',
+              ...closeRippleProps,
             }}
           />
         </div>
       </div>
-      <div className={styles['avatar-editor-container']} ref={cropRef}>
+      <div
+        className={[styles['avatar-editor-container']].join(' ')}
+        ref={cropRef}
+      >
         <AvatarEditor
-          {...modalProps}
           width={window.innerWidth}
           height={(window.innerWidth / cropRatio[1]) * cropRatio[0]}
           border={0}
@@ -172,18 +188,25 @@ export default function CropImage({
           color={[0, 0, 0, 0.35]}
           backgroundColor={'#000'}
           ref={editorRef}
-          image={src[selectedIndex]}
           scale={cropScale}
           rotate={0}
+          {...editorProps}
+          image={src[selectedIndex]}
         />
       </div>
-      <div className={styles['save-button-container']}>
+      <div
+        className={[
+          styles['save-button-container'],
+          classNames?.saveButtonContainer,
+        ].join(' ')}
+      >
         <Button
           block={true}
           touchScreen={touchScreen}
           type={'primary'}
           size={'large'}
           onClick={onCropConfirmed}
+          classNames={classNames?.saveButton}
         >
           {strings?.confirmText}
         </Button>
@@ -197,20 +220,31 @@ export default function CropImage({
       onCancel={onCropCanceled}
       classNames={{
         footerContainer: styles['modal-footer-container'],
+        ...classNames?.modal,
       }}
     >
-      <div className={styles['top-bar']}>
-        <Typography.Title className={styles['top-bar-title']} level={4}>
+      <div className={[styles['top-bar'], classNames?.topBar].join(' ')}>
+        <div
+          className={[styles['top-bar-title'], classNames?.topBarTitle].join(
+            ' '
+          )}
+        >
           {strings?.title}
-        </Typography.Title>
+        </div>
       </div>
-      <div className={styles['avatar-editor-container']} ref={cropRef}>
+      <div
+        className={[
+          styles['avatar-editor-container'],
+          classNames?.avatarEditorContainer,
+        ].join(' ')}
+        ref={cropRef}
+      >
         <AvatarEditor
+          rotate={0}
           {...editorProps}
           ref={editorRef}
           image={src[selectedIndex]}
           scale={cropScale}
-          rotate={0}
         />
       </div>
     </Modal>
