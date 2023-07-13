@@ -6,14 +6,17 @@ import { Close } from '../icon/icons/line'
 
 // @ts-ignore
 import styles from './overlay.module.scss'
+import { ButtonClasses } from '../button/button'
+
+export interface OverlayClasses {
+  animatedContent?: string
+  exitButtonRoot?: string
+  exitButton?: ButtonClasses
+  background?: string
+}
 
 export interface OverlayProps {
-  classNames?: {
-    animatedContent?: string
-    exitButtonRoot?: string
-    exitButtonContainer?: string
-    exitButton?: string
-  }
+  classNames?: OverlayClasses
   touchScreen?: boolean
   anchorRef?: React.RefObject<any>
   visible?: boolean
@@ -103,7 +106,9 @@ function Overlay({
         ' '
       )}
     >
-      <div className={styles['background']} />
+      <div
+        className={[styles['background'], classNames?.background].join(' ')}
+      />
       {!hideCloseButton && (
         <div
           className={[
@@ -113,11 +118,9 @@ function Overlay({
         >
           <Button
             classNames={{
-              container: [
-                styles['exit-button-container'],
-                classNames?.exitButtonContainer,
-              ].join(' '),
-              button: [styles['exit-button'], classNames?.exitButton].join(' '),
+              container: styles['exit-button-container'],
+              button: styles['exit-button'],
+              ...classNames?.exitButton,
             }}
             touchScreen={touchScreen}
             icon={<Close stroke={closeIconColor} />}

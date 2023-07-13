@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Modal, ModalProps, ModalClasses } from '../modal'
 import AvatarEditor, { AvatarEditorProps } from 'react-avatar-editor'
-import { Overlay } from '../overlay'
+import { Overlay, OverlayClasses } from '../overlay'
 
 // @ts-ignore
 import styles from './crop-image.module.scss'
@@ -18,6 +18,7 @@ export interface CropClasses {
   saveButtonContainer?: string
   saveButton?: ButtonClasses
   modal?: ModalClasses
+  overlay?: OverlayClasses
   avatarEditorContainer?: string
 }
 
@@ -144,6 +145,7 @@ export default function CropImage({
 
   return touchScreen ? (
     <Overlay
+      classNames={classNames?.overlay}
       touchScreen={true}
       visible={isVisible ?? false}
       hideCloseButton={true}
