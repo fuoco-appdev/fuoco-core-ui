@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { RipplesProps } from 'react-ripples'
 import { animated, useSpring } from 'react-spring'
 import { Button } from '../button'
@@ -38,6 +38,9 @@ function Overlay({
   closeIconColor = '#000',
   onClose,
 }: OverlayProps) {
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
+  const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight)
+
   const [style, api] = useSpring(() => ({
     from: {
       opacity: 0,
@@ -59,7 +62,7 @@ function Overlay({
       height: window.innerHeight,
       width: window.innerWidth,
       borderRadius: 0,
-      zIndex: 24,
+      zIndex: 1000,
     },
     config: {
       tension: 1000,
@@ -67,6 +70,17 @@ function Overlay({
       bounce: 0,
     },
   }))
+
+  useEffect(() => {
+    const onResize = () => {
+      setWindowWidth(window.innerWidth)
+      setWindowHeight(window.innerHeight)
+    }
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
 
   useLayoutEffect(() => {
     let borderRadius: string | null = null
@@ -90,14 +104,12 @@ function Overlay({
         : anchorRef
         ? anchorRef?.current?.getBoundingClientRect().top
         : '50%',
-      height: visible
-        ? window.innerHeight
-        : anchorRef?.current?.clientHeight ?? 0,
-      width: visible ? window.innerWidth : anchorRef?.current?.clientWidth ?? 0,
+      height: visible ? windowHeight : anchorRef?.current?.clientHeight ?? 0,
+      width: visible ? windowWidth : anchorRef?.current?.clientWidth ?? 0,
       borderRadius: visible ? 0 : Number(borderRadius ?? 0),
-      zIndex: visible ? 24 : -1,
+      zIndex: visible ? 1000 : -1,
     })
-  }, [visible])
+  }, [visible, windowWidth, windowHeight])
 
   return (
     <animated.div
