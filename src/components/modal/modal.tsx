@@ -41,7 +41,7 @@ export interface ModalProps {
   footerBackground?: boolean
   title?: string
   variant?: 'danger' | 'warning' | 'success'
-  visible: boolean
+  visible?: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large'
   style?: React.CSSProperties
   overlayStyle?: React.CSSProperties
