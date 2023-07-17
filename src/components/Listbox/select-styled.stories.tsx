@@ -129,7 +129,6 @@ export const People = (args: any) => {
   return (
     <Listbox
       label="Choose a person"
-      layout="horizontal"
       descriptionText="Choose a person for this role"
       defaultIndex={0}
       options={options}
@@ -153,7 +152,6 @@ export const WithIcon = (args: any) => {
   return (
     <Listbox
       label="Language"
-      layout="vertical"
       icon={
         <Language
           size={24}
