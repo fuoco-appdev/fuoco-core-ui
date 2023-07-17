@@ -176,7 +176,7 @@ function Dropdown({
           <animated.div
             ref={parentRef}
             style={overlayStyle}
-            className={DropdownStyles['touchscreen-overlay']}
+            className={DropdownStyles['touchscreen-animated-overlay']}
             onClick={onClose}
           >
             {desktopTransition(

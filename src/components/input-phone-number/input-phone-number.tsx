@@ -34,7 +34,6 @@ export interface InputPhoneNumberClasses {
 export interface InputPhoneNumberProps {
   id?: string
   iconColor?: string
-  parentRef: React.MutableRefObject<HTMLElement | null>
   classNames?: InputPhoneNumberClasses
   touchScreen?: boolean
   error?: string
@@ -123,7 +122,6 @@ export interface InputPhoneNumberProps {
 function InputPhoneNumber({
   id,
   iconColor = '#000',
-  parentRef,
   classNames,
   touchScreen = false,
   error,
@@ -960,7 +958,6 @@ function InputPhoneNumber({
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
         labelOptional={labelOptional}
-        layout={layout}
         id={id}
         error={error}
         descriptionText={descriptionText}
@@ -1000,10 +997,8 @@ function InputPhoneNumber({
           <Dropdown
             className={classNames?.dropdown}
             touchScreen={touchScreen}
-            parentRef={parentRef}
             anchorRef={inputRef}
             align={DropdownAlignment.Left}
-            ref={dropdownRef}
             open={showDropdown}
             onClose={() => {
               setShowDropdown(false)
