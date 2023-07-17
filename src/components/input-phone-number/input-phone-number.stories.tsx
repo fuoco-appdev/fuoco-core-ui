@@ -19,11 +19,7 @@ export const Default = (args: any) => {
         height: '80vh',
       }}
     >
-      <InputPhoneNumber
-        {...args}
-        parentRef={containerRef}
-        onChange={(value) => console.log(value)}
-      />
+      <InputPhoneNumber {...args} onChange={(value) => console.log(value)} />
     </div>
   )
 }
@@ -54,7 +50,6 @@ export const TouchScreen = (args: any) => {
 
 Default.args = {
   label: 'Phone number',
-  layout: 'vertical',
   country: 'ca',
   defaultValue: '11234567890',
 }
@@ -64,4 +59,5 @@ DefaultWithError.args = {
   layout: 'vertical',
   country: 'ca',
   error: 'Field cannot be empty',
+  defaultValue: '11234567890',
 }

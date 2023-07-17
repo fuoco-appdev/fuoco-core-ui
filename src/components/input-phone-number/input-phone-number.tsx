@@ -923,7 +923,7 @@ function InputPhoneNumber({
     )
     setCountryGuess(guess)
     setFormattedNumber(number)
-  }, [defaultValue])
+  }, [country])
 
   useEffect(() => {
     setSelectedCountry(countryGuess)
