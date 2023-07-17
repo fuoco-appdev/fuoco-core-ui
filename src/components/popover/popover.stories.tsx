@@ -29,19 +29,16 @@ export const Default = (args: any) => (
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"
-              layout="horizontal"
             />
             <Input
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"
-              layout="horizontal"
             />
             <Input
               label="Width"
               defaultValue="100%"
               descriptionText="Set the width of something"
-              layout="horizontal"
             />
           </div>
         </>,
