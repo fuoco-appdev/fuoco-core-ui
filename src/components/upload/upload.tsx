@@ -11,7 +11,6 @@ function Dragger({
   label,
   afterLabel,
   beforeLabel,
-  layout,
   children,
   files,
   setFiles,
@@ -77,7 +76,6 @@ function Dragger({
         label={label}
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
-        layout={layout}
       >
         <label htmlFor="file-upload" className={classes.join(' ')}>
           <input
