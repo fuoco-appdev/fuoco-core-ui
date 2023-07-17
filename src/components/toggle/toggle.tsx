@@ -72,7 +72,6 @@ function Toggle({
       afterLabel={afterLabel}
       beforeLabel={beforeLabel}
       labelOptional={labelOptional}
-      layout={layout}
       id={id}
       error={error}
       align={layout === 'vertical' ? align : undefined}
