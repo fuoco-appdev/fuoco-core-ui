@@ -14,7 +14,6 @@ export interface InputGeocodingProps {
   id?: string
   iconColor?: string
   touchScreen?: boolean
-  parentRef: React.MutableRefObject<HTMLElement | null>
   className?: string
   strings?: {
     searchNotFound: string
@@ -68,7 +67,6 @@ function InputGeocoding({
   touchScreen = false,
   iconColor = '#ffffff',
   mapboxAccessToken,
-  parentRef,
   icon,
   className,
   strings = {
@@ -214,7 +212,6 @@ function InputGeocoding({
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
         labelOptional={labelOptional}
-        layout={layout}
         id={id}
         error={error}
         descriptionText={descriptionText}
@@ -269,10 +266,8 @@ function InputGeocoding({
       <Dropdown
         className={classes?.dropdown}
         touchScreen={touchScreen}
-        parentRef={parentRef}
         anchorRef={inputRef}
         align={DropdownAlignment.Left}
-        ref={dropdownRef}
         open={showDropdown}
         onClose={() => {
           setShowDropdown(false)
