@@ -102,14 +102,6 @@ export function Item({
     classNames?.panel,
   ]
 
-  let buttonClasses = [
-    AccordionStyles['accordion-item-button'],
-    classNames?.button,
-  ]
-  if (bordered) {
-    buttonClasses.push(AccordionStyles['accordion-item-bordered'])
-  }
-
   useEffect(() => {
     onChange?.({ id, label, open: disclosureOpen })
   }, [disclosureOpen])
