@@ -80,7 +80,7 @@ export interface ItemProps {
   classNames?: AccordionItemClasses
   label: string
   id?: string | number
-  rippleProps: RipplesProps
+  rippleProps?: RipplesProps
   touchScreen?: boolean
 }
 
