@@ -5,13 +5,14 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import Ripples from 'react-ripples'
+import Ripples, { RipplesProps } from 'react-ripples'
 import { Disclosure, Transition } from '@headlessui/react'
 // @ts-ignore
 import AccordionStyles from './accordion.module.scss'
 import { ExpandMore } from '../icon/icons/line'
 import { Button, Typography } from '../../index'
 import { animated, useSpring, useTransition } from 'react-spring'
+import { ButtonClasses } from '../button/button'
 
 type ContextValue = Required<Pick<AccordionProps, 'defaultActiveId'>> &
   Pick<AccordionProps, 'onChange' | 'bordered'>
@@ -22,9 +23,13 @@ const AccordionContext = createContext<ContextValue>({
   onChange: undefined,
 })
 
+export interface AccordionClasses {
+  container?: string
+}
+
 export interface AccordionProps {
   children?: React.ReactNode
-  className?: string
+  classNames?: AccordionClasses
   defaultActiveId?: (string | number)[]
   bordered?: boolean
   onChange?: (item: {
@@ -36,17 +41,17 @@ export interface AccordionProps {
 
 function Accordion({
   children,
-  className,
+  classNames,
   defaultActiveId = [],
   bordered,
   onChange,
 }: AccordionProps) {
-  let containerClasses = [AccordionStyles['accordion-container']]
+  let containerClasses = [
+    AccordionStyles['accordion-container'],
+    classNames?.container,
+  ]
   if (bordered) {
     containerClasses.push(AccordionStyles['accordion-container-bordered'])
-  }
-  if (className) {
-    containerClasses.push(className)
   }
 
   const contextValue = {
@@ -62,17 +67,21 @@ function Accordion({
   )
 }
 
+export interface AccordionItemClasses {
+  panel?: string
+  button?: ButtonClasses
+  topBar?: string
+  topBarLabel?: string
+}
+
 export interface ItemProps {
   children?: React.ReactNode
   iconColor?: string
-  classNames?: {
-    panel?: string
-    button?: string
-    topBar?: string
-    topBarLabel?: string
-  }
+  classNames?: AccordionItemClasses
   label: string
   id?: string | number
+  rippleProps: RipplesProps
+  touchScreen?: boolean
 }
 
 export function Item({
@@ -81,6 +90,8 @@ export function Item({
   classNames,
   label,
   id,
+  rippleProps,
+  touchScreen,
 }: ItemProps) {
   const { defaultActiveId, onChange, bordered } = useContext(AccordionContext)
   const isDefaultActive = id ? defaultActiveId?.includes(id) : false
@@ -143,9 +154,14 @@ export function Item({
             </Typography.Text>
             <div>
               <Button
+                classNames={classNames?.button}
+                touchScreen={touchScreen}
+                rippleProps={rippleProps}
                 type={'text'}
+                rounded={true}
                 icon={
                   <animated.div
+                    className={AccordionStyles['expand-animated-container']}
                     style={buttonIconStyle}
                     onClick={() => setDisclosureOpen(!disclosureOpen)}
                   >
