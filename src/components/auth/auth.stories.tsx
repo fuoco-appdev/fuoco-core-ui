@@ -322,6 +322,9 @@ export const UpdatePassword = (args: any) => {
   useEffect(() => {
     if (errorType === AuthErrorType.BadAuthentication) {
       setPasswordErrorMessage('You must provide a valid password')
+    }
+    if (errorType === AuthErrorType.ConfirmPasswordNoMatch) {
+      setPasswordErrorMessage('Password does not match')
     } else {
       setPasswordErrorMessage(null)
     }
@@ -331,6 +334,7 @@ export const UpdatePassword = (args: any) => {
     <Auth.UpdatePassword
       {...args}
       passwordErrorMessage={passwordErrorMessage}
+      confirmPasswordErrorMessage={passwordErrorMessage}
       onPasswordUpdated={() => setErrorType(null)}
       onUpdatePasswordError={(error: AuthError, type: AuthErrorType) =>
         setErrorType(type)

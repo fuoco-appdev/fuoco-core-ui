@@ -1461,6 +1461,19 @@ function ResetPassword({
   )
 }
 
+export interface UpdatePasswordProps {
+  classNames?: UpdatePasswordClasses
+  supabaseClient: SupabaseClient
+  defaultIconColor?: string
+  litIconColor?: string
+  strings: AuthStrings
+  passwordErrorMessage?: string
+  confirmPasswordErrorMessage?: string
+  rippleProps?: RipplesProps
+  onUpdatePasswordError?: (error: AuthError, type: AuthErrorType) => void
+  onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
+}
+
 function UpdatePassword({
   classNames,
   supabaseClient,
@@ -1468,29 +1481,30 @@ function UpdatePassword({
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   passwordErrorMessage,
+  confirmPasswordErrorMessage,
   rippleProps = {
     color: 'rgba(0, 0, 0, .3)',
     during: 250,
   },
   onUpdatePasswordError,
   onPasswordUpdated,
-}: {
-  classNames?: UpdatePasswordClasses
-  supabaseClient: SupabaseClient
-  defaultIconColor?: string
-  litIconColor?: string
-  strings: AuthStrings
-  passwordErrorMessage?: string
-  rippleProps?: RipplesProps
-  onUpdatePasswordError?: (error: AuthError, type: AuthErrorType) => void
-  onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
-}) {
+}: UpdatePasswordProps) {
   const [password, setPassword] = useState('')
   const [passwordIconLit, setPasswordIconLit] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      if (password !== confirmPassword) {
+        onUpdatePasswordError?.(
+          new AuthError('Confirm password does not match', 401),
+          AuthErrorType.ConfirmPasswordNoMatch
+        )
+        return
+      }
+
       const { error } = await supabaseClient.auth.updateUser({ password })
       if (error) onUpdatePasswordError?.(error, AuthErrorType.BadAuthentication)
       else onPasswordUpdated?.(e)
@@ -1535,6 +1549,36 @@ function UpdatePassword({
             }}
             onFocus={() => setPasswordIconLit(true)}
             onBlur={() => setPasswordIconLit(false)}
+          />
+          <Input
+            classNames={classNames?.input}
+            label={strings?.confirmNewPassword}
+            placeholder={strings?.confirmNewPasswordPlaceholder}
+            reveal={true}
+            password={true}
+            iconColor={defaultIconColor}
+            error={confirmPasswordErrorMessage}
+            icon={
+              <Key
+                size={24}
+                strokeWidth={0}
+                stroke={
+                  confirmPasswordIconLit ? litIconColor : defaultIconColor
+                }
+                color={confirmPasswordIconLit ? litIconColor : defaultIconColor}
+              />
+            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setConfirmPassword(e.target.value)
+            }
+            onMouseEnter={() => setConfirmPasswordIconLit(true)}
+            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
+              if (document.activeElement !== e.currentTarget) {
+                setConfirmPasswordIconLit(false)
+              }
+            }}
+            onFocus={() => setConfirmPasswordIconLit(true)}
+            onBlur={() => setConfirmPasswordIconLit(false)}
           />
           <Button
             block
