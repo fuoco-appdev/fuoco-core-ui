@@ -1,6 +1,6 @@
 {
   "name": "@fuoco.appdev/core-ui",
-  "version": "0.14.27",
+  "version": "0.14.28",
   "main": "./dist/cjs/index.js",
   "types": "./dist/cjs/src/index.d.ts",
   "module": "./dist/cjs/index.js",

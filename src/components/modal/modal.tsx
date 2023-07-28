@@ -5,6 +5,7 @@ import { Button, Typography } from '../../index'
 import { Close } from '../icon/icons/line'
 import { AnimationTailwindClasses } from '../../types'
 import { animated, useTransition } from 'react-spring'
+import { ButtonClasses } from '../button/button'
 
 export interface ModalClasses {
   overlayContainer?: string
@@ -16,8 +17,8 @@ export interface ModalClasses {
   content?: string
   title?: string
   description?: string
-  closeContainer?: string
-  closeButton?: string
+  cancelButton?: ButtonClasses
+  confirmButton?: ButtonClasses
   footer?: string
   footerContainer?: string
   footerCancelText?: string
@@ -28,7 +29,6 @@ export interface ModalProps {
   iconColor?: string
   children?: React.ReactNode
   customFooter?: React.ReactNode
-  closable?: boolean
   description?: string
   hideFooter?: boolean
   icon?: React.ReactNode
@@ -56,7 +56,6 @@ const Modal = ({
   iconColor = '#ffffff',
   children,
   customFooter = undefined,
-  closable,
   description,
   hideFooter = false,
   loading = false,
@@ -109,7 +108,12 @@ const Modal = ({
       ].join(' ')}
     >
       <div className={ModalStyles['footer-button-container']}>
-        <Button type={'default'} onClick={onCancel} disabled={loading}>
+        <Button
+          classNames={classNames?.cancelButton}
+          type={'default'}
+          onClick={onCancel}
+          disabled={loading}
+        >
           <span
             className={[
               ModalStyles['footer-cancel-text'],
@@ -120,6 +124,7 @@ const Modal = ({
           </span>
         </Button>
         <Button
+          classNames={classNames?.confirmButton}
           onClick={onConfirm}
           loading={loading}
           danger={variant === 'danger'}
@@ -262,32 +267,6 @@ const Modal = ({
                             {!hideFooter && footerBackground && (
                               <div className={footerClasses.join(' ')}>
                                 {footerContent}
-                              </div>
-                            )}
-                            {closable && (
-                              <div
-                                className={[
-                                  ModalStyles['modal-close-container'],
-                                  classNames?.closeContainer,
-                                ].join(' ')}
-                              >
-                                <Button
-                                  className={[
-                                    ModalStyles['modal-close-button'],
-                                    classNames?.closeButton,
-                                  ].join(' ')}
-                                  onClick={onCancel}
-                                  type="text"
-                                  shadow={false}
-                                  icon={
-                                    <Close
-                                      size={24}
-                                      strokeWidth={0}
-                                      color={iconColor}
-                                      stroke={iconColor}
-                                    />
-                                  }
-                                />
                               </div>
                             )}
                           </div>
