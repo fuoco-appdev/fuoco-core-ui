@@ -59,3 +59,6 @@ export * from './components/auth'
 
 // ICONS
 export * from './components/icon'
+
+// Layout
+export * from './lib/layout/form-layout'
