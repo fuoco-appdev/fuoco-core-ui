@@ -625,7 +625,12 @@ function SocialAuth({
 }: AuthProps) {
   const handleProviderSignIn = (provider: Provider) => {
     setTimeout(async () => {
-      const { error } = await supabaseClient.auth.signInWithOAuth({ provider })
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo,
+        },
+      })
       if (error)
         if (props.view == 'sign_in') {
           onSigninError?.(error, AuthErrorType.BadAuthentication)
