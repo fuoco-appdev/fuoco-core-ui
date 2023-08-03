@@ -46,12 +46,6 @@ type ViewType =
 
 type RedirectTo = undefined | string
 
-export enum AuthErrorType {
-  BadAuthentication,
-  BadLinkRedirect,
-  ConfirmPasswordNoMatch,
-}
-
 export interface AuthStrings {
   orContinueWith?: string
   emailAddress?: string
@@ -189,11 +183,11 @@ export interface AuthProps {
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
   onResetPasswordSent?: (e?: React.FormEvent<HTMLFormElement>) => void
   onMagicLinkSent?: (e?: React.FormEvent<HTMLFormElement>) => void
-  onSigninError?: (error: AuthError, type: AuthErrorType) => void
-  onSignupError?: (error: AuthError, type: AuthErrorType) => void
-  onUpdatePasswordError?: (error: AuthError, type: AuthErrorType) => void
-  onResetPasswordError?: (error: AuthError, type: AuthErrorType) => void
-  onMagicLinkError?: (error: AuthError, type: AuthErrorType) => void
+  onSigninError?: (error: AuthError) => void
+  onSignupError?: (error: AuthError) => void
+  onUpdatePasswordError?: (error: AuthError) => void
+  onResetPasswordError?: (error: AuthError) => void
+  onMagicLinkError?: (error: AuthError) => void
 }
 
 const defaultStrings: AuthStrings = {
@@ -633,9 +627,9 @@ function SocialAuth({
       })
       if (error)
         if (props.view == 'sign_in') {
-          onSigninError?.(error, AuthErrorType.BadAuthentication)
+          onSigninError?.(error)
         } else if (props.view === 'sign_up') {
-          onSignupError?.(error, AuthErrorType.BadAuthentication)
+          onSignupError?.(error)
         } else {
           onAuthenticating ? onAuthenticating?.() : null
         }
@@ -761,8 +755,8 @@ function EmailAuth({
   onSigninRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onAuthenticating?: (e?: React.FormEvent<HTMLFormElement>) => void
   onEmailConfirmationSent?: (e: React.FormEvent<HTMLFormElement>) => void
-  onSigninError?: (error: AuthError, type: AuthErrorType) => void
-  onSignupError?: (error: AuthError, type: AuthErrorType) => void
+  onSigninError?: (error: AuthError) => void
+  onSignupError?: (error: AuthError) => void
 }) {
   const isMounted = useRef<boolean>(true)
   const [email, setEmail] = useState(defaultEmail)
@@ -793,8 +787,7 @@ function EmailAuth({
             email,
             password,
           })
-          if (authSignin.error)
-            onSigninError?.(authSignin.error, AuthErrorType.BadAuthentication)
+          if (authSignin.error) onSigninError?.(authSignin.error)
           else {
             onAuthenticating ? onAuthenticating?.(e) : null
           }
@@ -802,8 +795,7 @@ function EmailAuth({
         case 'sign_up':
           if (password !== confirmPassword) {
             onSigninError?.(
-              new AuthError('Confirm password does not match', 401),
-              AuthErrorType.ConfirmPasswordNoMatch
+              new AuthError('Confirm password does not match', 401)
             )
             break
           }
@@ -812,8 +804,7 @@ function EmailAuth({
             email,
             password,
           })
-          if (authSignup.error)
-            onSignupError?.(authSignup.error, AuthErrorType.BadAuthentication)
+          if (authSignup.error) onSignupError?.(authSignup.error)
           // Check if session is null -> email confirmation setting is turned on
           else if (authSignup.data.user && !authSignup.data.session)
             onEmailConfirmationSent?.(e)
@@ -1104,7 +1095,7 @@ function MagicLink({
   emailErrorMessage?: string
   rippleProps?: RipplesProps
   onMagicLinkSent?: (e: React.FormEvent<HTMLFormElement>) => void
-  onMagicLinkError?: (error: AuthError, type: AuthErrorType) => void
+  onMagicLinkError?: (error: AuthError) => void
 }) {
   const [email, setEmail] = useState('')
   const [emailIconLit, setEmailIconLit] = useState(false)
@@ -1118,7 +1109,7 @@ function MagicLink({
           emailRedirectTo: redirectTo,
         },
       })
-      if (error) onMagicLinkError?.(error, AuthErrorType.BadLinkRedirect)
+      if (error) onMagicLinkError?.(error)
       else onMagicLinkSent?.(e)
     }, rippleProps?.during ?? 0)
   }
@@ -1224,7 +1215,7 @@ function ForgottenPassword({
   emailErrorMessage?: string
   rippleProps?: RipplesProps
   onSigninRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
-  onResetPasswordError?: (error: AuthError, type: AuthErrorType) => void
+  onResetPasswordError?: (error: AuthError) => void
   onResetPasswordSent?: (e: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [email, setEmail] = useState('')
@@ -1236,7 +1227,7 @@ function ForgottenPassword({
       const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
         redirectTo,
       })
-      if (error) onResetPasswordError?.(error, AuthErrorType.BadAuthentication)
+      if (error) onResetPasswordError?.(error)
       else onResetPasswordSent?.(e)
     }, rippleProps?.during ?? 0)
   }
@@ -1339,7 +1330,7 @@ function ResetPassword({
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
   rippleProps?: RipplesProps
-  onResetPasswordError?: (error: AuthError, type: AuthErrorType) => void
+  onResetPasswordError?: (error: AuthError) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }) {
   const [password, setPassword] = useState('')
@@ -1352,8 +1343,7 @@ function ResetPassword({
     setTimeout(async () => {
       if (password !== confirmPassword) {
         onResetPasswordError?.(
-          new AuthError('Confirm password does not match', 401),
-          AuthErrorType.ConfirmPasswordNoMatch
+          new AuthError('Confirm password does not match', 401)
         )
         return
       }
@@ -1361,7 +1351,7 @@ function ResetPassword({
       const { error } = await supabaseClient.auth.updateUser({
         password,
       })
-      if (error) onResetPasswordError?.(error, AuthErrorType.BadAuthentication)
+      if (error) onResetPasswordError?.(error)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
   }
@@ -1475,7 +1465,7 @@ export interface UpdatePasswordProps {
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
   rippleProps?: RipplesProps
-  onUpdatePasswordError?: (error: AuthError, type: AuthErrorType) => void
+  onUpdatePasswordError?: (error: AuthError) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }
 
@@ -1504,14 +1494,13 @@ function UpdatePassword({
     setTimeout(async () => {
       if (password !== confirmPassword) {
         onUpdatePasswordError?.(
-          new AuthError('Confirm password does not match', 401),
-          AuthErrorType.ConfirmPasswordNoMatch
+          new AuthError('Confirm password does not match', 401)
         )
         return
       }
 
       const { error } = await supabaseClient.auth.updateUser({ password })
-      if (error) onUpdatePasswordError?.(error, AuthErrorType.BadAuthentication)
+      if (error) onUpdatePasswordError?.(error)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
   }
