@@ -282,144 +282,121 @@ function Auth({
   const verticalSocialLayout = socialLayout === 'vertical' ? true : false
 
   let containerClasses = [AuthStyles['sbui-auth'], classNames?.container]
-  const Container = (props: any) => (
-    <div className={containerClasses.join(' ')} style={style}>
-      <SocialAuth
-        classNames={classNames}
-        view={view}
-        strings={{ ...defaultStrings, ...strings }}
-        defaultIconColor={defaultIconColor}
-        litIconColor={litIconColor}
-        supabaseClient={supabaseClient}
-        verticalSocialLayout={verticalSocialLayout}
-        providers={providers}
-        rippleProps={rippleProps}
-        socialLayout={socialLayout}
-        socialButtonSize={socialButtonSize}
-        socialColors={socialColors}
-        redirectTo={redirectTo}
-        onlyThirdPartyProviders={onlyThirdPartyProviders}
-        magicLink={magicLink}
-        onForgotPasswordRedirect={onForgotPasswordRedirect}
-        onTermsOfServiceRedirect={onTermsOfServiceRedirect}
-        onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
-        onMagicLinkRedirect={onMagicLinkRedirect}
-        onSignupRedirect={onSignupRedirect}
-        onSigninRedirect={onSigninRedirect}
-        onAuthenticating={onAuthenticating}
-        onEmailConfirmationSent={onEmailConfirmationSent}
-      />
-      {!onlyThirdPartyProviders && props.children}
-    </div>
-  )
-
   useEffect(() => {
     // handle view override
     setAuthView(view)
   }, [view])
 
-  switch (authView) {
-    case VIEWS.SIGN_IN:
-    case VIEWS.SIGN_UP:
-      return (
-        <Container>
-          <EmailAuth
-            classNames={classNames?.emailAuth}
-            id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
-            defaultIconColor={defaultIconColor}
-            emailValue={emailValue}
-            passwordValue={passwordValue}
-            confirmPasswordValue={confirmPasswordValue}
-            litIconColor={litIconColor}
-            strings={{ ...defaultStrings, ...strings }}
-            rippleProps={rippleProps}
-            supabaseClient={supabaseClient}
-            authView={authView}
-            setAuthView={setAuthView}
-            emailErrorMessage={emailErrorMessage}
-            passwordErrorMessage={passwordErrorMessage}
-            confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-            magicLink={magicLink}
-            onEmailChanged={onEmailChanged}
-            onPasswordChanged={onPasswordChanged}
-            onConfirmPasswordChanged={onConfirmPasswordChanged}
-            onForgotPasswordRedirect={onForgotPasswordRedirect}
-            onTermsOfServiceRedirect={onTermsOfServiceRedirect}
-            onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
-            onMagicLinkRedirect={onMagicLinkRedirect}
-            onSignupRedirect={onSignupRedirect}
-            onSigninRedirect={onSigninRedirect}
-            onAuthenticating={onAuthenticating}
-            onEmailConfirmationSent={onEmailConfirmationSent}
-            onSigninError={onSigninError}
-            onSignupError={onSignupError}
-          />
-        </Container>
-      )
-    case VIEWS.FORGOTTEN_PASSWORD:
-      return (
-        <Container>
-          <ForgottenPassword
-            classNames={classNames?.forgottenPassword}
-            strings={{ ...defaultStrings, ...strings }}
-            defaultIconColor={defaultIconColor}
-            litIconColor={litIconColor}
-            supabaseClient={supabaseClient}
-            redirectTo={redirectTo}
-            emailErrorMessage={emailErrorMessage}
-            onSigninRedirect={onSigninRedirect}
-            onResetPasswordError={onResetPasswordError}
-            onResetPasswordSent={onResetPasswordSent}
-          />
-        </Container>
-      )
-    case VIEWS.MAGIC_LINK:
-      return (
-        <Container>
-          <MagicLink
-            classNames={classNames?.magicLink}
-            strings={{ ...defaultStrings, ...strings }}
-            defaultIconColor={defaultIconColor}
-            litIconColor={litIconColor}
-            supabaseClient={supabaseClient}
-            setAuthView={setAuthView}
-            redirectTo={redirectTo}
-            emailErrorMessage={emailErrorMessage}
-            onMagicLinkError={onMagicLinkError}
-            onMagicLinkSent={onMagicLinkSent}
-          />
-        </Container>
-      )
-    case VIEWS.UPDATE_PASSWORD:
-      return (
-        <Container>
-          <UpdatePassword
-            classNames={classNames?.updatePassword}
-            strings={{ ...defaultStrings, ...strings }}
-            defaultIconColor={defaultIconColor}
-            litIconColor={litIconColor}
-            supabaseClient={supabaseClient}
-            passwordErrorMessage={passwordErrorMessage}
-            onUpdatePasswordError={onUpdatePasswordError}
-            onPasswordUpdated={onPasswordUpdated}
-          />
-        </Container>
-      )
-    case VIEWS.TERMS_OF_SERVICE:
-      return (
-        <Container>
-          <TermsOfService termsOfService={termsOfService} />
-        </Container>
-      )
-    case VIEWS.PRIVACY_POLICY:
-      return (
-        <Container>
-          <PrivacyPolicy privacyPolicy={privacyPolicy} />
-        </Container>
-      )
-    default:
-      return null
-  }
+  return (
+    <div className={containerClasses.join(' ')} style={style}>
+      {providers && providers?.length > 0 && (
+        <SocialAuth
+          classNames={classNames}
+          view={view}
+          strings={{ ...defaultStrings, ...strings }}
+          defaultIconColor={defaultIconColor}
+          litIconColor={litIconColor}
+          supabaseClient={supabaseClient}
+          verticalSocialLayout={verticalSocialLayout}
+          providers={providers}
+          rippleProps={rippleProps}
+          socialLayout={socialLayout}
+          socialButtonSize={socialButtonSize}
+          socialColors={socialColors}
+          redirectTo={redirectTo}
+          onlyThirdPartyProviders={onlyThirdPartyProviders}
+          magicLink={magicLink}
+          onForgotPasswordRedirect={onForgotPasswordRedirect}
+          onTermsOfServiceRedirect={onTermsOfServiceRedirect}
+          onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
+          onMagicLinkRedirect={onMagicLinkRedirect}
+          onSignupRedirect={onSignupRedirect}
+          onSigninRedirect={onSigninRedirect}
+          onAuthenticating={onAuthenticating}
+          onEmailConfirmationSent={onEmailConfirmationSent}
+        />
+      )}
+      {(authView === VIEWS.SIGN_IN || authView === VIEWS.SIGN_UP) && (
+        <EmailAuth
+          classNames={classNames?.emailAuth}
+          id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
+          defaultIconColor={defaultIconColor}
+          emailValue={emailValue}
+          passwordValue={passwordValue}
+          confirmPasswordValue={confirmPasswordValue}
+          litIconColor={litIconColor}
+          strings={{ ...defaultStrings, ...strings }}
+          rippleProps={rippleProps}
+          supabaseClient={supabaseClient}
+          authView={authView}
+          setAuthView={setAuthView}
+          emailErrorMessage={emailErrorMessage}
+          passwordErrorMessage={passwordErrorMessage}
+          confirmPasswordErrorMessage={confirmPasswordErrorMessage}
+          magicLink={magicLink}
+          onEmailChanged={onEmailChanged}
+          onPasswordChanged={onPasswordChanged}
+          onConfirmPasswordChanged={onConfirmPasswordChanged}
+          onForgotPasswordRedirect={onForgotPasswordRedirect}
+          onTermsOfServiceRedirect={onTermsOfServiceRedirect}
+          onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
+          onMagicLinkRedirect={onMagicLinkRedirect}
+          onSignupRedirect={onSignupRedirect}
+          onSigninRedirect={onSigninRedirect}
+          onAuthenticating={onAuthenticating}
+          onEmailConfirmationSent={onEmailConfirmationSent}
+          onSigninError={onSigninError}
+          onSignupError={onSignupError}
+        />
+      )}
+      {authView === VIEWS.FORGOTTEN_PASSWORD && (
+        <ForgottenPassword
+          classNames={classNames?.forgottenPassword}
+          strings={{ ...defaultStrings, ...strings }}
+          defaultIconColor={defaultIconColor}
+          litIconColor={litIconColor}
+          supabaseClient={supabaseClient}
+          redirectTo={redirectTo}
+          emailErrorMessage={emailErrorMessage}
+          onSigninRedirect={onSigninRedirect}
+          onResetPasswordError={onResetPasswordError}
+          onResetPasswordSent={onResetPasswordSent}
+        />
+      )}
+      {authView === VIEWS.MAGIC_LINK && (
+        <MagicLink
+          classNames={classNames?.magicLink}
+          strings={{ ...defaultStrings, ...strings }}
+          defaultIconColor={defaultIconColor}
+          litIconColor={litIconColor}
+          supabaseClient={supabaseClient}
+          setAuthView={setAuthView}
+          redirectTo={redirectTo}
+          emailErrorMessage={emailErrorMessage}
+          onMagicLinkError={onMagicLinkError}
+          onMagicLinkSent={onMagicLinkSent}
+        />
+      )}
+      {authView === VIEWS.UPDATE_PASSWORD && (
+        <UpdatePassword
+          classNames={classNames?.updatePassword}
+          strings={{ ...defaultStrings, ...strings }}
+          defaultIconColor={defaultIconColor}
+          litIconColor={litIconColor}
+          supabaseClient={supabaseClient}
+          passwordErrorMessage={passwordErrorMessage}
+          onUpdatePasswordError={onUpdatePasswordError}
+          onPasswordUpdated={onPasswordUpdated}
+        />
+      )}
+      {authView === VIEWS.TERMS_OF_SERVICE && (
+        <TermsOfService termsOfService={termsOfService} />
+      )}
+      {authView === VIEWS.PRIVACY_POLICY && (
+        <PrivacyPolicy privacyPolicy={privacyPolicy} />
+      )}
+    </div>
+  )
 }
 
 function SocialButton({
@@ -772,30 +749,11 @@ function EmailAuth({
   onSigninError?: (error: AuthError) => void
   onSignupError?: (error: AuthError) => void
 }) {
-  const isMounted = useRef<boolean>(true)
-  const [email, setEmail] = useState<string>(emailValue ?? '')
-  const [password, setPassword] = useState<string>(passwordValue ?? '')
-  const [confirmPassword, setConfirmPassword] = useState<string>(
-    confirmPasswordValue ?? ''
-  )
-  const [defaultEmail, setDefaultEmail] = useState<string>(emailValue ?? '')
-  const [defaultPassword, setDefaultPassword] = useState<string>(
-    passwordValue ?? ''
-  )
-  const [defaultConfirmPassword, setDefaultConfirmPassword] = useState<string>(
-    confirmPasswordValue ?? ''
-  )
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
   const [emailIconLit, setEmailIconLit] = useState(false)
   const [passwordIconLit, setPasswordIconLit] = useState(false)
   const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
-
-  useEffect(() => {
-    return () => {
-      isMounted.current = false
-    }
-  }, [authView])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -804,8 +762,8 @@ function EmailAuth({
       switch (authView) {
         case 'sign_in':
           const authSignin = await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password,
+            email: emailValue ?? '',
+            password: passwordValue ?? '',
           })
           if (authSignin.error) onSigninError?.(authSignin.error)
           else {
@@ -813,7 +771,7 @@ function EmailAuth({
           }
           break
         case 'sign_up':
-          if (password !== confirmPassword) {
+          if (passwordValue !== confirmPasswordValue) {
             onSigninError?.(
               new AuthError('Confirm password does not match', 401)
             )
@@ -821,8 +779,8 @@ function EmailAuth({
           }
 
           const authSignup = await supabaseClient.auth.signUp({
-            email: email,
-            password: password,
+            email: emailValue ?? '',
+            password: passwordValue ?? '',
           })
           if (authSignup.error) onSignupError?.(authSignup.error)
           // Check if session is null -> email confirmation setting is turned on
@@ -841,13 +799,13 @@ function EmailAuth({
       <div>
         <div>
           <Input
+            key={'email'}
             classNames={classNames?.input}
             label={strings.emailAddress}
             error={emailErrorMessage}
             autoComplete="email"
-            value={email}
+            value={emailValue}
             iconColor={defaultIconColor}
-            defaultValue={defaultEmail}
             icon={
               <Email
                 size={24}
@@ -857,7 +815,7 @@ function EmailAuth({
               />
             }
             onChange={(e) => {
-              setEmail(e.target.value)
+              onEmailChanged?.(e)
             }}
             onMouseEnter={() => setEmailIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
@@ -868,18 +826,17 @@ function EmailAuth({
             onFocus={() => setEmailIconLit(true)}
             onBlur={(e) => {
               setEmailIconLit(false)
-              onEmailChanged?.(e)
             }}
           />
           <Input
+            key={'password'}
             classNames={classNames?.input}
             label={strings.password}
             error={passwordErrorMessage}
             reveal={true}
             password={true}
             iconColor={defaultIconColor}
-            value={password}
-            defaultValue={defaultPassword}
+            value={passwordValue}
             autoComplete="current-password"
             icon={
               <Key
@@ -890,7 +847,7 @@ function EmailAuth({
               />
             }
             onChange={(e) => {
-              setPassword(e.target.value)
+              onPasswordChanged?.(e)
             }}
             onMouseEnter={() => setPasswordIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
@@ -901,19 +858,18 @@ function EmailAuth({
             onFocus={() => setPasswordIconLit(true)}
             onBlur={(e) => {
               setPasswordIconLit(false)
-              onPasswordChanged?.(e)
             }}
           />
           {authView === VIEWS.SIGN_UP && (
             <Input
+              key={'confirm-password'}
               classNames={classNames?.input}
               label={strings.confirmPassword}
               error={confirmPasswordErrorMessage}
               iconColor={defaultIconColor}
               reveal={true}
               password={true}
-              value={confirmPassword}
-              defaultValue={defaultConfirmPassword}
+              value={confirmPasswordValue}
               autoComplete="current-password"
               icon={
                 <Key
@@ -928,7 +884,7 @@ function EmailAuth({
                 />
               }
               onChange={(e) => {
-                setConfirmPassword(e.target.value)
+                onConfirmPasswordChanged?.(e)
               }}
               onMouseEnter={() => setConfirmPasswordIconLit(true)}
               onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
@@ -939,7 +895,6 @@ function EmailAuth({
               onFocus={() => setConfirmPasswordIconLit(true)}
               onBlur={(e) => {
                 setConfirmPasswordIconLit(false)
-                onConfirmPasswordChanged?.(e)
               }}
             />
           )}
