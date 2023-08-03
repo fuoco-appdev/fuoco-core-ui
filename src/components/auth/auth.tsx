@@ -833,7 +833,7 @@ function EmailAuth({
             label={strings.emailAddress}
             error={emailErrorMessage}
             autoComplete="email"
-            defaultValue={emailValue}
+            value={emailValue}
             iconColor={defaultIconColor}
             icon={
               <Email
@@ -860,7 +860,7 @@ function EmailAuth({
             reveal={true}
             password={true}
             iconColor={defaultIconColor}
-            defaultValue={passwordValue}
+            value={passwordValue}
             autoComplete="current-password"
             icon={
               <Key
@@ -888,7 +888,7 @@ function EmailAuth({
               iconColor={defaultIconColor}
               reveal={true}
               password={true}
-              defaultValue={confirmPasswordValue}
+              value={confirmPasswordValue}
               autoComplete="current-password"
               icon={
                 <Key
