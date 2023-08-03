@@ -38,7 +38,7 @@ export interface InputProps
   disabled?: boolean
   error?: string
   icon?: any
-  inputRef?: string
+  inputRef?: React.RefObject<HTMLInputElement>
   label?: string
   afterLabel?: string
   beforeLabel?: string

@@ -773,6 +773,18 @@ function EmailAuth({
   onSignupError?: (error: AuthError) => void
 }) {
   const isMounted = useRef<boolean>(true)
+  const [email, setEmail] = useState<string>(emailValue ?? '')
+  const [password, setPassword] = useState<string>(passwordValue ?? '')
+  const [confirmPassword, setConfirmPassword] = useState<string>(
+    confirmPasswordValue ?? ''
+  )
+  const [defaultEmail, setDefaultEmail] = useState<string>(emailValue ?? '')
+  const [defaultPassword, setDefaultPassword] = useState<string>(
+    passwordValue ?? ''
+  )
+  const [defaultConfirmPassword, setDefaultConfirmPassword] = useState<string>(
+    confirmPasswordValue ?? ''
+  )
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
   const [emailIconLit, setEmailIconLit] = useState(false)
@@ -792,8 +804,8 @@ function EmailAuth({
       switch (authView) {
         case 'sign_in':
           const authSignin = await supabaseClient.auth.signInWithPassword({
-            email: emailValue ?? '',
-            password: passwordValue ?? '',
+            email: email,
+            password: password,
           })
           if (authSignin.error) onSigninError?.(authSignin.error)
           else {
@@ -801,7 +813,7 @@ function EmailAuth({
           }
           break
         case 'sign_up':
-          if (passwordValue !== confirmPasswordValue) {
+          if (password !== confirmPassword) {
             onSigninError?.(
               new AuthError('Confirm password does not match', 401)
             )
@@ -809,8 +821,8 @@ function EmailAuth({
           }
 
           const authSignup = await supabaseClient.auth.signUp({
-            email: emailValue ?? '',
-            password: passwordValue ?? '',
+            email: email,
+            password: password,
           })
           if (authSignup.error) onSignupError?.(authSignup.error)
           // Check if session is null -> email confirmation setting is turned on
@@ -833,8 +845,9 @@ function EmailAuth({
             label={strings.emailAddress}
             error={emailErrorMessage}
             autoComplete="email"
-            value={emailValue}
+            value={email}
             iconColor={defaultIconColor}
+            defaultValue={defaultEmail}
             icon={
               <Email
                 size={24}
@@ -843,7 +856,9 @@ function EmailAuth({
                 color={emailIconLit ? litIconColor : defaultIconColor}
               />
             }
-            onChange={onEmailChanged}
+            onChange={(e) => {
+              setEmail(e.target.value)
+            }}
             onMouseEnter={() => setEmailIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
               if (document.activeElement !== e.currentTarget) {
@@ -851,7 +866,10 @@ function EmailAuth({
               }
             }}
             onFocus={() => setEmailIconLit(true)}
-            onBlur={() => setEmailIconLit(false)}
+            onBlur={(e) => {
+              setEmailIconLit(false)
+              onEmailChanged?.(e)
+            }}
           />
           <Input
             classNames={classNames?.input}
@@ -860,7 +878,8 @@ function EmailAuth({
             reveal={true}
             password={true}
             iconColor={defaultIconColor}
-            value={passwordValue}
+            value={password}
+            defaultValue={defaultPassword}
             autoComplete="current-password"
             icon={
               <Key
@@ -870,7 +889,9 @@ function EmailAuth({
                 color={passwordIconLit ? litIconColor : defaultIconColor}
               />
             }
-            onChange={onPasswordChanged}
+            onChange={(e) => {
+              setPassword(e.target.value)
+            }}
             onMouseEnter={() => setPasswordIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
               if (document.activeElement !== e.currentTarget) {
@@ -878,7 +899,10 @@ function EmailAuth({
               }
             }}
             onFocus={() => setPasswordIconLit(true)}
-            onBlur={() => setPasswordIconLit(false)}
+            onBlur={(e) => {
+              setPasswordIconLit(false)
+              onPasswordChanged?.(e)
+            }}
           />
           {authView === VIEWS.SIGN_UP && (
             <Input
@@ -888,7 +912,8 @@ function EmailAuth({
               iconColor={defaultIconColor}
               reveal={true}
               password={true}
-              value={confirmPasswordValue}
+              value={confirmPassword}
+              defaultValue={defaultConfirmPassword}
               autoComplete="current-password"
               icon={
                 <Key
@@ -902,7 +927,9 @@ function EmailAuth({
                   }
                 />
               }
-              onChange={onConfirmPasswordChanged}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+              }}
               onMouseEnter={() => setConfirmPasswordIconLit(true)}
               onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
                 if (document.activeElement !== e.currentTarget) {
@@ -910,7 +937,10 @@ function EmailAuth({
                 }
               }}
               onFocus={() => setConfirmPasswordIconLit(true)}
-              onBlur={() => setConfirmPasswordIconLit(false)}
+              onBlur={(e) => {
+                setConfirmPasswordIconLit(false)
+                onConfirmPasswordChanged?.(e)
+              }}
             />
           )}
         </div>
