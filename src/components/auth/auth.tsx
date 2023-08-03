@@ -152,6 +152,9 @@ export interface RippleProps {
 export interface AuthProps {
   supabaseClient: SupabaseClient
   classNames?: AuthClassNames
+  emailValue?: string
+  passwordValue?: string
+  confirmPasswordValue?: string
   defaultIconColor?: string
   litIconColor?: string
   children?: React.ReactNode
@@ -172,6 +175,9 @@ export interface AuthProps {
   emailErrorMessage?: string
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
+  onEmailChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onPasswordChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onConfirmPasswordChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onForgotPasswordRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onTermsOfServiceRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onPrivacyPolicyRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
@@ -222,6 +228,9 @@ const defaultStrings: AuthStrings = {
 function Auth({
   supabaseClient,
   classNames,
+  emailValue,
+  passwordValue,
+  confirmPasswordValue,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   style,
@@ -249,6 +258,9 @@ function Auth({
   magicLink = false,
   termsOfService,
   privacyPolicy,
+  onEmailChanged,
+  onPasswordChanged,
+  onConfirmPasswordChanged,
   onForgotPasswordRedirect,
   onTermsOfServiceRedirect,
   onPrivacyPolicyRedirect,
@@ -267,9 +279,6 @@ function Auth({
   onMagicLinkError,
 }: AuthProps): JSX.Element | null {
   const [authView, setAuthView] = useState(view)
-  const [defaultEmail, setDefaultEmail] = useState('')
-  const [defaultPassword, setDefaultPassword] = useState('')
-
   const verticalSocialLayout = socialLayout === 'vertical' ? true : false
 
   let containerClasses = [AuthStyles['sbui-auth'], classNames?.container]
@@ -318,21 +327,22 @@ function Auth({
             classNames={classNames?.emailAuth}
             id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
             defaultIconColor={defaultIconColor}
+            emailValue={emailValue}
+            passwordValue={passwordValue}
+            confirmPasswordValue={confirmPasswordValue}
             litIconColor={litIconColor}
             strings={{ ...defaultStrings, ...strings }}
             rippleProps={rippleProps}
             supabaseClient={supabaseClient}
             authView={authView}
             setAuthView={setAuthView}
-            defaultEmail={defaultEmail}
-            defaultPassword={defaultPassword}
-            setDefaultEmail={setDefaultEmail}
-            setDefaultPassword={setDefaultPassword}
             emailErrorMessage={emailErrorMessage}
             passwordErrorMessage={passwordErrorMessage}
             confirmPasswordErrorMessage={confirmPasswordErrorMessage}
-            redirectTo={redirectTo}
             magicLink={magicLink}
+            onEmailChanged={onEmailChanged}
+            onPasswordChanged={onPasswordChanged}
+            onConfirmPasswordChanged={onConfirmPasswordChanged}
             onForgotPasswordRedirect={onForgotPasswordRedirect}
             onTermsOfServiceRedirect={onTermsOfServiceRedirect}
             onPrivacyPolicyRedirect={onPrivacyPolicyRedirect}
@@ -695,6 +705,9 @@ function SocialAuth({
 
 function EmailAuth({
   classNames,
+  emailValue,
+  passwordValue,
+  confirmPasswordValue,
   authView,
   strings,
   rippleProps = {
@@ -709,15 +722,15 @@ function EmailAuth({
   },
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
-  defaultEmail,
-  defaultPassword,
   id,
   supabaseClient,
-  redirectTo,
   magicLink,
   emailErrorMessage,
   passwordErrorMessage,
   confirmPasswordErrorMessage,
+  onEmailChanged,
+  onPasswordChanged,
+  onConfirmPasswordChanged,
   onForgotPasswordRedirect,
   onTermsOfServiceRedirect,
   onPrivacyPolicyRedirect,
@@ -731,22 +744,23 @@ function EmailAuth({
 }: {
   classNames?: EmailAuthClasses
   defaultIconColor?: string
+  emailValue?: string
+  passwordValue?: string
+  confirmPasswordValue?: string
   litIconColor?: string
   authView: ViewType
   strings: AuthStrings
   rippleProps: RippleProps
-  defaultEmail: string
-  defaultPassword: string
   id: 'auth-sign-up' | 'auth-sign-in'
   setAuthView: any
-  setDefaultEmail: (email: string) => void
-  setDefaultPassword: (password: string) => void
   supabaseClient: SupabaseClient
-  redirectTo?: RedirectTo
   magicLink?: boolean
   emailErrorMessage?: string
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
+  onEmailChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onPasswordChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onConfirmPasswordChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onForgotPasswordRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onTermsOfServiceRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
   onPrivacyPolicyRedirect?: (e: React.MouseEvent<HTMLAnchorElement>) => void
@@ -759,9 +773,6 @@ function EmailAuth({
   onSignupError?: (error: AuthError) => void
 }) {
   const isMounted = useRef<boolean>(true)
-  const [email, setEmail] = useState(defaultEmail)
-  const [password, setPassword] = useState(defaultPassword)
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
   const [emailIconLit, setEmailIconLit] = useState(false)
@@ -769,9 +780,6 @@ function EmailAuth({
   const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   useEffect(() => {
-    setEmail(defaultEmail)
-    setPassword(defaultPassword)
-
     return () => {
       isMounted.current = false
     }
@@ -784,8 +792,8 @@ function EmailAuth({
       switch (authView) {
         case 'sign_in':
           const authSignin = await supabaseClient.auth.signInWithPassword({
-            email,
-            password,
+            email: emailValue ?? '',
+            password: passwordValue ?? '',
           })
           if (authSignin.error) onSigninError?.(authSignin.error)
           else {
@@ -793,7 +801,7 @@ function EmailAuth({
           }
           break
         case 'sign_up':
-          if (password !== confirmPassword) {
+          if (passwordValue !== confirmPasswordValue) {
             onSigninError?.(
               new AuthError('Confirm password does not match', 401)
             )
@@ -801,8 +809,8 @@ function EmailAuth({
           }
 
           const authSignup = await supabaseClient.auth.signUp({
-            email,
-            password,
+            email: emailValue ?? '',
+            password: passwordValue ?? '',
           })
           if (authSignup.error) onSignupError?.(authSignup.error)
           // Check if session is null -> email confirmation setting is turned on
@@ -825,7 +833,7 @@ function EmailAuth({
             label={strings.emailAddress}
             error={emailErrorMessage}
             autoComplete="email"
-            defaultValue={email}
+            defaultValue={emailValue}
             iconColor={defaultIconColor}
             icon={
               <Email
@@ -835,9 +843,7 @@ function EmailAuth({
                 color={emailIconLit ? litIconColor : defaultIconColor}
               />
             }
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
+            onChange={onEmailChanged}
             onMouseEnter={() => setEmailIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
               if (document.activeElement !== e.currentTarget) {
@@ -854,7 +860,7 @@ function EmailAuth({
             reveal={true}
             password={true}
             iconColor={defaultIconColor}
-            defaultValue={password}
+            defaultValue={passwordValue}
             autoComplete="current-password"
             icon={
               <Key
@@ -864,9 +870,7 @@ function EmailAuth({
                 color={passwordIconLit ? litIconColor : defaultIconColor}
               />
             }
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
+            onChange={onPasswordChanged}
             onMouseEnter={() => setPasswordIconLit(true)}
             onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
               if (document.activeElement !== e.currentTarget) {
@@ -884,7 +888,7 @@ function EmailAuth({
               iconColor={defaultIconColor}
               reveal={true}
               password={true}
-              defaultValue={confirmPassword}
+              defaultValue={confirmPasswordValue}
               autoComplete="current-password"
               icon={
                 <Key
@@ -898,9 +902,7 @@ function EmailAuth({
                   }
                 />
               }
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setConfirmPassword(e.target.value)
-              }
+              onChange={onConfirmPasswordChanged}
               onMouseEnter={() => setConfirmPasswordIconLit(true)}
               onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
                 if (document.activeElement !== e.currentTarget) {
