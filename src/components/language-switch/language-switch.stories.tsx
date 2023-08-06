@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { LanguageSwitch } from '.'
 import { DropdownAlignment } from '../dropdown'
-import { LanguageCode } from './language-switch'
+import { LanguageCode } from 'iso-639-1'
 
 export default {
   title: 'General/LanguageSwitch',
@@ -9,7 +9,7 @@ export default {
 }
 
 export const Default = (args: any) => {
-  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [language, setLanguage] = useState<LanguageCode>('en')
   const [open, setOpen] = useState<boolean>(false)
   return (
     <div
@@ -25,14 +25,14 @@ export const Default = (args: any) => {
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Left }}
-        onChange={(value) => setLanguage(value)}
+        onChange={(code, info) => setLanguage(code)}
       />
     </div>
   )
 }
 
 export const AlignedRight = (args: any) => {
-  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [language, setLanguage] = useState<LanguageCode>('en')
   const [open, setOpen] = useState<boolean>(false)
   return (
     <div
@@ -49,7 +49,7 @@ export const AlignedRight = (args: any) => {
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Right }}
-        onChange={(value) => setLanguage(value)}
+        onChange={(code) => setLanguage(code)}
       />
     </div>
   )
@@ -57,7 +57,7 @@ export const AlignedRight = (args: any) => {
 
 export const Listbox = (args: any) => {
   const [open, setOpen] = useState<boolean>(false)
-  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [language, setLanguage] = useState<LanguageCode>('en')
   return (
     <div
       style={{
@@ -73,14 +73,14 @@ export const Listbox = (args: any) => {
         onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Left }}
         type={'listbox'}
-        onChange={(value) => setLanguage(value)}
+        onChange={(code) => setLanguage(code)}
       />
     </div>
   )
 }
 
 export const None = (args: any) => {
-  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [language, setLanguage] = useState<LanguageCode>('en')
   return (
     <div
       style={{
@@ -95,7 +95,7 @@ export const None = (args: any) => {
         open={true}
         dropdownProps={{ align: DropdownAlignment.Left }}
         type={'none'}
-        onChange={(value) => setLanguage(value)}
+        onChange={(code) => setLanguage(code)}
       />
     </div>
   )
@@ -103,7 +103,7 @@ export const None = (args: any) => {
 
 export const TouchScreen = (args: any) => {
   const [open, setOpen] = useState<boolean>(false)
-  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [language, setLanguage] = useState<LanguageCode>('en')
   return (
     <div
       style={{
@@ -118,7 +118,7 @@ export const TouchScreen = (args: any) => {
         language={language}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
-        onChange={(value) => setLanguage(value)}
+        onChange={(code) => setLanguage(code)}
       />
     </div>
   )

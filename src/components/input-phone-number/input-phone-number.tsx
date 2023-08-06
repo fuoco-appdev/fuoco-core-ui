@@ -67,7 +67,6 @@ export interface InputPhoneNumberProps {
   enableAreaCodeStretch?: boolean
   autoFormat?: boolean
   disabled?: boolean
-  disableDropdown?: boolean
   jumpCursorToEnd?: boolean
   defaultPlaceholder?: string
   searchNotFound?: string
@@ -93,29 +92,6 @@ export interface InputPhoneNumberProps {
   onFocus?: (
     event: React.FocusEvent<HTMLInputElement>,
     data: CountryDataProps | {}
-  ) => void
-  onBlur?: (
-    event: React.FocusEvent<HTMLInputElement>,
-    data: CountryDataProps | {}
-  ) => void
-  onClick?: (
-    event: React.MouseEvent<HTMLInputElement>,
-    data: CountryDataProps | {}
-  ) => void
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-  onEnterKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-  isValid?:
-    | ((
-        value: string,
-        country: object,
-        countries: object[],
-        hiddenAreaCodes: object[]
-      ) => boolean | string)
-    | boolean
-  onMount?: (
-    value: string,
-    data: CountryDataProps | {},
-    formattedValue: string
   ) => void
 }
 
@@ -155,7 +131,6 @@ function InputPhoneNumber({
   enableAreaCodeStretch = false,
   autoFormat = true,
   disabled = false,
-  disableDropdown = false,
   jumpCursorToEnd = true,
   defaultPlaceholder = '1 (702) 123-4567',
   searchNotFound = 'No entries to show',
@@ -169,12 +144,6 @@ function InputPhoneNumber({
   shakeDistance = 6,
   onChange,
   onFocus,
-  onBlur,
-  onClick,
-  onKeyDown,
-  onEnterKeyPress,
-  isValid,
-  onMount,
 }: InputPhoneNumberProps) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const numberInputRef = useRef<HTMLInputElement | null>(null)
