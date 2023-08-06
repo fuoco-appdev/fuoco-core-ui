@@ -896,11 +896,11 @@ const isoLanguages: Record<string, { name: string; nativeName: string }> = {
 }
 
 export interface LanguageSwitchProps {
-  type?: 'button' | 'listbox'
+  type?: 'button' | 'listbox' | 'none'
   language?: LanguageCode
+  open?: boolean
   supportedLanguages?: LanguageCode[]
   touchScreen?: boolean
-  parentRef?: React.RefObject<HTMLElement>
   dropdownProps?: DropDownProps
   hideText?: boolean
   classNames?: {
@@ -916,11 +916,12 @@ export interface LanguageSwitchProps {
   id?: string
   label?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   descriptionText?: string
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
   style?: React.CSSProperties
+  onOpen?: () => void
+  onClose?: () => void
   onChange?: (
     language: LanguageCode,
     e: React.MouseEvent<HTMLButtonElement>
@@ -930,6 +931,7 @@ export interface LanguageSwitchProps {
 function LanguageSwitch({
   type = 'button',
   language = LanguageCode.EN,
+  open = false,
   supportedLanguages = [
     LanguageCode.AA,
     LanguageCode.AB,
@@ -1092,80 +1094,37 @@ function LanguageSwitch({
   id,
   label,
   labelOptional,
-  layout,
   descriptionText,
   onMouseEnter,
   onMouseLeave,
   style,
-  parentRef,
   dropdownProps,
+  onOpen,
+  onClose,
   onChange,
 }: LanguageSwitchProps) {
   const dropdownRefs: Record<string, HTMLLIElement> = {}
   const anchorRef = useRef<HTMLDivElement | null>(null)
-  const [showDropdown, setShowDropdown] = useState<boolean>(false)
-  const dropdown = (
-    <Dropdown
-      {...dropdownProps}
-      style={{
-        ...(type === 'listbox' && {
-          width: anchorRef?.current?.getBoundingClientRect().width,
-        }),
-      }}
-      touchScreen={touchScreen}
-      parentRef={parentRef}
-      anchorRef={anchorRef}
-      open={showDropdown}
-      onClose={() => {
-        setShowDropdown(false)
-      }}
-    >
-      {supportedLanguages.map((language, index) => {
-        const inputFlagClasses = [styles['flag'], styles[language]].join(' ')
-        return (
-          <Dropdown.Item
-            onClick={(e) => {
-              onChange?.(language, e)
-              setShowDropdown(false)
-            }}
-            ref={(el: HTMLLIElement) => (dropdownRefs[`flag_no_${index}`] = el)}
-            key={`flag_no_${index}`}
-          >
-            <Dropdown.Icon>
-              <div className={inputFlagClasses} />
-            </Dropdown.Icon>
-            <span className={styles['language-name']}>
-              {isoLanguages[language]?.nativeName}
-            </span>
-          </Dropdown.Item>
-        )
-      })}
-    </Dropdown>
-  )
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       {type === 'button' && (
-        <div>
-          <Button
-            ref={anchorRef}
-            type={'text'}
-            icon={
-              <div className={[styles['flag'], styles[language]].join(' ')} />
-            }
-            onClick={() => setShowDropdown(true)}
-            touchScreen={touchScreen}
-          >
-            {!hideText && isoLanguages[language]?.nativeName}
-          </Button>
-          {dropdown}
-        </div>
+        <Button
+          ref={anchorRef}
+          type={'text'}
+          icon={
+            <div className={[styles['flag'], styles[language]].join(' ')} />
+          }
+          onClick={onOpen}
+          touchScreen={touchScreen}
+        >
+          {!hideText && isoLanguages[language]?.nativeName}
+        </Button>
       )}
       {type === 'listbox' && (
         <FormLayout
           label={label}
           labelOptional={labelOptional}
-          layout={layout}
           id={id}
           descriptionText={descriptionText}
           classNames={classNames?.formLayout}
@@ -1185,7 +1144,7 @@ function LanguageSwitch({
               className={[styles['listbox-ripple'], classNames?.ripple].join(
                 ' '
               )}
-              onClick={() => setShowDropdown(true)}
+              onClick={onOpen}
             >
               <div
                 className={[styles['listbox'], classNames?.listbox].join(' ')}
@@ -1233,10 +1192,44 @@ function LanguageSwitch({
               </div>
             </Ripples>
           </div>
-          {dropdown}
         </FormLayout>
       )}
-    </>
+      <Dropdown
+        {...dropdownProps}
+        style={{
+          ...(type === 'listbox' && {
+            width: anchorRef?.current?.getBoundingClientRect().width,
+          }),
+        }}
+        touchScreen={touchScreen}
+        anchorRef={anchorRef}
+        open={open}
+        onClose={onClose}
+      >
+        {supportedLanguages.map((language, index) => {
+          const inputFlagClasses = [styles['flag'], styles[language]].join(' ')
+          return (
+            <Dropdown.Item
+              onClick={(e) => {
+                onChange?.(language, e)
+                onClose?.()
+              }}
+              ref={(el: HTMLLIElement) =>
+                (dropdownRefs[`flag_no_${index}`] = el)
+              }
+              key={`flag_no_${index}`}
+            >
+              <Dropdown.Icon>
+                <div className={inputFlagClasses} />
+              </Dropdown.Icon>
+              <span className={styles['language-name']}>
+                {isoLanguages[language]?.nativeName}
+              </span>
+            </Dropdown.Item>
+          )
+        })}
+      </Dropdown>
+    </div>
   )
 }
 

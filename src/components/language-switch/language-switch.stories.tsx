@@ -9,11 +9,10 @@ export default {
 }
 
 export const Default = (args: any) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [open, setOpen] = useState<boolean>(false)
   return (
     <div
-      ref={containerRef}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -22,7 +21,9 @@ export const Default = (args: any) => {
     >
       <LanguageSwitch
         language={language}
-        parentRef={containerRef}
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Left }}
         onChange={(value) => setLanguage(value)}
       />
@@ -31,11 +32,10 @@ export const Default = (args: any) => {
 }
 
 export const AlignedRight = (args: any) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  const [open, setOpen] = useState<boolean>(false)
   return (
     <div
-      ref={containerRef}
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -45,7 +45,9 @@ export const AlignedRight = (args: any) => {
     >
       <LanguageSwitch
         language={language}
-        parentRef={containerRef}
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Right }}
         onChange={(value) => setLanguage(value)}
       />
@@ -54,11 +56,10 @@ export const AlignedRight = (args: any) => {
 }
 
 export const Listbox = (args: any) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [open, setOpen] = useState<boolean>(false)
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
   return (
     <div
-      ref={containerRef}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -67,7 +68,9 @@ export const Listbox = (args: any) => {
     >
       <LanguageSwitch
         language={language}
-        parentRef={containerRef}
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Left }}
         type={'listbox'}
         onChange={(value) => setLanguage(value)}
@@ -76,12 +79,10 @@ export const Listbox = (args: any) => {
   )
 }
 
-export const TouchScreen = (args: any) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
+export const None = (args: any) => {
   const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
   return (
     <div
-      ref={containerRef}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -89,9 +90,34 @@ export const TouchScreen = (args: any) => {
       }}
     >
       <LanguageSwitch
+        language={language}
+        touchScreen={true}
+        open={true}
+        dropdownProps={{ align: DropdownAlignment.Left }}
+        type={'none'}
+        onChange={(value) => setLanguage(value)}
+      />
+    </div>
+  )
+}
+
+export const TouchScreen = (args: any) => {
+  const [open, setOpen] = useState<boolean>(false)
+  const [language, setLanguage] = useState<LanguageCode>(LanguageCode.EN)
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '80vh',
+      }}
+    >
+      <LanguageSwitch
+        open={open}
         touchScreen={true}
         language={language}
-        parentRef={containerRef}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
         onChange={(value) => setLanguage(value)}
       />
     </div>
