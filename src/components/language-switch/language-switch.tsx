@@ -73,7 +73,8 @@ export interface LanguageSwitchProps {
   ) => void
 }
 
-const countriesInfo = getCountriesInfo()
+export const countriesInfo = getCountriesInfo()
+
 const defaultSupportedLanguages = Object.keys(countriesInfo).map((value) => ({
   isoCode: value as LanguageCode,
 }))
