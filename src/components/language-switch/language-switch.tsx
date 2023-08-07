@@ -125,7 +125,7 @@ function LanguageSwitch({
     if (languagesInfo[language]) {
       onChange?.(language, languagesInfo[language])
     }
-  }, [language])
+  }, [language, languagesInfo])
 
   return (
     <div style={{ position: 'relative' }}>
