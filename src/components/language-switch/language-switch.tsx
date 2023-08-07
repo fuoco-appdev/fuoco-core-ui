@@ -125,7 +125,7 @@ function LanguageSwitch({
     if (languagesInfo[language]) {
       onChange?.(language, languagesInfo[language])
     }
-  }, [languagesInfo])
+  }, [language])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -184,7 +184,7 @@ function LanguageSwitch({
                 >
                   <ReactCountryFlag
                     countryCode={languagesInfo[language]?.countryCode ?? ''}
-                    style={{ width: 18, height: 18 }}
+                    style={{ width: 24 }}
                     svg
                   />
                 </div>
@@ -253,7 +253,7 @@ function LanguageSwitch({
                     countryCode={
                       languagesInfo[language.isoCode]?.countryCode ?? ''
                     }
-                    style={{ width: 18, height: 18 }}
+                    style={{ width: 24 }}
                     svg
                   />
                 </div>
