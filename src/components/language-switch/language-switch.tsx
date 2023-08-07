@@ -66,11 +66,7 @@ export interface LanguageSwitchProps {
   style?: React.CSSProperties
   onOpen?: () => void
   onClose?: () => void
-  onChange?: (
-    code: LanguageCode,
-    info: LanguageInfo,
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => void
+  onChange?: (code: LanguageCode, info: LanguageInfo) => void
 }
 
 export const countriesInfo = getCountriesInfo()
@@ -124,6 +120,12 @@ function LanguageSwitch({
 
     setLanguagesInfo(info)
   }, [supportedLanguages])
+
+  useEffect(() => {
+    if (languagesInfo[language]) {
+      onChange?.(language, languagesInfo[language])
+    }
+  }, [languagesInfo])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -236,8 +238,8 @@ function LanguageSwitch({
         {supportedLanguages.map((language, index) => {
           return (
             <Dropdown.Item
-              onClick={(e) => {
-                onChange?.(language.isoCode, languagesInfo[language.isoCode], e)
+              onClick={() => {
+                onChange?.(language.isoCode, languagesInfo[language.isoCode])
                 onClose?.()
               }}
               ref={(el: HTMLLIElement) =>

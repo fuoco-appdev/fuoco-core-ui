@@ -25,7 +25,11 @@ export const Default = (args: any) => {
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
         dropdownProps={{ align: DropdownAlignment.Left }}
-        onChange={(code, info) => setLanguage(code)}
+        onChange={(code, info) => {
+          console.log(code)
+          console.log(info)
+          setLanguage(code)
+        }}
       />
     </div>
   )
