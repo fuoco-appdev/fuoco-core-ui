@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../button'
 import { Dropdown, DropDownProps } from '../dropdown'
-import Ripples from 'react-ripples'
+import Ripples, { RipplesProps } from 'react-ripples'
 import ReactCountryFlag from 'react-country-flag'
 import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
@@ -43,6 +43,7 @@ export interface LanguageSwitchProps {
   type?: 'button' | 'listbox' | 'none'
   language?: LanguageCode
   open?: boolean
+  rippleProps?: RipplesProps
   supportedLanguages?: SupportedLanguage[]
   touchScreen?: boolean
   dropdownProps?: DropDownProps
@@ -79,6 +80,7 @@ function LanguageSwitch({
   type = 'button',
   language = 'en',
   open = false,
+  rippleProps,
   supportedLanguages = defaultSupportedLanguages,
   touchScreen = false,
   hideText = false,
@@ -133,6 +135,8 @@ function LanguageSwitch({
         <Button
           ref={anchorRef}
           type={'text'}
+          rounded={true}
+          rippleProps={rippleProps}
           icon={
             <div className={styles['flag']}>
               <ReactCountryFlag

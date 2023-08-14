@@ -256,7 +256,22 @@ export const withCustomTag = (args: any) => (
 )
 
 export const rounded = (args: any) => (
-  <Button {...args} rounded={true} icon={<ShoppingBag size={24} />} />
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      height: '80vh',
+      width: '100vw',
+    }}
+  >
+    <Button
+      {...args}
+      rounded={true}
+      touchScreen={false}
+      floatingLabel={'Shopping cart'}
+      icon={<ShoppingBag size={24} />}
+    />
+  </div>
 )
 
 const icon = <ChevronRight />

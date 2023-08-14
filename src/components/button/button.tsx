@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 // @ts-ignore
 import ButtonStyles from './button.module.scss'
 import { IconContext } from '../icon/icon-context'
 import Ripples, { RipplesProps } from 'react-ripples'
+import { CSSTransition } from 'react-transition-group'
 
 export interface ButtonClasses {
   container?: string
@@ -21,6 +22,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   icon?: React.ReactNode
   iconRight?: React.ReactNode
+  floatingLabel?: string
   loading?: boolean
   shadow?: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'full'
@@ -59,6 +61,7 @@ function Button(
     danger,
     disabled = false,
     touchScreen = false,
+    floatingLabel,
     onClick,
     icon,
     iconRight,
@@ -80,6 +83,29 @@ function Button(
   }: ButtonProps,
   ref: React.ForwardedRef<any>
 ) {
+  const rootRef = useRef<HTMLDivElement | null>(null)
+  const floatingLabelRef = useRef<HTMLDivElement | null>(null)
+  const [isFloatingLabelVisible, setIsFloatingLabelVisible] =
+    useState<boolean>(false)
+
+  useLayoutEffect(() => {
+    if (!rootRef.current || !floatingLabelRef.current) {
+      return
+    }
+
+    const rootRect = rootRef.current.getBoundingClientRect()
+    const floatingLabelRect = floatingLabelRef.current.getBoundingClientRect()
+    const x = rootRect.width / 2 - floatingLabelRect.width / 2
+    const y = 8
+    floatingLabelRef.current.style.transform = `translate(${x}px, ${y}px)`
+
+    if (rootRect.x <= floatingLabelRect.width) {
+      floatingLabelRef.current.style.transform = `translate(0px, ${y}px)`
+    } else if (rootRect.x + rootRect.width >= window.innerWidth) {
+      floatingLabelRef.current.style.transform = `translate(calc(-100% + ${rootRect.width}px), ${y}px)`
+    }
+  }, [rootRef.current, floatingLabelRef.current, isFloatingLabelVisible])
+
   // styles
   const showIcon = loading || icon
 
@@ -123,8 +149,6 @@ function Button(
     classes.push(ButtonStyles[`button-${size}`])
   }
 
-  const iconLoaderClasses = [ButtonStyles['button-anim-spin']]
-
   if (loading) {
     classes.push(ButtonStyles[`button-text-fade-out`])
   }
@@ -148,41 +172,73 @@ function Button(
   }
 
   return (
-    <Ripples {...rippleProps} className={containerClasses.join(' ')}>
-      <button
-        {...props}
-        ref={ref}
-        id={props.id}
-        className={classes.join(' ')}
-        disabled={loading || (disabled && true)}
-        style={style}
-        onClick={(e) => setTimeout(() => onClick?.(e), rippleProps?.during)}
-        type={htmlType}
-        tabIndex={tabIndex}
-        role={role}
-      >
-        {showIcon &&
-          (loading ? (
-            <div />
-          ) : icon ? (
+    <div ref={rootRef} className={ButtonStyles['root']}>
+      <Ripples {...rippleProps} className={containerClasses.join(' ')}>
+        <button
+          {...props}
+          ref={ref}
+          id={props.id}
+          className={classes.join(' ')}
+          disabled={loading || (disabled && true)}
+          style={style}
+          onClick={(e) => setTimeout(() => onClick?.(e), rippleProps?.during)}
+          type={htmlType}
+          tabIndex={tabIndex}
+          role={role}
+          onMouseEnter={() => setIsFloatingLabelVisible(true)}
+          onMouseLeave={() => setIsFloatingLabelVisible(false)}
+        >
+          {showIcon &&
+            (loading ? (
+              <div />
+            ) : icon ? (
+              <IconContext.Provider value={{ contextSize: size }}>
+                <div className={leftIconClasses.join(' ')}>{icon}</div>
+              </IconContext.Provider>
+            ) : null)}
+          {children && (
+            <span
+              className={
+                (ButtonStyles['button-children'], classNames?.children)
+              }
+            >
+              {children}
+            </span>
+          )}
+          {iconRight && !loading && (
             <IconContext.Provider value={{ contextSize: size }}>
-              <div className={leftIconClasses.join(' ')}>{icon}</div>
+              <div className={rightIconClasses.join(' ')}>{iconRight}</div>
             </IconContext.Provider>
-          ) : null)}
-        {children && (
-          <span
-            className={(ButtonStyles['button-children'], classNames?.children)}
+          )}
+        </button>
+      </Ripples>
+      {rounded && !touchScreen && floatingLabel && (
+        <CSSTransition
+          nodeRef={floatingLabelRef}
+          in={isFloatingLabelVisible}
+          unmountOnExit={!rootRef.current}
+          timeout={150}
+          classNames={{
+            appear: ButtonStyles['label-appear'],
+            appearActive: ButtonStyles['label-appear-active'],
+            appearDone: ButtonStyles['label-appear-done'],
+            enter: ButtonStyles['label-enter'],
+            enterActive: ButtonStyles['label-enter-active'],
+            enterDone: ButtonStyles['label-enter-done'],
+            exit: ButtonStyles['label-exit'],
+            exitActive: ButtonStyles['label-exit-active'],
+            exitDone: ButtonStyles['label-exit-done'],
+          }}
+        >
+          <div
+            ref={floatingLabelRef}
+            className={ButtonStyles['floating-label-container']}
           >
-            {children}
-          </span>
-        )}
-        {iconRight && !loading && (
-          <IconContext.Provider value={{ contextSize: size }}>
-            <div className={rightIconClasses.join(' ')}>{iconRight}</div>
-          </IconContext.Provider>
-        )}
-      </button>
-    </Ripples>
+            {floatingLabel}
+          </div>
+        </CSSTransition>
+      )}
+    </div>
   )
 }
 

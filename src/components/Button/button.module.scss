@@ -2,6 +2,12 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+.root {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
 .button {
   position: relative;
   display: inline-flex;
@@ -27,8 +33,6 @@
 
 .button-ripple {
   display: flex;
-  height: inherit;
-  width: inherit;
   pointer-events: auto;
   justify-content: center;
   border-radius: $rounded-base;
@@ -318,4 +322,57 @@
 
 .right-icon-space {
   margin-left: $mp-2;
+}
+
+.floating-label-container {
+  position: absolute;
+  width: max-content;
+  background-color: $brand-100;
+  color: $brand-900;
+  border-radius: $rounded-full;
+  padding: $mp-2;
+  word-break: keep-all;
+  font-size: 8pt;
+  font-weight: $font-weight-bold;
+}
+
+.label-appear {
+  opacity: 0;
+  transition-duration: 75ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-appear-active {
+  opacity: 0;
+  transition-duration: 75ms;
+  transition-delay: 100ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-appear-done {
+  opacity: 0;
+}
+.label-enter {
+  opacity: 0;
+  transition-duration: 75ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-enter-active {
+  opacity: 1;
+  transition-duration: 75ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-enter-done {
+  opacity: 1;
+}
+.label-exit {
+  opacity: 1;
+  transition-duration: 150ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-exit-active {
+  opacity: 0;
+  transition-duration: 150ms;
+  transition-timing-function: $transition-standard-easing;
+}
+.label-exit-done {
+  opacity: 0;
 }
