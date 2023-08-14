@@ -48,6 +48,7 @@ export interface LanguageSwitchProps {
   touchScreen?: boolean
   dropdownProps?: DropDownProps
   hideText?: boolean
+  floatingLabel?: string
   classNames?: {
     formLayout?: FormLayoutClasses
     listbox?: string
@@ -84,6 +85,7 @@ function LanguageSwitch({
   supportedLanguages = defaultSupportedLanguages,
   touchScreen = false,
   hideText = false,
+  floatingLabel,
   classNames,
   id,
   label,
@@ -137,6 +139,7 @@ function LanguageSwitch({
           type={'text'}
           rounded={true}
           rippleProps={rippleProps}
+          floatingLabel={floatingLabel}
           icon={
             <div className={styles['flag']}>
               <ReactCountryFlag

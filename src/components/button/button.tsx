@@ -11,6 +11,7 @@ export interface ButtonClasses {
   leftIconContainer?: string
   rightIconContainer?: string
   children?: string
+  floatingLabelContainer?: string
 }
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -232,7 +233,10 @@ function Button(
         >
           <div
             ref={floatingLabelRef}
-            className={ButtonStyles['floating-label-container']}
+            className={[
+              ButtonStyles['floating-label-container'],
+              classNames?.floatingLabelContainer,
+            ].join(' ')}
           >
             {floatingLabel}
           </div>
