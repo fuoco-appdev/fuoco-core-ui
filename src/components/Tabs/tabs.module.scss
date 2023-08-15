@@ -8,7 +8,7 @@
   align-items: center;
   position: relative;
   z-index: 0;
-  padding: $mp-2 0;
+  padding: $mp-4 0;
 }
 
 .nav-verticle {
@@ -21,9 +21,9 @@
   -webkit-border-radius: $rounded-md;
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
+  width: 100%;
   display: flex;
-  align-items: center;
-  padding: $mp-2 $mp-2;
+  padding: $mp-4;
   z-index: 20;
   background-color: transparent;
   margin-right: $mp-2;
@@ -45,7 +45,7 @@
 }
 
 .tab-button-with-text {
-  padding: $mp-2 $mp-4;
+  padding: $mp-4;
 }
 
 .tab-button:focus {

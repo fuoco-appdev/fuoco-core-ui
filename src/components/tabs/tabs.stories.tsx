@@ -131,6 +131,41 @@ export const Vertical = (args: any) => (
   />
 )
 
+export const VerticalText = (args: any) => (
+  <Tabs
+    {...args}
+    activeId={'panel-1'}
+    direction={'vertical'}
+    type={'underlined'}
+    tabs={[
+      {
+        id: 'panel-1',
+        icon: <Email size={24} />,
+        label: 'Email 123',
+        children: (
+          <Typography.Text>Content for the first panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-2',
+        icon: <Email size={24} />,
+        label: 'Email 12',
+        children: (
+          <Typography.Text>Content for the second panel</Typography.Text>
+        ),
+      },
+      {
+        id: 'panel-3',
+        icon: <Email size={24} />,
+        label: 'Email 12345',
+        children: (
+          <Typography.Text>Content for the third panel</Typography.Text>
+        ),
+      },
+    ]}
+  />
+)
+
 export const Underlined = (args: any) => (
   <Tabs
     {...args}
