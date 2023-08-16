@@ -58,18 +58,15 @@ function Tabs({
   const [selectedTabIndex, setSelectedTabIndex] = useState<number | null>(null)
   const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
   const [hoveredRect, setHoveredRect] = useState<DOMRect | undefined>(undefined)
+  const isMountedRef = useRef<boolean>(false)
   const navRef = useRef<HTMLDivElement>(null)
   const removableRef = useRef<HTMLButtonElement>(null)
-  const [prevSelectedRect, setPrevSelectedRect] = useState<DOMRect | undefined>(
-    undefined
-  )
   const [selectedRect, setSelectedRect] = useState<DOMRect | undefined>(
     undefined
   )
   const [removableRect, setRemovableRect] = useState<DOMRect | undefined>(
     undefined
   )
-  const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
   const [navRect, setNavRect] = useState<DOMRect | undefined>(undefined)
   const [selectStyles, setSelectStyles] = useState<React.CSSProperties>({})
   const [hoverStyles, setHoverStyles] = useState<React.CSSProperties>({
@@ -81,7 +78,6 @@ function Tabs({
   const [removableStyles, setRemovableStyles] = useState<React.CSSProperties>({
     opacity: 0,
   })
-  const isInitialRender = useRef(true)
 
   useEffect(() => {
     if (selectedId !== activeId) {
@@ -89,65 +85,74 @@ function Tabs({
     }
   }, [activeId])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (selectedId === '') {
+      setSelectedTabIndex(null)
+      setHoveredTabIndex(null)
+      setSelectedRect(undefined)
+      setHoveredRect(undefined)
+      setRemovableRect(undefined)
+      return
+    }
+
     if (!navRef.current) {
       return
     }
 
     const resizeObserver = new ResizeObserver(() => {
       setNavRect(navRef.current?.getBoundingClientRect())
-      setPrevSelectedRect(selectedRect)
       setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
       setHoveredRect(buttonRefs[selectedId]?.getBoundingClientRect())
       setRemovableRect(removableRef?.current?.getBoundingClientRect())
+      const index = tabs.findIndex((value) => value.id === selectedId)
+      setSelectedTabIndex(index)
+      setHoveredTabIndex(index)
     })
     resizeObserver.observe(navRef.current)
+
     return () => resizeObserver.disconnect()
   }, [selectedId])
 
-  useEffect(() => {
-    if (type === 'underlined' && navRect && selectedRect) {
-      const style: React.CSSProperties = {}
-      if (direction === 'vertical') {
-        style.transform = `translate3d(calc(${selectedRect.right}px), calc(${
-          selectedRect.bottom - navRect.bottom
-        }px), 0px)`
-        style.height = selectedRect.height
-        style.width = '2px'
-        style.transition = isInitialRender.current
-          ? `opacity 150ms 150ms`
-          : `transform 150ms 0ms, opacity 150ms 150ms, height 150ms`
-        if (prevSelectedRect?.right === selectedRect.right) {
-          isInitialRender.current = false
+  useLayoutEffect(() => {
+    if (type === 'underlined' && navRect) {
+      if (selectedRect) {
+        const styles: React.CSSProperties = {}
+        if (direction === 'vertical') {
+          styles.transform = `translate3d(calc(${selectedRect.right}px), calc(${
+            selectedRect.bottom - navRect.bottom
+          }px), 0px)`
+          styles.height = selectedRect.height
+          styles.width = '2px'
+        } else {
+          styles.transform = `translateX(calc(${
+            selectedRect.left - navRect.left
+          }px + 10%))`
+          styles.width = selectedRect.width * 0.8
+          if (!isMountedRef.current) {
+            styles.transition = 'none'
+          }
         }
+
+        setSelectStyles(styles)
       } else {
-        style.transform = `translateX(calc(${
-          selectedRect.left - navRect.left
-        }px + 10%))`
-        style.width = selectedRect.width * 0.8
-        style.transition = isInitialRender.current
-          ? `opacity 150ms 150ms`
-          : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
-        if (prevSelectedRect?.left !== selectedRect.left) {
-          isInitialRender.current = false
-        }
+        setSelectStyles({ opacity: 0 })
       }
 
-      setSelectStyles(style)
-    }
-
-    if (type === 'underlined' && navRect && hoveredRect) {
-      let styles: React.CSSProperties = { opacity: 0 }
-      styles.transform = `translate3d(${hoveredRect.left - navRect.left}px,${
-        hoveredRect.top - navRect.top
-      }px,0px)`
-      styles.width = hoveredRect.width
-      styles.height = hoveredRect.height
-      styles.opacity = hoveredTabIndex != null ? 1 : 0
-      styles.transition = isInitialHoveredElement
-        ? `opacity 150ms`
-        : `transform 150ms 0ms, opacity 150ms 0ms, width 150ms`
-      setHoverStyles(styles)
+      if (hoveredRect) {
+        let styles: React.CSSProperties = { opacity: 0 }
+        styles.transform = `translate3d(${hoveredRect.left - navRect.left}px,${
+          hoveredRect.top - navRect.top
+        }px,0px)`
+        styles.width = hoveredRect.width
+        styles.height = hoveredRect.height
+        styles.opacity = hoveredTabIndex != null ? 1 : 0
+        if (!isMountedRef.current) {
+          styles.transition = 'none'
+        }
+        setHoverStyles(styles)
+      } else {
+        setHoverStyles({ opacity: 0 })
+      }
     }
 
     if (type === 'pills' && navRect && selectedRect) {
@@ -158,64 +163,36 @@ function Tabs({
         selectedRect.left - navRect.left
       }px), ${selectedRect.top - navRect.top}px, 0px)`
       styles.opacity = 1
-      styles.transition = isInitialRender.current
-        ? `opacity 150ms 150ms`
-        : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
-
-      isInitialRender.current = false
+      if (!isMountedRef.current) {
+        styles.transition = 'none'
+      }
       setSelectPillStyles(styles)
     }
 
-    if (removable && removableRef.current && navRect && selectedRect) {
+    if (removable && removableRef && navRect && selectedRect && removableRect) {
       let styles: React.CSSProperties = { opacity: 0 }
       styles.transform = `translate3d(calc(${
         selectedRect.left -
         navRect.left +
-        (selectedRect.width - ((removableRect?.width ?? 0) / 3) * 2)
+        (selectedRect.width - ((removableRect.width ?? 0) / 3) * 2)
       }px), ${
         selectedRect.top -
         navRect.top -
-        (selectedRect.height - ((removableRect?.width ?? 0) / 3) * 2)
+        (selectedRect.height - ((removableRect.height ?? 0) / 3) * 1)
       }px, 0px)`
       styles.opacity = 1
-      styles.transition = isInitialRender.current
-        ? `opacity 150ms 150ms`
-        : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
-
-      isInitialRender.current = false
+      if (!isMountedRef.current) {
+        styles.transition = 'none'
+      }
       setRemovableStyles(styles)
     }
-  }, [
-    navRect,
-    selectedRect,
-    hoveredRect,
-    isInitialHoveredElement,
-    hoveredTabIndex,
-  ])
 
-  useLayoutEffect(() => {
-    if (selectedId === '') {
-      setSelectedTabIndex(null)
-      setHoveredTabIndex(null)
-      setPrevSelectedRect(undefined)
-      setSelectedRect(undefined)
-      setHoveredRect(undefined)
-      setRemovableRect(undefined)
-    } else {
-      const index = tabs.findIndex((value) => value.id === selectedId)
-      setSelectedTabIndex(index)
-      setHoveredTabIndex(index)
-      setPrevSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
-      setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
-      setHoveredRect(buttonRefs[selectedId]?.getBoundingClientRect())
-      setRemovableRect(removableRef?.current?.getBoundingClientRect())
-    }
-  }, [selectedId])
+    isMountedRef.current = true
+  }, [navRect, selectedRect, hoveredRect, removableRect])
 
   const onLeaveTabs = () => {
-    setIsInitialHoveredElement(true)
-    setHoveredTabIndex(selectedTabIndex)
     setHoveredRect(selectedRect)
+    setHoveredTabIndex(selectedTabIndex)
   }
 
   const onEnterTab = (
@@ -224,22 +201,15 @@ function Tabs({
       | React.FocusEvent<HTMLButtonElement>,
     i: number
   ) => {
-    setHoveredTabIndex((prev) => {
-      if (prev != null && prev !== i) {
-        setIsInitialHoveredElement(false)
-      }
-
-      return i
-    })
+    setNavRect(navRef.current?.getBoundingClientRect())
     setHoveredRect((e.target as HTMLButtonElement).getBoundingClientRect())
+    setHoveredTabIndex(i)
   }
 
   const onSelectTab = (id: string, index: number) => {
-    buttonRefs[selectedId]?.blur()
     onChange?.(id)
+    buttonRefs[selectedId]?.blur()
     setSelectedId(id)
-    setSelectedTabIndex(index)
-    setHoveredTabIndex(index)
   }
 
   const navClasses = [TabsStyles['nav'], classNames?.nav]

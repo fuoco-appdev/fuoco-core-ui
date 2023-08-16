@@ -30,8 +30,6 @@
   margin-bottom: $mp-2;
   font-size: $font-size-base;
   cursor: pointer;
-  transition: all $duration-expand-sm;
-  transition-timing-function: $transition-standard-easing;
   color: $gray-100;
   border: 0;
   -webkit-tap-highlight-color: transparent;
@@ -59,7 +57,7 @@
 }
 
 .tab-button-pills-with-text {
-  padding: $mp-4 $mp-2;
+  padding: $mp-3 $mp-2;
 }
 
 .tab-button:focus {
@@ -93,7 +91,7 @@
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
   background-color: rgba(#fff, 0.15);
-  transition: width $transition-accelerated-easing;
+  transition: transform $transition-standard-easing 150ms;
   transition-timing-function: $duration-expand-md;
 }
 
@@ -107,7 +105,7 @@
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
   background-color: $brand-500;
-  transition: width $transition-accelerated-easing;
+  transition: width, transform $transition-standard-easing 150ms;
   transition-timing-function: $duration-expand-md;
 }
 
@@ -118,11 +116,15 @@
   left: 0;
   height: $mp-0-5;
   background-color: $brand-400;
+  transition: transform $transition-standard-easing 150ms;
+  transition-timing-function: $duration-expand-md;
 }
 
 .removable-button-container {
   position: absolute;
   z-index: 20;
+  transition: transform $transition-standard-easing 150ms;
+  transition-timing-function: $duration-expand-md;
 }
 
 .removable-button {

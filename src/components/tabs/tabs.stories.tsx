@@ -133,19 +133,24 @@ export const Vertical = (args: any) => (
 
 export function VerticalText() {
   const [isExanded, setIsExpanded] = useState<boolean>(false)
+  const [selectedId, setSelectedId] = useState<string>('')
 
   return (
     <div>
       <Button
         rounded={true}
-        onClick={() => setIsExpanded(!isExanded)}
+        onClick={() => {
+          setIsExpanded(!isExanded)
+          //setSelectedId('')
+        }}
         icon={<Line.Menu size={24} />}
       />
       <div style={{ width: isExanded ? '256px' : '56px' }}>
         <Tabs
-          activeId={'panel-1'}
+          activeId={selectedId}
           direction={'vertical'}
           type={'underlined'}
+          onChange={(id) => setSelectedId(id)}
           tabs={[
             {
               id: 'panel-1',
