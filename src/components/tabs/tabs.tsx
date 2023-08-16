@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 // @ts-ignore
 import TabsStyles from './tabs.module.scss'
@@ -29,6 +29,7 @@ export interface TabsClasses {
   nav?: string
   tabIcon?: string
   tabButton?: string
+  buttonText?: string
   selectedTabIcon?: string
   selectedTabButton?: string
   tabSliderPill?: string
@@ -54,6 +55,15 @@ function Tabs({
     Record<string, HTMLButtonElement | null>
   >({})
   const [selectedId, setSelectedId] = useState<string>(activeId ?? '')
+  const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
+  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const removableRef = useRef<HTMLButtonElement>(null)
+  const removableRect = removableRef?.current?.getBoundingClientRect()
+  const selectedRect = buttonRefs[selectedId]?.getBoundingClientRect()
+  const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
+  const [navRect, setNavRect] = useState<DOMRect | undefined>(undefined)
+  const isInitialRender = useRef(true)
 
   useEffect(() => {
     if (selectedId !== activeId) {
@@ -61,18 +71,39 @@ function Tabs({
     }
   }, [activeId])
 
-  const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
-  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
+  useLayoutEffect(() => {
+    const updateSize = () => {
+      setNavRect(navRef.current?.getBoundingClientRect())
+    }
 
-  const navRef = useRef<HTMLDivElement>(null)
-  const removableRef = useRef<HTMLButtonElement>(null)
-  const removableRect = removableRef?.current?.getBoundingClientRect()
-  const navRect = navRef.current?.getBoundingClientRect()
+    window.addEventListener('resize', updateSize)
+    updateSize()
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
 
-  const selectedRect = buttonRefs[selectedId]?.getBoundingClientRect()
+  let selectStyles: React.CSSProperties = {}
+  if (type === 'underlined' && navRect && selectedRect) {
+    if (direction === 'vertical') {
+      selectStyles.transform = `translate3d(calc(${
+        selectedRect.right
+      }px), calc(${selectedRect.bottom - navRect.bottom}px), 0px)`
+      selectStyles.height = selectedRect.height
+      selectStyles.width = '2px'
+      selectStyles.transition = isInitialRender.current
+        ? `opacity 150ms 150ms`
+        : `transform 150ms 0ms, opacity 150ms 150ms, height 150ms`
+    } else {
+      selectStyles.transform = `translateX(calc(${
+        selectedRect.left - navRect.left
+      }px + 10%))`
+      selectStyles.width = selectedRect.width * 0.8
+      selectStyles.transition = isInitialRender.current
+        ? `opacity 150ms 150ms`
+        : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
+    }
 
-  const [isInitialHoveredElement, setIsInitialHoveredElement] = useState(true)
-  const isInitialRender = useRef(true)
+    isInitialRender.current = false
+  }
 
   const onLeaveTabs = () => {
     setIsInitialHoveredElement(true)
@@ -114,30 +145,6 @@ function Tabs({
     hoverStyles.transition = isInitialHoveredElement
       ? `opacity 150ms`
       : `transform 150ms 0ms, opacity 150ms 0ms, width 150ms`
-  }
-
-  let selectStyles: React.CSSProperties = {}
-  if (type === 'underlined' && navRect && selectedRect) {
-    if (direction === 'vertical') {
-      selectStyles.transform = `translate3d(calc(${
-        selectedRect.right
-      }px), calc(${selectedRect.bottom - navRect.bottom}px), 0px)`
-      selectStyles.height = selectedRect.height
-      selectStyles.width = '2px'
-      selectStyles.transition = isInitialRender.current
-        ? `opacity 150ms 150ms`
-        : `transform 150ms 0ms, opacity 150ms 150ms, height 150ms`
-    } else {
-      selectStyles.transform = `translateX(calc(${
-        selectedRect.left - navRect.left
-      }px + 10%))`
-      selectStyles.width = selectedRect.width * 0.8
-      selectStyles.transition = isInitialRender.current
-        ? `opacity 150ms 150ms`
-        : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
-    }
-
-    isInitialRender.current = false
   }
 
   let selectPillStyles: React.CSSProperties = { opacity: 0 }
@@ -217,7 +224,14 @@ function Tabs({
             {item.icon && (
               <div className={iconClasses.join(' ')}>{item.icon}</div>
             )}
-            {item.label}
+            <div
+              className={[
+                TabsStyles['button-text'],
+                classNames?.buttonText,
+              ].join(' ')}
+            >
+              {item.label}
+            </div>
           </button>
         )
       })}
