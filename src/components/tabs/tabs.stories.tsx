@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../button'
 import { Email } from '../icon/icons/line'
-import { Typography } from '../../index'
+import { Line, Typography } from '../../index'
 
 import { Tabs } from '.'
 
@@ -131,40 +131,43 @@ export const Vertical = (args: any) => (
   />
 )
 
-export const VerticalText = (args: any) => (
-  <Tabs
-    {...args}
-    activeId={'panel-1'}
-    direction={'vertical'}
-    type={'underlined'}
-    tabs={[
-      {
-        id: 'panel-1',
-        icon: <Email size={24} />,
-        label: 'Email 123',
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-2',
-        icon: <Email size={24} />,
-        label: 'Email 12',
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-3',
-        icon: <Email size={24} />,
-        label: 'Email 12345',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-    ]}
-  />
-)
+export function VerticalText() {
+  const [isExanded, setIsExpanded] = useState<boolean>(false)
+
+  return (
+    <div>
+      <Button
+        rounded={true}
+        onClick={() => setIsExpanded(!isExanded)}
+        icon={<Line.Menu size={24} />}
+      />
+      <div style={{ width: isExanded ? '256px' : '56px' }}>
+        <Tabs
+          activeId={'panel-1'}
+          direction={'vertical'}
+          type={'underlined'}
+          tabs={[
+            {
+              id: 'panel-1',
+              icon: <Email size={24} />,
+              label: isExanded ? 'Email 123' : '',
+            },
+            {
+              id: 'panel-2',
+              icon: <Email size={24} />,
+              label: isExanded ? 'Email 12' : '',
+            },
+            {
+              id: 'panel-3',
+              icon: <Email size={24} />,
+              label: isExanded ? 'Email 12345' : '',
+            },
+          ]}
+        />
+      </div>
+    </div>
+  )
+}
 
 export const Underlined = (args: any) => (
   <Tabs

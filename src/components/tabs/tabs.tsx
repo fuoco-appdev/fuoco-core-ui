@@ -97,7 +97,7 @@ function Tabs({
     })
     resizeObserver.observe(navRef.current)
     return () => resizeObserver.disconnect()
-  }, [])
+  }, [selectedId])
 
   useEffect(() => {
     if (type === 'underlined' && navRect && selectedRect) {
@@ -239,6 +239,7 @@ function Tabs({
         ]
         if (item.label) {
           buttonClasses.push(TabsStyles['tab-button-with-text'])
+          buttonClasses.push(TabsStyles[`tab-button-${type}-with-text`])
         }
 
         if (flex) {

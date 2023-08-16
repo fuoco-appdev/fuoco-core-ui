@@ -52,7 +52,13 @@
   justify-content: center;
 }
 
-.tab-button-with-text {
+.tab-button-with-text {}
+
+.tab-button-underlined-with-text {
+  padding: $mp-4;
+}
+
+.tab-button-pills-with-text {
   padding: $mp-4 $mp-2;
 }
 
