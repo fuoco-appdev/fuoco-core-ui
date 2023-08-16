@@ -86,15 +86,17 @@ function Tabs({
   }, [activeId])
 
   useLayoutEffect(() => {
-    const updateSize = () => {
+    if (!navRef.current) {
+      return
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
       setNavRect(navRef.current?.getBoundingClientRect())
       setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
       setRemovableRect(removableRef?.current?.getBoundingClientRect())
-    }
-
-    window.addEventListener('resize', updateSize)
-    updateSize()
-    return () => window.removeEventListener('resize', updateSize)
+    })
+    resizeObserver.observe(navRef.current)
+    return () => resizeObserver.disconnect()
   }, [])
 
   useEffect(() => {
@@ -171,7 +173,13 @@ function Tabs({
       isInitialRender.current = false
       setRemovableStyles(styles)
     }
-  }, [navRect, selectedRect, hoveredRect])
+  }, [
+    navRect,
+    selectedRect,
+    hoveredRect,
+    isInitialHoveredElement,
+    hoveredTabIndex,
+  ])
 
   useLayoutEffect(() => {
     setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
