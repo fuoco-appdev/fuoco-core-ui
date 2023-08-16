@@ -29,7 +29,6 @@
   margin-right: $mp-2;
   margin-bottom: $mp-2;
   font-size: $font-size-base;
-  line-height: $font-line-height-base;
   cursor: pointer;
   transition: all $duration-expand-sm;
   transition-timing-function: $transition-standard-easing;
@@ -37,6 +36,15 @@
   border: 0;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  align-items: center;
+}
+
+.tab-button-vertical {
+  flex-direction: row;
+}
+
+.tab-button-horizontal {
+  flex-direction: column;
 }
 
 .tab-button-flex {
@@ -45,13 +53,18 @@
 }
 
 .tab-button-with-text {
-  padding: $mp-4;
+  padding: $mp-4 $mp-2;
 }
 
 .tab-button:focus {
   outline: none;
   border: none;
   box-shadow: none;
+}
+
+.button-text {
+  text-align: center;
+  line-height: 100%;
 }
 
 .tab-icon {
