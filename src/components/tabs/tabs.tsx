@@ -30,8 +30,8 @@ export interface TabsClasses {
   tabIcon?: string
   tabButton?: string
   buttonText?: string
-  selectedTabIcon?: string
-  selectedTabButton?: string
+  hoveredTabIcon?: string
+  hoveredTabButton?: string
   tabSliderPill?: string
   tabSlider?: string
   tabOutline?: string
@@ -55,10 +55,14 @@ function Tabs({
     Record<string, HTMLButtonElement | null>
   >({})
   const [selectedId, setSelectedId] = useState<string>(activeId ?? '')
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number | null>(null)
   const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
-  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null)
+  const [hoveredRect, setHoveredRect] = useState<DOMRect | undefined>(undefined)
   const navRef = useRef<HTMLDivElement>(null)
   const removableRef = useRef<HTMLButtonElement>(null)
+  const [prevSelectedRect, setPrevSelectedRect] = useState<DOMRect | undefined>(
+    undefined
+  )
   const [selectedRect, setSelectedRect] = useState<DOMRect | undefined>(
     undefined
   )
@@ -92,7 +96,9 @@ function Tabs({
 
     const resizeObserver = new ResizeObserver(() => {
       setNavRect(navRef.current?.getBoundingClientRect())
+      setPrevSelectedRect(selectedRect)
       setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
+      setHoveredRect(buttonRefs[selectedId]?.getBoundingClientRect())
       setRemovableRect(removableRef?.current?.getBoundingClientRect())
     })
     resizeObserver.observe(navRef.current)
@@ -111,6 +117,9 @@ function Tabs({
         style.transition = isInitialRender.current
           ? `opacity 150ms 150ms`
           : `transform 150ms 0ms, opacity 150ms 150ms, height 150ms`
+        if (prevSelectedRect?.right === selectedRect.right) {
+          isInitialRender.current = false
+        }
       } else {
         style.transform = `translateX(calc(${
           selectedRect.left - navRect.left
@@ -119,8 +128,11 @@ function Tabs({
         style.transition = isInitialRender.current
           ? `opacity 150ms 150ms`
           : `transform 150ms 0ms, opacity 150ms 150ms, width 150ms`
+        if (prevSelectedRect?.left !== selectedRect.left) {
+          isInitialRender.current = false
+        }
       }
-      isInitialRender.current = false
+
       setSelectStyles(style)
     }
 
@@ -182,13 +194,28 @@ function Tabs({
   ])
 
   useLayoutEffect(() => {
-    setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
-    setRemovableRect(removableRef?.current?.getBoundingClientRect())
+    if (selectedId === '') {
+      setSelectedTabIndex(null)
+      setHoveredTabIndex(null)
+      setPrevSelectedRect(undefined)
+      setSelectedRect(undefined)
+      setHoveredRect(undefined)
+      setRemovableRect(undefined)
+    } else {
+      const index = tabs.findIndex((value) => value.id === selectedId)
+      setSelectedTabIndex(index)
+      setHoveredTabIndex(index)
+      setPrevSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
+      setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
+      setHoveredRect(buttonRefs[selectedId]?.getBoundingClientRect())
+      setRemovableRect(removableRef?.current?.getBoundingClientRect())
+    }
   }, [selectedId])
 
   const onLeaveTabs = () => {
     setIsInitialHoveredElement(true)
-    setHoveredTabIndex(null)
+    setHoveredTabIndex(selectedTabIndex)
+    setHoveredRect(selectedRect)
   }
 
   const onEnterTab = (
@@ -197,8 +224,6 @@ function Tabs({
       | React.FocusEvent<HTMLButtonElement>,
     i: number
   ) => {
-    if (!e.target || !(e.target instanceof HTMLButtonElement)) return
-
     setHoveredTabIndex((prev) => {
       if (prev != null && prev !== i) {
         setIsInitialHoveredElement(false)
@@ -206,13 +231,15 @@ function Tabs({
 
       return i
     })
-    setHoveredRect(e.target.getBoundingClientRect())
+    setHoveredRect((e.target as HTMLButtonElement).getBoundingClientRect())
   }
 
-  const onSelectTab = (id: string) => {
+  const onSelectTab = (id: string, index: number) => {
     buttonRefs[selectedId]?.blur()
     onChange?.(id)
     setSelectedId(id)
+    setSelectedTabIndex(index)
+    setHoveredTabIndex(index)
   }
 
   const navClasses = [TabsStyles['nav'], classNames?.nav]
@@ -246,9 +273,9 @@ function Tabs({
           buttonClasses.push(TabsStyles['tab-button-flex'])
         }
 
-        if (item.id === selectedId) {
-          buttonClasses.push(classNames?.selectedTabButton)
-          iconClasses.push(classNames?.selectedTabIcon)
+        if (i === hoveredTabIndex) {
+          buttonClasses.push(classNames?.hoveredTabButton)
+          iconClasses.push(classNames?.hoveredTabIcon)
         }
 
         return (
@@ -258,7 +285,7 @@ function Tabs({
             ref={(el) => (buttonRefs[item.id ?? ''] = el)}
             onPointerEnter={(e) => onEnterTab(e, i)}
             onFocus={(e) => onEnterTab(e, i)}
-            onClick={() => onSelectTab(item.id ?? '')}
+            onClick={() => onSelectTab(item.id ?? '', i)}
           >
             {item.icon && (
               <div className={iconClasses.join(' ')}>{item.icon}</div>
