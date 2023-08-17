@@ -115,7 +115,6 @@ export default function Avatar({
             />
             <Button
               ref={buttonRef}
-              block={true}
               classNames={{
                 container: styles['edit-image-button-ripple'],
                 button: styles['edit-image-button'],
