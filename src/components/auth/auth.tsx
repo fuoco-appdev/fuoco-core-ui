@@ -158,6 +158,7 @@ export interface AuthProps {
   defaultIconColor?: string
   litIconColor?: string
   children?: React.ReactNode
+  touchScreen?: boolean
   style?: React.CSSProperties
   strings?: AuthStrings
   rippleProps?: RippleProps
@@ -248,6 +249,7 @@ function Auth({
   socialLayout = 'vertical',
   socialColors = false,
   socialButtonSize = 'large',
+  touchScreen = false,
   providers,
   view = 'sign_in',
   emailErrorMessage,
@@ -293,6 +295,7 @@ function Auth({
         <SocialAuth
           classNames={classNames}
           view={view}
+          touchScreen={touchScreen}
           strings={{ ...defaultStrings, ...strings }}
           defaultIconColor={defaultIconColor}
           litIconColor={litIconColor}
@@ -321,6 +324,7 @@ function Auth({
           classNames={classNames?.emailAuth}
           id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
           defaultIconColor={defaultIconColor}
+          touchScreen={touchScreen}
           emailValue={emailValue}
           passwordValue={passwordValue}
           confirmPasswordValue={confirmPasswordValue}
@@ -353,6 +357,7 @@ function Auth({
         <ForgottenPassword
           classNames={classNames?.forgottenPassword}
           strings={{ ...defaultStrings, ...strings }}
+          touchScreen={touchScreen}
           defaultIconColor={defaultIconColor}
           litIconColor={litIconColor}
           supabaseClient={supabaseClient}
@@ -367,6 +372,7 @@ function Auth({
         <MagicLink
           classNames={classNames?.magicLink}
           strings={{ ...defaultStrings, ...strings }}
+          touchScreen={touchScreen}
           defaultIconColor={defaultIconColor}
           litIconColor={litIconColor}
           supabaseClient={supabaseClient}
@@ -381,6 +387,7 @@ function Auth({
         <UpdatePassword
           classNames={classNames?.updatePassword}
           strings={{ ...defaultStrings, ...strings }}
+          touchScreen={touchScreen}
           defaultIconColor={defaultIconColor}
           litIconColor={litIconColor}
           supabaseClient={supabaseClient}
@@ -403,6 +410,7 @@ function SocialButton({
   classNames,
   provider,
   strings,
+  touchScreen,
   rippleProps = {
     color: 'rgba(0, 0, 0, .3)',
     during: 250,
@@ -415,6 +423,7 @@ function SocialButton({
 }: {
   classNames?: SocialButtonClasses
   provider: Provider
+  touchScreen?: boolean
   strings: AuthStrings
   rippleProps?: RipplesProps
   verticalSocialLayout: any
@@ -540,6 +549,7 @@ function SocialButton({
         classNames={classNames?.button}
         type="default"
         shadow
+        touchScreen={touchScreen}
         size={socialButtonSize}
         style={{
           ...(socialColors
@@ -579,6 +589,7 @@ function SocialAuth({
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   strings,
+  touchScreen,
   rippleProps = {
     socialButton: {
       color: 'rgba(0, 0, 0, .3)',
@@ -646,6 +657,7 @@ function SocialAuth({
               {providers.map((provider) => {
                 return (
                   <SocialButton
+                    touchScreen={touchScreen}
                     classNames={classNames?.socialAuth?.socialButton}
                     key={`${provider}-button`}
                     provider={provider}
@@ -697,6 +709,7 @@ function EmailAuth({
       during: 250,
     },
   },
+  touchScreen,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   id,
@@ -723,6 +736,7 @@ function EmailAuth({
   defaultIconColor?: string
   emailValue?: string
   passwordValue?: string
+  touchScreen?: boolean
   confirmPasswordValue?: string
   litIconColor?: string
   authView: ViewType
@@ -982,6 +996,7 @@ function EmailAuth({
             ].join(' ')}
           >
             <Button
+              touchScreen={touchScreen}
               classNames={classNames?.emailButton}
               htmlType="submit"
               type="primary"
@@ -1060,6 +1075,7 @@ function MagicLink({
   classNames,
   setAuthView,
   strings,
+  touchScreen,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   supabaseClient,
@@ -1073,6 +1089,7 @@ function MagicLink({
   onMagicLinkError,
 }: {
   classNames?: MagicLinkClasses
+  touchScreen?: boolean
   defaultIconColor?: string
   litIconColor?: string
   setAuthView: any
@@ -1138,6 +1155,7 @@ function MagicLink({
           />
           <Button
             classNames={classNames?.button}
+            touchScreen={touchScreen}
             block
             size="large"
             htmlType="submit"
@@ -1180,6 +1198,7 @@ function MagicLink({
 function ForgottenPassword({
   classNames,
   strings,
+  touchScreen,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   supabaseClient,
@@ -1195,6 +1214,7 @@ function ForgottenPassword({
 }: {
   classNames?: ForgottenPasswordClasses
   defaultIconColor?: string
+  touchScreen?: boolean
   litIconColor?: string
   strings: AuthStrings
   supabaseClient: SupabaseClient
@@ -1255,6 +1275,7 @@ function ForgottenPassword({
             onBlur={() => setEmailIconLit(false)}
           />
           <Button
+            touchScreen={touchScreen}
             classNames={classNames?.button}
             block
             size="large"
@@ -1298,6 +1319,7 @@ function ResetPassword({
   classNames,
   supabaseClient,
   strings,
+  touchScreen,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   passwordErrorMessage,
@@ -1311,6 +1333,7 @@ function ResetPassword({
 }: {
   classNames?: ResetPasswordClasses
   supabaseClient: SupabaseClient
+  touchScreen?: boolean
   defaultIconColor?: string
   litIconColor?: string
   strings?: AuthStrings
@@ -1414,6 +1437,7 @@ function ResetPassword({
           />
           <Button
             block
+            touchScreen={touchScreen}
             classNames={classNames?.button}
             size="large"
             htmlType="submit"
@@ -1446,6 +1470,7 @@ function ResetPassword({
 export interface UpdatePasswordProps {
   classNames?: UpdatePasswordClasses
   supabaseClient: SupabaseClient
+  touchScreen?: boolean
   defaultIconColor?: string
   litIconColor?: string
   strings: AuthStrings
@@ -1460,6 +1485,7 @@ function UpdatePassword({
   classNames,
   supabaseClient,
   strings,
+  touchScreen,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   passwordErrorMessage,
@@ -1563,6 +1589,7 @@ function UpdatePassword({
           />
           <Button
             block
+            touchScreen={touchScreen}
             classNames={classNames?.button}
             size="large"
             htmlType="submit"
