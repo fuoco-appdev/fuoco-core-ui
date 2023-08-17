@@ -173,7 +173,13 @@ function Button(
   }
 
   return (
-    <div ref={rootRef} className={ButtonStyles['root']}>
+    <div
+      ref={rootRef}
+      className={[
+        ButtonStyles['root'],
+        block && ButtonStyles['root-block'],
+      ].join(' ')}
+    >
       <Ripples {...rippleProps} className={containerClasses.join(' ')}>
         <button
           {...props}

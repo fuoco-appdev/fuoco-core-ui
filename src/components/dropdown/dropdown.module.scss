@@ -20,6 +20,7 @@
   width: inherit;
   color: $gray-300;
   align-items: center;
+  width: 100%;
 }
 
 .dropdown-item svg {
@@ -63,6 +64,8 @@
 }
 
 .dropdown-icon {
+  display: flex;
+  align-items: center;
   padding-right: $mp-3;
 }
 

@@ -290,6 +290,7 @@ function Item({ ref, classNames, children, onClick }: ItemProps) {
           children: DropdownStyles['dropdown-item-content'],
           ...classNames?.button,
         }}
+        block={true}
         type={'text'}
         size={'large'}
         onClick={onClick}
