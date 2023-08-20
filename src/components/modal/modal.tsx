@@ -15,6 +15,7 @@ export interface ModalClasses {
   background?: string
   modal?: string
   content?: string
+  text?: string
   title?: string
   description?: string
   cancelButton?: ButtonClasses
@@ -238,7 +239,12 @@ const Modal = ({
                               style={contentStyle}
                             >
                               {title || description || icon ? (
-                                <div className={ModalStyles['modal-text']}>
+                                <div
+                                  className={[
+                                    ModalStyles['modal-text'],
+                                    classNames?.text,
+                                  ].join(' ')}
+                                >
                                   {icon ? icon : null}
                                   <span>
                                     {title && (
