@@ -21,6 +21,7 @@ export interface ModalClasses {
   confirmButton?: ButtonClasses
   footer?: string
   footerContainer?: string
+  footerButtonContainer?: string
   footerCancelText?: string
 }
 
@@ -107,7 +108,12 @@ const Modal = ({
         classNames?.footerContainer,
       ].join(' ')}
     >
-      <div className={ModalStyles['footer-button-container']}>
+      <div
+        className={[
+          ModalStyles['footer-button-container'],
+          classNames?.footerButtonContainer,
+        ].join(' ')}
+      >
         <Button
           classNames={classNames?.cancelButton}
           type={'default'}
