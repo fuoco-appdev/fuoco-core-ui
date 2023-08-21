@@ -118,9 +118,9 @@ function Tabs({
       if (selectedRect) {
         const styles: React.CSSProperties = {}
         if (direction === 'vertical') {
-          styles.transform = `translate3d(calc(${selectedRect.right}px), calc(${
-            selectedRect.bottom - navRect.bottom
-          }px), 0px)`
+          styles.transform = `translate3d(${
+            selectedRect.left - navRect.left + navRect.width
+          }px, ${selectedRect.bottom - navRect.bottom}px, 0px)`
           styles.height = selectedRect.height
           styles.width = '2px'
         } else {
