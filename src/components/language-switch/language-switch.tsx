@@ -8,6 +8,7 @@ import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import styles from './language-switch.module.scss'
 import ISO6391, { LanguageCode } from 'iso-639-1'
 import * as countriesList from 'countries-list'
+import { ButtonClasses } from '../button/button'
 
 export function getCountriesInfo(): { [isoCode: string]: string[] } {
   const countriesInfo: { [isoCode: string]: string[] } = {}
@@ -39,6 +40,18 @@ export interface SupportedLanguage {
   countryCode?: string
 }
 
+export interface LanguageSwitchClasses {
+  formLayout?: FormLayoutClasses
+  button?: ButtonClasses
+  listbox?: string
+  container?: string
+  ripple?: string
+  iconContainer?: string
+  label?: string
+  chevronContainer?: string
+  chevron?: string
+}
+
 export interface LanguageSwitchProps {
   type?: 'button' | 'listbox' | 'none'
   language?: LanguageCode
@@ -49,16 +62,7 @@ export interface LanguageSwitchProps {
   dropdownProps?: DropDownProps
   hideText?: boolean
   floatingLabel?: string
-  classNames?: {
-    formLayout?: FormLayoutClasses
-    listbox?: string
-    container?: string
-    ripple?: string
-    iconContainer?: string
-    label?: string
-    chevronContainer?: string
-    chevron?: string
-  }
+  classNames?: LanguageSwitchClasses
   id?: string
   label?: string
   labelOptional?: string
@@ -136,6 +140,7 @@ function LanguageSwitch({
       {type === 'button' && (
         <Button
           ref={anchorRef}
+          classNames={classNames?.button}
           type={'text'}
           rounded={true}
           rippleProps={rippleProps}
