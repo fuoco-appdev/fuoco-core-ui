@@ -198,11 +198,9 @@ function Button(
           {showIcon &&
             (loading ? (
               <div />
-            ) : icon ? (
-              <IconContext.Provider value={{ contextSize: size }}>
-                <div className={leftIconClasses.join(' ')}>{icon}</div>
-              </IconContext.Provider>
-            ) : null)}
+            ) : (
+              icon && <div className={leftIconClasses.join(' ')}>{icon}</div>
+            ))}
           {children && (
             <span
               className={

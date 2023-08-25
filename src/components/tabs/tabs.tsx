@@ -32,9 +32,13 @@ export interface TabsClasses {
   buttonText?: string
   hoveredTabIcon?: string
   hoveredTabButton?: string
+  selectedTabIcon?: string
+  selectedTabButton?: string
+  tabSliderContainer?: string
   tabSliderPill?: string
   tabSlider?: string
   tabOutline?: string
+  removableContainer?: string
   removableButtonContainer?: string
   removableButton?: ButtonClasses
 }
@@ -75,9 +79,6 @@ function Tabs({
   const [selectPillStyles, setSelectPillStyles] = useState<React.CSSProperties>(
     { opacity: 0 }
   )
-  const [removableStyles, setRemovableStyles] = useState<React.CSSProperties>({
-    opacity: 0,
-  })
 
   useEffect(() => {
     if (selectedId !== activeId) {
@@ -167,24 +168,8 @@ function Tabs({
         styles.transition = 'none'
       }
       setSelectPillStyles(styles)
-    }
-
-    if (removable && removableRef && navRect && selectedRect && removableRect) {
-      let styles: React.CSSProperties = { opacity: 0 }
-      styles.transform = `translate3d(calc(${
-        selectedRect.left -
-        navRect.left +
-        (selectedRect.width - ((removableRect.width ?? 0) / 3) * 2)
-      }px), ${
-        selectedRect.top -
-        navRect.top -
-        (selectedRect.height - ((removableRect.height ?? 0) / 3) * 1)
-      }px, 0px)`
-      styles.opacity = 1
-      if (!isMountedRef.current) {
-        styles.transition = 'none'
-      }
-      setRemovableStyles(styles)
+    } else {
+      setSelectPillStyles({ opacity: 0 })
     }
 
     isMountedRef.current = true
@@ -223,6 +208,30 @@ function Tabs({
       className={navClasses.join(' ')}
       onPointerLeave={onLeaveTabs}
     >
+      {type === 'pills' ? (
+        <div
+          className={[
+            TabsStyles['tab-slider-pill'],
+            classNames?.tabSliderPill,
+          ].join(' ')}
+          style={selectPillStyles}
+        />
+      ) : (
+        <div
+          className={[TabsStyles['tab-slider'], classNames?.tabSlider].join(
+            ' '
+          )}
+          style={hoverStyles}
+        />
+      )}
+      {type === 'underlined' && (
+        <div
+          className={[TabsStyles['tab-outline'], classNames?.tabOutline].join(
+            ' '
+          )}
+          style={selectStyles}
+        />
+      )}
       {tabs.map((item, i) => {
         const iconClasses = [TabsStyles['tab-icon'], classNames?.tabIcon]
         if (item.label) {
@@ -248,6 +257,11 @@ function Tabs({
           iconClasses.push(classNames?.hoveredTabIcon)
         }
 
+        if (i === selectedTabIndex) {
+          buttonClasses.push(classNames?.selectedTabButton)
+          iconClasses.push(classNames?.selectedTabIcon)
+        }
+
         return (
           <button
             key={i}
@@ -271,57 +285,39 @@ function Tabs({
           </button>
         )
       })}
-      {type === 'pills' ? (
-        <div
-          className={[
-            TabsStyles['tab-slider-pill'],
-            classNames?.tabSliderPill,
-          ].join(' ')}
-          style={selectPillStyles}
-        />
-      ) : (
-        <div
-          className={[TabsStyles['tab-slider'], classNames?.tabSlider].join(
-            ' '
-          )}
-          style={hoverStyles}
-        />
-      )}
-      {type === 'underlined' && (
-        <div
-          className={[TabsStyles['tab-outline'], classNames?.tabOutline].join(
-            ' '
-          )}
-          style={selectStyles}
-        />
-      )}
       {removable && (
         <div
           className={[
-            TabsStyles['removable-button-container'],
-            classNames?.removableButtonContainer,
+            TabsStyles['removable-container'],
+            classNames?.removableContainer,
           ].join(' ')}
-          style={removableStyles}
+          style={selectPillStyles}
         >
-          <Button
-            classNames={{
-              button: TabsStyles['removable-button'],
-              ...classNames?.removableButton,
-            }}
-            onClick={() => {
-              buttonRefs[selectedId]?.blur()
-              onChange?.('')
-              setSelectedId('')
-            }}
-            rippleProps={removableRippleProps}
-            touchScreen={touchScreen}
-            ref={removableRef}
-            block={true}
-            rounded={true}
-            type={'primary'}
-            size={'tiny'}
-            icon={<Solid.Cancel size={14} />}
-          />
+          <div
+            className={[
+              TabsStyles['removable-button-container'],
+              classNames?.removableButtonContainer,
+            ].join(' ')}
+          >
+            <Button
+              classNames={{
+                button: TabsStyles['removable-button'],
+                ...classNames?.removableButton,
+              }}
+              onClick={() => {
+                buttonRefs[selectedId]?.blur()
+                onChange?.('')
+                setSelectedId('')
+              }}
+              rippleProps={removableRippleProps}
+              touchScreen={touchScreen}
+              ref={removableRef}
+              rounded={true}
+              type={'primary'}
+              size={'tiny'}
+              icon={<Solid.Cancel size={14} />}
+            />
+          </div>
         </div>
       )}
     </nav>

@@ -24,7 +24,6 @@
   width: 100%;
   display: flex;
   padding: $mp-4;
-  z-index: 20;
   background-color: transparent;
   margin-right: $mp-2;
   margin-bottom: $mp-2;
@@ -83,7 +82,6 @@
 
 .tab-slider {
   position: absolute;
-  z-index: 10;
   top: 0;
   left: 0;
   border-radius: $rounded-md;
@@ -97,22 +95,20 @@
 
 .tab-slider-pill {
   position: absolute;
-  z-index: 10;
   top: 0;
   left: 0;
+  transition: width, transform $transition-standard-easing 150ms;
+  transition-timing-function: $duration-expand-md;
   border-radius: $rounded-full;
   -webkit-border-radius: $rounded-full;
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
   background-color: $brand-500;
-  transition: width, transform $transition-standard-easing 150ms;
-  transition-timing-function: $duration-expand-md;
 }
 
 .tab-outline {
   position: absolute;
   margin-left: $mp-2;
-  z-index: 10;
   bottom: 0;
   left: 0;
   height: $mp-0-5;
@@ -121,11 +117,20 @@
   transition-timing-function: $duration-expand-md;
 }
 
+.removable-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width, transform $transition-standard-easing 150ms;
+  transition-timing-function: $duration-expand-md;
+}
+
 .removable-button-container {
   position: absolute;
-  z-index: 20;
-  transition: transform $transition-standard-easing 150ms;
-  transition-timing-function: $duration-expand-md;
+  width: 24px;
+  height: 24px;
+  right: -6px;
+  top: -6px;
 }
 
 .removable-button {
