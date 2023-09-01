@@ -37,6 +37,7 @@
 }
 
 .checkbox {
+  cursor: pointer;
   border-width: 1px;
   border-style: solid;
   border-radius: $mp-1;
@@ -45,15 +46,6 @@
   -khtml-border-radius: $mp-1;
   background-color: transparent;
   border-color: $gray-300;
-
-  & :hover {
-    border-color: $brand-500;
-  }
-
-  & :focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
 }
 
 .checkbox[type='checkbox']:checked:hover {
@@ -71,7 +63,6 @@
 
 .checkbox-container {
   display: flex;
-  cursor: pointer;
 }
 
 .checkbox-label-container {
@@ -82,7 +73,6 @@
 
 .checkbox-label-container-label {
   color: $gray-100;
-  cursor: pointer;
   margin-top: 0px;
 }
 

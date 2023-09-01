@@ -9,17 +9,18 @@ export default {
 }
 
 const defaultOptions = [
-  { value: 'one', label: 'one' },
-  { value: 'two', label: 'two' },
-  { value: 'three', label: 'three' },
-  { value: 'four', label: 'four' },
+  { id: 'one', value: 'one', label: 'one' },
+  { id: 'two', value: 'two', label: 'two' },
+  { id: 'three', value: 'three', label: 'three' },
+  { id: 'four', value: 'four', label: 'four' },
 ]
 
-export const Default = (args: any) => {
+export const Default = () => {
+  const [selectedId, setSelectedId] = useState<string>('one')
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
     options.push({
-      id: option.label,
+      id: option.id,
       value: option.value,
       children: () => (
         <span style={{ fontSize: '0.875rem' }}>{option.label}</span>
@@ -30,10 +31,10 @@ export const Default = (args: any) => {
     <div style={{ height: '80vh' }}>
       <Listbox
         label="Default listbox"
-        defaultIndex={0}
+        selectedId={selectedId}
         options={options}
-        onChange={(index: number, id: string, value: string) =>
-          console.log(value)
+        onChange={(index: number, id: string, value?: string) =>
+          setSelectedId(id)
         }
       />
     </div>
@@ -42,62 +43,73 @@ export const Default = (args: any) => {
 
 const people = [
   {
+    id: 'wade-cooper',
     value: 'Wade Cooper',
     avatar:
       'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'arlene-mccoy',
     value: 'Arlene Mccoy',
     avatar:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'devon-webb',
     value: 'Devon Webb',
     avatar:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
   },
   {
+    id: 'tom-cook',
     value: 'Tom Cook',
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'tanya-fox',
     value: 'Tanya Fox',
     avatar:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'hellen-schmidt',
     value: 'Hellen Schmidt',
     avatar:
       'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'caroline-schultz',
     value: 'Caroline Schultz',
     avatar:
       'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'mason-heaney',
     value: 'Mason Heaney',
     avatar:
       'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'claudie-smitham',
     value: 'Claudie Smitham',
     avatar:
       'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
+    id: 'emil-schaefer',
     value: 'Emil Schaefer',
     avatar:
       'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
 ]
 
-export const People = (args: any) => {
-  const ref = useRef<any>(null)
+export const People = () => {
+  const [selectedId, setSelectedId] = useState<string>('emil-schaefer')
   const options: OptionProps[] = []
   for (const person of people) {
     options.push({
+      id: person.id,
       value: person.value,
       addOnBefore: () => (
         <img
@@ -130,10 +142,10 @@ export const People = (args: any) => {
     <Listbox
       label="Choose a person"
       descriptionText="Choose a person for this role"
-      defaultIndex={0}
+      selectedId={selectedId}
       options={options}
-      onChange={(index: number, id: string, value: string) =>
-        console.log(value)
+      onChange={(index: number, id: string, value?: string) =>
+        setSelectedId(id)
       }
     />
   )
@@ -146,11 +158,12 @@ People.args = {
   size: 'medium',
 }
 
-export const WithIcon = (args: any) => {
-  const ref = useRef<any>(null)
+export const WithIcon = () => {
+  const [selectedId, setSelectedId] = useState<string>('en')
   const [isGlobeIconLit, setIsGlobeIconLit] = useState<boolean>(false)
   return (
     <Listbox
+      selectedId={selectedId}
       label="Language"
       icon={
         <Language
@@ -159,8 +172,8 @@ export const WithIcon = (args: any) => {
           strokeWidth={0}
         />
       }
-      onChange={(index: number, id: string, value: string) =>
-        console.log(value)
+      onChange={(index: number, id: string, value?: string) =>
+        setSelectedId(id)
       }
       onMouseEnter={() => setIsGlobeIconLit(true)}
       onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -172,6 +185,7 @@ export const WithIcon = (args: any) => {
       onBlur={() => setIsGlobeIconLit(false)}
       options={[
         {
+          id: 'en',
           value: 'English',
           children: ({ selected }: any) => {
             return (
@@ -185,6 +199,7 @@ export const WithIcon = (args: any) => {
           },
         },
         {
+          id: 'fr',
           value: 'French',
           children: ({ selected }: any) => {
             return (
@@ -208,10 +223,12 @@ WithIcon.args = {
   size: 'medium',
 }
 
-export const ErrorState = (args: any) => {
+export const ErrorState = () => {
+  const [selectedId, setSelectedId] = useState<string>('arlene-mccoy')
   const options: OptionProps[] = []
   for (const person of people) {
     options.push({
+      id: person.id,
       value: person.value,
       addOnBefore: ({ selected }: any) => (
         <img
@@ -239,22 +256,24 @@ export const ErrorState = (args: any) => {
   }
   return (
     <Listbox
+      selectedId={selectedId}
       label="Choose a person"
       descriptionText="Choose a person for this role"
       error="I am an error"
       options={options}
-      onChange={(index: number, id: string, value: string) =>
-        console.log(value)
+      onChange={(index: number, id: string, value?: string) =>
+        setSelectedId(id)
       }
     />
   )
 }
 
-export const TouchScreen = (args: any) => {
+export const TouchScreen = () => {
+  const [selectedId, setSelectedId] = useState<string>('one')
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
     options.push({
-      id: option.label,
+      id: option.id,
       value: option.value,
       children: () => (
         <span style={{ fontSize: '0.875rem' }}>{option.label}</span>
@@ -266,10 +285,10 @@ export const TouchScreen = (args: any) => {
       <Listbox
         label="Default listbox"
         touchScreen={true}
-        defaultIndex={0}
+        selectedId={selectedId}
         options={options}
-        onChange={(index: number, id: string, value: string) =>
-          console.log(value)
+        onChange={(index: number, id: string, value?: string) =>
+          setSelectedId(id)
         }
       />
     </div>

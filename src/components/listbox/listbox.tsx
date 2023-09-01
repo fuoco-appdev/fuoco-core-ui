@@ -10,13 +10,13 @@ import { Dropdown } from '../dropdown'
 import { DropdownAlignment } from '../dropdown/dropdown'
 
 const ListboxContext = React.createContext<{
-  selectedItem?: string
-  setSelectedItem?: (value: string) => void
+  selectedId?: string
+  onSelectedId?: (id: string) => void
 }>({})
 
 export interface ListboxProps {
   options: OptionProps[]
-  defaultIndex?: number
+  selectedId: string
   classNames?: {
     formLayout?: FormLayoutClasses
     listbox?: string
@@ -35,10 +35,9 @@ export interface ListboxProps {
   descriptionText?: string
   error?: string
   icon?: any
-  id?: string
   label?: string
   labelOptional?: string
-  onChange?: (index: number, id: string, value: string) => void
+  onChange?: (index: number, id: string, value: string | undefined) => void
   style?: React.CSSProperties
   reveal?: boolean
   actions?: React.ReactNode
@@ -50,14 +49,13 @@ export interface ListboxProps {
 }
 
 function Listbox({
-  defaultIndex = 0,
+  selectedId,
   options,
   classNames,
   touchScreen = false,
   descriptionText,
   error,
   icon,
-  id,
   label,
   labelOptional,
   onChange,
@@ -68,29 +66,25 @@ function Listbox({
   onFocus,
   onBlur,
 }: ListboxProps) {
-  const [childRefs] = useState<Record<string, React.MutableRefObject<any>>>({})
-  const [selectedProps, setSelectedProps] = useState<OptionProps | undefined>(
-    options[defaultIndex]
+  const [selectedOption, setSelectedOption] = useState<OptionProps | undefined>(
+    undefined
   )
   const anchorRef = useRef<HTMLDivElement | null>(null)
 
-  function handleOnChange(e: any) {}
-
-  const setSelectedItem = (value: string) => {
-    const props = options.find((option) => option.value === value)
+  const onSelectedId = (id: string | undefined) => {
+    const props = options.find((option) => option.id === id)
     if (props) {
       const index = options.indexOf(props)
-      setSelectedProps(props)
-
-      if (onChange) onChange?.(index, props?.id ?? value, value)
+      if (onChange) onChange?.(index, props?.id, props?.value)
     }
   }
 
   useEffect(() => {
-    if (options.length > 0 && !selectedProps) {
-      setSelectedProps(options[defaultIndex])
+    if (options.length > 0) {
+      const selectedOption = options.find((value) => value.id === selectedId)
+      setSelectedOption(selectedOption)
     }
-  }, [options])
+  }, [selectedId])
 
   let selectClasses = [SelectStyles['listbox'], classNames?.listbox]
   if (error)
@@ -105,7 +99,6 @@ function Listbox({
     <FormLayout
       label={label}
       labelOptional={labelOptional}
-      id={id}
       error={error}
       descriptionText={descriptionText}
       classNames={classNames?.formLayout}
@@ -120,13 +113,13 @@ function Listbox({
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <HeadlessListbox value={selectedProps?.value} onChange={handleOnChange}>
+        <HeadlessListbox value={selectedOption?.value} onChange={() => {}}>
           {({ open }) => {
             return (
               <ListboxContext.Provider
                 value={{
-                  selectedItem: selectedProps?.value,
-                  setSelectedItem: setSelectedItem,
+                  selectedId: selectedId,
+                  onSelectedId: onSelectedId,
                 }}
               >
                 <div ref={anchorRef}>
@@ -147,14 +140,14 @@ function Listbox({
                           {icon}
                         </div>
                       )}
-                      {selectedProps?.addOnBefore && (
+                      {selectedOption?.addOnBefore && (
                         <span
                           className={[
                             SelectStyles['listbox-addonbefore'],
                             classNames?.addonbefore,
                           ].join(' ')}
                         >
-                          {selectedProps.addOnBefore(selectedProps?.value)}
+                          {selectedOption.addOnBefore(selectedOption?.value)}
                         </span>
                       )}
                       <span
@@ -163,7 +156,7 @@ function Listbox({
                           classNames?.label,
                         ].join(' ')}
                       >
-                        {selectedProps?.value}
+                        {selectedOption?.value}
                       </span>
                       {error && (
                         <div
@@ -208,11 +201,11 @@ function Listbox({
                   touchScreen={touchScreen}
                   onOpen={() => {
                     onFocus?.()
-                    for (const key in childRefs) {
-                      childRefs[key]?.current?.updateSelectedValue(
-                        selectedProps?.value
-                      )
-                    }
+                    // for (const key in childRefs) {
+                    //   childRefs[key]?.current?.updateSelectedValue(
+                    //     selectedOption?.value
+                    //   )
+                    // }
                   }}
                   onClose={() => {
                     onBlur?.()
@@ -235,8 +228,8 @@ function Listbox({
 }
 
 export interface OptionProps {
-  value: string
-  id?: string
+  id: string
+  value?: string
   classNames?: {
     option?: string
     optionInner?: string
@@ -258,7 +251,7 @@ export function ListboxOption({
       {(selectedProps) => (
         <Dropdown.Item
           key={id}
-          onClick={() => selectedProps?.setSelectedItem?.(value)}
+          onClick={() => selectedProps?.onSelectedId?.(id)}
         >
           <div
             className={[
@@ -274,11 +267,11 @@ export function ListboxOption({
             >
               {addOnBefore &&
                 addOnBefore?.({
-                  selected: value === selectedProps?.selectedItem,
+                  selected: id === selectedProps?.selectedId,
                 })}
               <span>
                 {typeof children === 'function'
-                  ? children?.({ selected: selectedProps?.selectedItem })
+                  ? children?.({ selected: selectedProps?.selectedId })
                   : children}
               </span>
             </div>

@@ -50,7 +50,6 @@ export interface RadioGroupProps {
   checkboxes?: any
   id: string
   classNames?: RadioGroupClasses
-  layout?: 'horizontal' | 'vertical'
   error?: any
   descriptionText?: any
   label?: any
@@ -70,7 +69,6 @@ export interface RadioGroupProps {
 function RadioGroup({
   id,
   activeId = '',
-  layout,
   rippleProps = {
     during: 350,
     color: 'rgba(0,0,0,0.35)',
@@ -152,7 +150,6 @@ function Radio({
   beforeLabel,
   description,
   rightContent,
-  name,
   onChange,
   onFocus,
   size = 'medium',

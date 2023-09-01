@@ -41,7 +41,6 @@ export interface CheckboxProps {
 
 export interface CheckboxGroupProps {
   id?: any
-  layout?: 'horizontal' | 'vertical'
   error?: any
   descriptionText?: any
   label?: any
@@ -60,7 +59,6 @@ export interface CheckboxGroupProps {
 
 function Group({
   id,
-  layout = 'vertical',
   error,
   descriptionText,
   label,
@@ -84,7 +82,6 @@ function Group({
       afterLabel={afterLabel}
       beforeLabel={beforeLabel}
       labelOptional={labelOptional}
-      layout={layout}
       id={id}
       error={error}
       descriptionText={descriptionText}
