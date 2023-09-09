@@ -179,7 +179,6 @@ function Tabs({
       | React.FocusEvent<HTMLButtonElement>,
     i: number
   ) => {
-    setNavRect(navRef.current?.getBoundingClientRect())
     setHoveredRect((e.target as HTMLButtonElement).getBoundingClientRect())
     setHoveredTabIndex(i)
   }
