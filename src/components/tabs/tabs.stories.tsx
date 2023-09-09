@@ -21,51 +21,30 @@ export function Default() {
         {
           id: 'panel-1',
           label: '1st tab',
-          children: (
-            <Typography.Text>Content for the first panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-2',
           label: '2st tab',
-          children: (
-            <Typography.Text>Content for the second panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-3',
           label: '3st tab',
-          children: (
-            <Typography.Text>Content for the third panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-4',
           label: '4th tab',
-          children: (
-            <Typography.Text>Content for the third panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-5',
           label: '5th tab',
-          children: (
-            <Typography.Text>Content for the third panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-6',
           label: '6th tab',
-          children: (
-            <Typography.Text>Content for the third panel</Typography.Text>
-          ),
         },
         {
           id: 'panel-7',
           label: '7th tab',
-          children: (
-            <Typography.Text>Content for the third panel</Typography.Text>
-          ),
         },
       ]}
     />
