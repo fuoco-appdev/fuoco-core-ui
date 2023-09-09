@@ -58,7 +58,6 @@ function Tabs({
   const [buttonRefs, setButtonRefs] = useState<
     Record<string, HTMLButtonElement | null>
   >({})
-  const [selectedId, setSelectedId] = useState<string>(activeId ?? '')
   const [selectedTabIndex, setSelectedTabIndex] = useState<number | null>(null)
   const [hoveredTabIndex, setHoveredTabIndex] = useState<number | null>(null)
   const [hoveredRect, setHoveredRect] = useState<DOMRect | undefined>(undefined)
@@ -81,13 +80,7 @@ function Tabs({
   )
 
   useEffect(() => {
-    if (selectedId !== activeId) {
-      setSelectedId(activeId ?? '')
-    }
-  }, [activeId])
-
-  useEffect(() => {
-    if (selectedId === '') {
+    if (activeId === '') {
       setSelectedTabIndex(null)
       setHoveredTabIndex(null)
       setSelectedRect(undefined)
@@ -102,17 +95,17 @@ function Tabs({
 
     const resizeObserver = new ResizeObserver(() => {
       setNavRect(navRef.current?.getBoundingClientRect())
-      setSelectedRect(buttonRefs[selectedId]?.getBoundingClientRect())
-      setHoveredRect(buttonRefs[selectedId]?.getBoundingClientRect())
+      setSelectedRect(buttonRefs[activeId ?? '']?.getBoundingClientRect())
+      setHoveredRect(buttonRefs[activeId ?? '']?.getBoundingClientRect())
       setRemovableRect(removableRef?.current?.getBoundingClientRect())
-      const index = tabs.findIndex((value) => value.id === selectedId)
+      const index = tabs.findIndex((value) => value.id === activeId)
       setSelectedTabIndex(index)
       setHoveredTabIndex(index)
     })
     resizeObserver.observe(navRef.current)
 
     return () => resizeObserver.disconnect()
-  }, [selectedId])
+  }, [activeId, tabs])
 
   useLayoutEffect(() => {
     if (type === 'underlined' && navRect) {
@@ -193,8 +186,7 @@ function Tabs({
 
   const onSelectTab = (id: string, index: number) => {
     onChange?.(id)
-    buttonRefs[selectedId]?.blur()
-    setSelectedId(id)
+    buttonRefs[activeId ?? '']?.blur()
   }
 
   const navClasses = [TabsStyles['nav'], classNames?.nav]
@@ -305,9 +297,8 @@ function Tabs({
                 ...classNames?.removableButton,
               }}
               onClick={() => {
-                buttonRefs[selectedId]?.blur()
+                buttonRefs[activeId ?? '']?.blur()
                 onChange?.('')
-                setSelectedId('')
               }}
               rippleProps={removableRippleProps}
               touchScreen={touchScreen}
