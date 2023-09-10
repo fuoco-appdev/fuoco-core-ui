@@ -26,16 +26,12 @@ const icons: Partial<{ [key in ToastType]: any }> = {
 }
 
 export interface ToastProps {
-  key: string
   classNames?: ToastClasses
   iconColor?: string
   refCallback?: (ref: HTMLDivElement | null) => void
-  id?: string
   type?: 'success' | 'error' | 'loading'
   icon?: React.ReactNode
-  messageProps?: ComponentProps<typeof Typography.Text>
   message?: string
-  descriptionProps?: ComponentProps<typeof Typography.Text>
   description?: string
   closable?: boolean
   onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -52,6 +48,8 @@ export interface ToastClasses {
   closeButton?: ButtonClasses
   details?: string
   content?: string
+  message?: string
+  description?: string
   iconContainer?: string
   alertAnimSpin?: string
   textContainer?: string
@@ -61,154 +59,148 @@ export interface ToastClasses {
   life?: string
 }
 
-function Message({
-  children,
-  ...props
-}: ComponentProps<typeof Typography.Text>) {
-  return (
-    <Typography.Text
-      className={[ToastStyles['toast-message'], props?.className].join(' ')}
-      {...props}
-    >
-      {children}
-    </Typography.Text>
-  )
-}
-
-function Description({
-  children,
-  ...props
-}: ComponentProps<typeof Typography.Text>) {
-  return (
-    <Typography.Text
-      className={[ToastStyles['toast-description'], props?.className].join(' ')}
-      {...props}
-    >
-      {children}
-    </Typography.Text>
-  )
-}
-
-function Toast(props: ToastProps) {
-  let containerClasses = [
-    ToastStyles['toast-container'],
-    props.classNames?.container,
-  ]
-  if (props.type) {
-    containerClasses.push(ToastStyles[`toast-container-${props.type}`])
+function Toast({
+  classNames,
+  iconColor,
+  refCallback,
+  type,
+  icon,
+  message,
+  description,
+  closable,
+  onClose,
+  actions,
+  actionsPosition,
+  width,
+  disableLife,
+  life,
+  touchScreen,
+}: ToastProps) {
+  let containerClasses = [ToastStyles['toast-container'], classNames?.container]
+  if (type) {
+    containerClasses.push(ToastStyles[`toast-container-${type}`])
   }
-  if (props.touchScreen) {
+  if (touchScreen) {
     containerClasses.push(ToastStyles['toast-container-touchscreen'])
   }
 
-  if (props.width === 'sm' || props.width === 'md') {
-    containerClasses.push(ToastStyles[`toast-container-${props.width}`])
+  if (width === 'sm' || width === 'md') {
+    containerClasses.push(ToastStyles[`toast-container-${width}`])
   }
 
   let closeButtonClasses = [ToastStyles['toast-close-button']]
-  if (props.type) {
-    closeButtonClasses.push(ToastStyles[`toast-close-button-${props.type}`])
+  if (type) {
+    closeButtonClasses.push(ToastStyles[`toast-close-button-${type}`])
   }
 
-  let detailsClasses = [ToastStyles['toast-details'], props.classNames?.details]
-  if (props.actionsPosition === 'bottom') {
+  let detailsClasses = [ToastStyles['toast-details'], classNames?.details]
+  if (actionsPosition === 'bottom') {
     detailsClasses.push(ToastStyles[`toast-details-actions-bottom`])
   }
 
   return (
-    <div ref={props?.refCallback} className={containerClasses.join(' ')}>
+    <div ref={refCallback} className={containerClasses.join(' ')}>
       <div
-        className={[
-          ToastStyles['toast-content'],
-          props.classNames?.content,
-        ].join(' ')}
+        className={[ToastStyles['toast-content'], classNames?.content].join(
+          ' '
+        )}
       >
         <Typography.Text
           className={[
             ToastStyles['toast-icon-container'],
-            props.classNames?.iconContainer,
+            classNames?.iconContainer,
           ].join(' ')}
         >
-          {props.type === 'loading' ? (
+          {type === 'loading' ? (
             <Refresh
               size={24}
               strokeWidth={0}
               className={[
                 ToastStyles['alert-anim-spin'],
-                props.classNames?.alertAnimSpin,
+                classNames?.alertAnimSpin,
               ].join(' ')}
-              stroke={props.iconColor ? props.iconColor : '#ffffff'}
-              color={props.iconColor ? props.iconColor : '#ffffff'}
+              stroke={iconColor}
+              color={iconColor}
             />
           ) : (
-            props.icon || icons[props.type ?? 'blank']
+            icon || icons[type ?? 'blank']
           )}
         </Typography.Text>
         <div
           className={[
             ToastStyles['toast-text-container'],
-            props.classNames?.textContainer,
+            classNames?.textContainer,
           ].join(' ')}
         >
           <div className={detailsClasses.join(' ')}>
             <div
               className={[
                 ToastStyles['toast-details__content'],
-                props.classNames?.detailsContent,
+                classNames?.detailsContent,
               ].join(' ')}
             >
-              <Message {...props.messageProps}>{props.message}</Message>
-              {props.description && (
-                <Description {...props.descriptionProps}>
-                  {props.description}
-                </Description>
-              )}
-            </div>
-            {props.actions && (
               <div
                 className={[
-                  ToastStyles['toast-details__actions'],
-                  props.classNames?.detailsActions,
+                  ToastStyles['toast-message'],
+                  classNames?.message,
                 ].join(' ')}
               >
-                {props.actions}
+                {message}
+              </div>
+              {description && (
+                <div
+                  className={[
+                    ToastStyles['toast-description'],
+                    classNames?.description,
+                  ].join(' ')}
+                >
+                  {description}
+                </div>
+              )}
+            </div>
+            {actions && (
+              <div
+                className={[
+                  ToastStyles['toast-details-actions'],
+                  classNames?.detailsActions,
+                ].join(' ')}
+              >
+                {actions}
               </div>
             )}
           </div>
         </div>
-        {props.closable && (
+        {closable && (
           <div
             className={[
               ToastStyles['toast-close-container'],
-              props.classNames?.closeContainer,
+              classNames?.closeContainer,
             ].join(' ')}
           >
             <Button
               type={'text'}
               classNames={{
                 container: closeButtonClasses.join(' '),
-                ...props.classNames?.closeButton,
+                ...classNames?.closeButton,
               }}
               icon={
                 <Close
                   size={24}
                   strokeWidth={0}
                   aria-hidden="true"
-                  stroke={props.iconColor}
-                  color={props.iconColor}
+                  stroke={iconColor}
+                  color={iconColor}
                 />
               }
-              onClick={props.onClose}
+              onClick={onClose}
             />
           </div>
         )}
       </div>
-      {!props.disableLife && props.life && (
+      {!disableLife && life && (
         <animated.div
-          className={[ToastStyles['toast-life'], props.classNames?.life].join(
-            ' '
-          )}
-          style={{ right: props.life }}
+          className={[ToastStyles['toast-life'], classNames?.life].join(' ')}
+          style={{ right: life }}
         />
       )}
     </div>

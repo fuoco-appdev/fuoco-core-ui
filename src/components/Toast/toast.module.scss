@@ -114,7 +114,7 @@
   flex-direction: column;
 }
 
-.toast-details-actions-bottom .toast-details__actions {
+.toast-details-actions-bottom .toast-details-actions {
   margin-top: $mp-4;
 }
 
@@ -140,7 +140,7 @@
   color: $gray-300;
 }
 
-.toast-details__actions {
+.toast-details-actions {
   display: flex;
   margin-right: $mp-4;
   margin-left: $mp-4;
