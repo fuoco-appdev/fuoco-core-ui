@@ -22,7 +22,6 @@ export interface Props {
   afterLabel?: string
   beforeLabel?: string
   labelOptional?: string
-  layout?: 'horizontal' | 'vertical'
   name?: string
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
   onFocus?(x: React.FocusEvent<HTMLInputElement>): void
@@ -53,7 +52,6 @@ function InputNumber({
   afterLabel,
   beforeLabel,
   labelOptional,
-  layout,
   name,
   onChange,
   onBlur,
@@ -130,7 +128,6 @@ function InputNumber({
         afterLabel={afterLabel}
         beforeLabel={beforeLabel}
         labelOptional={labelOptional}
-        layout={layout}
         id={id}
         error={error}
         descriptionText={descriptionText}
