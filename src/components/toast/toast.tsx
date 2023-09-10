@@ -26,6 +26,7 @@ const icons: Partial<{ [key in ToastType]: any }> = {
 }
 
 export interface ToastProps {
+  key: string
   classNames?: ToastClasses
   iconColor?: string
   refCallback?: (ref: HTMLDivElement | null) => void
@@ -60,6 +61,7 @@ export interface ToastClasses {
 }
 
 function Toast({
+  key,
   classNames,
   iconColor,
   refCallback,
