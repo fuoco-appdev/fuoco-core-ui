@@ -95,6 +95,7 @@ function Listbox({
       classNames?.borderless
     )
 
+  const anchorRect = anchorRef?.current?.getBoundingClientRect()
   return (
     <FormLayout
       label={label}
@@ -196,7 +197,7 @@ function Listbox({
                 </div>
                 <Dropdown
                   style={{
-                    width: anchorRef?.current?.getClientRects()[0].width,
+                    ...(anchorRect && { width: anchorRect.width }),
                   }}
                   touchScreen={touchScreen}
                   onOpen={() => {
