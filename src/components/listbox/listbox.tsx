@@ -126,7 +126,11 @@ function Listbox({
                 <div
                   ref={(ref) => {
                     anchorRef.current = ref
-                    setAnchorRect(ref?.getBoundingClientRect())
+
+                    const rect = ref?.getBoundingClientRect()
+                    if (JSON.stringify(rect) !== JSON.stringify(anchorRect)) {
+                      setAnchorRect(rect)
+                    }
                   }}
                 >
                   <Ripples
