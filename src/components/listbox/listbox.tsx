@@ -69,6 +69,7 @@ function Listbox({
   const [selectedOption, setSelectedOption] = useState<OptionProps | undefined>(
     undefined
   )
+  const [anchorRect, setAnchorRect] = useState<DOMRect | undefined>()
   const anchorRef = useRef<HTMLDivElement | null>(null)
 
   const onSelectedId = (id: string | undefined) => {
@@ -95,7 +96,6 @@ function Listbox({
       classNames?.borderless
     )
 
-  const anchorRect = anchorRef?.current?.getBoundingClientRect()
   return (
     <FormLayout
       label={label}
@@ -123,7 +123,12 @@ function Listbox({
                   onSelectedId: onSelectedId,
                 }}
               >
-                <div ref={anchorRef}>
+                <div
+                  ref={(ref) => {
+                    anchorRef.current = ref
+                    setAnchorRect(ref?.getBoundingClientRect())
+                  }}
+                >
                   <Ripples
                     className={[
                       SelectStyles['listbox-ripple'],
