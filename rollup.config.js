@@ -42,7 +42,7 @@ export default [
       typescript(),
       bundleScss({exclusive: false}),
       postcss({
-        extract: false,
+        extract: true,
         minimize: true,
         modules: true,
         plugins: [
