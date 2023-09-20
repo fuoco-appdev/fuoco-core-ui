@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
 import url from 'postcss-url'
 import json from '@rollup/plugin-json'
+import bundleScss from 'rollup-plugin-bundle-scss';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
@@ -39,6 +40,7 @@ export default [
         include: 'node_modules/**',
       }),
       typescript(),
+      bundleScss({exclusive: false}),
       postcss({
         extract: false,
         minimize: true,
