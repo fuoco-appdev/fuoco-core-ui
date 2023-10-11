@@ -227,12 +227,6 @@ const Modal = ({
                           >
                             <div
                               className={[
-                                ModalStyles['modal-background'],
-                                classNames?.background,
-                              ].join(' ')}
-                            />
-                            <div
-                              className={[
                                 ModalStyles['modal-content'],
                                 classNames?.content,
                               ].join(' ')}

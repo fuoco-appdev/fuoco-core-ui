@@ -56,22 +56,11 @@
   box-shadow: $shadow-6;
   vertical-align: middle;
   z-index: 24;
-}
-
-.modal-background {
-  position: absolute;
   background-color: white;
-  backdrop-filter: blur(6px);
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  border-radius: $rounded-md;
-  -webkit-border-radius: $rounded-md;
-  -moz-border-radius: $rounded-md;
-  -khtml-border-radius: $rounded-md;
 }
 
 .modal-content {
+
 }
 
 .footer-container {
