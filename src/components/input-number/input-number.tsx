@@ -1,16 +1,29 @@
 import React from 'react'
-import { FormLayout } from '../../lib/layout/form-layout'
+import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
-import { ExpandMore, ExpandLess, ErrorOutline } from '../icon/icons/line'
+import { Add, Remove, ErrorOutline } from '../icon/icons/line'
 import InputIconContainer from '../../lib/layout/input-icon-container'
 // @ts-ignore
 import InputNumberStyles from './input-number.module.scss'
+import Button, { ButtonClasses } from '../button/button'
+import { RipplesProps } from 'react-ripples'
 
-export interface Props {
+export interface InputNumberClasses {
+  formLayout?: FormLayoutClasses
+  container?: string
+  input?: string
+  icon?: string
+  error?: string
+  withIcon?: string
+  borderless?: string
+  button?: ButtonClasses
+}
+
+export interface InputNumberProps {
   iconColor?: string
   autoComplete?: string
   autofocus?: boolean
-  className?: string
+  classNames?: InputNumberClasses
   defaultValue?: string | number
   descriptionText?: string
   disabled?: boolean
@@ -23,14 +36,14 @@ export interface Props {
   beforeLabel?: string
   labelOptional?: string
   name?: string
+  rippleProps?: RipplesProps
   onChange?(x: React.ChangeEvent<HTMLInputElement>): void
   onFocus?(x: React.FocusEvent<HTMLInputElement>): void
   onBlur?(x: React.FocusEvent<HTMLInputElement>): void
   onKeyDown?(x: React.KeyboardEvent<HTMLInputElement>): void
   placeholder?: string
   style?: React.CSSProperties
-  value?: any
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
+  value?: string
   min?: number
   max?: number
   borderless?: boolean
@@ -40,7 +53,7 @@ function InputNumber({
   iconColor = '#ffffff',
   autoComplete,
   autofocus,
-  className,
+  classNames,
   defaultValue,
   descriptionText,
   disabled,
@@ -52,51 +65,49 @@ function InputNumber({
   afterLabel,
   beforeLabel,
   labelOptional,
+  rippleProps,
   name,
   onChange,
   onBlur,
   onFocus,
   onKeyDown,
   placeholder,
-  value,
+  value = '0',
   style,
-  size = 'medium',
   min,
   max,
   borderless = false,
-}: Props) {
-  const inputClasses = [InputNumberStyles['sbui-inputnumber']]
-
-  const iconUpClasses = [
-    InputNumberStyles['sbui-inputnumber-button'],
-    InputNumberStyles['sbui-inputnumber-button-up'],
-  ]
-
+}: InputNumberProps) {
+  const inputClasses = [InputNumberStyles['inputnumber'], classNames?.input]
   const inputRefCurrent = inputRef
     ? inputRef
     : React.createRef<HTMLInputElement>()
 
-  const iconDownClasses = [
-    InputNumberStyles['sbui-inputnumber-button'],
-    InputNumberStyles['sbui-inputnumber-button-down'],
-  ]
+  const iconClasses = [InputNumberStyles['inputnumber-icon'], classNames?.icon]
 
-  const iconNavClasses = [InputNumberStyles['sbui-inputnumber-nav']]
+  if (error)
+    inputClasses.push(InputNumberStyles['inputnumber-error'], classNames?.error)
 
-  if (error) inputClasses.push(InputNumberStyles['sbui-inputnumber--error'])
-
-  if (icon) inputClasses.push(InputNumberStyles['sbui-inputnumber--with-icon'])
-
-  if (size) {
-    inputClasses.push(InputNumberStyles[`sbui-inputnumber--${size}`])
-    iconNavClasses.push(InputNumberStyles[`sbui-inputnumber-nav--${size}`])
-  }
+  if (icon)
+    inputClasses.push(
+      InputNumberStyles['inputnumber-with-icon'],
+      classNames?.withIcon
+    )
 
   if (borderless)
-    inputClasses.push(InputNumberStyles['sbui-inputnumber--borderless'])
+    inputClasses.push(
+      InputNumberStyles['inputnumber-borderless'],
+      classNames?.borderless
+    )
 
-  const onClickChevronUp = () => {
-    inputRefCurrent.current?.stepUp()
+  const onIncrement = () => {
+    if (!inputRefCurrent.current) {
+      return
+    }
+
+    inputRefCurrent.current.value = String(
+      Number(inputRefCurrent.current.value) + 1
+    )
     if (onChange) {
       inputRefCurrent.current?.dispatchEvent(
         new InputEvent('change', {
@@ -108,8 +119,14 @@ function InputNumber({
     }
   }
 
-  const onClickChevronDown = () => {
-    inputRefCurrent.current?.stepDown()
+  const onDecrement = () => {
+    if (!inputRefCurrent.current) {
+      return
+    }
+
+    inputRefCurrent.current.value = String(
+      Number(inputRefCurrent.current.value) - 1
+    )
     if (onChange) {
       inputRefCurrent.current?.dispatchEvent(
         new InputEvent('change', {
@@ -122,73 +139,65 @@ function InputNumber({
   }
 
   return (
-    <div className={className}>
-      <FormLayout
-        label={label}
-        afterLabel={afterLabel}
-        beforeLabel={beforeLabel}
-        labelOptional={labelOptional}
-        id={id}
-        error={error}
-        descriptionText={descriptionText}
-        style={style}
-        size={size}
+    <FormLayout
+      classNames={classNames?.formLayout}
+      label={label}
+      afterLabel={afterLabel}
+      beforeLabel={beforeLabel}
+      labelOptional={labelOptional}
+      id={id}
+      error={error}
+      descriptionText={descriptionText}
+      style={style}
+    >
+      <div
+        className={[InputNumberStyles['container'], classNames?.container].join(
+          ' '
+        )}
       >
-        <div className={InputNumberStyles['sbui-inputnumber-container']}>
-          <input
-            autoComplete={autoComplete}
-            autoFocus={autofocus}
-            defaultValue={defaultValue}
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={onChange ? (event) => onChange(event) : undefined}
-            onFocus={onFocus ? (event) => onFocus(event) : undefined}
-            onBlur={onBlur ? (event) => onBlur(event) : undefined}
-            onKeyDown={onKeyDown ? (event) => onKeyDown(event) : undefined}
-            placeholder={placeholder}
-            ref={inputRefCurrent}
-            type={'number'}
-            value={value}
-            className={inputClasses.join(' ')}
-            min={min}
-            max={max}
+        <input
+          autoComplete={autoComplete}
+          autoFocus={autofocus}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          id={id}
+          name={name}
+          onChange={onChange ? (event) => onChange(event) : undefined}
+          onFocus={onFocus ? (event) => onFocus(event) : undefined}
+          onBlur={onBlur ? (event) => onBlur(event) : undefined}
+          onKeyDown={onKeyDown ? (event) => onKeyDown(event) : undefined}
+          placeholder={placeholder}
+          ref={inputRefCurrent}
+          type={'number'}
+          value={value}
+          className={inputClasses.join(' ')}
+          min={min}
+          max={max}
+        />
+        <div className={iconClasses.join(' ')}>
+          <Button
+            classNames={classNames?.button}
+            rippleProps={rippleProps}
+            rounded={true}
+            type={'text'}
+            onClick={onDecrement}
+            icon={<Remove size={18} color={iconColor} stroke={iconColor} />}
           />
-          <div className={iconNavClasses.join(' ')}>
-            <ExpandMore
-              size={24}
-              strokeWidth={0}
-              color={iconColor}
-              stroke={iconColor}
-              className={iconUpClasses.join(' ')}
-              onClick={onClickChevronUp}
-              onMouseDown={(e: React.MouseEvent) => {
-                e.preventDefault()
-              }}
-            />
-            <ExpandLess
-              className={iconDownClasses.join(' ')}
-              onClick={onClickChevronDown}
-              onMouseDown={(e: React.MouseEvent) => {
-                e.preventDefault()
-              }}
-            />
-          </div>
+          <Button
+            classNames={classNames?.button}
+            rippleProps={rippleProps}
+            rounded={true}
+            type={'text'}
+            onClick={onIncrement}
+            icon={<Add size={18} color={iconColor} stroke={iconColor} />}
+          />
           {icon && <InputIconContainer icon={icon} />}
-          {error ? (
-            <div
-              className={
-                InputNumberStyles['sbui-inputnumber-actions-container']
-              }
-            >
-              {error && (
-                <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
-              )}
-            </div>
-          ) : null}
+          {error && (
+            <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
+          )}
         </div>
-      </FormLayout>
-    </div>
+      </div>
+    </FormLayout>
   )
 }
 

@@ -2,80 +2,90 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-inputnumber-container {
+.container {
   position: relative;
-}
-
-.sbui-inputnumber {
-  display: block;
+  display: flex;
   box-sizing: border-box;
-  padding: $mp-2 $mp-3;
-  width: 100%;
+  border-width: 1px;
+  border-style: solid;
   border-radius: $rounded-md;
   -webkit-border-radius: $rounded-md;
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: $gray-100;
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 0 $mp-3;
+  align-items: center;
+}
+
+.inputnumber {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: none;
+  border: 0;
+  box-shadow: none !important;
+  font-family: inherit;
+  appearance: textfield;
+  background: transparent;
+  padding: $mp-3 0;
+  width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  border-width: 1px;
-  border-style: solid;
   color: $gray-100;
-  border-color: $gray-100;
-  font-family: inherit;
-  transition: box-shadow 0.3s ease-in-out;
-  -moz-appearance: textfield;
-  float: left;
-  display: block;
   background-color: transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  resize: none;
 
   & :focus {
-    border-color: $gray-100;
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
 
   & :hover {
-    border-color: $brand-200;
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
 }
 
-.sbui-inputnumber::placeholder {
+.inputnumber::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: $gray-300;
 }
 
-.sbui-inputnumber:-ms-input-placeholder {
+.inputnumber:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: $gray-300;
 }
 
-.sbui-inputnumber::-ms-input-placeholder {
+.inputnumber::-ms-input-placeholder {
   /* Microsoft Edge */
   color: $gray-300;
 }
 
-.sbui-inputnumber::-webkit-inner-spin-button,
-.sbui-inputnumber::-webkit-outer-spin-button {
+.inputnumber::-webkit-inner-spin-button,
+.inputnumber::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.sbui-inputnumber:focus {
+.inputnumber:focus {
   outline: 0;
 }
 
-.sbui-inputnumber--error {
+.inputnumber-error {
   border-color: $red-500;
 }
 
-.sbui-inputnumber--borderless {
+.inputnumber-borderless {
   border-color: transparent;
   box-shadow: none;
 }
 
-.sbui-inputnumber-actions-container {
+.inputnumber-actions-container {
   position: absolute;
   display: flex;
   align-items: center;
@@ -86,17 +96,16 @@
   padding-right: $mp-1;
 }
 
-.sbui-inputnumber-nav {
-  display: none;
-  float: left;
-  position: relative;
+.inputnumber-icon {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: $mp-2;
 }
 
-.sbui-inputnumber:focus + .sbui-inputnumber-nav {
-  display: block;
-}
-
-.sbui-inputnumber-button {
+.inputnumber-button {
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -128,12 +137,12 @@
   user-select: none;
 }
 
-.sbui-inputnumber-button:active {
+.inputnumber-button:active {
   background: #eaeaea;
   background-clip: padding-box;
 }
 
-.sbui-inputnumber-button-up {
+.inputnumber-button-up {
   position: absolute;
   height: 50%;
   top: 0;
@@ -144,7 +153,7 @@
   line-height: 1.6;
 }
 
-.sbui-inputnumber-button-down {
+.inputnumber-button-down {
   position: absolute;
   bottom: 0;
   height: 50%;
@@ -154,56 +163,6 @@
   -khtml-border-radius: $rounded-md;
 }
 
-/*
-    Input sizes
-  */
-
-.sbui-inputnumber--tiny {
-  padding: $mp-1-5 $mp-2-5;
-  font-size: $font-size-xs;
-  line-height: $font-line-height-xs;
-}
-.sbui-inputnumber--small {
-  padding: $mp-2 $mp-3;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-xs;
-}
-.sbui-inputnumber--medium {
-  padding: $mp-2 $mp-4;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
-}
-
-.sbui-inputnumber--large {
-  padding: $mp-2 $mp-4;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
-}
-.sbui-inputnumber--xlarge {
-  padding: $mp-3 $mp-6;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
-}
-
-.sbui-inputnumber-nav--tiny {
-  height: 30px;
-}
-.sbui-inputnumber-nav--small {
-  height: 34px;
-}
-.sbui-inputnumber-nav--medium {
-  height: 38px;
-}
-.sbui-inputnumber-nav--large {
-  height: 42px;
-}
-.sbui-inputnumber-nav--xlarge {
-  height: 50px;
-}
-/*
-    Input icon
-  */
-
-.sbui-inputnumber--with-icon {
+.inputnumber-with-icon {
   padding-left: $mp-10;
 }
