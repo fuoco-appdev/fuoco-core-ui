@@ -105,9 +105,7 @@ function InputNumber({
       return
     }
 
-    inputRefCurrent.current.value = String(
-      Number(inputRefCurrent.current.value) + 1
-    )
+    inputRefCurrent.current.stepUp()
     if (onChange) {
       inputRefCurrent.current?.dispatchEvent(
         new InputEvent('change', {
@@ -124,9 +122,7 @@ function InputNumber({
       return
     }
 
-    inputRefCurrent.current.value = String(
-      Number(inputRefCurrent.current.value) - 1
-    )
+    inputRefCurrent.current.stepDown()
     if (onChange) {
       inputRefCurrent.current?.dispatchEvent(
         new InputEvent('change', {
@@ -162,6 +158,19 @@ function InputNumber({
           disabled={disabled}
           id={id}
           name={name}
+          onInput={(e) => {
+            if (
+              parseInt(e.currentTarget.value) > parseInt(e.currentTarget.max)
+            ) {
+              e.currentTarget.value = e.currentTarget.max
+            }
+
+            if (
+              parseInt(e.currentTarget.value) < parseInt(e.currentTarget.min)
+            ) {
+              e.currentTarget.value = e.currentTarget.min
+            }
+          }}
           onChange={onChange ? (event) => onChange(event) : undefined}
           onFocus={onFocus ? (event) => onFocus(event) : undefined}
           onBlur={onBlur ? (event) => onBlur(event) : undefined}
