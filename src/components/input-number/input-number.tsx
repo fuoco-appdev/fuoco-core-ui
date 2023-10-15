@@ -25,6 +25,7 @@ export interface InputNumberProps {
   autofocus?: boolean
   classNames?: InputNumberClasses
   defaultValue?: string | number
+  touchScreen?: boolean
   descriptionText?: string
   disabled?: boolean
   error?: string
@@ -55,6 +56,7 @@ function InputNumber({
   autofocus,
   classNames,
   defaultValue,
+  touchScreen,
   descriptionText,
   disabled,
   error,
@@ -185,6 +187,7 @@ function InputNumber({
         />
         <div className={iconClasses.join(' ')}>
           <Button
+            touchScreen={touchScreen}
             classNames={classNames?.button}
             rippleProps={rippleProps}
             rounded={true}
@@ -193,6 +196,7 @@ function InputNumber({
             icon={<Remove size={18} color={iconColor} stroke={iconColor} />}
           />
           <Button
+            touchScreen={touchScreen}
             classNames={classNames?.button}
             rippleProps={rippleProps}
             rounded={true}
