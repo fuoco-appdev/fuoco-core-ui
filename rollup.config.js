@@ -9,6 +9,7 @@ import postcss from 'rollup-plugin-postcss'
 import url from 'postcss-url'
 import json from '@rollup/plugin-json'
 import bundleScss from 'rollup-plugin-bundle-scss';
+import autoprefixer from 'autoprefixer';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
@@ -50,6 +51,7 @@ export default [
             url: 'inline',
             fallback: 'copy',
           }),
+          autoprefixer(),
         ],
         use: [
           [
