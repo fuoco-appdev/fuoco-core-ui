@@ -5,15 +5,16 @@ import { Button } from '../button/index'
 // @ts-ignore
 import DropdownStyles from './dropdown.module.scss'
 import { useDrag } from '@use-gesture/react'
+import { ButtonClasses } from '../button/button'
 
 export enum DropdownAlignment {
   Left,
   Right,
 }
 
-export interface DropDownProps {
+export interface DropdownProps {
   id?: string
-  className?: string
+  classNames?: DropdownClasses
   align?: DropdownAlignment
   dropThresholdPercent?: number
   open?: boolean
@@ -25,9 +26,20 @@ export interface DropDownProps {
   style?: React.CSSProperties
 }
 
+export interface DropdownClasses {
+  touchscreenAnimatedOverlay?: string
+  touchscreenOverlay?: string
+  dropdown?: string
+  touchscreenDropdown?: string
+  touchscreenAnimatedContainer?: string
+  touchscreenDropdownBar?: string
+  touchscreenDropdownHandleContainer?: string
+  touchscreenDropdownHandle?: string
+}
+
 function Dropdown({
   id,
-  className,
+  classNames,
   align = DropdownAlignment.Right,
   dropThresholdPercent = 50,
   open,
@@ -37,7 +49,7 @@ function Dropdown({
   onClose,
   children,
   style,
-}: DropDownProps) {
+}: DropdownProps) {
   const parentRef = useRef<HTMLDivElement | null>(null)
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
@@ -176,7 +188,10 @@ function Dropdown({
           <animated.div
             ref={parentRef}
             style={overlayStyle}
-            className={DropdownStyles['touchscreen-animated-overlay']}
+            className={[
+              DropdownStyles['touchscreen-animated-overlay'],
+              classNames?.touchscreenAnimatedOverlay,
+            ].join(' ')}
             onClick={onClose}
           >
             {desktopTransition(
@@ -195,9 +210,10 @@ function Dropdown({
                     <ul
                       ref={uListRef}
                       id={id}
-                      className={[DropdownStyles['dropdown'], className].join(
-                        ' '
-                      )}
+                      className={[
+                        DropdownStyles['dropdown'],
+                        classNames?.dropdown,
+                      ].join(' ')}
                     >
                       {children}
                     </ul>
@@ -213,15 +229,24 @@ function Dropdown({
         item && (
           <animated.div
             style={overlayStyle}
-            className={DropdownStyles['touchscreen-animated-overlay']}
+            className={[
+              DropdownStyles['touchscreen-animated-overlay'],
+              classNames?.touchscreenAnimatedOverlay,
+            ].join(' ')}
           >
             <div
-              className={DropdownStyles['touchscreen-overlay']}
+              className={[
+                DropdownStyles['touchscreen-overlay'],
+                classNames?.touchscreenOverlay,
+              ].join(' ')}
               onClick={onClose}
             />
             <animated.div
               ref={divRef}
-              className={DropdownStyles['touchscreen-animated-container']}
+              className={[
+                DropdownStyles['touchscreen-animated-container'],
+                classNames?.touchscreenAnimatedContainer,
+              ].join(' ')}
               {...bind()}
               onScroll={() => {
                 const scrollTop = divRef.current?.scrollTop ?? 0
@@ -238,17 +263,26 @@ function Dropdown({
                 ref={uListRef}
                 className={[
                   DropdownStyles['touchscreen-dropdown'],
-                  className,
+                  classNames?.touchscreenDropdown,
                 ].join(' ')}
               >
-                <div className={DropdownStyles['touchscreen-dropdown-bar']}>
+                <div
+                  className={[
+                    DropdownStyles['touchscreen-dropdown-bar'],
+                    classNames?.touchscreenDropdownBar,
+                  ].join(' ')}
+                >
                   <div
-                    className={
-                      DropdownStyles['touchscreen-dropdown-handle-container']
-                    }
+                    className={[
+                      DropdownStyles['touchscreen-dropdown-handle-container'],
+                      classNames?.touchscreenDropdownHandleContainer,
+                    ].join(' ')}
                   >
                     <div
-                      className={DropdownStyles['touchscreen-dropdown-handle']}
+                      className={[
+                        DropdownStyles['touchscreen-dropdown-handle'],
+                        classNames?.touchscreenDropdownHandle,
+                      ].join(' ')}
                     />
                   </div>
                 </div>
@@ -261,23 +295,19 @@ function Dropdown({
   }
 }
 
-interface ItemProps {
+export interface DropdownItemClasses {
+  container?: string
+  button?: ButtonClasses
+}
+
+export interface DropdownItemProps {
   ref?: React.LegacyRef<HTMLLIElement>
-  classNames?: {
-    container?: string
-    button?: {
-      container?: string
-      button?: string
-      leftIconContainer?: string
-      rightIconContainer?: string
-      children?: string
-    }
-  }
+  classNames?: DropdownItemClasses
   children?: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function Item({ ref, classNames, children, onClick }: ItemProps) {
+function Item({ ref, classNames, children, onClick }: DropdownItemProps) {
   return (
     <li
       ref={ref}
@@ -301,12 +331,23 @@ function Item({ ref, classNames, children, onClick }: ItemProps) {
   )
 }
 
-interface IconProps {
+export interface DropdownIconClasses {
+  icon?: string
+}
+
+export interface DropdownIconProps {
+  classNames?: DropdownIconClasses
   children?: React.ReactNode
 }
 
-function Icon({ children }: IconProps) {
-  return <div className={DropdownStyles['dropdown-icon']}>{children}</div>
+function Icon({ classNames, children }: DropdownIconProps) {
+  return (
+    <div
+      className={[DropdownStyles['dropdown-icon'], classNames?.icon].join(' ')}
+    >
+      {children}
+    </div>
+  )
 }
 
 Dropdown.Item = Item
