@@ -1,0 +1,146 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
+.banner-root {
+  position: fixed;
+  height: calc(100vh - 56px - $mp-8);
+  width: 100vw;
+  z-index: 24;
+  pointer-events: none;
+  overflow: none;
+}
+
+.banner-overlay-container {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  gap: 8px;
+  overflow: none;
+}
+
+.banner-overlay-container-up {
+  flex-direction: column-reverse;
+}
+
+.banner-overlay-container-down {
+  flex-direction: column;
+}
+
+.banner-overlay-container-left {
+  align-items: flex-start;
+  padding-left: $mp-10;
+}
+
+.banner-overlay-container-right {
+  align-items: flex-end;
+  padding-right: $mp-10;
+}
+
+.banner-overlay-container-center {
+  align-items: center;
+}
+
+.banner-content {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.banner-text-container {
+  width: 100%;
+}
+
+.banner-container {
+  position: relative;
+  box-shadow: $shadow-4;
+  border-radius: $rounded-md;
+  -webkit-border-radius: $rounded-md;
+  -moz-border-radius: $rounded-md;
+  -khtml-border-radius: $rounded-md;
+  padding: $mp-4;
+  width: 360px;
+  min-height: 120px;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.banner-container-touchscreen {
+  width: calc(100vw - $mp-8);
+}
+
+.banner-container > div {
+  display: flex;
+  align-items: flex-start;
+}
+
+.banner-icon-container {
+  flex-shrink: 0;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+.banner-details {
+  display: flex;
+  flex: 1;
+  margin-left: $mp-3;
+}
+
+.banner-details__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-title {
+  margin: 0px;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
+  font-weight: $font-weight-bold;
+  color: $brand-900;
+}
+
+.banner-subtitle {
+  margin: 0px;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+  font-weight: $font-weight-bold;
+  color: $brand-900;
+}
+
+.banner-description {
+  margin: 0px;
+  margin: $mp-2 0;
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+  font-weight: $font-weight-normal;
+  color: $brand-900;
+  flex: 1;
+}
+
+.banner-footer-text {
+  margin: 0px;
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
+  font-weight: $font-weight-bold;
+  color: $brand-900;
+}
+
+.banner-details-actions {
+  display: flex;
+  margin-right: $mp-4;
+  margin-left: $mp-4;
+}
+
+.banner-close-container {
+  display: flex;
+  flex-shrink: 0;
+  margin-left: $mp-1;
+  color: $brand-900;
+}
+
+.banner-close-button {
+  color: $brand-900;
+  cursor: pointer;
+}

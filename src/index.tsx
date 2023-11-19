@@ -30,6 +30,7 @@ export * from './components/dropdown'
 export * from './components/context-menu'
 export * from './components/popover'
 export * from './components/toast'
+export * from './components/banner'
 
 // UTILITIES
 export * from './components/loading'
