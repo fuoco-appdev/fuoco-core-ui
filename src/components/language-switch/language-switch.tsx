@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../button'
-import { Dropdown, DropDownProps } from '../dropdown'
+import { Dropdown, DropdownProps } from '../dropdown'
 import Ripples, { RipplesProps } from 'react-ripples'
 import ReactCountryFlag from 'react-country-flag'
 import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
@@ -59,7 +59,7 @@ export interface LanguageSwitchProps {
   rippleProps?: RipplesProps
   supportedLanguages?: SupportedLanguage[]
   touchScreen?: boolean
-  dropdownProps?: DropDownProps
+  dropdownProps?: DropdownProps
   hideText?: boolean
   floatingLabel?: string
   classNames?: LanguageSwitchClasses
