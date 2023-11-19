@@ -5,7 +5,7 @@ import InputGeocodingStyles from './input-geocoding.module.scss'
 import { Dropdown } from '../dropdown/index'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import { animated, useSpring } from 'react-spring'
-import { DropdownAlignment } from '../dropdown/dropdown'
+import { DropdownAlignment, DropdownClasses } from '../dropdown/dropdown'
 import InputIconContainer from '../../lib/layout/input-icon-container'
 import { ErrorOutline, Search } from '../icon/icons/line'
 
@@ -48,7 +48,7 @@ export interface InputGeocodingProps {
   shakeInterpolationCount?: number
   shakeDistance?: number
   classes?: {
-    dropdown?: string
+    dropdown?: DropdownClasses
   }
   onLocationChanged?: (value: string, data: any) => void
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -264,7 +264,7 @@ function InputGeocoding({
         </div>
       </FormLayout>
       <Dropdown
-        className={classes?.dropdown}
+        classNames={classes?.dropdown}
         touchScreen={touchScreen}
         anchorRef={inputRef}
         align={DropdownAlignment.Left}
