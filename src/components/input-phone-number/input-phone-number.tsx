@@ -10,8 +10,9 @@ import { Dropdown } from '../dropdown/index'
 import { Divider } from '../divider'
 import { ErrorOutline, Search } from '../icon/icons/line'
 import { animated, useSpring } from 'react-spring'
-import { DropdownAlignment } from '../dropdown/dropdown'
+import { DropdownAlignment, DropdownClasses } from '../dropdown/dropdown'
 import ReactCountryFlag from 'react-country-flag'
+import { ButtonClasses } from '../button/button'
 
 export interface InputPhoneNumberClasses {
   countryName?: string
@@ -23,11 +24,11 @@ export interface InputPhoneNumberClasses {
   search?: string
   dropdownList?: string
   container?: string
-  button?: string
+  button?: ButtonClasses
   inputPhoneNumber?: string
   actionsContainer?: string
   formLayout?: FormLayoutClasses
-  dropdown?: string
+  dropdown?: DropdownClasses
   inputContainer?: string
 }
 
@@ -944,10 +945,10 @@ function InputPhoneNumber({
         >
           <Button
             tabIndex={-1}
-            className={[
-              InputPhoneNumberStyles['button'],
-              classNames?.button,
-            ].join(' ')}
+            classNames={{
+              button: [InputPhoneNumberStyles['button']].join(' '),
+              ...classNames?.button,
+            }}
             rounded={true}
             htmlType={'button'}
             size={'tiny'}
@@ -964,7 +965,7 @@ function InputPhoneNumber({
             }}
           />
           <Dropdown
-            className={classNames?.dropdown}
+            classNames={classNames?.dropdown}
             touchScreen={touchScreen}
             anchorRef={inputRef}
             align={DropdownAlignment.Left}
