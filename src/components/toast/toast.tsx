@@ -180,6 +180,7 @@ function Toast({
             ].join(' ')}
           >
             <Button
+              touchScreen={touchScreen}
               type={'text'}
               classNames={{
                 container: closeButtonClasses.join(' '),
