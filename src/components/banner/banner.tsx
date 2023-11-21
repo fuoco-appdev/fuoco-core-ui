@@ -60,8 +60,6 @@ function Banner({
     containerClasses.push(BannerStyles['banner-container-touchscreen'])
   }
 
-  let closeButtonClasses = [BannerStyles['banner-close-button']]
-
   let detailsClasses = [BannerStyles['banner-details'], classNames?.details]
   return (
     <div ref={refCallback} className={containerClasses.join(' ')}>
@@ -142,15 +140,11 @@ function Banner({
             touchScreen={touchScreen}
             type={'text'}
             rounded={true}
-            classNames={{
-              container: closeButtonClasses.join(' '),
-              ...classNames?.closeButton,
-            }}
+            classNames={classNames?.closeButton}
             icon={
               <Close
                 size={24}
                 strokeWidth={0}
-                aria-hidden="true"
                 stroke={iconColor}
                 color={iconColor}
               />
