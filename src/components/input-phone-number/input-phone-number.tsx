@@ -946,7 +946,6 @@ function InputPhoneNumber({
           <Button
             tabIndex={-1}
             classNames={{
-              container: [InputPhoneNumberStyles['button']].join(' '),
               ...classNames?.button,
             }}
             rounded={true}
