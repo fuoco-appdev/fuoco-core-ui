@@ -10,6 +10,8 @@ import { Close } from '../icon/icons/line'
 import { Button } from '../button'
 import { ButtonClasses } from '../button/button'
 import { RipplesProps } from 'react-ripples'
+import { Line } from '../icon'
+import { CSSTransition } from 'react-transition-group'
 
 export interface CropClasses {
   topBar?: string
@@ -45,7 +47,7 @@ export default function CropImage({
   src,
   strings = {
     title: 'Crop image',
-    confirmText: 'Save',
+    confirmText: 'Crop',
   },
   classNames,
   closeRippleProps,
@@ -54,7 +56,7 @@ export default function CropImage({
   touchScreen = false,
   modalProps = {
     visible: false,
-    confirmText: 'Save',
+    confirmText: 'Crop',
   },
   editorProps,
   cropRatio = [1, 1],
@@ -64,9 +66,12 @@ export default function CropImage({
 }: CropProps): JSX.Element {
   const cropRef = useRef<HTMLDivElement | null>(null)
   const editorRef = useRef<any | null>(null)
+  const gridRef = useRef<HTMLDivElement | null>(null)
   let cursorPosition: { x: number; y: number } = { x: 0, y: 0 }
   let scale = 1.0
+  let gridTimeout: NodeJS.Timeout
   const [cropScale, setCropScale] = useState<number>(scale)
+  const [showGrid, setShowGrid] = useState<boolean>(false)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const onMouseMove = (event: MouseEvent) => {
@@ -76,9 +81,9 @@ export default function CropImage({
 
   const onCropScroll = (event: WheelEvent) => {
     if (event.deltaY < 0) {
-      scale += 0.15
+      scale += 0.05
     } else {
-      scale -= 0.15
+      scale -= 0.05
     }
 
     scale = Math.max(scale, 1.0)
@@ -194,7 +199,149 @@ export default function CropImage({
           rotate={0}
           {...editorProps}
           image={src[selectedIndex]}
+          onMouseMove={() => {
+            setShowGrid(true)
+            clearTimeout(gridTimeout)
+            gridTimeout = setTimeout(() => {
+              setShowGrid(false)
+            }, 1000)
+          }}
         />
+        <CSSTransition
+          nodeRef={gridRef}
+          in={showGrid && Boolean(gridRef.current)}
+          timeout={300}
+          classNames={{
+            appear: styles['grid-appear'],
+            appearActive: styles['grid-appear-active'],
+            appearDone: styles['grid-appear-done'],
+            enter: styles['grid-enter'],
+            enterActive: styles['grid-enter-active'],
+            enterDone: styles['grid-enter-done'],
+            exit: styles['grid-exit'],
+            exitActive: styles['grid-exit-active'],
+            exitDone: styles['grid-exit-done'],
+          }}
+        >
+          <div ref={gridRef} className={[styles['avatar-grid']].join(' ')}>
+            <div className={[styles['grid-line-container']].join(' ')}>
+              <div
+                className={[styles['vertical-grid-line-container']].join(' ')}
+              >
+                <div className={[styles['vertical-grid-line']].join(' ')} />
+                <div className={[styles['vertical-grid-line']].join(' ')} />
+              </div>
+              <div
+                className={[styles['horizontal-grid-line-container']].join(' ')}
+              >
+                <div className={[styles['horizontal-grid-line']].join(' ')} />
+                <div className={[styles['horizontal-grid-line']].join(' ')} />
+              </div>
+            </div>
+            <div
+              className={[styles['vertical-grid-line-container']].join(' ')}
+            ></div>
+            <div
+              className={[styles['horizontal-grid-line-container']].join(' ')}
+            ></div>
+          </div>
+        </CSSTransition>
+      </div>
+      <div
+        className={[
+          styles['save-button-container-touchscreen'],
+          classNames?.saveButtonContainer,
+        ].join(' ')}
+      >
+        <Button
+          block={true}
+          touchScreen={touchScreen}
+          type={'primary'}
+          size={'large'}
+          onClick={onCropConfirmed}
+          classNames={classNames?.saveButton}
+          icon={<Line.Transform size={24} />}
+        >
+          {strings?.confirmText}
+        </Button>
+      </div>
+    </Overlay>
+  ) : (
+    <Modal
+      hideFooter={true}
+      {...modalProps}
+      visible={isVisible ?? false}
+      onConfirm={onCropConfirmed}
+      onCancel={onCropCanceled}
+      classNames={{
+        footerContainer: styles['modal-footer-container'],
+        ...classNames?.modal,
+      }}
+    >
+      <div
+        className={[
+          styles['avatar-editor-container'],
+          classNames?.avatarEditorContainer,
+        ].join(' ')}
+        ref={cropRef}
+      >
+        <AvatarEditor
+          width={500}
+          height={500}
+          borderRadius={500}
+          border={0}
+          rotate={0}
+          {...editorProps}
+          ref={editorRef}
+          image={src[selectedIndex]}
+          scale={cropScale}
+          onMouseMove={() => {
+            setShowGrid(true)
+            clearTimeout(gridTimeout)
+            gridTimeout = setTimeout(() => {
+              setShowGrid(false)
+            }, 1000)
+          }}
+        />
+        <CSSTransition
+          nodeRef={gridRef}
+          in={showGrid && Boolean(gridRef.current)}
+          timeout={300}
+          classNames={{
+            appear: styles['grid-appear'],
+            appearActive: styles['grid-appear-active'],
+            appearDone: styles['grid-appear-done'],
+            enter: styles['grid-enter'],
+            enterActive: styles['grid-enter-active'],
+            enterDone: styles['grid-enter-done'],
+            exit: styles['grid-exit'],
+            exitActive: styles['grid-exit-active'],
+            exitDone: styles['grid-exit-done'],
+          }}
+        >
+          <div ref={gridRef} className={[styles['avatar-grid']].join(' ')}>
+            <div className={[styles['grid-line-container']].join(' ')}>
+              <div
+                className={[styles['vertical-grid-line-container']].join(' ')}
+              >
+                <div className={[styles['vertical-grid-line']].join(' ')} />
+                <div className={[styles['vertical-grid-line']].join(' ')} />
+              </div>
+              <div
+                className={[styles['horizontal-grid-line-container']].join(' ')}
+              >
+                <div className={[styles['horizontal-grid-line']].join(' ')} />
+                <div className={[styles['horizontal-grid-line']].join(' ')} />
+              </div>
+            </div>
+            <div
+              className={[styles['vertical-grid-line-container']].join(' ')}
+            ></div>
+            <div
+              className={[styles['horizontal-grid-line-container']].join(' ')}
+            ></div>
+          </div>
+        </CSSTransition>
       </div>
       <div
         className={[
@@ -209,45 +356,10 @@ export default function CropImage({
           size={'large'}
           onClick={onCropConfirmed}
           classNames={classNames?.saveButton}
+          icon={<Line.Transform size={24} />}
         >
           {strings?.confirmText}
         </Button>
-      </div>
-    </Overlay>
-  ) : (
-    <Modal
-      {...modalProps}
-      visible={isVisible ?? false}
-      onConfirm={onCropConfirmed}
-      onCancel={onCropCanceled}
-      classNames={{
-        footerContainer: styles['modal-footer-container'],
-        ...classNames?.modal,
-      }}
-    >
-      <div className={[styles['top-bar'], classNames?.topBar].join(' ')}>
-        <div
-          className={[styles['top-bar-title'], classNames?.topBarTitle].join(
-            ' '
-          )}
-        >
-          {strings?.title}
-        </div>
-      </div>
-      <div
-        className={[
-          styles['avatar-editor-container'],
-          classNames?.avatarEditorContainer,
-        ].join(' ')}
-        ref={cropRef}
-      >
-        <AvatarEditor
-          rotate={0}
-          {...editorProps}
-          ref={editorRef}
-          image={src[selectedIndex]}
-          scale={cropScale}
-        />
       </div>
     </Modal>
   )

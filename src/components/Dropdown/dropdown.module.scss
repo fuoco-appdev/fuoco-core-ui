@@ -95,6 +95,9 @@
   max-height: 75vh;
   overflow-y: auto;
   z-index: 1;
+  transition-duration: 75ms;
+  transition-property: max-height;
+  transition-timing-function: $transition-decelerated-easing;
 }
 
 .touchscreen-dropdown {
@@ -104,7 +107,15 @@
 }
 
 .touchscreen-dropdown-bar {
+  position: fixed;
+  width: 100%;
   height: $mp-8;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.touchscreen-dropdown-content {
+  padding-top: $mp-8;
 }
 
 .touchscreen-dropdown-handle-container {

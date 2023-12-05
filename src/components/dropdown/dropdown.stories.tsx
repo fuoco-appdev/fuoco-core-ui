@@ -137,14 +137,16 @@ export const TouchScreen = (args: any) => {
           setIsOpen(false)
         }}
       >
-        <Dropdown.Item
-          onClick={() => {
-            //setIsOpen(false)
-            console.log('clicked')
-          }}
-        >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
-        </Dropdown.Item>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16].map(() => (
+          <Dropdown.Item
+            onClick={() => {
+              //setIsOpen(false)
+              console.log('clicked')
+            }}
+          >
+            <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+          </Dropdown.Item>
+        ))}
         <Dropdown.Item
           onClick={() => {
             //setIsOpen(false)

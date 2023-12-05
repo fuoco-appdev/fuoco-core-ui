@@ -36,12 +36,132 @@
 }
 
 .avatar-editor-container {
+  position: relative;
   display: flex;
+
+  & .avatar-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+
+    & .grid-line-container {
+      width: 100%;
+      height: 100%;
+
+      & .vertical-grid-line-container {
+        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+
+        & .vertical-grid-line {
+          width: 1px;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
+
+      & .horizontal-grid-line-container {
+        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        & .horizontal-grid-line {
+          width: 100%;
+          height: 1px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
 }
 
-.save-button-container {
+.save-button-container-touchscreen {
   position: absolute;
   padding: $mp-2;
   width: 100%;
   bottom: 0;
+}
+
+.save-button-container {
+  padding: $mp-2;
+}
+
+.grid-appear {
+  opacity: 1;
+}
+
+.grid-appear-active {
+  opacity: 1;
+}
+
+.grid-appear-done {
+  opacity: 1;
+}
+
+.grid-enter {
+  opacity: 0 !important;
+  -webkit-transition-duration: 250ms;
+       -o-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: $transition-standard-easing;
+       -o-transition-timing-function: $transition-standard-easing;
+          transition-timing-function: $transition-standard-easing;
+}
+
+.grid-enter-active {
+  opacity: 1 !important;
+  -webkit-transition-duration: 250ms;
+       -o-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: $transition-standard-easing;
+       -o-transition-timing-function: $transition-standard-easing;
+          transition-timing-function: $transition-standard-easing;
+}
+
+.grid-enter-done {
+  opacity: 1 !important;
+  -webkit-transition-duration: 250ms;
+       -o-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: $transition-standard-easing;
+       -o-transition-timing-function: $transition-standard-easing;
+          transition-timing-function: $transition-standard-easing;
+}
+
+.grid-exit {
+  opacity: 1 !important;
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
+  -webkit-transition-timing-function: $transition-decelerated-easing;
+       -o-transition-timing-function: $transition-decelerated-easing;
+          transition-timing-function: $transition-decelerated-easing;
+}
+
+.grid-exit-active {
+  opacity: 0 !important;
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
+  -webkit-transition-timing-function: $transition-decelerated-easing;
+       -o-transition-timing-function: $transition-decelerated-easing;
+          transition-timing-function: $transition-decelerated-easing;
+}
+
+.grid-exit-done {
+  opacity: 0 !important;
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
+  -webkit-transition-timing-function: $transition-decelerated-easing;
+       -o-transition-timing-function: $transition-decelerated-easing;
+          transition-timing-function: $transition-decelerated-easing;
 }

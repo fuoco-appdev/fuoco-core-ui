@@ -56,6 +56,10 @@ export default function Avatar({
     styles[`avatar-size-${size}`],
     classNames?.container,
   ]
+  let iconSize = 24
+  if (size === 'medium') {
+    iconSize = 16
+  }
 
   if (src) {
     classes.push(styles['avatar-image'])
@@ -116,12 +120,15 @@ export default function Avatar({
             <Button
               ref={buttonRef}
               classNames={{
-                container: styles['edit-image-button-ripple'],
+                container: [
+                  styles['edit-image-button-ripple'],
+                  styles[`edit-image-button-ripple-${size}`],
+                ].join(' '),
                 button: styles['edit-image-button'],
                 ...classNames?.button,
               }}
               rippleProps={rippleProps}
-              icon={<Line.Add stroke={'#fff'} size={24} />}
+              icon={<Line.Add stroke={'#fff'} size={iconSize} />}
               onClick={onEditFileClick}
             />
           </div>

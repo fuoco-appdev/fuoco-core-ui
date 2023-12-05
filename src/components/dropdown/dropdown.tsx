@@ -253,6 +253,11 @@ function Dropdown({
                 if (isScrolling && scrollTop <= 0) {
                   setIsScrolling(false)
                 }
+                if (scrollTop <= 0) {
+                  divRef.current!.style.maxHeight = '75vh'
+                } else {
+                  divRef.current!.style.maxHeight = '98vh'
+                }
               }}
               style={{
                 ...touchScreenProps,
@@ -286,7 +291,13 @@ function Dropdown({
                     />
                   </div>
                 </div>
-                {children}
+                <div
+                  className={[
+                    DropdownStyles['touchscreen-dropdown-content'],
+                  ].join(' ')}
+                >
+                  {children}
+                </div>
               </ul>
             </animated.div>
           </animated.div>
