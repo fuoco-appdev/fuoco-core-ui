@@ -7,6 +7,7 @@ import { ModalProps } from '../modal'
 import { CropClasses, CropImage } from '../crop-image'
 import { Button } from '../button'
 import { ButtonClasses } from '../button/button'
+import { createPortal } from 'react-dom'
 
 export interface AvatarClasses {
   container?: string
@@ -134,19 +135,22 @@ export default function Avatar({
           </div>
         )}
       </div>
-      {editMode && selectedImages && (
-        <CropImage
-          src={selectedImages}
-          isVisible={isModalVisible}
-          onChange={onChange}
-          onConfirmed={onCropConfirmed}
-          onCanceled={onCropCanceled}
-          modalProps={modalProps}
-          touchScreen={touchScreen}
-          anchorRef={buttonRef}
-          classNames={classNames?.cropImage}
-        />
-      )}
+      {editMode &&
+        selectedImages &&
+        createPortal(
+          <CropImage
+            src={selectedImages}
+            isVisible={isModalVisible}
+            onChange={onChange}
+            onConfirmed={onCropConfirmed}
+            onCanceled={onCropCanceled}
+            modalProps={modalProps}
+            touchScreen={touchScreen}
+            anchorRef={buttonRef}
+            classNames={classNames?.cropImage}
+          />,
+          document.body
+        )}
     </div>
   )
 }
