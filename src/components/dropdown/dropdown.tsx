@@ -254,9 +254,9 @@ function Dropdown({
                   setIsScrolling(false)
                 }
                 if (scrollTop <= 0) {
-                  divRef.current!.style.maxHeight = '75vh'
+                  divRef.current!.style.maxHeight = '75%'
                 } else {
-                  divRef.current!.style.maxHeight = '98vh'
+                  divRef.current!.style.maxHeight = '98%'
                 }
               }}
               style={{
