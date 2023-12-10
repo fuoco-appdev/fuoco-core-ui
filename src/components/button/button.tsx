@@ -8,6 +8,7 @@ import { CSSTransition } from 'react-transition-group'
 export interface ButtonClasses {
   container?: string
   button?: string
+  loading?: string
   leftIconContainer?: string
   rightIconContainer?: string
   children?: string
@@ -25,6 +26,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   iconRight?: React.ReactNode
   floatingLabel?: string
   loading?: boolean
+  loadingComponent?: JSX.Element
   shadow?: boolean
   size?: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'full'
   style?: React.CSSProperties
@@ -67,6 +69,7 @@ function Button(
     icon,
     iconRight,
     loading = false,
+    loadingComponent,
     shadow = true,
     size = 'tiny',
     style,
@@ -150,10 +153,6 @@ function Button(
     classes.push(ButtonStyles[`button-${size}`])
   }
 
-  if (loading) {
-    classes.push(ButtonStyles[`button-text-fade-out`])
-  }
-
   classes.push(ButtonStyles[`button-text-align-${textAlign}`])
 
   const leftIconClasses = [
@@ -186,9 +185,15 @@ function Button(
           ref={ref}
           id={props.id}
           className={classes.join(' ')}
-          disabled={loading || (disabled && true)}
+          disabled={disabled && true}
           style={style}
-          onClick={(e) => setTimeout(() => onClick?.(e), rippleProps?.during)}
+          onClick={(e) =>
+            setTimeout(() => {
+              if (!loading) {
+                onClick?.(e)
+              }
+            }, rippleProps?.during)
+          }
           type={htmlType}
           tabIndex={tabIndex}
           role={role}
@@ -201,7 +206,16 @@ function Button(
             ) : (
               icon && <div className={leftIconClasses.join(' ')}>{icon}</div>
             ))}
-          {children && (
+          {loading && (
+            <div
+              className={[ButtonStyles['loading'], classNames?.loading].join(
+                ' '
+              )}
+            >
+              {loadingComponent}
+            </div>
+          )}
+          {!loading && children && (
             <span
               className={
                 (ButtonStyles['button-children'], classNames?.children)

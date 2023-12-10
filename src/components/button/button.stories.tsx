@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import { Button } from '../../index'
-import { ChevronRight, ShoppingBag } from '../icon/icons/line'
+import { ChevronRight, ShoppingBag, Refresh } from '../icon/icons/line'
 
 export default {
   title: 'General/Button',
@@ -9,6 +9,17 @@ export default {
 }
 
 export const Default = (args: any) => <Button {...args}>Button text</Button>
+export const loading = (args: any) => (
+  <Button
+    size={'full'}
+    block={true}
+    {...args}
+    loading={true}
+    loadingComponent={<Refresh size={24} color={'#fff'} />}
+  >
+    Button text
+  </Button>
+)
 export const withStyles = (args: any) => <Button {...args}>Button text</Button>
 export const withIcon = (args: any) => <Button {...args}>Button text</Button>
 export const withIconRight = (args: any) => (
