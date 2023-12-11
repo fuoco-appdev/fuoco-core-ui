@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // @ts-ignore
 import styles from './avatar.module.scss'
 import Ripples, { RipplesProps } from 'react-ripples'
@@ -95,14 +95,18 @@ export default function Avatar({
     onModalVisible?.(true)
   }
 
-  const onCropConfirmed = () => {
-    setSelectedImages(undefined)
-  }
+  const onCropConfirmed = () => {}
 
   const onCropCanceled = () => {
     setSelectedImages(undefined)
     onModalVisible?.(false)
   }
+
+  useEffect(() => {
+    if (!isModalVisible) {
+      setSelectedImages(undefined)
+    }
+  }, [isModalVisible])
 
   return (
     <div>
@@ -144,10 +148,9 @@ export default function Avatar({
         )}
       </div>
       {editMode &&
-        selectedImages &&
         createPortal(
           <CropImage
-            src={selectedImages}
+            src={selectedImages ?? FileList.prototype}
             isVisible={isModalVisible}
             onChange={onChange}
             onConfirmed={onCropConfirmed}

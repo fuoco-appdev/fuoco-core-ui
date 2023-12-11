@@ -44,8 +44,10 @@ export const Edit = (args: any) => {
         onChange={(index: number, blob: Blob) => {
           console.log(blob)
           setImageURL(URL.createObjectURL(blob))
-          setLoading(false)
-          setIsModalVisible(false)
+          setTimeout(() => {
+            setLoading(false)
+            setIsModalVisible(false)
+          }, 1000)
         }}
         src={imageURL}
         loading={loading}
