@@ -30,6 +30,8 @@ export interface CropProps {
     title?: string
     confirmText?: string
   }
+  loading?: boolean
+  loadingComponent?: JSX.Element
   classNames?: CropClasses
   closeRippleProps?: RipplesProps
   anchorRef?: React.RefObject<any>
@@ -41,6 +43,7 @@ export interface CropProps {
   onConfirmed?: (index: number) => void
   onCanceled?: () => void
   onChange?: (index: number, blob: Blob) => void
+  onLoading?: (loading: boolean) => void
 }
 
 export default function CropImage({
@@ -49,6 +52,8 @@ export default function CropImage({
     title: 'Crop image',
     confirmText: 'Crop',
   },
+  loading,
+  loadingComponent,
   classNames,
   closeRippleProps,
   anchorRef,
@@ -63,6 +68,7 @@ export default function CropImage({
   onConfirmed,
   onCanceled,
   onChange,
+  onLoading,
 }: CropProps): JSX.Element {
   const cropRef = useRef<HTMLDivElement | null>(null)
   const editorRef = useRef<any | null>(null)
@@ -81,9 +87,9 @@ export default function CropImage({
 
   const onCropScroll = (event: WheelEvent) => {
     if (event.deltaY < 0) {
-      scale += 0.05
+      scale += 0.025
     } else {
-      scale -= 0.05
+      scale -= 0.025
     }
 
     scale = Math.max(scale, 1.0)
@@ -91,6 +97,7 @@ export default function CropImage({
   }
 
   const onCropConfirmed = () => {
+    onLoading?.(true)
     if (editorRef?.current) {
       const canvas = editorRef?.current.getImage().toDataURL()
       fetch(canvas)
@@ -106,6 +113,7 @@ export default function CropImage({
   }
 
   const onCropCanceled = () => {
+    onLoading?.(false)
     onCanceled?.()
   }
 
@@ -261,6 +269,8 @@ export default function CropImage({
           onClick={onCropConfirmed}
           classNames={classNames?.saveButton}
           icon={<Line.Transform size={24} />}
+          loading={loading}
+          loadingComponent={loadingComponent}
         >
           {strings?.confirmText}
         </Button>
@@ -357,6 +367,8 @@ export default function CropImage({
           onClick={onCropConfirmed}
           classNames={classNames?.saveButton}
           icon={<Line.Transform size={24} />}
+          loading={loading}
+          loadingComponent={loadingComponent}
         >
           {strings?.confirmText}
         </Button>

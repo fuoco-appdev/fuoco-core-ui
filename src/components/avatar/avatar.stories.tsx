@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Airplay } from '../icon/icons/solid'
 
 import Avatar from './avatar'
+import { Line } from '../icon'
 
 export default {
   title: 'General/Avatar',
@@ -34,6 +35,8 @@ export const Icon = (args: any) => {
 
 export const Edit = (args: any) => {
   const [imageURL, setImageURL] = useState<string | undefined>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   return (
     <>
       <Avatar
@@ -41,8 +44,15 @@ export const Edit = (args: any) => {
         onChange={(index: number, blob: Blob) => {
           console.log(blob)
           setImageURL(URL.createObjectURL(blob))
+          setLoading(false)
+          setIsModalVisible(false)
         }}
         src={imageURL}
+        loading={loading}
+        loadingComponent={<Line.Refresh size={24} />}
+        isModalVisible={isModalVisible}
+        onLoading={(value) => setLoading(value)}
+        onModalVisible={(value) => setIsModalVisible(value)}
       />
     </>
   )

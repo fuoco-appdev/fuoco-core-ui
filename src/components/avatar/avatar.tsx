@@ -19,7 +19,10 @@ export interface AvatarClasses {
 export interface AvatarProps {
   children?: React.ReactNode
   src?: string
+  loading?: boolean
+  loadingComponent?: JSX.Element
   touchScreen?: boolean
+  isModalVisible?: boolean
   classNames?: AvatarClasses
   alt?: string
   text?: string
@@ -29,11 +32,16 @@ export interface AvatarProps {
   rippleProps?: RipplesProps
   modalProps?: ModalProps
   onChange?: (index: number, blob: Blob) => void
+  onLoading?: (loading: boolean) => void
+  onModalVisible?: (visible: boolean) => void
 }
 
 export default function Avatar({
   src,
   touchScreen = false,
+  loading,
+  loadingComponent,
+  isModalVisible,
   classNames,
   alt,
   text,
@@ -47,10 +55,11 @@ export default function Avatar({
     confirmText: 'Crop',
   },
   onChange,
+  onLoading,
+  onModalVisible,
 }: AvatarProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const fileRef = useRef<HTMLInputElement | null>(null)
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   const [selectedImages, setSelectedImages] = useState<FileList | undefined>()
   const classes = [
     styles['avatar'],
@@ -83,17 +92,17 @@ export default function Avatar({
     }
 
     setSelectedImages(files)
-    setIsModalVisible(true)
+    onModalVisible?.(true)
   }
 
   const onCropConfirmed = () => {
-    setIsModalVisible(false)
+    onModalVisible?.(false)
     setSelectedImages(undefined)
   }
 
   const onCropCanceled = () => {
     setSelectedImages(undefined)
-    setIsModalVisible(false)
+    onModalVisible?.(false)
   }
 
   return (
@@ -148,6 +157,9 @@ export default function Avatar({
             touchScreen={touchScreen}
             anchorRef={buttonRef}
             classNames={classNames?.cropImage}
+            loading={loading}
+            loadingComponent={loadingComponent}
+            onLoading={onLoading}
           />,
           document.body
         )}
