@@ -96,7 +96,6 @@ export default function Avatar({
   }
 
   const onCropConfirmed = () => {
-    onModalVisible?.(false)
     setSelectedImages(undefined)
   }
 
