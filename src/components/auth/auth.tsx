@@ -159,6 +159,8 @@ export interface AuthProps {
   litIconColor?: string
   children?: React.ReactNode
   touchScreen?: boolean
+  socialLoadingComponent?: JSX.Element
+  emailLoadingComponent?: JSX.Element
   style?: React.CSSProperties
   strings?: AuthStrings
   rippleProps?: RippleProps
@@ -236,6 +238,8 @@ function Auth({
   litIconColor = '#4AFFFF',
   style,
   strings,
+  socialLoadingComponent,
+  emailLoadingComponent,
   rippleProps = {
     socialButton: {
       color: 'rgba(0, 0, 0, .3)',
@@ -296,6 +300,7 @@ function Auth({
           classNames={classNames}
           view={view}
           touchScreen={touchScreen}
+          socialLoadingComponent={socialLoadingComponent}
           strings={{ ...defaultStrings, ...strings }}
           defaultIconColor={defaultIconColor}
           litIconColor={litIconColor}
@@ -325,6 +330,7 @@ function Auth({
           id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
           defaultIconColor={defaultIconColor}
           touchScreen={touchScreen}
+          loadingComponent={emailLoadingComponent}
           emailValue={emailValue}
           passwordValue={passwordValue}
           confirmPasswordValue={confirmPasswordValue}
@@ -409,6 +415,8 @@ function Auth({
 function SocialButton({
   classNames,
   provider,
+  isLoading,
+  loadingComponent,
   strings,
   touchScreen,
   rippleProps = {
@@ -423,6 +431,8 @@ function SocialButton({
 }: {
   classNames?: SocialButtonClasses
   provider: Provider
+  isLoading: boolean
+  loadingComponent?: JSX.Element
   touchScreen?: boolean
   strings: AuthStrings
   rippleProps?: RipplesProps
@@ -558,6 +568,8 @@ function SocialButton({
               : buttonStyles[provider]
             : {}),
         }}
+        loading={isLoading}
+        loadingComponent={loadingComponent}
         onClick={() => handleProviderSignIn(provider)}
         rippleProps={rippleProps}
         onMouseEnter={handleMouseEnter}
@@ -590,6 +602,7 @@ function SocialAuth({
   litIconColor = '#4AFFFF',
   strings,
   touchScreen,
+  socialLoadingComponent,
   rippleProps = {
     socialButton: {
       color: 'rgba(0, 0, 0, .3)',
@@ -615,15 +628,17 @@ function SocialAuth({
   onSignupError,
   ...props
 }: AuthProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const handleProviderSignIn = (provider: Provider) => {
     setTimeout(async () => {
+      setIsLoading(true)
       const { error } = await supabaseClient.auth.signInWithOAuth({
         provider,
         options: {
           redirectTo,
         },
       })
-      if (error)
+      if (error) {
         if (props.view == 'sign_in') {
           onSigninError?.(error)
         } else if (props.view === 'sign_up') {
@@ -631,6 +646,9 @@ function SocialAuth({
         } else {
           onAuthenticating ? onAuthenticating?.() : null
         }
+      }
+
+      setIsLoading(false)
     }, rippleProps.submitButton?.during)
   }
 
@@ -667,6 +685,8 @@ function SocialAuth({
                     socialColors={socialColors}
                     strings={strings!}
                     rippleProps={rippleProps.socialButton}
+                    isLoading={isLoading}
+                    loadingComponent={socialLoadingComponent}
                     handleProviderSignIn={handleProviderSignIn}
                   />
                 )
@@ -699,6 +719,7 @@ function EmailAuth({
   confirmPasswordValue,
   authView,
   strings,
+  loadingComponent,
   rippleProps = {
     socialButton: {
       color: 'rgba(0, 0, 0, .3)',
@@ -739,6 +760,7 @@ function EmailAuth({
   touchScreen?: boolean
   confirmPasswordValue?: string
   litIconColor?: string
+  loadingComponent?: JSX.Element
   authView: ViewType
   strings: AuthStrings
   rippleProps: RippleProps
@@ -763,6 +785,7 @@ function EmailAuth({
   onSigninError?: (error: AuthError) => void
   onSignupError?: (error: AuthError) => void
 }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
   const [emailIconLit, setEmailIconLit] = useState(false)
@@ -773,12 +796,14 @@ function EmailAuth({
     e.preventDefault()
 
     setTimeout(async () => {
+      setIsLoading(true)
       switch (authView) {
         case 'sign_in':
           const authSignin = await supabaseClient.auth.signInWithPassword({
             email: emailValue ?? '',
             password: passwordValue ?? '',
           })
+          setIsLoading(false)
           if (authSignin.error) onSigninError?.(authSignin.error)
           else {
             onAuthenticating ? onAuthenticating?.(e) : null
@@ -796,6 +821,7 @@ function EmailAuth({
             email: emailValue ?? '',
             password: passwordValue ?? '',
           })
+          setIsLoading(false)
           if (authSignup.error) onSignupError?.(authSignup.error)
           // Check if session is null -> email confirmation setting is turned on
           else if (authSignup.data.user && !authSignup.data.session)
@@ -998,6 +1024,8 @@ function EmailAuth({
             <Button
               touchScreen={touchScreen}
               classNames={classNames?.emailButton}
+              loading={isLoading}
+              loadingComponent={loadingComponent}
               htmlType="submit"
               type="primary"
               size="large"
@@ -1077,6 +1105,7 @@ function MagicLink({
   strings,
   touchScreen,
   defaultIconColor = '#ffffff',
+  loadingComponent,
   litIconColor = '#4AFFFF',
   supabaseClient,
   redirectTo,
@@ -1091,6 +1120,7 @@ function MagicLink({
   classNames?: MagicLinkClasses
   touchScreen?: boolean
   defaultIconColor?: string
+  loadingComponent?: JSX.Element
   litIconColor?: string
   setAuthView: any
   strings: AuthStrings
@@ -1101,18 +1131,21 @@ function MagicLink({
   onMagicLinkSent?: (e: React.FormEvent<HTMLFormElement>) => void
   onMagicLinkError?: (error: AuthError) => void
 }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState('')
   const [emailIconLit, setEmailIconLit] = useState(false)
 
   const handleMagicLinkSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      setIsLoading(true)
       const { error } = await supabaseClient.auth.signInWithOtp({
         email,
         options: {
           emailRedirectTo: redirectTo,
         },
       })
+      setIsLoading(false)
       if (error) onMagicLinkError?.(error)
       else onMagicLinkSent?.(e)
     }, rippleProps?.during ?? 0)
@@ -1156,6 +1189,8 @@ function MagicLink({
           <Button
             classNames={classNames?.button}
             touchScreen={touchScreen}
+            loading={isLoading}
+            loadingComponent={loadingComponent}
             block
             size="large"
             htmlType="submit"
@@ -1199,6 +1234,7 @@ function ForgottenPassword({
   classNames,
   strings,
   touchScreen,
+  loadingComponent,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   supabaseClient,
@@ -1215,6 +1251,7 @@ function ForgottenPassword({
   classNames?: ForgottenPasswordClasses
   defaultIconColor?: string
   touchScreen?: boolean
+  loadingComponent?: JSX.Element
   litIconColor?: string
   strings: AuthStrings
   supabaseClient: SupabaseClient
@@ -1225,15 +1262,18 @@ function ForgottenPassword({
   onResetPasswordError?: (error: AuthError) => void
   onResetPasswordSent?: (e: React.FormEvent<HTMLFormElement>) => void
 }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState('')
   const [emailIconLit, setEmailIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      setIsLoading(true)
       const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
         redirectTo,
       })
+      setIsLoading(false)
       if (error) onResetPasswordError?.(error)
       else onResetPasswordSent?.(e)
     }, rippleProps?.during ?? 0)
@@ -1277,6 +1317,8 @@ function ForgottenPassword({
           <Button
             touchScreen={touchScreen}
             classNames={classNames?.button}
+            loading={isLoading}
+            loadingComponent={loadingComponent}
             block
             size="large"
             htmlType="submit"
@@ -1320,6 +1362,7 @@ function ResetPassword({
   supabaseClient,
   strings,
   touchScreen,
+  loadingComponent,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   passwordErrorMessage,
@@ -1337,12 +1380,14 @@ function ResetPassword({
   defaultIconColor?: string
   litIconColor?: string
   strings?: AuthStrings
+  loadingComponent?: JSX.Element
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
   rippleProps?: RipplesProps
   onResetPasswordError?: (error: AuthError) => void
   onPasswordUpdated?: (e?: React.FormEvent<HTMLFormElement>) => void
 }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [password, setPassword] = useState('')
   const [passwordIconLit, setPasswordIconLit] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -1351,6 +1396,7 @@ function ResetPassword({
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      setIsLoading(true)
       if (password !== confirmPassword) {
         onResetPasswordError?.(
           new AuthError('Confirm password does not match', 401)
@@ -1361,6 +1407,7 @@ function ResetPassword({
       const { error } = await supabaseClient.auth.updateUser({
         password,
       })
+      setIsLoading(false)
       if (error) onResetPasswordError?.(error)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
@@ -1439,6 +1486,8 @@ function ResetPassword({
             block
             touchScreen={touchScreen}
             classNames={classNames?.button}
+            loading={isLoading}
+            loadingComponent={loadingComponent}
             size="large"
             htmlType="submit"
             rippleProps={rippleProps}
@@ -1471,6 +1520,7 @@ export interface UpdatePasswordProps {
   classNames?: UpdatePasswordClasses
   supabaseClient: SupabaseClient
   touchScreen?: boolean
+  loadingComponent?: JSX.Element
   defaultIconColor?: string
   litIconColor?: string
   strings: AuthStrings
@@ -1486,6 +1536,7 @@ function UpdatePassword({
   supabaseClient,
   strings,
   touchScreen,
+  loadingComponent,
   defaultIconColor = '#ffffff',
   litIconColor = '#4AFFFF',
   passwordErrorMessage,
@@ -1497,6 +1548,7 @@ function UpdatePassword({
   onUpdatePasswordError,
   onPasswordUpdated,
 }: UpdatePasswordProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [password, setPassword] = useState('')
   const [passwordIconLit, setPasswordIconLit] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -1505,6 +1557,7 @@ function UpdatePassword({
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setTimeout(async () => {
+      setIsLoading(true)
       if (password !== confirmPassword) {
         onUpdatePasswordError?.(
           new AuthError('Confirm password does not match', 401)
@@ -1513,6 +1566,7 @@ function UpdatePassword({
       }
 
       const { error } = await supabaseClient.auth.updateUser({ password })
+      setIsLoading(false)
       if (error) onUpdatePasswordError?.(error)
       else onPasswordUpdated?.(e)
     }, rippleProps?.during ?? 0)
@@ -1591,6 +1645,8 @@ function UpdatePassword({
             block
             touchScreen={touchScreen}
             classNames={classNames?.button}
+            loading={isLoading}
+            loadingComponent={loadingComponent}
             size="large"
             htmlType="submit"
             rippleProps={rippleProps}

@@ -61,7 +61,6 @@ export interface ToastClasses {
 }
 
 function Toast({
-  key,
   classNames,
   iconColor,
   refCallback,
