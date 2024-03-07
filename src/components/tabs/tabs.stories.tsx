@@ -51,6 +51,48 @@ export function Default() {
   )
 }
 
+export function Underlined() {
+  const [selectedId, setSelectedId] = useState<string>('panel-1')
+
+  return (
+    <Tabs
+      activeId={selectedId}
+      onChange={(id) => setSelectedId(id)}
+      type={'underlined'}
+      tabs={[
+        {
+          id: 'panel-1',
+          label: '1st tab',
+        },
+        {
+          id: 'panel-2',
+          label: '2st tab',
+        },
+        {
+          id: 'panel-3',
+          label: '3st tab',
+        },
+        {
+          id: 'panel-4',
+          label: '4th tab',
+        },
+        {
+          id: 'panel-5',
+          label: '5th tab',
+        },
+        {
+          id: 'panel-6',
+          label: '6th tab',
+        },
+        {
+          id: 'panel-7',
+          label: '7th tab',
+        },
+      ]}
+    />
+  )
+}
+
 export const IconsAndText = (args: any) => (
   <Tabs
     {...args}
