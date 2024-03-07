@@ -70,7 +70,7 @@
     "@types/lodash.shuffle": "^4.2.7",
     "@types/react": "^18.0.18",
     "@types/react-avatar-editor": "^13.0.0",
-    "@use-gesture/react": "^10.2.23",
+    "@use-gesture/react": "^10.3.0",
     "autoprefixer": "^10.4.8",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",

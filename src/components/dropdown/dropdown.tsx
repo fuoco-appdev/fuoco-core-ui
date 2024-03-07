@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
-import { animated, useSpring, useTransition } from 'react-spring'
+import { animated, config, useSpring, useTransition } from 'react-spring'
 import { Button } from '../button/index'
 
 // @ts-ignore
@@ -16,9 +16,13 @@ export interface DropdownProps {
   id?: string
   classNames?: DropdownClasses
   align?: DropdownAlignment
+  extendThresholdPercent?: number
   dropThresholdPercent?: number
+  extendedHeightPercent?: number
+  defaultHeightPercent?: number
   open?: boolean
   touchScreen?: boolean
+  title?: string
   anchorRef?: React.RefObject<HTMLElement>
   onOpen?: () => void
   onClose?: () => void
@@ -35,14 +39,19 @@ export interface DropdownClasses {
   touchscreenDropdownBar?: string
   touchscreenDropdownHandleContainer?: string
   touchscreenDropdownHandle?: string
+  touchscreenDropdownTitle?: string
 }
 
 function Dropdown({
   id,
   classNames,
   align = DropdownAlignment.Right,
-  dropThresholdPercent = 50,
+  extendThresholdPercent = 70,
+  dropThresholdPercent = 30,
+  extendedHeightPercent = 90,
+  defaultHeightPercent = 60,
   open,
+  title = 'Title',
   touchScreen = false,
   anchorRef,
   onOpen,
@@ -53,7 +62,9 @@ function Dropdown({
   const parentRef = useRef<HTMLDivElement | null>(null)
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
-  const [isScrolling, setIsScrolling] = useState<boolean>(true)
+  const initialClientHeightRef = useRef<number>(0)
+  const mouseDownRef = useRef<boolean>(false)
+  const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -96,10 +107,10 @@ function Dropdown({
 
   const [touchScreenProps, touchScreenApi] = useSpring(() => ({
     from: {
-      bottom: -window.innerHeight,
+      minHeight: '0%',
     },
     to: {
-      bottom: 0,
+      maxHeight: `${defaultHeightPercent}%`,
     },
     config: {
       tension: 1000,
@@ -108,38 +119,74 @@ function Dropdown({
     },
   }))
 
-  const bind = useDrag(({ down, movement: [mx, my] }) => {
-    const y = -my
-    if (y < 0) {
-      const scrollTop = divRef.current?.scrollTop ?? 0
-      if (isScrolling && scrollTop <= 0) {
-        setIsScrolling(false)
-      }
-      touchScreenApi.start({
-        bottom: down ? y : 0,
-        immediate: down,
-      })
-    } else {
-      if (!isScrolling) {
-        setIsScrolling(true)
-      }
-    }
+  const dragBind = useDrag(
+    ({ down, movement: [mx, my] }) => {
+      const parentHeight = parentRef.current?.clientHeight ?? 0
+      const extendedHeight = (parentHeight * extendedHeightPercent) / 100
+      const defaultHeight = (parentHeight * defaultHeightPercent) / 100
+      const maxHeight = Math.min(
+        initialClientHeightRef.current - my,
+        extendedHeight
+      )
+      const dropThresholdHeight = (parentHeight * dropThresholdPercent) / 100
+      const extendThresholdHeight =
+        (parentHeight * extendThresholdPercent) / 100
 
-    const clientHeight = divRef.current?.clientHeight ?? 0
-    const dropdownHeight =
-      clientHeight - (clientHeight * dropThresholdPercent) / 100
-    if (y < -dropdownHeight) {
-      touchScreenApi.start({
-        bottom: -clientHeight,
-        onRest: () => {
-          if (!isScrolling) {
-            setIsScrolling(true)
-          }
-          onClose?.()
-        },
-      })
-    }
-  })
+      if (down) {
+        touchScreenApi.start({
+          immediate: down,
+          minHeight: `${maxHeight}px`,
+        })
+      }
+
+      if (!down && maxHeight > extendThresholdHeight) {
+        touchScreenApi.start({
+          from: {
+            minHeight: `${maxHeight}px`,
+          },
+          to: {
+            minHeight: `${extendedHeight}px`,
+          },
+          onRest: () => {
+            const clientHeight = divRef.current?.clientHeight ?? 0
+            initialClientHeightRef.current = clientHeight
+          },
+        })
+      } else if (
+        !down &&
+        maxHeight > dropThresholdHeight &&
+        maxHeight < extendThresholdHeight
+      ) {
+        touchScreenApi.start({
+          from: {
+            minHeight: `${maxHeight}px`,
+          },
+          to: {
+            minHeight: `${defaultHeight}px`,
+          },
+          onRest: () => {
+            const clientHeight = divRef.current?.clientHeight ?? 0
+            initialClientHeightRef.current = clientHeight
+          },
+        })
+      } else if (!down && maxHeight < dropThresholdHeight) {
+        touchScreenApi.start({
+          from: {
+            minHeight: `${maxHeight}px`,
+          },
+          to: {
+            minHeight: '0%',
+          },
+          onRest: () => {
+            const clientHeight = divRef.current?.clientHeight ?? 0
+            initialClientHeightRef.current = clientHeight
+            onClose?.()
+          },
+        })
+      }
+    },
+    { axis: 'y' }
+  )
 
   useLayoutEffect(() => {
     if (!touchScreen) {
@@ -176,7 +223,11 @@ function Dropdown({
       }
     } else {
       touchScreenApi.start({
-        bottom: open ? 0 : -window.innerHeight,
+        minHeight: open ? '50%' : '0%',
+        onRest: () => {
+          const clientHeight = divRef.current?.clientHeight ?? 0
+          initialClientHeightRef.current = clientHeight
+        },
       })
     }
   }, [open, children])
@@ -228,7 +279,8 @@ function Dropdown({
       (overlayStyle: any, item: any) =>
         item && (
           <animated.div
-            style={overlayStyle}
+            style={{ ...overlayStyle }}
+            ref={parentRef}
             className={[
               DropdownStyles['touchscreen-animated-overlay'],
               classNames?.touchscreenAnimatedOverlay,
@@ -247,25 +299,14 @@ function Dropdown({
                 DropdownStyles['touchscreen-animated-container'],
                 classNames?.touchscreenAnimatedContainer,
               ].join(' ')}
-              {...bind()}
-              onScroll={() => {
-                const scrollTop = divRef.current?.scrollTop ?? 0
-                if (isScrolling && scrollTop <= 0) {
-                  setIsScrolling(false)
-                }
-                if (scrollTop <= 0) {
-                  divRef.current!.style.maxHeight = '75%'
-                } else {
-                  divRef.current!.style.maxHeight = '98%'
-                }
-              }}
+              {...dragBind()}
               style={{
                 ...touchScreenProps,
-                touchAction: !isScrolling ? 'none' : 'initial',
+                touchAction: 'none',
+                bottom: 0,
               }}
             >
-              <ul
-                ref={uListRef}
+              <div
                 className={[
                   DropdownStyles['touchscreen-dropdown'],
                   classNames?.touchscreenDropdown,
@@ -290,15 +331,26 @@ function Dropdown({
                       ].join(' ')}
                     />
                   </div>
+                  <div
+                    className={[
+                      DropdownStyles['touchscreen-dropdown-title'],
+                      classNames?.touchscreenDropdownTitle,
+                    ].join(' ')}
+                  >
+                    {title}
+                  </div>
                 </div>
                 <div
                   className={[
                     DropdownStyles['touchscreen-dropdown-content'],
                   ].join(' ')}
+                  style={{
+                    overflowY: 'auto',
+                  }}
                 >
                   {children}
                 </div>
-              </ul>
+              </div>
             </animated.div>
           </animated.div>
         )
@@ -315,10 +367,17 @@ export interface DropdownItemProps {
   ref?: React.LegacyRef<HTMLLIElement>
   classNames?: DropdownItemClasses
   children?: React.ReactNode
+  touchScreen?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function Item({ ref, classNames, children, onClick }: DropdownItemProps) {
+function Item({
+  ref,
+  classNames,
+  children,
+  touchScreen,
+  onClick,
+}: DropdownItemProps) {
   return (
     <li
       ref={ref}
@@ -331,6 +390,7 @@ function Item({ ref, classNames, children, onClick }: DropdownItemProps) {
           children: DropdownStyles['dropdown-item-content'],
           ...classNames?.button,
         }}
+        touchScreen={touchScreen}
         block={true}
         type={'text'}
         size={'large'}

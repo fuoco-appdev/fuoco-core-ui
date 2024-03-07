@@ -132,7 +132,7 @@ export function VerticalText() {
         <Tabs
           activeId={selectedId}
           direction={'vertical'}
-          type={'underlined'}
+          type={'nav'}
           onChange={(id) => setSelectedId(id)}
           tabs={[
             {
@@ -157,7 +157,7 @@ export function VerticalText() {
   )
 }
 
-export const Underlined = (args: any) => (
+export const Nav = (args: any) => (
   <Tabs
     {...args}
     activeId={'panel-1'}
@@ -278,16 +278,16 @@ export const Flex = (args: any) => (
 )
 
 IconsAndText.args = {
-  type: 'underlined',
+  type: 'nav',
 }
 Vertical.args = {
-  type: 'underlined',
+  type: 'nav',
   direction: 'vertical',
 }
-Underlined.args = {
-  type: 'underlined',
+Nav.args = {
+  type: 'nav',
 }
 
 Flex.args = {
-  type: 'underlined',
+  type: 'nav',
 }

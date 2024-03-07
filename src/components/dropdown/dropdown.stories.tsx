@@ -137,7 +137,10 @@ export const TouchScreen = (args: any) => {
           setIsOpen(false)
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16].map(() => (
+        {[
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1,
+        ].map(() => (
           <Dropdown.Item
             onClick={() => {
               //setIsOpen(false)

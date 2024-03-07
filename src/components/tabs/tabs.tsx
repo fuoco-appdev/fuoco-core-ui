@@ -18,7 +18,7 @@ export interface TabsProps {
   touchScreen?: boolean
   tabs?: TabProps[]
   onChange?: (id: string) => void
-  type?: 'pills' | 'underlined'
+  type?: 'pills' | 'nav'
   direction?: 'vertical' | 'horizontal'
   activeId?: string
   removable?: boolean
@@ -108,7 +108,7 @@ function Tabs({
   }, [activeId, tabs])
 
   useLayoutEffect(() => {
-    if (type === 'underlined' && navRect) {
+    if (type === 'nav' && navRect) {
       if (selectedRect) {
         const styles: React.CSSProperties = {}
         if (direction === 'vertical') {
@@ -213,14 +213,6 @@ function Tabs({
             ' '
           )}
           style={hoverStyles}
-        />
-      )}
-      {type === 'underlined' && (
-        <div
-          className={[TabsStyles['tab-outline'], classNames?.tabOutline].join(
-            ' '
-          )}
-          style={selectStyles}
         />
       )}
       {tabs.map((item, i) => {
