@@ -40,6 +40,7 @@ export interface DropdownClasses {
   touchscreenDropdownHandleContainer?: string
   touchscreenDropdownHandle?: string
   touchscreenDropdownTitle?: string
+  touchscreenDropdownContent?: string
 }
 
 function Dropdown({
@@ -361,6 +362,7 @@ function Dropdown({
                   ref={contentRef}
                   className={[
                     DropdownStyles['touchscreen-dropdown-content'],
+                    classNames?.touchscreenDropdownContent,
                     title &&
                       DropdownStyles['touchscreen-dropdown-content-with-title'],
                   ].join(' ')}
