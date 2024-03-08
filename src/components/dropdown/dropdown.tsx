@@ -51,7 +51,7 @@ function Dropdown({
   extendedHeightPercent = 90,
   defaultHeightPercent = 60,
   open,
-  title = 'Title',
+  title,
   touchScreen = false,
   anchorRef,
   onOpen,
@@ -62,9 +62,9 @@ function Dropdown({
   const parentRef = useRef<HTMLDivElement | null>(null)
   const uListRef = useRef<HTMLUListElement | null>(null)
   const divRef = useRef<HTMLDivElement | null>(null)
+  const barRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
   const initialClientHeightRef = useRef<number>(0)
-  const mouseDownRef = useRef<boolean>(false)
-  const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)
   const [left, setLeft] = useState<number>(0)
 
@@ -110,7 +110,7 @@ function Dropdown({
       minHeight: '0%',
     },
     to: {
-      maxHeight: `${defaultHeightPercent}%`,
+      minHeight: '0%',
     },
     config: {
       tension: 1000,
@@ -157,12 +157,16 @@ function Dropdown({
         maxHeight > dropThresholdHeight &&
         maxHeight < extendThresholdHeight
       ) {
+        const contentHeight = contentRef.current?.clientHeight ?? defaultHeight
         touchScreenApi.start({
           from: {
             minHeight: `${maxHeight}px`,
           },
           to: {
-            minHeight: `${defaultHeight}px`,
+            minHeight:
+              contentHeight < defaultHeight
+                ? `${contentHeight}px`
+                : `${defaultHeight}px`,
           },
           onRest: () => {
             const clientHeight = divRef.current?.clientHeight ?? 0
@@ -222,8 +226,18 @@ function Dropdown({
         onClose?.()
       }
     } else {
+      const parentHeight = parentRef.current?.clientHeight ?? 0
+      const defaultHeight = (parentHeight * defaultHeightPercent) / 100
+      const contentHeight = contentRef.current?.clientHeight ?? defaultHeight
+      if (contentHeight <= 0) {
+        return
+      }
+
+      const height =
+        contentHeight < defaultHeight ? contentHeight : defaultHeight
+      const heightPercent = (height * 100) / parentHeight
       touchScreenApi.start({
-        minHeight: open ? '50%' : '0%',
+        minHeight: open ? `${heightPercent}%` : '0%',
         onRest: () => {
           const clientHeight = divRef.current?.clientHeight ?? 0
           initialClientHeightRef.current = clientHeight
@@ -313,6 +327,7 @@ function Dropdown({
                 ].join(' ')}
               >
                 <div
+                  ref={barRef}
                   className={[
                     DropdownStyles['touchscreen-dropdown-bar'],
                     classNames?.touchscreenDropdownBar,
@@ -331,18 +346,23 @@ function Dropdown({
                       ].join(' ')}
                     />
                   </div>
-                  <div
-                    className={[
-                      DropdownStyles['touchscreen-dropdown-title'],
-                      classNames?.touchscreenDropdownTitle,
-                    ].join(' ')}
-                  >
-                    {title}
-                  </div>
+                  {title && (
+                    <div
+                      className={[
+                        DropdownStyles['touchscreen-dropdown-title'],
+                        classNames?.touchscreenDropdownTitle,
+                      ].join(' ')}
+                    >
+                      {title}
+                    </div>
+                  )}
                 </div>
                 <div
+                  ref={contentRef}
                   className={[
                     DropdownStyles['touchscreen-dropdown-content'],
+                    title &&
+                      DropdownStyles['touchscreen-dropdown-content-with-title'],
                   ].join(' ')}
                   style={{
                     overflowY: 'auto',

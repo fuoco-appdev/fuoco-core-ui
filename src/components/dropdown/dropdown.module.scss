@@ -103,7 +103,6 @@
   position: relative;
   margin-top: 0 !important;
   width: 100%;
-  height: 100%;
   padding-left: 0;
 }
 
@@ -117,14 +116,17 @@
 
 .touchscreen-dropdown-content {
   position: absolute;
-  height: auto;
+  height: fit-content;
+  padding-top: 54px;
   width: 100%;
+}
+
+.touchscreen-dropdown-content-with-title {
   padding-top: 76px;
 }
 
 .touchscreen-dropdown-handle-container {
   display: flex;
-  height: 100%;
   flex: 1;
   flex-direction: column;
   justify-content: center;
