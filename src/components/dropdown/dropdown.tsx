@@ -6,6 +6,7 @@ import { Button } from '../button/index'
 import DropdownStyles from './dropdown.module.scss'
 import { useDrag } from '@use-gesture/react'
 import { ButtonClasses } from '../button/button'
+import { RipplesProps } from 'react-ripples'
 
 export enum DropdownAlignment {
   Left,
@@ -390,6 +391,7 @@ export interface DropdownItemProps {
   classNames?: DropdownItemClasses
   children?: React.ReactNode
   touchScreen?: boolean
+  rippleProps?: RipplesProps
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -398,6 +400,7 @@ function Item({
   classNames,
   children,
   touchScreen,
+  rippleProps,
   onClick,
 }: DropdownItemProps) {
   return (
@@ -413,6 +416,7 @@ function Item({
           ...classNames?.button,
         }}
         touchScreen={touchScreen}
+        rippleProps={rippleProps}
         block={true}
         type={'text'}
         size={'large'}
