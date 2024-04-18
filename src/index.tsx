@@ -48,6 +48,7 @@ export * from './components/input-geocoding'
 export * from './components/radio'
 export * from './components/toggle'
 export * from './components/upload'
+export * from './components/slider'
 
 // ARCHIVE
 

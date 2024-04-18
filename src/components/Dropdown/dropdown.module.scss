@@ -60,6 +60,7 @@
   padding-left: 0;
   background-color: white;
   overflow-y: auto;
+  overscroll-behavior: none;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
@@ -93,6 +94,7 @@
   border-top-left-radius: $rounded-base;
   border-top-right-radius: $rounded-base;
   overflow-y: auto;
+  overscroll-behavior: none;
   z-index: 1;
   transition-duration: 75ms;
   transition-property: max-height;
