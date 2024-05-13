@@ -22,8 +22,8 @@ export interface ScrollProps {
     isLoading?: boolean
     onReload?: () => void
     onLoad?: () => void
-    onScroll?: (progress: number, scrollRef: React.RefObject<HTMLDivElement>) => void
-    onDrag?: (top: number, scrollRef: React.RefObject<HTMLDivElement>) => void
+    onScroll?: (progress: number, scrollRef: React.RefObject<HTMLDivElement>, contentRef: React.RefObject<HTMLDivElement>) => void
+    onDrag?: (top: number, scrollRef: React.RefObject<HTMLDivElement>, contentRef: React.RefObject<HTMLDivElement>) => void
 }
 
 export interface ScrollClasses {
@@ -103,7 +103,7 @@ function Scroll({
     })
 
     motionY.on('change', (value) => {
-        onDrag?.(value, scrollRef);
+        onDrag?.(value, scrollRef, contentRef);
 
         if (
             reloadScrollHeightRef.current &&
@@ -120,7 +120,7 @@ function Scroll({
     })
 
     scrollYProgress.on('change', (value) => {
-        onScroll?.(value, scrollRef);
+        onScroll?.(value, scrollRef, contentRef);
 
         if (!showLoad && value >= 1) {
             setShowLoad(true);
