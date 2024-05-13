@@ -45,10 +45,10 @@ code {
     background-color: $brand-500;
 }
   
-.slider-mark.slider-mark-before {
+.slider-mark-before {
     background-color: $brand-700;
 }
-  
-.slider-mark.customSlider-mark-active {
-    display: none;
+
+.slider-mark-active {
+    background-color: $brand-200;
 }
