@@ -22,6 +22,8 @@ export interface ScrollProps {
     isLoading?: boolean
     onReload?: () => void
     onLoad?: () => void
+    onScroll?: (progress: number, scrollRef: React.RefObject<HTMLDivElement>) => void
+    onDrag?: (top: number, scrollRef: React.RefObject<HTMLDivElement>) => void
 }
 
 export interface ScrollClasses {
@@ -44,6 +46,8 @@ function Scroll({
     isLoading,
     onReload,
     onLoad,
+    onScroll,
+    onDrag
 }: ScrollProps) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const scrollRef = useRef<HTMLDivElement | null>(null)
@@ -99,6 +103,8 @@ function Scroll({
     })
 
     motionY.on('change', (value) => {
+        onDrag?.(value, scrollRef);
+
         if (
             reloadScrollHeightRef.current &&
             value <= reloadScrollHeightRef.current
@@ -114,6 +120,8 @@ function Scroll({
     })
 
     scrollYProgress.on('change', (value) => {
+        onScroll?.(value, scrollRef);
+
         if (!showLoad && value >= 1) {
             setShowLoad(true);
         }
