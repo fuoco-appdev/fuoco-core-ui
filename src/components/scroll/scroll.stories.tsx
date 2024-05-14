@@ -57,6 +57,7 @@ export const Default = (args: any) => {
                 isLoading={isLoading}
                 onReload={() => {
                     setIsReloading(true)
+                    setItems([]);
                     setTimeout(() => {
                         setItems([
                             <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
@@ -159,6 +160,7 @@ export const TouchScreen = (args: any) => {
                 isLoading={isLoading}
                 onReload={() => {
                     setIsReloading(true)
+                    setItems([]);
                     setTimeout(() => {
                         setItems([
                             <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,

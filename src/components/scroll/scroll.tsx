@@ -9,7 +9,7 @@ import {
 } from 'framer-motion'
 // @ts-ignore
 import styles from './scroll.module.scss'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export interface ScrollProps {
     classNames?: ScrollClasses
@@ -70,7 +70,10 @@ function Scroll({
     const [scrollHeight, setScrollHeight] = useState<number>(0)
     const reloadScrollHeightRef = useRef<number | null>(null)
     const loadRef = useRef<HTMLDivElement | null>(null)
-    const [showLoad, setShowLoad] = useState<boolean>(false)
+    const [showLoad, setShowLoad] = useState<boolean>(false);
+    const showLoadCallback = useCallback<(node: boolean) => void>((node) => {
+        setShowLoad(node);
+    }, [showLoad]);
     const [size, setSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
@@ -98,10 +101,10 @@ function Scroll({
     }, [isReloading])
 
     useEffect(() => {
-        if (!isLoading) {
-            setShowLoad(false)
+        if (isReloading || !isLoading) {
+            showLoadCallback(false);
         }
-    }, [isLoading])
+    }, [isLoading, isReloading])
 
     useEffect(() => {
         setScrollHeight((childrenRef.current?.clientHeight ?? 0) + loadingHeight)
@@ -132,17 +135,17 @@ function Scroll({
             motionY.animation?.play()
         }
 
-        const top = contentRef.current?.getBoundingClientRect().top ?? 0
-        if (!showLoad && value <= top) {
-            setShowLoad(true)
+        const bottom = (contentRef.current?.getBoundingClientRect().height ?? 0) - (scrollRef.current?.getBoundingClientRect().height ?? 0)
+        if (motionY.hasAnimated && value <= -bottom) {
+            showLoadCallback(true);
         }
     })
 
     scrollYProgress.on('change', (value) => {
         onScroll?.(value, scrollRef, contentRef)
 
-        if (!showLoad && value >= 1) {
-            setShowLoad(true)
+        if (value >= 1) {
+            showLoadCallback(true);
         }
     })
 
