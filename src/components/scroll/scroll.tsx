@@ -9,7 +9,7 @@ import {
 } from 'framer-motion'
 // @ts-ignore
 import styles from './scroll.module.scss'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export interface ScrollProps {
     classNames?: ScrollClasses
@@ -59,8 +59,8 @@ function Scroll({
 }: ScrollProps) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const scrollRef = useRef<HTMLDivElement | null>(null)
-    const contentRef = useRef<HTMLDivElement | null>(null)
     const childrenRef = useRef<HTMLDivElement | null>(null)
+    const contentRef = useRef<HTMLDivElement | null>(null)
     const motionY = useMotionValue(0)
     const { scrollYProgress } = useScroll({
         container: scrollRef,
@@ -71,9 +71,34 @@ function Scroll({
     const reloadScrollHeightRef = useRef<number | null>(null)
     const loadRef = useRef<HTMLDivElement | null>(null)
     const [showLoad, setShowLoad] = useState<boolean>(false);
+    const [childrenSize, setChildrenSize] = useState<{ width: number; height: number }>({
+        width: 0,
+        height: 0,
+    })
     const showLoadCallback = useCallback<(node: boolean) => void>((node) => {
         setShowLoad(node);
     }, [showLoad]);
+    const observer = useMemo(
+        () =>
+            new ResizeObserver((entries) => {
+                const rect = entries[0].target.getBoundingClientRect();
+                setChildrenSize({ width: rect.width ?? 0, height: rect.height ?? 0 });
+            }),
+        []
+    );
+
+    const childrenCallbackRef = useCallback<(node: HTMLDivElement | null) => void>(
+        (node) => {
+            if (node !== null) {
+                childrenRef.current = node;
+                observer.observe(node);
+            } else {
+                observer.unobserve(childrenRef.current as Element);
+                childrenRef.current = null;
+            }
+        },
+        [observer]
+    );
     const [size, setSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
@@ -107,8 +132,8 @@ function Scroll({
     }, [isLoading, isReloading])
 
     useEffect(() => {
-        setScrollHeight((childrenRef.current?.clientHeight ?? 0) + loadingHeight)
-    }, [childrenRef.current, isLoading, isReloading, size])
+        setScrollHeight(childrenSize.height + loadingHeight)
+    }, [childrenSize, size])
 
     touchScreenReloadScale.on('change', (value) => {
         if (value >= 1 && reloadScrollHeightRef.current === null) {
@@ -180,7 +205,7 @@ function Scroll({
                             }}
                         >
                             <motion.div
-                                ref={childrenRef}
+                                ref={childrenCallbackRef}
                                 className={[styles['children'], classNames?.children].join(' ')}
                             >
                                 {children}
@@ -267,7 +292,7 @@ function Scroll({
                             }}
                         >
                             <motion.div
-                                ref={childrenRef}
+                                ref={childrenCallbackRef}
                                 className={[styles['children'], classNames?.children].join(' ')}
                             >
                                 {children}
