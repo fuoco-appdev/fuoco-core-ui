@@ -287,7 +287,7 @@ function Scroll({
                             }}
                             drag="y"
                             dragConstraints={{
-                                top: -scrollHeight + (rootRef.current?.clientHeight ?? 0),
+                                top: -scrollHeight + (scrollRef.current?.clientHeight ?? 0),
                                 bottom: 0,
                             }}
                         >
