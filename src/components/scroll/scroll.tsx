@@ -5,7 +5,7 @@ import {
     useMotionValue,
     useTransform,
     AnimatePresence,
-    useMotionValueEvent
+    useMotionValueEvent,
 } from 'framer-motion'
 // @ts-ignore
 import styles from './scroll.module.scss'
@@ -22,8 +22,16 @@ export interface ScrollProps {
     isLoading?: boolean
     onReload?: () => void
     onLoad?: () => void
-    onScroll?: (progress: number, scrollRef: React.RefObject<HTMLDivElement>, contentRef: React.RefObject<HTMLDivElement>) => void
-    onDrag?: (top: number, scrollRef: React.RefObject<HTMLDivElement>, contentRef: React.RefObject<HTMLDivElement>) => void
+    onScroll?: (
+        progress: number,
+        scrollRef: React.RefObject<HTMLDivElement>,
+        contentRef: React.RefObject<HTMLDivElement>
+    ) => void
+    onDrag?: (
+        top: number,
+        scrollRef: React.RefObject<HTMLDivElement>,
+        contentRef: React.RefObject<HTMLDivElement>
+    ) => void
 }
 
 export interface ScrollClasses {
@@ -47,7 +55,7 @@ function Scroll({
     onReload,
     onLoad,
     onScroll,
-    onDrag
+    onDrag,
 }: ScrollProps) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const scrollRef = useRef<HTMLDivElement | null>(null)
@@ -55,20 +63,23 @@ function Scroll({
     const childrenRef = useRef<HTMLDivElement | null>(null)
     const motionY = useMotionValue(0)
     const { scrollYProgress } = useScroll({
-        container: scrollRef
-    });
+        container: scrollRef,
+    })
     const touchScreenReloadScale = useTransform(motionY, [0, 100], [0, 1])
     const touchScreenReloadOpacity = useTransform(motionY, [0, 100], [0, 1])
     const [scrollHeight, setScrollHeight] = useState<number>(0)
     const reloadScrollHeightRef = useRef<number | null>(null)
     const loadRef = useRef<HTMLDivElement | null>(null)
     const [showLoad, setShowLoad] = useState<boolean>(false)
-    const [size, setSize] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
+    const [size, setSize] = useState<{ width: number; height: number }>({
+        width: 0,
+        height: 0,
+    })
 
     const handleResize = () => {
         setSize({
             height: window.innerHeight,
-            width: window.innerWidth
+            width: window.innerWidth,
         })
     }
 
@@ -77,20 +88,20 @@ function Scroll({
         return () => {
             window.removeEventListener('resize', handleResize)
         }
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (touchScreen && !isReloading) {
             reloadScrollHeightRef.current = null
-            motionY.animation?.play();
+            motionY.animation?.play()
         }
     }, [isReloading])
 
     useEffect(() => {
         if (!isLoading) {
-            setShowLoad(false);
+            setShowLoad(false)
         }
-    }, [isLoading]);
+    }, [isLoading])
 
     useEffect(() => {
         setScrollHeight((childrenRef.current?.clientHeight ?? 0) + loadingHeight)
@@ -103,29 +114,37 @@ function Scroll({
     })
 
     motionY.on('change', (value) => {
-        onDrag?.(value, scrollRef, contentRef);
+        onDrag?.(value, scrollRef, contentRef)
 
         if (
             reloadScrollHeightRef.current &&
             value <= reloadScrollHeightRef.current
         ) {
-            motionY.animation?.pause();
-            onReload?.();
+            motionY.animation?.pause()
+            onReload?.()
         }
 
-        const top = contentRef.current?.getBoundingClientRect().top ?? 0;
+        if (
+            isReloading &&
+            reloadScrollHeightRef.current &&
+            value >= reloadScrollHeightRef.current
+        ) {
+            motionY.animation?.play()
+        }
+
+        const top = contentRef.current?.getBoundingClientRect().top ?? 0
         if (!showLoad && value <= top) {
-            setShowLoad(true);
+            setShowLoad(true)
         }
     })
 
     scrollYProgress.on('change', (value) => {
-        onScroll?.(value, scrollRef, contentRef);
+        onScroll?.(value, scrollRef, contentRef)
 
         if (!showLoad && value >= 1) {
-            setShowLoad(true);
+            setShowLoad(true)
         }
-    });
+    })
 
     return (
         <div ref={rootRef} className={[styles['root'], classNames?.root].join(' ')}>
@@ -133,32 +152,44 @@ function Scroll({
                 <>
                     <motion.div
                         ref={scrollRef}
-                        className={[styles['scroll-container'], classNames?.scrollContainer].join(' ')}
+                        className={[
+                            styles['scroll-container'],
+                            classNames?.scrollContainer,
+                        ].join(' ')}
                         style={{
                             width: '100%',
                             height: '100%',
                             overflow: 'hidden',
                             position: 'relative',
-                            overflowY: 'auto'
+                            overflowY: 'auto',
                         }}
                     >
                         <motion.div
                             ref={contentRef}
-                            className={[styles['scroll-content'], classNames?.scrollContent].join(' ')}
+                            className={[
+                                styles['scroll-content'],
+                                classNames?.scrollContent,
+                            ].join(' ')}
                             style={{
                                 position: 'relative',
                                 width: '100%',
                                 height: scrollHeight,
                             }}
                         >
-                            <motion.div ref={childrenRef} className={[styles['children'], classNames?.children].join(' ')}>
+                            <motion.div
+                                ref={childrenRef}
+                                className={[styles['children'], classNames?.children].join(' ')}
+                            >
                                 {children}
                             </motion.div>
                             <AnimatePresence>
                                 {showLoad && (
                                     <motion.div
                                         ref={loadRef}
-                                        className={[styles['load-container'], classNames?.loadContainer].join(' ')}
+                                        className={[
+                                            styles['load-container'],
+                                            classNames?.loadContainer,
+                                        ].join(' ')}
                                         initial={{ opacity: 0, scale: 0 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0 }}
@@ -182,10 +213,12 @@ function Scroll({
             {touchScreen && (
                 <>
                     <motion.div
-                        className={[styles['reload-container'], classNames?.reloadContainer].join(' ')}
+                        className={[
+                            styles['reload-container'],
+                            classNames?.reloadContainer,
+                        ].join(' ')}
                         style={{
                             position: 'absolute',
-                            top: 0,
                             display: 'flex',
                             justifyContent: 'center',
                             alignContent: 'center',
@@ -198,7 +231,10 @@ function Scroll({
                     </motion.div>
                     <motion.div
                         ref={scrollRef}
-                        className={[styles['scroll-container'], classNames?.scrollContainer].join(' ')}
+                        className={[
+                            styles['scroll-container'],
+                            classNames?.scrollContainer,
+                        ].join(' ')}
                         style={{
                             width: '100%',
                             height: '100%',
@@ -211,7 +247,10 @@ function Scroll({
                     >
                         <motion.div
                             ref={contentRef}
-                            className={[styles['scroll-content'], classNames?.scrollContent].join(' ')}
+                            className={[
+                                styles['scroll-content'],
+                                classNames?.scrollContent,
+                            ].join(' ')}
                             style={{
                                 position: 'relative',
                                 width: '100%',
@@ -224,14 +263,20 @@ function Scroll({
                                 bottom: 0,
                             }}
                         >
-                            <motion.div ref={childrenRef} className={[styles['children'], classNames?.children].join(' ')}>
+                            <motion.div
+                                ref={childrenRef}
+                                className={[styles['children'], classNames?.children].join(' ')}
+                            >
                                 {children}
                             </motion.div>
                             <AnimatePresence>
                                 {showLoad && (
                                     <motion.div
                                         ref={loadRef}
-                                        className={[styles['load-container'], classNames?.loadContainer].join(' ')}
+                                        className={[
+                                            styles['load-container'],
+                                            classNames?.loadContainer,
+                                        ].join(' ')}
                                         initial={{ opacity: 0, scale: 0 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0 }}
