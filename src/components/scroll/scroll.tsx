@@ -68,6 +68,7 @@ function Scroll({
     const touchScreenReloadScale = useTransform(motionY, [0, 100], [0, 1])
     const touchScreenReloadOpacity = useTransform(motionY, [0, 100], [0, 1])
     const [scrollHeight, setScrollHeight] = useState<number>(0)
+    const [scrollTopConstraint, setScrollTopConstraint] = useState<number>(0);
     const reloadScrollHeightRef = useRef<number | null>(null)
     const loadRef = useRef<HTMLDivElement | null>(null)
     const [showLoad, setShowLoad] = useState<boolean>(false);
@@ -132,7 +133,15 @@ function Scroll({
     }, [isLoading, isReloading])
 
     useEffect(() => {
-        setScrollHeight(childrenSize.height + loadingHeight)
+        const height = childrenSize.height + loadingHeight;
+        setScrollHeight(height)
+
+        const rootHeight = (rootRef.current?.clientHeight ?? 0);
+        if (height >= rootHeight) {
+            setScrollTopConstraint(-height + (scrollRef.current?.clientHeight ?? 0));
+        } else {
+            setScrollTopConstraint(0);
+        }
     }, [childrenSize, size])
 
     touchScreenReloadScale.on('change', (value) => {
@@ -161,12 +170,17 @@ function Scroll({
         }
 
         const bottom = (contentRef.current?.getBoundingClientRect().height ?? 0) - (scrollRef.current?.getBoundingClientRect().height ?? 0)
-        if (motionY.hasAnimated && value <= -bottom) {
+        const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
+        if (scrollHeight >= rootHeight && motionY.hasAnimated && value < -bottom) {
             showLoadCallback(true);
         }
     })
 
     scrollYProgress.on('change', (value) => {
+        if (touchScreen) {
+            return;
+        }
+
         onScroll?.(value, scrollRef, contentRef)
 
         if (value >= 1) {
@@ -266,8 +280,8 @@ function Scroll({
                         style={{
                             width: '100%',
                             height: '100%',
-                            overflow: 'hidden',
                             position: 'relative',
+                            overflow: 'hidden',
                             transform: 'translateZ(0)',
                             cursor: 'grab',
                         }}
@@ -287,7 +301,7 @@ function Scroll({
                             }}
                             drag="y"
                             dragConstraints={{
-                                top: -scrollHeight + (scrollRef.current?.clientHeight ?? 0),
+                                top: scrollTopConstraint,
                                 bottom: 0,
                             }}
                         >

@@ -112,18 +112,8 @@ export const TouchScreen = (args: any) => {
     const [isReloading, setIsReloading] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [items, setItems] = useState<JSX.Element[]>([
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-        <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
     ])
     return (
         <div
@@ -163,18 +153,20 @@ export const TouchScreen = (args: any) => {
                     setItems([]);
                     setTimeout(() => {
                         setItems([
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                            <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                            <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                         ])
                         setIsReloading(false)
                     }, 2000)
@@ -185,18 +177,8 @@ export const TouchScreen = (args: any) => {
                         setItems([
                             ...items,
                             ...[
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
-                                <div style={{ height: 250, width: 250, backgroundColor: '#fff' }} />,
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                             ],
                         ])
                         setIsLoading(false)
