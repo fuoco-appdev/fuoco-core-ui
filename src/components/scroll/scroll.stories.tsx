@@ -192,3 +192,43 @@ export const TouchScreen = (args: any) => {
         </div>
     )
 }
+
+export const NotLoadableTouchScreen = (args: any) => {
+    const [isReloading, setIsReloading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [items, setItems] = useState<JSX.Element[]>([
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+        <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+    ])
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '80vh',
+            }}
+        >
+            <Scroll
+                touchScreen={true}
+                loadingHeight={80}
+                isLoadable={false}
+            >
+                <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                    {items}
+                </div>
+            </Scroll>
+        </div>
+    )
+}

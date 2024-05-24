@@ -18,6 +18,7 @@ export interface ScrollProps {
     reloadComponent?: JSX.Element
     loadComponent?: JSX.Element
     loadingHeight?: number
+    isLoadable?: boolean
     isReloading?: boolean
     isLoading?: boolean
     onReload?: () => void
@@ -50,6 +51,7 @@ function Scroll({
     reloadComponent,
     loadComponent,
     loadingHeight = 40,
+    isLoadable = true,
     isReloading,
     isLoading,
     onReload,
@@ -77,8 +79,10 @@ function Scroll({
         height: 0,
     })
     const showLoadCallback = useCallback<(node: boolean) => void>((node) => {
-        setShowLoad(node);
-    }, [showLoad]);
+        if (isLoadable) {
+            setShowLoad(node);
+        }
+    }, [showLoad, isLoadable]);
     const observer = useMemo(
         () =>
             new ResizeObserver((entries) => {
@@ -120,14 +124,14 @@ function Scroll({
     }, [])
 
     useEffect(() => {
-        if (touchScreen && !isReloading) {
+        if (isLoadable && touchScreen && !isReloading) {
             reloadScrollHeightRef.current = null
             motionY.animation?.play()
         }
     }, [isReloading])
 
     useEffect(() => {
-        if (isReloading || !isLoading) {
+        if (isLoadable && isReloading || !isLoading) {
             showLoadCallback(false);
         }
     }, [isLoading, isReloading])
@@ -145,7 +149,7 @@ function Scroll({
     }, [childrenSize, size])
 
     touchScreenReloadScale.on('change', (value) => {
-        if (value >= 1 && reloadScrollHeightRef.current === null) {
+        if (isLoadable && value >= 1 && reloadScrollHeightRef.current === null) {
             reloadScrollHeightRef.current = motionY.get()
         }
     })
@@ -154,6 +158,7 @@ function Scroll({
         onDrag?.(value, scrollRef, contentRef)
 
         if (
+            isLoadable &&
             reloadScrollHeightRef.current &&
             value <= reloadScrollHeightRef.current
         ) {
@@ -162,6 +167,7 @@ function Scroll({
         }
 
         if (
+            isLoadable &&
             isReloading &&
             reloadScrollHeightRef.current &&
             value >= reloadScrollHeightRef.current
@@ -171,7 +177,7 @@ function Scroll({
 
         const bottom = (contentRef.current?.getBoundingClientRect().height ?? 0) - (scrollRef.current?.getBoundingClientRect().height ?? 0)
         const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
-        if (scrollHeight >= rootHeight && motionY.hasAnimated && value < -bottom) {
+        if (isLoadable && scrollHeight >= rootHeight && motionY.hasAnimated && value < -bottom) {
             showLoadCallback(true);
         }
     })
