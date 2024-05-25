@@ -63,17 +63,12 @@ function Scroll({
     const scrollRef = useRef<HTMLDivElement | null>(null)
     const childrenRef = useRef<HTMLDivElement | null>(null)
     const contentRef = useRef<HTMLDivElement | null>(null)
-    const motionY = useMotionValue(0)
     const { scrollYProgress } = useScroll({
         container: scrollRef,
     })
-    const touchScreenReloadScale = useTransform(motionY, [0, 100], [0, 1])
-    const touchScreenReloadOpacity = useTransform(motionY, [0, 100], [0, 1])
     const [scrollHeight, setScrollHeight] = useState<number>(0)
-    const [scrollTopConstraint, setScrollTopConstraint] = useState<number>(0);
-    const reloadScrollHeightRef = useRef<number | null>(null)
-    const loadRef = useRef<HTMLDivElement | null>(null)
     const [showLoad, setShowLoad] = useState<boolean>(false);
+    const [showReload, setShowReload] = useState<boolean>(false);
     const [childrenSize, setChildrenSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
@@ -83,6 +78,7 @@ function Scroll({
             setShowLoad(node);
         }
     }, [showLoad, isLoadable]);
+
     const observer = useMemo(
         () =>
             new ResizeObserver((entries) => {
@@ -124,13 +120,6 @@ function Scroll({
     }, [])
 
     useEffect(() => {
-        if (isLoadable && touchScreen && !isReloading) {
-            reloadScrollHeightRef.current = null
-            motionY.animation?.play()
-        }
-    }, [isReloading])
-
-    useEffect(() => {
         if (isLoadable && isReloading || !isLoading) {
             showLoadCallback(false);
         }
@@ -139,212 +128,76 @@ function Scroll({
     useEffect(() => {
         const height = childrenSize.height + loadingHeight;
         setScrollHeight(height)
-
-        const rootHeight = (rootRef.current?.clientHeight ?? 0);
-        if (height >= rootHeight) {
-            setScrollTopConstraint(-height + (scrollRef.current?.clientHeight ?? 0));
-        } else {
-            setScrollTopConstraint(0);
-        }
     }, [childrenSize, size])
 
-    touchScreenReloadScale.on('change', (value) => {
-        if (isLoadable && value >= 1 && reloadScrollHeightRef.current === null) {
-            reloadScrollHeightRef.current = motionY.get()
-        }
-    })
-
-    motionY.on('change', (value) => {
-        onDrag?.(value, scrollRef, contentRef)
-
-        if (
-            isLoadable &&
-            reloadScrollHeightRef.current &&
-            value <= reloadScrollHeightRef.current
-        ) {
-            motionY.animation?.pause()
-            onReload?.()
-        }
-
-        if (
-            isLoadable &&
-            isReloading &&
-            reloadScrollHeightRef.current &&
-            value >= reloadScrollHeightRef.current
-        ) {
-            motionY.animation?.play()
-        }
-
-        const bottom = (contentRef.current?.getBoundingClientRect().height ?? 0) - (scrollRef.current?.getBoundingClientRect().height ?? 0)
-        const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
-        if (isLoadable && scrollHeight >= rootHeight && motionY.hasAnimated && value < -bottom) {
-            showLoadCallback(true);
-        }
-    })
-
     scrollYProgress.on('change', (value) => {
-        if (touchScreen) {
-            return;
-        }
-
         onScroll?.(value, scrollRef, contentRef)
 
-        if (value >= 1) {
+        const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
+        if (scrollHeight >= rootHeight && value >= 1) {
             showLoadCallback(true);
         }
     })
 
     return (
         <div ref={rootRef} className={[styles['root'], classNames?.root].join(' ')}>
-            {!touchScreen && (
-                <>
+            <motion.div
+                ref={scrollRef}
+                className={[
+                    styles['scroll-container'],
+                    classNames?.scrollContainer,
+                ].join(' ')}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    overflowY: 'auto',
+                }}
+            >
+                <motion.div
+                    ref={contentRef}
+                    className={[
+                        styles['scroll-content'],
+                        classNames?.scrollContent,
+                    ].join(' ')}
+                    style={{
+                        position: 'relative',
+                        width: '100%',
+                        //height: scrollHeight,
+                    }}
+                >
                     <motion.div
-                        ref={scrollRef}
-                        className={[
-                            styles['scroll-container'],
-                            classNames?.scrollContainer,
-                        ].join(' ')}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            overflow: 'hidden',
-                            position: 'relative',
-                            overflowY: 'auto',
-                        }}
+                        ref={childrenCallbackRef}
+                        className={[styles['children'], classNames?.children].join(' ')}
                     >
-                        <motion.div
-                            ref={contentRef}
-                            className={[
-                                styles['scroll-content'],
-                                classNames?.scrollContent,
-                            ].join(' ')}
-                            style={{
-                                position: 'relative',
-                                width: '100%',
-                                height: scrollHeight,
-                            }}
-                        >
+                        {children}
+                    </motion.div>
+                    <AnimatePresence>
+                        {showLoad && (
                             <motion.div
-                                ref={childrenCallbackRef}
-                                className={[styles['children'], classNames?.children].join(' ')}
+                                className={[
+                                    styles['load-container'],
+                                    classNames?.loadContainer,
+                                ].join(' ')}
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0 }}
+                                style={{
+                                    padding: 16,
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignContent: 'center',
+                                    width: '100%',
+                                }}
+                                onAnimationComplete={() => onLoad?.()}
                             >
-                                {children}
+                                {loadComponent}
                             </motion.div>
-                            <AnimatePresence>
-                                {showLoad && (
-                                    <motion.div
-                                        ref={loadRef}
-                                        className={[
-                                            styles['load-container'],
-                                            classNames?.loadContainer,
-                                        ].join(' ')}
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0 }}
-                                        style={{
-                                            padding: 16,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignContent: 'center',
-                                            width: '100%',
-                                        }}
-                                        onAnimationComplete={() => onLoad?.()}
-                                    >
-                                        {loadComponent}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    </motion.div>
-                </>
-            )}
-            {touchScreen && (
-                <>
-                    <motion.div
-                        className={[
-                            styles['reload-container'],
-                            classNames?.reloadContainer,
-                        ].join(' ')}
-                        style={{
-                            position: 'absolute',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                            width: '100%',
-                            scale: touchScreenReloadScale,
-                            opacity: touchScreenReloadOpacity,
-                        }}
-                    >
-                        {reloadComponent}
-                    </motion.div>
-                    <motion.div
-                        ref={scrollRef}
-                        className={[
-                            styles['scroll-container'],
-                            classNames?.scrollContainer,
-                        ].join(' ')}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            position: 'relative',
-                            overflow: 'hidden',
-                            transform: 'translateZ(0)',
-                            cursor: 'grab',
-                        }}
-                        whileTap={{ cursor: 'grabbing' }}
-                    >
-                        <motion.div
-                            ref={contentRef}
-                            className={[
-                                styles['scroll-content'],
-                                classNames?.scrollContent,
-                            ].join(' ')}
-                            style={{
-                                position: 'relative',
-                                width: '100%',
-                                height: scrollHeight,
-                                y: motionY,
-                            }}
-                            drag="y"
-                            dragConstraints={{
-                                top: scrollTopConstraint,
-                                bottom: 0,
-                            }}
-                        >
-                            <motion.div
-                                ref={childrenCallbackRef}
-                                className={[styles['children'], classNames?.children].join(' ')}
-                            >
-                                {children}
-                            </motion.div>
-                            <AnimatePresence>
-                                {showLoad && (
-                                    <motion.div
-                                        ref={loadRef}
-                                        className={[
-                                            styles['load-container'],
-                                            classNames?.loadContainer,
-                                        ].join(' ')}
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0 }}
-                                        style={{
-                                            padding: 16,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignContent: 'center',
-                                            width: '100%',
-                                        }}
-                                        onAnimationComplete={() => onLoad?.()}
-                                    >
-                                        {loadComponent}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    </motion.div>
-                </>
-            )}
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            </motion.div>
         </div>
     )
 }

@@ -150,7 +150,6 @@ export const TouchScreen = (args: any) => {
                 isLoading={isLoading}
                 onReload={() => {
                     setIsReloading(true)
-                    setItems([]);
                     setTimeout(() => {
                         setItems([
                             <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
