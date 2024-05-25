@@ -153,6 +153,7 @@ function Scroll({
                     overflow: 'hidden',
                     position: 'relative',
                     overflowY: 'auto',
+                    overscrollBehavior: 'none',
                 }}
             >
                 <motion.div
