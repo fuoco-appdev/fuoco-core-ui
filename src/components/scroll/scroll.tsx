@@ -42,6 +42,7 @@ export interface ScrollClasses {
     scrollContent?: string
     children?: string
     loadContainer?: string
+    pullIndicator?: string
 }
 
 function Scroll({
@@ -135,7 +136,7 @@ function Scroll({
         }
 
         const pullIndicator = document.createElement("div");
-        pullIndicator.className = styles["pull-indicator"];
+        pullIndicator.className = [styles["pull-indicator"], classNames?.pullIndicator].join(' ');
         pullIndicator.innerHTML = pullIndicatorComponent ? renderToString(pullIndicatorComponent) : '';
         el.appendChild(pullIndicator);
     }
