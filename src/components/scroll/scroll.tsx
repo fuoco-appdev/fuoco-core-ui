@@ -22,6 +22,7 @@ export interface ScrollProps {
     loadingHeight?: number
     reloadThreshold?: number
     showIndicatorThreshold?: number
+    isReloadable?: boolean
     isLoadable?: boolean
     isReloading?: boolean
     isLoading?: boolean
@@ -53,6 +54,7 @@ function Scroll({
     loadingHeight = 40,
     reloadThreshold = 56,
     showIndicatorThreshold = 24,
+    isReloadable = true,
     isLoadable = true,
     isReloading,
     isLoading,
@@ -154,7 +156,7 @@ function Scroll({
 
     const handleTouchStart = (startEvent: TouchEvent) => {
         const el = contentRef.current;
-        if (!el || !isLoadable) return;
+        if (!el || !isReloadable) return;
 
         // get the initial Y position
         const initialY = startEvent.touches[0].clientY;
@@ -168,7 +170,7 @@ function Scroll({
         }
 
         const handleTouchMove = (moveEvent: TouchEvent) => {
-            if (!isLoadable) {
+            if (!isReloadable) {
                 return;
             }
 
@@ -194,7 +196,7 @@ function Scroll({
         }
 
         const handleTouchEnd = (endEvent: TouchEvent) => {
-            if (!isLoadable) {
+            if (!isReloadable) {
                 return;
             }
 
@@ -294,7 +296,7 @@ function Scroll({
                 }}
             >
                 <AnimatePresence>
-                    {isLoadable && isReloading && (
+                    {isReloadable && isReloading && (
                         <motion.div
                             className={[
                                 styles['reload-container'],
