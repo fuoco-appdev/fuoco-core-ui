@@ -16,10 +16,42 @@
 
 }
 
-.reload-container {
+.pull-indicator {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 150ms $transition-standard-easing;
+    z-index: 10;
+  }
+  
+  .pull-indicator * {
+    transition: transform 150ms $transition-standard-easing;
+  }
+  
+  .flip * {
+    transform: rotate(180deg);
+  }
+
+  .scale * {
+    scale: 1;
+    transform: scale(150ms);
+  }
+
+  .reload-container {
     
-}
+  }
 
-.load-container {
-
-}
+  .load-container {
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 150ms $transition-standard-easing;
+    padding: $mp-4;
+  }

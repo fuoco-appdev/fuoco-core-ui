@@ -126,6 +126,16 @@ export const TouchScreen = (args: any) => {
             <Scroll
                 touchScreen={true}
                 loadingHeight={80}
+                pullIndicatorComponent={
+                    <div
+                        style={{
+                            height: 40,
+                            width: 20,
+                            borderRadius: 20,
+                            backgroundColor: '#fff',
+                        }}
+                    />
+                }
                 reloadComponent={
                     <div
                         style={{
@@ -176,6 +186,10 @@ export const TouchScreen = (args: any) => {
                         setItems([
                             ...items,
                             ...[
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
+                                <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                                 <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                                 <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                             ],
