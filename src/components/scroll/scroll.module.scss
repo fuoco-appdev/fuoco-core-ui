@@ -25,12 +25,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 150ms $transition-standard-easing;
-    z-index: 10;
+    transition: transform 150ms;
+    transition-timing-function: $transition-standard-easing;
+    z-index: -1;
   }
   
   .pull-indicator * {
-    transition: transform 150ms $transition-standard-easing;
+    transition: transform 150ms;
+    transition-timing-function: $transition-standard-easing;
+    transform-origin: 50% 50%;
   }
   
   .flip * {
@@ -43,15 +46,26 @@
   }
 
   .reload-container {
-    
-  }
-
-  .load-container {
+    position: absolute;
+    top: 16px;
+    left: 0;
     width: 100%;
     background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 150ms $transition-standard-easing;
+    transition: transform 150ms;
+    transition-timing-function: $transition-standard-easing;
+    z-index: -1;
+  }
+
+  .load-container {
+    width: 100%;
+    scale: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: scale 75ms;
+    transition-timing-function: $transition-standard-easing;
     padding: $mp-4;
   }

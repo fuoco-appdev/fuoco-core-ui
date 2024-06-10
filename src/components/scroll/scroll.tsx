@@ -71,7 +71,6 @@ function Scroll({
         container: scrollRef,
     })
     const [scrollHeight, setScrollHeight] = useState<number>(0)
-    const [showLoad, setShowLoad] = useState<boolean>(false);
     const [childrenSize, setChildrenSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
@@ -85,13 +84,6 @@ function Scroll({
             }),
         []
     );
-
-    const showLoadCallback = useCallback<(node: boolean) => void>((node) => {
-        if (showLoad !== node) {
-            setShowLoad(node);
-        }
-    }, [showLoad]);
-
 
     const childrenCallbackRef = useCallback<(node: HTMLDivElement | null) => void>(
         (node) => {
@@ -148,6 +140,52 @@ function Scroll({
         }
     }
 
+    const addReload = (el: HTMLDivElement) => {
+        const existingReload = el.querySelector(`.${styles["reload-container"]}`);
+        if (existingReload) {
+            return;
+        }
+
+        const reload = document.createElement("div");
+        reload.className = [styles["reload-container"], classNames?.reloadContainer].join(' ');
+        reload.innerHTML = reloadComponent ? renderToString(reloadComponent) : '';
+        el.appendChild(reload);
+    }
+
+    const removeReload = (el: HTMLDivElement) => {
+        const reload = el.querySelector(`.${styles['reload-container']}`);
+        if (reload) {
+            reload.remove();
+            // add transition
+            contentRef.current!.style.transition = "transform 150ms";
+            contentRef.current!.style.transform = `translateY(0px)`;
+        }
+    }
+
+    const addLoad = (el: HTMLDivElement) => {
+        const existingLoad = el.querySelector(`.${styles["load-container"]}`);
+        if (existingLoad) {
+            return;
+        }
+
+        const load = document.createElement("div");
+        load.className = [styles["load-container"], classNames?.loadContainer].join(' ');
+        load.innerHTML = loadComponent ? renderToString(loadComponent) : '';
+        load.ontransitionend = () => onLoad?.();
+        el.appendChild(load);
+
+        setTimeout(() => {
+            load.style.scale = '1';
+        }, 150);
+    }
+
+    const removeLoad = (el: HTMLDivElement) => {
+        const load = el.querySelector(`.${styles['load-container']}`);
+        if (load) {
+            load.remove();
+        }
+    }
+
     const flipArrow = (el: HTMLDivElement) => {
         const pullIndicator = el.querySelector(`.${styles['pull-indicator']}`);
         if (pullIndicator && !pullIndicator.classList.contains(styles["flip"])) {
@@ -193,6 +231,7 @@ function Scroll({
             }
 
             // now we are using the `appr` function
+            el.style.transition = "";
             el.style.transform = `translateY(${appr(dy)}px)`;
         }
 
@@ -202,11 +241,14 @@ function Scroll({
             }
 
             // return the element to its initial position
-            el.style.transform = "translateY(0)";
-            removePullIndicator(el.parentNode as HTMLDivElement);
-
+            const indicator = scrollRef.current?.querySelector(`.${styles["pull-indicator"]}`);
+            const indicatorRect = indicator?.getBoundingClientRect();
+            const position = (indicatorRect?.y ?? 0) + (indicatorRect?.height ?? 0);
             // add transition
             el.style.transition = "transform 150ms";
+            el.style.transform = `translateY(${position}px)`;
+
+            removePullIndicator(el.parentNode as HTMLDivElement);
 
             // run the callback
             const y = endEvent.changedTouches[0].clientY;
@@ -259,9 +301,22 @@ function Scroll({
 
         const existingLoader = contentRef.current.querySelector(`.${styles['load-container']}`);
         if (existingLoader && !isLoading) {
-            setShowLoad(false);
+            removeLoad(contentRef.current);
         }
     }, [isLoading, contentRef.current]);
+
+    useEffect(() => {
+        if (!isReloadable || !scrollRef.current) {
+            return;
+        }
+
+        if (isReloading) {
+            addReload(scrollRef.current);
+        }
+        else {
+            removeReload(scrollRef.current);
+        }
+    }, [isReloading]);
 
     scrollYProgress.on('change', (value) => {
         if (value >= 0 && value <= 1) {
@@ -275,7 +330,7 @@ function Scroll({
         const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
         const existingLoader = contentRef.current?.querySelector(`.${styles['load-container']}`);
         if (isLoadable && !existingLoader && scrollHeight > rootHeight && value >= 1) {
-            showLoadCallback(true);
+            addLoad(contentRef.current);
         }
     })
 
@@ -296,7 +351,7 @@ function Scroll({
                     overscrollBehavior: 'none'
                 }}
             >
-                <AnimatePresence>
+                {/* <AnimatePresence>
                     {isReloadable && isReloading && (
                         <motion.div
                             className={[
@@ -317,7 +372,7 @@ function Scroll({
                             {reloadComponent}
                         </motion.div>
                     )}
-                </AnimatePresence>
+                </AnimatePresence> */}
                 <motion.div
                     ref={contentRef}
                     className={[
@@ -335,22 +390,6 @@ function Scroll({
                     >
                         {children}
                     </motion.div>
-                    <AnimatePresence>
-                        {isLoadable && showLoad && (
-                            <motion.div
-                                className={[
-                                    styles['load-container'],
-                                    classNames?.loadContainer,
-                                ].join(' ')}
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0 }}
-                                onAnimationComplete={() => onLoad?.()}
-                            >
-                                {loadComponent}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
                 </motion.div>
             </motion.div>
         </div>

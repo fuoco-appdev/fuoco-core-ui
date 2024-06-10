@@ -134,7 +134,14 @@ export const TouchScreen = (args: any) => {
                             borderRadius: 20,
                             backgroundColor: '#fff',
                         }}
-                    />
+                    >
+                        <div style={{
+                            height: 20,
+                            width: 20,
+                            borderRadius: 20,
+                            backgroundColor: 'red',
+                        }} />
+                    </div>
                 }
                 reloadComponent={
                     <div
@@ -183,8 +190,8 @@ export const TouchScreen = (args: any) => {
                 onLoad={() => {
                     setIsLoading(true)
                     setTimeout(() => {
-                        setItems([
-                            ...items,
+                        setItems((prevState) => [
+                            ...prevState,
                             ...[
                                 <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                                 <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
