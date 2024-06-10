@@ -15,7 +15,8 @@ import { renderToString } from 'react-dom/server';
 export interface ScrollProps {
     classNames?: ScrollClasses
     touchScreen?: boolean
-    children?: JSX.Element
+    reverse?: boolean
+    children?: JSX.Element | JSX.Element[]
     reloadComponent?: JSX.Element
     pullIndicatorComponent?: JSX.Element
     loadComponent?: JSX.Element
@@ -48,6 +49,7 @@ export interface ScrollClasses {
 function Scroll({
     classNames,
     touchScreen,
+    reverse,
     children,
     reloadComponent,
     pullIndicatorComponent,
@@ -195,7 +197,7 @@ function Scroll({
 
     const handleTouchStart = (startEvent: TouchEvent) => {
         const el = contentRef.current;
-        if (!el || !isReloadable) return;
+        if (!el || !isReloadable || reverse) return;
 
         // get the initial Y position
         const initialY = startEvent.touches[0].clientY;
@@ -209,7 +211,7 @@ function Scroll({
         }
 
         const handleTouchMove = (moveEvent: TouchEvent) => {
-            if (!isReloadable) {
+            if (!isReloadable || reverse) {
                 return;
             }
 
@@ -236,7 +238,7 @@ function Scroll({
         }
 
         const handleTouchEnd = (endEvent: TouchEvent) => {
-            if (!isReloadable) {
+            if (!isReloadable || reverse) {
                 return;
             }
 
@@ -306,7 +308,7 @@ function Scroll({
     }, [isLoading, contentRef.current]);
 
     useEffect(() => {
-        if (!isReloadable || !scrollRef.current) {
+        if (!isReloadable || reverse || !scrollRef.current) {
             return;
         }
 
@@ -329,8 +331,10 @@ function Scroll({
 
         const rootHeight = rootRef.current?.getBoundingClientRect().height ?? 0;
         const existingLoader = contentRef.current?.querySelector(`.${styles['load-container']}`);
-        if (isLoadable && !existingLoader && scrollHeight > rootHeight && value >= 1) {
-            addLoad(contentRef.current);
+        if (isLoadable && !existingLoader && scrollHeight > rootHeight) {
+            if ((!reverse && value >= 1) || (reverse && value <= -0.99)) {
+                addLoad(contentRef.current);
+            }
         }
     })
 
@@ -343,36 +347,15 @@ function Scroll({
                     classNames?.scrollContainer,
                 ].join(' ')}
                 style={{
+                    display: 'flex',
+                    flexDirection: reverse ? 'column-reverse' : 'column',
                     width: '100%',
                     height: '100%',
                     overflow: 'hidden',
                     position: 'relative',
                     overflowY: 'auto',
-                    overscrollBehavior: 'none'
                 }}
             >
-                {/* <AnimatePresence>
-                    {isReloadable && isReloading && (
-                        <motion.div
-                            className={[
-                                styles['reload-container'],
-                                classNames?.reloadContainer,
-                            ].join(' ')}
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0 }}
-                            style={{
-                                padding: 16,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignContent: 'center',
-                                width: '100%',
-                            }}
-                        >
-                            {reloadComponent}
-                        </motion.div>
-                    )}
-                </AnimatePresence> */}
                 <motion.div
                     ref={contentRef}
                     className={[
@@ -381,12 +364,18 @@ function Scroll({
                     ].join(' ')}
                     style={{
                         position: 'relative',
+                        display: 'flex',
+                        flexDirection: reverse ? 'column-reverse' : 'column',
                         width: '100%',
                     }}
                 >
                     <motion.div
                         ref={childrenCallbackRef}
                         className={[styles['children'], classNames?.children].join(' ')}
+                        style={{
+                            display: 'flex',
+                            flexDirection: reverse ? 'column-reverse' : 'column',
+                        }}
                     >
                         {children}
                     </motion.div>
