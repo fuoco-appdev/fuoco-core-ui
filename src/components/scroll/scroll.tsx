@@ -55,7 +55,7 @@ function Scroll({
     pullIndicatorComponent,
     loadComponent,
     loadingHeight = 40,
-    reloadThreshold = 56,
+    reloadThreshold = 76,
     showIndicatorThreshold = 24,
     isReloadable = true,
     isLoadable = true,

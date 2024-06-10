@@ -32,13 +32,13 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   style?: React.CSSProperties
   rounded?: boolean
   type?:
-    | 'primary'
-    | 'default'
-    | 'secondary'
-    | 'outline'
-    | 'dashed'
-    | 'link'
-    | 'text'
+  | 'primary'
+  | 'default'
+  | 'secondary'
+  | 'outline'
+  | 'dashed'
+  | 'link'
+  | 'text'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   ariaSelected?: boolean
@@ -92,7 +92,7 @@ function Button(
   const [isFloatingLabelVisible, setIsFloatingLabelVisible] =
     useState<boolean>(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!rootRef.current || !floatingLabelRef.current) {
       return
     }

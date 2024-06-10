@@ -48,20 +48,25 @@
   padding-right: $mp-4;
 }
 
+.animated-container {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: $rounded-base;
+  z-index: 24;
+  scale: 0;
+  transition-duration: 75ms;
+  transition-property: scale;
+  transition-timing-function: $transition-decelerated-easing;
+}
+
 .dropdown {
   max-height: 40vh;
-  border-radius: $rounded-base;
-  -webkit-border-radius: $rounded-base;
-  -moz-border-radius: $rounded-base;
-  -khtml-border-radius: $rounded-base;
   margin: 0;
   padding-top: $mp-3;
   padding-bottom: $mp-3;
   padding-left: 0;
-  background-color: white;
   overflow-y: auto;
-  overscroll-behavior: none;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .dropdown-icon {
@@ -70,7 +75,7 @@
   padding-right: $mp-3;
 }
 
-.touchscreen-animated-overlay {
+.overlay {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -88,28 +93,31 @@
 
 .touchscreen-animated-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 90%;
   width: 100%;
   background-color: white;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   border-top-left-radius: $rounded-base;
   border-top-right-radius: $rounded-base;
-  overflow-y: auto;
-  overscroll-behavior: none;
   z-index: 1;
-  transition-duration: 75ms;
-  transition-property: max-height;
+  transform: translateY(100%);
+  transition-duration: 150ms;
+  transition-property: transform;
   transition-timing-function: $transition-decelerated-easing;
 }
 
 .touchscreen-dropdown {
-  position: relative;
   margin-top: 0 !important;
   width: 100%;
   padding-left: 0;
+  overflow-y: auto;
 }
 
 .touchscreen-dropdown-bar {
-  position: fixed;
+  position: absolute;
+  top: 0;
   width: 100%;
   background-color: #fff;
   z-index: 1;
@@ -117,8 +125,6 @@
 }
 
 .touchscreen-dropdown-content {
-  position: absolute;
-  height: fit-content;
   padding-top: 54px;
   padding-bottom: $mp-4;
   width: 100%;
@@ -152,7 +158,4 @@
   font-weight: $font-weight-bold;
   color: $brand-900;
   width: 100%;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
 }
