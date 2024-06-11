@@ -199,7 +199,7 @@ const Modal = ({
               classNames?.overlayContainer,
             ].join(' ')}
           >
-            <div className={overlayClasses.join(' ')} style={overlayStyle} />
+            <div className={overlayClasses.join(' ')} style={overlayStyle} onClick={() => (onCancel ? onCancel() : null)} />
             {transition(
               (transitionStyle, item) =>
                 item && (
@@ -209,7 +209,6 @@ const Modal = ({
                         ModalStyles['modal-container'],
                         classNames?.container,
                       ].join(' ')}
-                      onClick={() => (onCancel ? onCancel() : null)}
                     >
                       <div
                         className={[

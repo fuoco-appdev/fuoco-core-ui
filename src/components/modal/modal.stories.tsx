@@ -16,7 +16,7 @@ export default {
 }
 
 export const Default = (args: any) => (
-  <Modal {...args}>
+  <Modal {...args} onCancel={() => console.log('close')}>
     <div style={{ backgroundColor: '#fff', height: '100%' }}>
       <Typography.Text type="secondary" style={{ color: 'rgb(15,15,15)' }}>
         Modal content is inserted here, if you need to insert anything into the
@@ -324,7 +324,7 @@ export const ModalWithDropdowns = () => {
         visible={visible}
         onCancel={() => setVisible(!visible)}
         hideFooter
-        // className="pointer-events-auto"
+      // className="pointer-events-auto"
       >
         <Button as="span">Trigger dropdown</Button>
         <Dropdown>
