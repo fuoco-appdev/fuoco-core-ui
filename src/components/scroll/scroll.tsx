@@ -245,7 +245,7 @@ function Scroll({
             // return the element to its initial position
             const indicator = scrollRef.current?.querySelector(`.${styles["pull-indicator"]}`);
             const indicatorRect = indicator?.getBoundingClientRect();
-            const position = (indicatorRect?.top ?? 0) + (indicatorRect?.height ?? 0);
+            const position = (indicatorRect?.height ?? 0);
             // add transition
             el.style.transition = "transform 150ms";
             el.style.transform = `translateY(${position}px)`;
