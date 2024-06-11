@@ -5,7 +5,7 @@
 }
 
 .scroll-container {
-  
+  margin-top: 200px;
 }
 
 .scroll-content {
@@ -19,6 +19,7 @@
 .pull-indicator {
     position: absolute;
     left: 0;
+    top: 0;
     width: 100%;
     background-color: transparent;
     display: flex;
@@ -47,6 +48,7 @@
 
   .reload-container {
     position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
     background-color: transparent;

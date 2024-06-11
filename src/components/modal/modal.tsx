@@ -62,8 +62,8 @@ const Modal = ({
   hideFooter = false,
   loading = false,
   cancelText = 'Cancel',
-  onConfirm = () => {},
-  onCancel = () => {},
+  onConfirm = () => { },
+  onCancel = () => { },
   confirmText = 'Confirm',
   title,
   footerBackground,
@@ -199,89 +199,88 @@ const Modal = ({
               classNames?.overlayContainer,
             ].join(' ')}
           >
-            <div className={overlayClasses.join(' ')} style={overlayStyle}>
-              {transition(
-                (transitionStyle, item) =>
-                  item && (
-                    <animated.div style={transitionStyle}>
+            <div className={overlayClasses.join(' ')} style={overlayStyle} />
+            {transition(
+              (transitionStyle, item) =>
+                item && (
+                  <animated.div style={transitionStyle}>
+                    <div
+                      className={[
+                        ModalStyles['modal-container'],
+                        classNames?.container,
+                      ].join(' ')}
+                      onClick={() => (onCancel ? onCancel() : null)}
+                    >
                       <div
                         className={[
-                          ModalStyles['modal-container'],
-                          classNames?.container,
+                          ModalStyles['modal-flex-container'],
+                          classNames?.flexContainer,
                         ].join(' ')}
-                        onClick={() => (onCancel ? onCancel() : null)}
                       >
                         <div
-                          className={[
-                            ModalStyles['modal-flex-container'],
-                            classNames?.flexContainer,
-                          ].join(' ')}
+                          className={modalClasses.join(' ')}
+                          role="dialog"
+                          aria-modal="true"
+                          aria-labelledby="modal-headline"
+                          onClick={stopPropagation}
+                          style={style}
                         >
                           <div
-                            className={modalClasses.join(' ')}
-                            role="dialog"
-                            aria-modal="true"
-                            aria-labelledby="modal-headline"
-                            onClick={stopPropagation}
-                            style={style}
+                            className={[
+                              ModalStyles['modal-content'],
+                              classNames?.content,
+                            ].join(' ')}
+                            style={contentStyle}
                           >
-                            <div
-                              className={[
-                                ModalStyles['modal-content'],
-                                classNames?.content,
-                              ].join(' ')}
-                              style={contentStyle}
-                            >
-                              {title || description || icon ? (
-                                <div
-                                  className={[
-                                    ModalStyles['modal-text'],
-                                    classNames?.text,
-                                  ].join(' ')}
-                                >
-                                  {icon ? icon : null}
-                                  <span>
-                                    {title && (
-                                      <Typography.Title
-                                        className={[
-                                          ModalStyles['modal-title'],
-                                          classNames?.title,
-                                        ].join(' ')}
-                                        level={4}
-                                      >
-                                        {title}
-                                      </Typography.Title>
-                                    )}
-                                    {description && (
-                                      <Typography.Text
-                                        className={[
-                                          ModalStyles['modal-description'],
-                                          classNames?.description,
-                                        ].join(' ')}
-                                      >
-                                        {description}
-                                      </Typography.Text>
-                                    )}
-                                  </span>
-                                  {children}
-                                </div>
-                              ) : (
-                                children
-                              )}
-                            </div>
-                            {!footerBackground && !hideFooter && footerContent}
-                            {!hideFooter && footerBackground && (
-                              <div className={footerClasses.join(' ')}>
-                                {footerContent}
+                            {title || description || icon ? (
+                              <div
+                                className={[
+                                  ModalStyles['modal-text'],
+                                  classNames?.text,
+                                ].join(' ')}
+                              >
+                                {icon ? icon : null}
+                                <span>
+                                  {title && (
+                                    <Typography.Title
+                                      className={[
+                                        ModalStyles['modal-title'],
+                                        classNames?.title,
+                                      ].join(' ')}
+                                      level={4}
+                                    >
+                                      {title}
+                                    </Typography.Title>
+                                  )}
+                                  {description && (
+                                    <Typography.Text
+                                      className={[
+                                        ModalStyles['modal-description'],
+                                        classNames?.description,
+                                      ].join(' ')}
+                                    >
+                                      {description}
+                                    </Typography.Text>
+                                  )}
+                                </span>
+                                {children}
                               </div>
+                            ) : (
+                              children
                             )}
                           </div>
+                          {!footerBackground && !hideFooter && footerContent}
+                          {!hideFooter && footerBackground && (
+                            <div className={footerClasses.join(' ')}>
+                              {footerContent}
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </animated.div>
-                  )
-              )}
-            </div>
+                    </div>
+                  </animated.div>
+                )
+            )}
           </div>
         </animated.div>
       )

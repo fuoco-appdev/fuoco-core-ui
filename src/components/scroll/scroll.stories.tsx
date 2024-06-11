@@ -185,7 +185,7 @@ export const TouchScreen = (args: any) => {
                             <div style={{ height: 40, width: '100%', backgroundColor: '#fff' }} />,
                         ])
                         setIsReloading(false)
-                    }, 2000)
+                    }, 10000)
                 }}
                 onLoad={() => {
                     setIsLoading(true)
