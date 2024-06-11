@@ -59,6 +59,12 @@
     z-index: -1;
   }
 
+  .reload-container * {
+    transition: transform 150ms;
+    transition-timing-function: $transition-standard-easing;
+    transform-origin: 50% 50%;
+  }
+
   .load-container {
     width: 100%;
     scale: 0;
