@@ -218,6 +218,7 @@ function Dropdown({
           <div
             ref={contentRef}
             id={id}
+            style={style}
             className={[
               DropdownStyles['dropdown'],
               classNames?.dropdown,

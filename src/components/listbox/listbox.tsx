@@ -114,7 +114,7 @@ function Listbox({
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <HeadlessListbox value={selectedOption?.value} onChange={() => {}}>
+        <HeadlessListbox value={selectedOption?.value} onChange={() => { }}>
           {({ open }) => {
             return (
               <ListboxContext.Provider
@@ -208,6 +208,7 @@ function Listbox({
                   style={{
                     ...(anchorRect && { width: anchorRect.width }),
                   }}
+
                   touchScreen={touchScreen}
                   onOpen={() => {
                     onFocus?.()
@@ -220,7 +221,7 @@ function Listbox({
                   onClose={() => {
                     onBlur?.()
                   }}
-                  align={DropdownAlignment.Left}
+                  align={DropdownAlignment.Center}
                   open={open}
                   anchorRef={anchorRef}
                 >
