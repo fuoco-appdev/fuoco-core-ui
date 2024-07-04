@@ -1,5 +1,5 @@
 {
-  "name": "@fuoco.appdev/core-ui",
+  "name": "@fuoco.appdev/web-components",
   "version": "0.18.18",
   "main": "./dist/cjs/index.js",
   "types": "./dist/cjs/src/index.d.ts",
@@ -153,13 +153,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fuoco-appdev/fuoco-core-ui.git"
+    "url": "git+https://github.com/fuoco-appdev/web-components.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fuoco-appdev/fuoco-core-ui/issues"
+    "url": "https://github.com/fuoco-appdev/web-components/issues"
   },
-  "homepage": "https://github.com/fuoco-appdev/fuoco-core-ui#readme",
+  "homepage": "https://github.com/fuoco-appdev/web-components#readme",
   "description": "Supabase UI is a React UI library."
 }
