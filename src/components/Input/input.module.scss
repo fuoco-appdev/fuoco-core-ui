@@ -2,6 +2,46 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .input-container {
+    border-color: $gray-100;
+    background-color: $dark-1;
+  }
+
+  .input {
+    color: $gray-100;
+  }
+
+  .input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $gray-400;
+  }
+  
+  .input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $gray-400;
+  }
+  
+  .input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $gray-400;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    color: $gray-100;
+    background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 2V6" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2V6" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 10H21" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+      center/80% no-repeat;
+  }
+
+  .icon-container {
+    color: $gray-100;
+  }
+
+  .input-actions-container {
+    color: $gray-100;
+  }
+}
+
 .input-container {
   position: relative;
   display: flex;
@@ -14,13 +54,9 @@
   -khtml-border-radius: $rounded-md;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: $gray-100;
+  border-color: $gray-900;
   transition: box-shadow 0.3s ease-in-out;
-  padding: 0 $mp-3;
-}
-
-.input-container:hover {
-  border-color: $brand-200;
+  padding: 0 $mp-5;
 }
 
 .input {
@@ -33,57 +69,44 @@
   font-family: inherit;
   appearance: textfield;
   background: transparent;
-  padding: $mp-3 0;
+  padding: $mp-5 0;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  color: $gray-100;
+  color: $gray-900;
   background-color: transparent;
   outline: 2px solid transparent;
   outline-offset: 2px;
   resize: none;
-
-  & :focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-
-  & :hover {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
 }
 
 .input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $gray-300;
+  color: $gray-700;
 }
 
 .input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: $gray-300;
+  color: $gray-700;
 }
 
 .input::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: $gray-300;
+  color: $gray-700;
 }
 
 .icon-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-right: $mp-3;
+  margin-right: $mp-4;
+  color: $gray-900;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
-  color: white;
+  color: $gray-900;
   background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 2V6" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2V6" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 10H21" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>')
     center/80% no-repeat;
-}
-
-.input:focus {
-  box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
 }
 
 .input-error {
@@ -101,10 +124,11 @@ input[type='date']::-webkit-calendar-picker-indicator {
   top: 0px;
   bottom: 0px;
   right: 0px;
-  padding-left: $mp-3;
+  padding-left: $mp-4;
   padding-left: $mp-1;
+  color: $gray-900;
 }
 
 .error-icon {
-  margin-left: $mp-4;
+  margin-left: $mp-7;
 }

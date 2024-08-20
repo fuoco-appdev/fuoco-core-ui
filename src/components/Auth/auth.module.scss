@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-auth {
+.auth {
   width: 100%;
 }
 
@@ -15,14 +15,14 @@
 }
 
 .button-root {
-  margin-bottom: $mp-4;
+  margin-bottom: $mp-6;
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: $mp-2;
+  gap: $mp-3;
 }
 
 .button-content {
@@ -30,16 +30,17 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  gap: $mp-3;
 }
 
 .remember-me-container {
   justify-content: space-between;
-  margin-bottom: $mp-2;
+  margin-bottom: $mp-3;
   user-select: none;
 }
 
 .email-button-container {
-  margin-bottom: $mp-4;
+  margin-bottom: $mp-6;
 }
 
 .email-button-content {
@@ -53,7 +54,7 @@
 }
 
 .divider {
-  margin-bottom: $mp-4;
+  margin-bottom: $mp-6;
 }
 
 .link-container {
@@ -63,4 +64,10 @@
 .link {
   display: flex;
   margin-top: $mp-2;
+}
+
+:global(.dark) {
+  .email-button-content {
+    color: $gray-100;
+  }
 }

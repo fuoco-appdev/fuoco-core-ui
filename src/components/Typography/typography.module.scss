@@ -2,6 +2,56 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .sbui-typography {
+    color: $gray-100;
+  }
+  
+  .sbui-typography h1 {
+    color: $gray-100;
+  }
+  
+  .sbui-typography h2 {
+    color: $gray-100;
+  }
+  
+  .sbui-typography h3 {
+    color: $gray-100;
+  }
+  
+  .sbui-typography h4 {
+    color: $gray-100;
+  }
+  
+  .sbui-typography h5 {
+    color: $gray-100;
+  }
+  
+  .sbui-typography strong {
+    color: $gray-100;
+  }
+  
+  .sbui-typography li::before {
+    color: $gray-100;
+  }
+  
+  .sbui-typography a {
+    color: $gray-100;
+  }
+  
+  .sbui-typography blockquote {
+    color: $gray-100;
+  }
+  
+  .sbui-typography code {
+    color: $gray-100;
+  }
+  
+  .sbui-typography figcaption {
+    color: $gray-100;
+  }
+}
+
 /* marker fix */
 .sbui-typography li::marker {
   display: none;
@@ -9,13 +59,12 @@
 }
 
 .sbui-typography-container {
-
 }
 
 .sbui-typography {
   font-size: $font-size-base;
   line-height: $font-line-height-base;
-  color: $gray-100;
+  color: $gray-900;
 }
 
 /* .sbui-typography--prose-sm {
@@ -44,61 +93,50 @@
   -khtml-border-radius: 3px;
 }
 
-/*
-  dark mode styles
-
-  default styles are handled by tailwind config
-*/
-
-.dark .sbui-typography {
-  color: $gray-100;
+.sbui-typography {
+  color: $gray-900;
 }
 
-.dark .sbui-typography h1 {
-  color: white;
+.sbui-typography h1 {
+  color: $gray-900;
 }
 
-.dark .sbui-typography h2 {
-  color: white;
+.sbui-typography h2 {
+  color: $gray-900;
 }
 
-.dark .sbui-typography h3 {
-  color: white;
+.sbui-typography h3 {
+  color: $gray-900;
 }
 
-.dark .sbui-typography h4 {
-  color: white;
+.sbui-typography h4 {
+  color: $gray-900;
 }
 
-.dark .sbui-typography h5 {
-  color: white;
+.sbui-typography h5 {
+  color: $gray-900;
 }
 
-.dark .sbui-typography strong {
-  color: white;
+.sbui-typography strong {
+  color: $gray-900;
 }
 
-.dark .sbui-typography li::before {
-  color: $gray-100;
+.sbui-typography li::before {
+  color: $gray-900;
 }
 
-.dark .sbui-typography a {
-  color: white;
+.sbui-typography a {
+  color: $gray-900;
 }
 
-.dark .sbui-typography blockquote {
-  color: white;
+.sbui-typography blockquote {
+  color: $gray-900;
 }
 
-.dark .sbui-typography code {
-  color: white;
+.sbui-typography code {
+  color: $gray-900;
 }
 
-.dark .sbui-typography figcaption {
-  color: $gray-100;
-}
-
-.dark .sbui-typography::selection {
-  /* @apply bg-brand-500; */
-  backgroundcolor: '#6f7bb635';
+.sbui-typography figcaption {
+  color: $gray-900;
 }

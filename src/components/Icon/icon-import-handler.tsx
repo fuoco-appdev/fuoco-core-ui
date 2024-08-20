@@ -8,33 +8,61 @@ export interface IconProps extends SVGAttributes<SVGElement> {
 export type Icon = FC<IconProps>
 export const Activity: Icon = require(`react-feather/dist/icons/activity`)
 export const Airplay: Icon = require(`react-feather/dist/icons/airplay`)
-export const AlertCircle: Icon = require(`react-feather/dist/icons/alert-circle`)
-export const AlertOctagon: Icon = require(`react-feather/dist/icons/alert-octagon`)
-export const AlertTriangle: Icon = require(`react-feather/dist/icons/alert-triangle`)
-export const AlignCenter: Icon = require(`react-feather/dist/icons/align-center`)
-export const AlignJustify: Icon = require(`react-feather/dist/icons/align-justify`)
+export const AlertCircle: Icon = require(
+  `react-feather/dist/icons/alert-circle`,
+)
+export const AlertOctagon: Icon = require(
+  `react-feather/dist/icons/alert-octagon`,
+)
+export const AlertTriangle: Icon = require(
+  `react-feather/dist/icons/alert-triangle`,
+)
+export const AlignCenter: Icon = require(
+  `react-feather/dist/icons/align-center`,
+)
+export const AlignJustify: Icon = require(
+  `react-feather/dist/icons/align-justify`,
+)
 export const AlignLeft: Icon = require(`react-feather/dist/icons/align-left`)
 export const AlignRight: Icon = require(`react-feather/dist/icons/align-right`)
 export const Anchor: Icon = require(`react-feather/dist/icons/anchor`)
 export const Aperture: Icon = require(`react-feather/dist/icons/aperture`)
 export const Archive: Icon = require(`react-feather/dist/icons/archive`)
-export const ArrowDownCircle: Icon = require(`react-feather/dist/icons/arrow-down-circle`)
-export const ArrowDownLeft: Icon = require(`react-feather/dist/icons/arrow-down-left`)
-export const ArrowDownRight: Icon = require(`react-feather/dist/icons/arrow-down-right`)
+export const ArrowDownCircle: Icon = require(
+  `react-feather/dist/icons/arrow-down-circle`,
+)
+export const ArrowDownLeft: Icon = require(
+  `react-feather/dist/icons/arrow-down-left`,
+)
+export const ArrowDownRight: Icon = require(
+  `react-feather/dist/icons/arrow-down-right`,
+)
 export const ArrowDown: Icon = require(`react-feather/dist/icons/arrow-down`)
-export const ArrowLeftCircle: Icon = require(`react-feather/dist/icons/arrow-left-circle`)
+export const ArrowLeftCircle: Icon = require(
+  `react-feather/dist/icons/arrow-left-circle`,
+)
 export const ArrowLeft: Icon = require(`react-feather/dist/icons/arrow-left`)
-export const ArrowRightCircle: Icon = require(`react-feather/dist/icons/arrow-right-circle`)
+export const ArrowRightCircle: Icon = require(
+  `react-feather/dist/icons/arrow-right-circle`,
+)
 export const ArrowRight: Icon = require(`react-feather/dist/icons/arrow-right`)
-export const ArrowUpCircle: Icon = require(`react-feather/dist/icons/arrow-up-circle`)
-export const ArrowUpLeft: Icon = require(`react-feather/dist/icons/arrow-up-left`)
-export const ArrowUpRight: Icon = require(`react-feather/dist/icons/arrow-up-right`)
+export const ArrowUpCircle: Icon = require(
+  `react-feather/dist/icons/arrow-up-circle`,
+)
+export const ArrowUpLeft: Icon = require(
+  `react-feather/dist/icons/arrow-up-left`,
+)
+export const ArrowUpRight: Icon = require(
+  `react-feather/dist/icons/arrow-up-right`,
+)
 export const ArrowUp: Icon = require(`react-feather/dist/icons/arrow-up`)
 export const AtSign: Icon = require(`react-feather/dist/icons/at-sign`)
 export const Award: Icon = require(`react-feather/dist/icons/award`)
 export const BarChart2: Icon = require(`react-feather/dist/icons/bar-chart-2`)
 export const BarChart: Icon = require(`react-feather/dist/icons/bar-chart`)
-export const BatteryCharging: Icon = require(`react-feather/dist/icons/battery-charging`)
+export const BatteryCharging: Icon = require(
+  `react-feather/dist/icons/battery-charging`,
+)
 export const Battery: Icon = require(`react-feather/dist/icons/battery`)
 export const BellOff: Icon = require(`react-feather/dist/icons/bell-off`)
 export const Bell: Icon = require(`react-feather/dist/icons/bell`)
@@ -49,23 +77,43 @@ export const Calendar: Icon = require(`react-feather/dist/icons/calendar`)
 export const CameraOff: Icon = require(`react-feather/dist/icons/camera-off`)
 export const Camera: Icon = require(`react-feather/dist/icons/camera`)
 export const Cast: Icon = require(`react-feather/dist/icons/cast`)
-export const CheckCircle: Icon = require(`react-feather/dist/icons/check-circle`)
-export const CheckSquare: Icon = require(`react-feather/dist/icons/check-square`)
+export const CheckCircle: Icon = require(
+  `react-feather/dist/icons/check-circle`,
+)
+export const CheckSquare: Icon = require(
+  `react-feather/dist/icons/check-square`,
+)
 export const Check: Icon = require(`react-feather/dist/icons/check`)
-export const ChevronDown: Icon = require(`react-feather/dist/icons/chevron-down`)
-export const ChevronLeft: Icon = require(`react-feather/dist/icons/chevron-left`)
-export const ChevronRight: Icon = require(`react-feather/dist/icons/chevron-right`)
+export const ChevronDown: Icon = require(
+  `react-feather/dist/icons/chevron-down`,
+)
+export const ChevronLeft: Icon = require(
+  `react-feather/dist/icons/chevron-left`,
+)
+export const ChevronRight: Icon = require(
+  `react-feather/dist/icons/chevron-right`,
+)
 export const ChevronUp: Icon = require(`react-feather/dist/icons/chevron-up`)
-export const ChevronsDown: Icon = require(`react-feather/dist/icons/chevrons-down`)
-export const ChevronsLeft: Icon = require(`react-feather/dist/icons/chevrons-left`)
-export const ChevronsRight: Icon = require(`react-feather/dist/icons/chevrons-right`)
+export const ChevronsDown: Icon = require(
+  `react-feather/dist/icons/chevrons-down`,
+)
+export const ChevronsLeft: Icon = require(
+  `react-feather/dist/icons/chevrons-left`,
+)
+export const ChevronsRight: Icon = require(
+  `react-feather/dist/icons/chevrons-right`,
+)
 export const ChevronsUp: Icon = require(`react-feather/dist/icons/chevrons-up`)
 export const Chrome: Icon = require(`react-feather/dist/icons/chrome`)
 export const Circle: Icon = require(`react-feather/dist/icons/circle`)
 export const Clipboard: Icon = require(`react-feather/dist/icons/clipboard`)
 export const Clock: Icon = require(`react-feather/dist/icons/clock`)
-export const CloudDrizzle: Icon = require(`react-feather/dist/icons/cloud-drizzle`)
-export const CloudLightning: Icon = require(`react-feather/dist/icons/cloud-lightning`)
+export const CloudDrizzle: Icon = require(
+  `react-feather/dist/icons/cloud-drizzle`,
+)
+export const CloudLightning: Icon = require(
+  `react-feather/dist/icons/cloud-lightning`,
+)
 export const CloudOff: Icon = require(`react-feather/dist/icons/cloud-off`)
 export const CloudRain: Icon = require(`react-feather/dist/icons/cloud-rain`)
 export const CloudSnow: Icon = require(`react-feather/dist/icons/cloud-snow`)
@@ -78,14 +126,30 @@ export const Columns: Icon = require(`react-feather/dist/icons/columns`)
 export const Command: Icon = require(`react-feather/dist/icons/command`)
 export const Compass: Icon = require(`react-feather/dist/icons/compass`)
 export const Copy: Icon = require(`react-feather/dist/icons/copy`)
-export const CornerDownLeft: Icon = require(`react-feather/dist/icons/corner-down-left`)
-export const CornerDownRight: Icon = require(`react-feather/dist/icons/corner-down-right`)
-export const CornerLeftDown: Icon = require(`react-feather/dist/icons/corner-left-down`)
-export const CornerLeftUp: Icon = require(`react-feather/dist/icons/corner-left-up`)
-export const CornerRightDown: Icon = require(`react-feather/dist/icons/corner-right-down`)
-export const CornerRightUp: Icon = require(`react-feather/dist/icons/corner-right-up`)
-export const CornerUpLeft: Icon = require(`react-feather/dist/icons/corner-up-left`)
-export const CornerUpRight: Icon = require(`react-feather/dist/icons/corner-up-right`)
+export const CornerDownLeft: Icon = require(
+  `react-feather/dist/icons/corner-down-left`,
+)
+export const CornerDownRight: Icon = require(
+  `react-feather/dist/icons/corner-down-right`,
+)
+export const CornerLeftDown: Icon = require(
+  `react-feather/dist/icons/corner-left-down`,
+)
+export const CornerLeftUp: Icon = require(
+  `react-feather/dist/icons/corner-left-up`,
+)
+export const CornerRightDown: Icon = require(
+  `react-feather/dist/icons/corner-right-down`,
+)
+export const CornerRightUp: Icon = require(
+  `react-feather/dist/icons/corner-right-up`,
+)
+export const CornerUpLeft: Icon = require(
+  `react-feather/dist/icons/corner-up-left`,
+)
+export const CornerUpRight: Icon = require(
+  `react-feather/dist/icons/corner-up-right`,
+)
 export const Cpu: Icon = require(`react-feather/dist/icons/cpu`)
 export const CreditCard: Icon = require(`react-feather/dist/icons/credit-card`)
 export const Crop: Icon = require(`react-feather/dist/icons/crop`)
@@ -93,22 +157,32 @@ export const Crosshair: Icon = require(`react-feather/dist/icons/crosshair`)
 export const Database: Icon = require(`react-feather/dist/icons/database`)
 export const Delete: Icon = require(`react-feather/dist/icons/delete`)
 export const Disc: Icon = require(`react-feather/dist/icons/disc`)
-export const DivideCircle: Icon = require(`react-feather/dist/icons/divide-circle`)
-export const DivideSquare: Icon = require(`react-feather/dist/icons/divide-square`)
+export const DivideCircle: Icon = require(
+  `react-feather/dist/icons/divide-circle`,
+)
+export const DivideSquare: Icon = require(
+  `react-feather/dist/icons/divide-square`,
+)
 export const Divide: Icon = require(`react-feather/dist/icons/divide`)
 export const DollarSign: Icon = require(`react-feather/dist/icons/dollar-sign`)
-export const DownloadCloud: Icon = require(`react-feather/dist/icons/download-cloud`)
+export const DownloadCloud: Icon = require(
+  `react-feather/dist/icons/download-cloud`,
+)
 export const Download: Icon = require(`react-feather/dist/icons/download`)
 export const Dribbble: Icon = require(`react-feather/dist/icons/dribbble`)
 export const Droplet: Icon = require(`react-feather/dist/icons/droplet`)
 export const Edit2: Icon = require(`react-feather/dist/icons/edit-2`)
 export const Edit3: Icon = require(`react-feather/dist/icons/edit-3`)
 export const Edit: Icon = require(`react-feather/dist/icons/edit`)
-export const ExternalLink: Icon = require(`react-feather/dist/icons/external-link`)
+export const ExternalLink: Icon = require(
+  `react-feather/dist/icons/external-link`,
+)
 export const EyeOff: Icon = require(`react-feather/dist/icons/eye-off`)
 export const Eye: Icon = require(`react-feather/dist/icons/eye`)
 export const Facebook: Icon = require(`react-feather/dist/icons/facebook`)
-export const FastForward: Icon = require(`react-feather/dist/icons/fast-forward`)
+export const FastForward: Icon = require(
+  `react-feather/dist/icons/fast-forward`,
+)
 export const Feather: Icon = require(`react-feather/dist/icons/feather`)
 export const Figma: Icon = require(`react-feather/dist/icons/figma`)
 export const FileMinus: Icon = require(`react-feather/dist/icons/file-minus`)
@@ -118,7 +192,9 @@ export const File: Icon = require(`react-feather/dist/icons/file`)
 export const Film: Icon = require(`react-feather/dist/icons/film`)
 export const Filter: Icon = require(`react-feather/dist/icons/filter`)
 export const Flag: Icon = require(`react-feather/dist/icons/flag`)
-export const FolderMinus: Icon = require(`react-feather/dist/icons/folder-minus`)
+export const FolderMinus: Icon = require(
+  `react-feather/dist/icons/folder-minus`,
+)
 export const FolderPlus: Icon = require(`react-feather/dist/icons/folder-plus`)
 export const Folder: Icon = require(`react-feather/dist/icons/folder`)
 export const Framer: Icon = require(`react-feather/dist/icons/framer`)
@@ -127,7 +203,9 @@ export const Gift: Icon = require(`react-feather/dist/icons/gift`)
 export const GitBranch: Icon = require(`react-feather/dist/icons/git-branch`)
 export const GitCommit: Icon = require(`react-feather/dist/icons/git-commit`)
 export const GitMerge: Icon = require(`react-feather/dist/icons/git-merge`)
-export const GitPullRequest: Icon = require(`react-feather/dist/icons/git-pull-request`)
+export const GitPullRequest: Icon = require(
+  `react-feather/dist/icons/git-pull-request`,
+)
 export const GitHub: Icon = require(`react-feather/dist/icons/github`)
 export const Gitlab: Icon = require(`react-feather/dist/icons/gitlab`)
 export const Globe: Icon = require(`react-feather/dist/icons/globe`)
@@ -163,37 +241,63 @@ export const Maximize2: Icon = require(`react-feather/dist/icons/maximize-2`)
 export const Maximize: Icon = require(`react-feather/dist/icons/maximize`)
 export const Meh: Icon = require(`react-feather/dist/icons/meh`)
 export const Menu: Icon = require(`react-feather/dist/icons/menu`)
-export const MessageCircle: Icon = require(`react-feather/dist/icons/message-circle`)
-export const MessageSquare: Icon = require(`react-feather/dist/icons/message-square`)
+export const MessageCircle: Icon = require(
+  `react-feather/dist/icons/message-circle`,
+)
+export const MessageSquare: Icon = require(
+  `react-feather/dist/icons/message-square`,
+)
 export const MicOff: Icon = require(`react-feather/dist/icons/mic-off`)
 export const Mic: Icon = require(`react-feather/dist/icons/mic`)
 export const Minimize2: Icon = require(`react-feather/dist/icons/minimize-2`)
 export const Minimize: Icon = require(`react-feather/dist/icons/minimize`)
-export const MinusCircle: Icon = require(`react-feather/dist/icons/minus-circle`)
-export const MinusSquare: Icon = require(`react-feather/dist/icons/minus-square`)
+export const MinusCircle: Icon = require(
+  `react-feather/dist/icons/minus-circle`,
+)
+export const MinusSquare: Icon = require(
+  `react-feather/dist/icons/minus-square`,
+)
 export const Minus: Icon = require(`react-feather/dist/icons/minus`)
 export const Monitor: Icon = require(`react-feather/dist/icons/monitor`)
 export const Moon: Icon = require(`react-feather/dist/icons/moon`)
-export const MoreHorizontal: Icon = require(`react-feather/dist/icons/more-horizontal`)
-export const MoreVertical: Icon = require(`react-feather/dist/icons/more-vertical`)
-export const MousePointer: Icon = require(`react-feather/dist/icons/mouse-pointer`)
+export const MoreHorizontal: Icon = require(
+  `react-feather/dist/icons/more-horizontal`,
+)
+export const MoreVertical: Icon = require(
+  `react-feather/dist/icons/more-vertical`,
+)
+export const MousePointer: Icon = require(
+  `react-feather/dist/icons/mouse-pointer`,
+)
 export const Move: Icon = require(`react-feather/dist/icons/move`)
 export const Music: Icon = require(`react-feather/dist/icons/music`)
-export const Navigation2: Icon = require(`react-feather/dist/icons/navigation-2`)
+export const Navigation2: Icon = require(
+  `react-feather/dist/icons/navigation-2`,
+)
 export const Navigation: Icon = require(`react-feather/dist/icons/navigation`)
 export const Octagon: Icon = require(`react-feather/dist/icons/octagon`)
 export const Package: Icon = require(`react-feather/dist/icons/package`)
 export const Paperclip: Icon = require(`react-feather/dist/icons/paperclip`)
-export const PauseCircle: Icon = require(`react-feather/dist/icons/pause-circle`)
+export const PauseCircle: Icon = require(
+  `react-feather/dist/icons/pause-circle`,
+)
 export const Pause: Icon = require(`react-feather/dist/icons/pause`)
 export const PenTool: Icon = require(`react-feather/dist/icons/pen-tool`)
 export const Percent: Icon = require(`react-feather/dist/icons/percent`)
 export const PhoneCall: Icon = require(`react-feather/dist/icons/phone-call`)
-export const PhoneForwarded: Icon = require(`react-feather/dist/icons/phone-forwarded`)
-export const PhoneIncoming: Icon = require(`react-feather/dist/icons/phone-incoming`)
-export const PhoneMissed: Icon = require(`react-feather/dist/icons/phone-missed`)
+export const PhoneForwarded: Icon = require(
+  `react-feather/dist/icons/phone-forwarded`,
+)
+export const PhoneIncoming: Icon = require(
+  `react-feather/dist/icons/phone-incoming`,
+)
+export const PhoneMissed: Icon = require(
+  `react-feather/dist/icons/phone-missed`,
+)
 export const PhoneOff: Icon = require(`react-feather/dist/icons/phone-off`)
-export const PhoneOutgoing: Icon = require(`react-feather/dist/icons/phone-outgoing`)
+export const PhoneOutgoing: Icon = require(
+  `react-feather/dist/icons/phone-outgoing`,
+)
 export const Phone: Icon = require(`react-feather/dist/icons/phone`)
 export const PieChart: Icon = require(`react-feather/dist/icons/pie-chart`)
 export const PlayCircle: Icon = require(`react-feather/dist/icons/play-circle`)
@@ -222,12 +326,18 @@ export const Share2: Icon = require(`react-feather/dist/icons/share-2`)
 export const Share: Icon = require(`react-feather/dist/icons/share`)
 export const ShieldOff: Icon = require(`react-feather/dist/icons/shield-off`)
 export const Shield: Icon = require(`react-feather/dist/icons/shield`)
-export const ShoppingBag: Icon = require(`react-feather/dist/icons/shopping-bag`)
-export const ShoppingCart: Icon = require(`react-feather/dist/icons/shopping-cart`)
+export const ShoppingBag: Icon = require(
+  `react-feather/dist/icons/shopping-bag`,
+)
+export const ShoppingCart: Icon = require(
+  `react-feather/dist/icons/shopping-cart`,
+)
 export const Shuffle: Icon = require(`react-feather/dist/icons/shuffle`)
 export const Sidebar: Icon = require(`react-feather/dist/icons/sidebar`)
 export const SkipBack: Icon = require(`react-feather/dist/icons/skip-back`)
-export const SkipForward: Icon = require(`react-feather/dist/icons/skip-forward`)
+export const SkipForward: Icon = require(
+  `react-feather/dist/icons/skip-forward`,
+)
 export const Slack: Icon = require(`react-feather/dist/icons/slack`)
 export const Slash: Icon = require(`react-feather/dist/icons/slash`)
 export const Sliders: Icon = require(`react-feather/dist/icons/sliders`)
@@ -248,12 +358,16 @@ export const Thermometer: Icon = require(`react-feather/dist/icons/thermometer`)
 export const ThumbsDown: Icon = require(`react-feather/dist/icons/thumbs-down`)
 export const ThumbsUp: Icon = require(`react-feather/dist/icons/thumbs-up`)
 export const ToggleLeft: Icon = require(`react-feather/dist/icons/toggle-left`)
-export const ToggleRight: Icon = require(`react-feather/dist/icons/toggle-right`)
+export const ToggleRight: Icon = require(
+  `react-feather/dist/icons/toggle-right`,
+)
 export const Tool: Icon = require(`react-feather/dist/icons/tool`)
 export const Trash2: Icon = require(`react-feather/dist/icons/trash-2`)
 export const Trash: Icon = require(`react-feather/dist/icons/trash`)
 export const Trello: Icon = require(`react-feather/dist/icons/trello`)
-export const TrendingDown: Icon = require(`react-feather/dist/icons/trending-down`)
+export const TrendingDown: Icon = require(
+  `react-feather/dist/icons/trending-down`,
+)
 export const TrendingUp: Icon = require(`react-feather/dist/icons/trending-up`)
 export const Triangle: Icon = require(`react-feather/dist/icons/triangle`)
 export const Truck: Icon = require(`react-feather/dist/icons/truck`)
@@ -264,7 +378,9 @@ export const Type: Icon = require(`react-feather/dist/icons/type`)
 export const Umbrella: Icon = require(`react-feather/dist/icons/umbrella`)
 export const Underline: Icon = require(`react-feather/dist/icons/underline`)
 export const Unlock: Icon = require(`react-feather/dist/icons/unlock`)
-export const UploadCloud: Icon = require(`react-feather/dist/icons/upload-cloud`)
+export const UploadCloud: Icon = require(
+  `react-feather/dist/icons/upload-cloud`,
+)
 export const Upload: Icon = require(`react-feather/dist/icons/upload`)
 export const UserCheck: Icon = require(`react-feather/dist/icons/user-check`)
 export const UserMinus: Icon = require(`react-feather/dist/icons/user-minus`)

@@ -2,6 +2,30 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .accordion-item-bordered {
+    background-color: $gray-100;
+    border-color: $gray-100;
+  }
+  
+  .accordion-top-bar {
+    color: $gray-100;
+  }
+  
+  .accordion-top-bar-label {
+    color: $gray-100;
+  }
+
+  .accordion-item-button {
+    background-color: transparent;
+    color: $gray-100;
+  }
+
+  .accordion-container-bordered .accordion-item-button:not(:first-child) {
+    border-color: $gray-200;
+  }
+}
+
 .accordion-container {
   display: flex;
   flex-direction: column;
@@ -12,8 +36,8 @@
 }
 
 .accordion-item-bordered {
-  background-color: $gray-100;
-  border-color: $gray-100;
+  background-color: $gray-900;
+  border-color: $gray-900;
   border-width: $border-2;
   border-style: solid;
 }
@@ -23,11 +47,11 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: $mp-4;
-  color: $gray-100;
+  color: $gray-900;
 }
 
 .accordion-top-bar-label {
-  color: $gray-100;
+  color: $gray-900;
 }
 
 .accordion-item {
@@ -44,7 +68,7 @@
 .accordion-item-button {
   display: flex;
   justify-content: space-between;
-  padding: $mp-4 $mp-6;
+  padding: $mp-7 $mp-7;
   width: 100%;
   cursor: pointer;
   text-align: left;
@@ -59,11 +83,7 @@
   border-top-left-radius: $rounded-md;
   border-top-right-radius: $rounded-md;
   background-color: transparent;
-  color: $gray-100;
-
-  & :hover {
-    color: $gray-100;
-  }
+  color: $gray-900;
 }
 
 .accordion-item-button .typography-text {
@@ -79,17 +99,16 @@
   margin-top: 1px;
 }
 
-.accordion-container-bordered
-  .accordion-item-button:not(:first-child) {
+.accordion-container-bordered .accordion-item-button:not(:first-child) {
   border-radius: 0px;
-  border-color: $gray-200;
+  border-color: $gray-800;
 }
 
 .accordion-item-panel {
-  padding: $mp-4 $mp-6;
+  padding: $mp-4 $mp-4;
 }
 
 .expand-animated-container {
-  height: 24px;
-  width: 24px;
+  height: 21px;
+  width: 21px;
 }

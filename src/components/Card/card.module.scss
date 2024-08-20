@@ -2,6 +2,20 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .card {
+    background-color: $dark-1;
+  }
+
+  .card-hoverable {
+    background-color: $dark-1;
+  }
+
+  .card-hoverable:hover {
+    background-color: $dark-8;
+  }
+}
+
 .card {
   display: flex;
   background-color: $gray-100;
@@ -21,8 +35,8 @@
 
 .card-clickable {
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
--webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .card-head {

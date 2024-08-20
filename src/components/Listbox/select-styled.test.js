@@ -8,7 +8,7 @@ describe('#Select', () => {
       <Select data-testid="form-select">
         <option>1</option>
         <option>2</option>
-      </Select>
+      </Select>,
     )
     expect(screen.queryByTestId('form-select')).toBeInTheDocument()
   })
@@ -18,10 +18,10 @@ describe('#Select', () => {
       <Select isError data-testid="form-select">
         <option>1</option>
         <option>2</option>
-      </Select>
+      </Select>,
     )
     expect(screen.queryByTestId('form-select')).toHaveClass(
-      'form-select border-solid form-select--error'
+      'form-select border-solid form-select--error',
     )
   })
 })

@@ -2,19 +2,30 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .avatar {
+    background-color: $dark-6;
+    color: $gray-100;
+
+    & .edit-image-button {
+      background-color: $dark-6;
+    }
+  }
+}
+
 .avatar-size-small {
-  height: 56px;
-  width: 56px;
+  height: 34px;
+  width: 34px;
 }
 
 .avatar-size-medium {
-  height: 72px;
-  width: 72px;
+  height: 55px;
+  width: 55px;
 }
 
 .avatar-size-large {
-  height: 96px;
-  width: 96px;
+  height: 90px;
+  width: 90px;
 }
 
 .avatar {
@@ -25,35 +36,36 @@
   -khtml-border-radius: $rounded-full;
   background-color: $gray-200;
   user-select: none;
+  color: $gray-900;
 
   & .edit-image-button-size-small {
-    height: 28px;
-    width: 28px;
+    height: 21px;
+    width: 21px;
   }
 
   & .edit-image-button-ripple-small {
-    height: 28px !important;
-    width: 28px !important;
+    height: 21px !important;
+    width: 21px !important;
   }
 
   & .edit-image-button-size-medium {
-    height: 32px;
-    width: 32px;
+    height: 21px;
+    width: 21px;
   }
 
   & .edit-image-button-ripple-medium {
-    height: 36px !important;
-    width: 36px !important;
+    height: 21px !important;
+    width: 21px !important;
   }
 
   & .edit-image-button-size-large {
-    height: 36px;
-    width: 36px;
+    height: 34px;
+    width: 34px;
   }
 
   & .edit-image-button-ripple-large {
-    height: 36px !important;
-    width: 36px !important;
+    height: 34px !important;
+    width: 34px !important;
   }
 
   & .edit-image-button {
