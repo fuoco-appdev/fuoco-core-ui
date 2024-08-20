@@ -51,7 +51,6 @@ export interface InputNumberProps {
 }
 
 function InputNumber({
-  iconColor = '#ffffff',
   autoComplete,
   autofocus,
   classNames,
@@ -93,13 +92,13 @@ function InputNumber({
   if (icon)
     inputClasses.push(
       InputNumberStyles['inputnumber-with-icon'],
-      classNames?.withIcon
+      classNames?.withIcon,
     )
 
   if (borderless)
     inputClasses.push(
       InputNumberStyles['inputnumber-borderless'],
-      classNames?.borderless
+      classNames?.borderless,
     )
 
   const onIncrement = () => {
@@ -114,7 +113,7 @@ function InputNumber({
           view: window,
           bubbles: true,
           cancelable: false,
-        })
+        }),
       )
     }
   }
@@ -131,7 +130,7 @@ function InputNumber({
           view: window,
           bubbles: true,
           cancelable: false,
-        })
+        }),
       )
     }
   }
@@ -150,7 +149,7 @@ function InputNumber({
     >
       <div
         className={[InputNumberStyles['container'], classNames?.container].join(
-          ' '
+          ' ',
         )}
       >
         <input
@@ -193,7 +192,7 @@ function InputNumber({
             rounded={true}
             type={'text'}
             onClick={onDecrement}
-            icon={<Remove size={18} color={iconColor} stroke={iconColor} />}
+            icon={<Remove size={21} />}
           />
           <Button
             touchScreen={touchScreen}
@@ -202,11 +201,11 @@ function InputNumber({
             rounded={true}
             type={'text'}
             onClick={onIncrement}
-            icon={<Add size={18} color={iconColor} stroke={iconColor} />}
+            icon={<Add size={21} />}
           />
           {icon && <InputIconContainer icon={icon} />}
           {error && (
-            <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
+            <ErrorOutline size={21} color={'#ff0000'} strokeWidth={0} />
           )}
         </div>
       </div>

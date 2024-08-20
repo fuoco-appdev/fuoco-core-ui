@@ -30,7 +30,6 @@ export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   classNames?: InputClasses
   rippleProps?: RipplesProps
-  iconColor?: string
   copy?: boolean
   password?: boolean
   defaultValue?: string | number
@@ -56,7 +55,6 @@ function Input({
   autoFocus,
   classNames,
   rippleProps,
-  iconColor = '#ffffff',
   copy,
   password,
   defaultValue,
@@ -103,12 +101,12 @@ function Input({
   if (icon)
     inputContainerClasses.push(
       InputStyles['input-with-icon'],
-      classNames?.withIcon
+      classNames?.withIcon,
     )
   if (borderless)
     inputContainerClasses.push(
       InputStyles['input-borderless'],
-      classNames?.borderless
+      classNames?.borderless,
     )
 
   function onCopy(value: any) {
@@ -123,7 +121,7 @@ function Input({
       function () {
         /* clipboard write failed */
         setCopyLabel('Failed to copy')
-      }
+      },
     )
   }
 
@@ -212,19 +210,9 @@ function Input({
                   rounded={true}
                   icon={
                     hidden ? (
-                      <Visibility
-                        size={24}
-                        strokeWidth={0}
-                        color={iconColor}
-                        stroke={iconColor}
-                      />
+                      <Visibility size={21} strokeWidth={0} />
                     ) : (
-                      <VisibilityOff
-                        size={24}
-                        strokeWidth={0}
-                        color={iconColor}
-                        stroke={iconColor}
-                      />
+                      <VisibilityOff size={21} strokeWidth={0} />
                     )
                   }
                   onClick={onReveal}
@@ -232,7 +220,7 @@ function Input({
               ) : null}
               {error && (
                 <ErrorOutline
-                  size={24}
+                  size={21}
                   color={'#FF0000'}
                   strokeWidth={0}
                   className={InputStyles['error-icon']}
@@ -247,14 +235,7 @@ function Input({
                   type="default"
                   rounded={true}
                   onClick={() => onCopy(value)}
-                  icon={
-                    <ContentCopy
-                      size={24}
-                      strokeWidth={0}
-                      color={iconColor}
-                      stroke={iconColor}
-                    />
-                  }
+                  icon={<ContentCopy size={21} strokeWidth={0} />}
                 >
                   {copyLabel}
                 </Button>
@@ -366,18 +347,18 @@ function TextArea({
   if (error)
     inputContainerClasses.push(
       InputStyles['input-error'],
-      classNames?.inputError
+      classNames?.inputError,
     )
   if (icon)
     inputContainerClasses.push(
       InputStyles['input-with-icon'],
-      classNames?.inputWithIcon
+      classNames?.inputWithIcon,
     )
   if (size) inputContainerClasses.push(InputStyles[`input-${size}`])
   if (borderless)
     inputContainerClasses.push(
       InputStyles['input-borderless'],
-      classNames?.inputBorderless
+      classNames?.inputBorderless,
     )
 
   const interpolation: number[] = []
@@ -439,7 +420,7 @@ function TextArea({
             >
               {error && (
                 <ErrorOutline
-                  size={24}
+                  size={21}
                   strokeWidth={0}
                   color={'#FF0000'}
                   className={InputStyles['error-icon']}

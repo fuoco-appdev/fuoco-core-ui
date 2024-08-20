@@ -96,6 +96,17 @@
   --pink-700: #c2185b;
   --pink-800: #ad1457;
   --pink-900: #880e4f;
+
+  --dark-0: rgba(255, 255, 255, 0.0);
+  --dark-1: rgba(255, 255, 255, 0.05);
+  --dark-2: rgba(255, 255, 255, 0.07);
+  --dark-3: rgba(255, 255, 255, 0.08);
+  --dark-4: rgba(255, 255, 255, 0.09);
+  --dark-6: rgba(255, 255, 255, 0.11);
+  --dark-8: rgba(255, 255, 255, 0.12);
+  --dark-12: rgba(255, 255, 255, 0.14);
+  --dark-16: rgba(255, 255, 255, 0.15);
+  --dark-24: rgba(255, 255, 255, 0.16);
 }
 
 $gray-100: var(--gray-100) !default;
@@ -195,3 +206,14 @@ $pink-600: var(--pink-600) !default;
 $pink-700: var(--pink-700) !default;
 $pink-800: var(--pink-800) !default;
 $pink-900: var(--pink-900) !default;
+
+$dark-0: var(--dark-0) !default;
+$dark-1: var(--dark-1) !default;
+$dark-2: var(--dark-2) !default;
+$dark-3: var(--dark-3) !default;
+$dark-4: var(--dark-4) !default;
+$dark-6: var(--dark-6) !default;
+$dark-8: var(--dark-8) !default;
+$dark-12: var(--dark-12) !default;
+$dark-16: var(--dark-16) !default;
+$dark-24: var(--dark-24) !default;

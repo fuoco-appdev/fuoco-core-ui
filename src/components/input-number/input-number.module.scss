@@ -2,6 +2,43 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .container {
+    border-color: $gray-100;
+    background-color: $dark-1;
+  }
+  
+  .inputnumber {
+    color: $gray-100;
+    background-color: transparent;
+  }
+  
+  .inputnumber::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $gray-300;
+  }
+  
+  .inputnumber:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $gray-300;
+  }
+  
+  .inputnumber::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $gray-300;
+  }
+  
+  .inputnumber-error {
+    border-color: $red-500;
+  }
+  
+  .inputnumber-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: $gray-100;
+  }
+}
+
 .container {
   position: relative;
   display: flex;
@@ -14,9 +51,9 @@
   -khtml-border-radius: $rounded-md;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: $gray-100;
+  border-color: $gray-900;
   transition: box-shadow 0.3s ease-in-out;
-  padding: 0 $mp-3;
+  padding: 0 $mp-5;
   align-items: center;
 }
 
@@ -30,40 +67,30 @@
   font-family: inherit;
   appearance: textfield;
   background: transparent;
-  padding: $mp-3 0;
+  padding: $mp-5 0;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  color: $gray-100;
+  color: $gray-900;
   background-color: transparent;
   outline: 2px solid transparent;
   outline-offset: 2px;
   resize: none;
-
-  & :focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-
-  & :hover {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
 }
 
 .inputnumber::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputnumber:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputnumber::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputnumber::-webkit-inner-spin-button,
@@ -92,7 +119,7 @@
   top: 0px;
   bottom: 0px;
   right: 0px;
-  padding-left: $mp-3;
+  padding-left: $mp-5;
   padding-right: $mp-1;
 }
 
@@ -109,7 +136,7 @@
   position: relative;
   display: block;
   box-sizing: border-box;
-  padding: $mp-2 $mp-3;
+  padding: $mp-3 $mp-5;
   width: 100%;
   border-radius: $rounded-md;
   -webkit-border-radius: $rounded-md;
@@ -121,7 +148,7 @@
   border-style: solid;
   background-color: transparent;
   border-color: transparent;
-  color: white;
+  color: $gray-900;
   cursor: pointer;
   width: 21px;
   text-align: center;
@@ -164,5 +191,5 @@
 }
 
 .inputnumber-with-icon {
-  padding-left: $mp-10;
+
 }

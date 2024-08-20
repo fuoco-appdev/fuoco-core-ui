@@ -2,9 +2,101 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .button-primary {
+    background-color: $dark-2;
+    color: $gray-100;
+  }
+
+  .button-primary-desktop:hover {
+    background-color: $dark-8;
+  }
+
+  .button-rounded {
+    color: $gray-100;
+  }
+
+  .button-rounded:hover {
+    color: $gray-100;
+  }
+
+  .button-default {
+    color: $gray-100;
+    background-color: $dark-2;
+    border-color: $gray-200;
+  }
+  
+  .button-default-desktop:hover {
+    color: $gray-100;
+    background-color: $dark-8;
+    border-color: $gray-200;
+  }
+
+  .button-secondary {
+    color: $gray-100;
+    background-color: $dark-2;
+  }
+  
+  .button-secondary-desktop:hover {
+    background-color: $dark-8;
+  
+    & .button-children {
+      color: $gray-100;
+    }
+  }
+
+  .button-outline {
+    color: $gray-100;
+    background-color: transparent;
+    border-color: $gray-200;
+    border-style: solid;
+  }
+  
+  .button-outline-desktop:hover {
+    background-color: $dark-8;
+    color: $gray-100;
+    border-color: $gray-300;
+  }
+  
+  .button-dashed {
+    border-width: 1px;
+    color: $gray-500;
+    background-color: transparent;
+    border-color: $gray-200;
+    border-style: dashed;
+  }
+  
+  .button-dashed-desktop:hover {
+    color: $gray-100;
+    border-color: $gray-600;
+  }
+  
+  .button-link {
+    background-color: transparent;
+    color: $gray-200;
+  }
+  
+  .button-link-desktop:hover {
+    background-color: $brand-100;
+  }
+  
+  .button-text {
+    color: $gray-100;
+    background-color: transparent;
+  }
+  
+  .button-text-desktop:hover {
+    background-color: $dark-8;
+  }
+}
+
 .root {
   position: relative;
   height: fit-content;
+}
+
+.root:active {
+  transform: translateY(0.2rem);
 }
 
 .root-block {
@@ -15,7 +107,7 @@
   position: relative;
   display: inline-flex;
   font-family: inherit;
-  padding: $mp-2 $mp-4;
+  padding: $mp-2 $mp-6;
   align-items: center;
   text-align: center;
   border-width: 1px;
@@ -83,19 +175,19 @@
 */
 
 .button-tiny {
-  padding: $mp-2-5 $mp-2-5;
+  padding: $mp-4 $mp-4;
   line-height: $font-line-height-sm;
 }
 .button-small {
-  padding: $mp-4 $mp-4;
+  padding: $mp-7 $mp-7;
   line-height: $font-line-height-xs;
 }
 .button-medium {
-  padding: $mp-6 $mp-6;
+  padding: $mp-7 $mp-7;
   line-height: $font-line-height-sm;
 }
 .button-large {
-  padding: $mp-8 $mp-8;
+  padding: $mp-10 $mp-10;
   line-height: $font-line-height-base;
 }
 .button-xlarge {
@@ -108,23 +200,23 @@
 }
 
 .button-tiny-with-children {
-  padding: $mp-1-5 $mp-2-5;
+  padding: $mp-3 $mp-5;
   line-height: $font-line-height-sm;
 }
 .button-small-with-children {
-  padding: $mp-2 $mp-4;
+  padding: $mp-3 $mp-7;
   line-height: $font-line-height-xs;
 }
 .button-medium-with-children {
-  padding: $mp-2 $mp-6;
+  padding: $mp-4 $mp-7;
   line-height: $font-line-height-sm;
 }
 .button-large-with-children {
-  padding: $mp-2 $mp-8;
+  padding: $mp-4 $mp-8;
   line-height: $font-line-height-base;
 }
 .button-xlarge-with-children {
-  padding: $mp-3 $mp-10;
+  padding: $mp-4 $mp-8;
   line-height: $font-line-height-base;
 }
 .button-full-with-children {
@@ -142,6 +234,11 @@
 
 .button-rounded {
   border-radius: $rounded-full;
+  color: $gray-900;
+}
+
+.button-rounded:hover {
+  background-color: $gray-200;
 }
 
 .button-primary-desktop:hover {
@@ -170,7 +267,7 @@
 }
 
 .button-secondary-desktop:hover {
-  background-color: $gray-100;
+  background-color: $gray-500;
 
   & .button-children {
     color: $gray-900;
@@ -183,47 +280,47 @@
 
 .button-outline {
   border-width: 1px;
-  color: $gray-100;
+  color: $gray-900;
   background-color: transparent;
-  border-color: $gray-200;
+  border-color: $gray-900;
   border-style: solid;
 }
 
 .button-outline-desktop:hover {
   background-color: white;
   color: $gray-500;
-  border-color: $gray-600;
+  border-color: $gray-500;
 }
 
 .button-dashed {
   border-width: 1px;
-  color: $gray-500;
+  color: $gray-800;
   background-color: transparent;
-  border-color: $gray-200;
+  border-color: $gray-800;
   border-style: dashed;
 }
 
 .button-dashed-desktop:hover {
-  color: $gray-100;
-  border-color: $gray-600;
+  color: $gray-500;
+  border-color: $gray-500;
 }
 
 .button-link {
   background-color: transparent;
-  color: $brand-800;
+  color: $brand-600;
 }
 
 .button-link-desktop:hover {
-  background-color: $brand-100;
+  background-color: $brand-800;
 }
 
 .button-text {
-  color: $gray-100;
+  color: $gray-900;
   background-color: transparent;
 }
 
 .button-text-desktop:hover {
-  background-color: rgba(#fff, 0.15);
+  color: $gray-500;
 }
 
 .button-danger {
@@ -320,6 +417,7 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  min-height: 21px;
 }
 
 .left-icon-space {

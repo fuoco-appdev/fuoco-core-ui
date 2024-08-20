@@ -167,13 +167,13 @@ function Radio({
         if (type === 'cards') {
           classes.push(
             RadioStyles['radio-container-card'],
-            classNames?.containerCard
+            classNames?.containerCard,
           )
         }
         if (type === 'cards' && activeId === id) {
           classes.push(
             RadioStyles['radio-container-card-active'],
-            classNames?.containerCardActive
+            classNames?.containerCardActive,
           )
         }
 
@@ -183,7 +183,13 @@ function Radio({
         }
 
         return (
-          <Ripples {...rippleProps} className={classes.join(' ')}>
+          <Ripples
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            {...rippleProps}
+            className={classes.join(' ')}
+          >
             <label
               id={id}
               className={RadioStyles['radio-label-container-card']}

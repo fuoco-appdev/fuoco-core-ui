@@ -9,7 +9,7 @@ const gfm = require('remark-gfm')
 
 const supabase = createClient(
   'https://rsnibhkhsbfnncjmwnkj.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNTIxNDE1MywiZXhwIjoxOTMwNzkwMTUzfQ.OQEbAaTfgDdLCCht251P2JRD3QDnui6nsU8N-tZA_Mc'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNTIxNDE1MywiZXhwIjoxOTMwNzkwMTUzfQ.OQEbAaTfgDdLCCht251P2JRD3QDnui6nsU8N-tZA_Mc',
 )
 
 export default {
@@ -20,7 +20,7 @@ export default {
 export const Default = (args: any) => {
   const [error, setError] = useState<AuthError | null>(null)
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
-    null
+    null,
   )
   const [passwordErrorMessage, setPasswordErrorMessage] = useState<
     string | null
@@ -64,7 +64,7 @@ export const Default = (args: any) => {
 export const WithSocialAuth = (args: any) => {
   const [error, setError] = useState<AuthError | null>(null)
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
-    null
+    null,
   )
   const [passwordErrorMessage, setPasswordErrorMessage] = useState<
     string | null
@@ -102,7 +102,7 @@ export const WithSocialAuth = (args: any) => {
 export const WithAllSocialAuth = (args: any) => {
   const [error, setError] = useState<AuthError | null>(null)
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
-    null
+    null,
   )
   const [passwordErrorMessage, setPasswordErrorMessage] = useState<
     string | null
@@ -141,7 +141,7 @@ export const WithAllSocialAuth = (args: any) => {
 export const ResetPassword = (args: any) => {
   const [error, setError] = useState<AuthError | null>(null)
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
-    null
+    null,
   )
   const [passwordErrorMessage, setPasswordErrorMessage] = useState<
     string | null

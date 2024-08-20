@@ -2,53 +2,80 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+:global(.dark) {
+  .slider-track {
+    background: $dark-2;
+  }
   
-.slider {
-    margin: auto;
-}
+  .slider-track.slider-track-0 {
+    background: $dark-8;
+  }
   
-.slider-track {
-    top: 8px;
-    height: 4px;
-    background: $brand-700;
-}
-  
-.slider-track.slider-track-0 {
-    background: $brand-700;
-}
-  
-.slider-thumb {
-    cursor: pointer;
-    /*color for the thumb */
-    background: $brand-700;
-    /* shape of the thumb: circle */
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    transition: box-shadow 75ms $transition-standard-easing;
-    /* remove default outline when selected */
-    outline: none;
-}
-  
-.slider-thumb:hover {
-    box-shadow: 0 0 0 8px $brand-500;
-}
-  
-.slider-mark {
-    cursor: pointer;
-    top: 6px;
-    width: 1.5px;
-    height: 8px;
+  .slider-thumb {
+    background: $brand-500;
+  }
+
+  .slider-mark {
     background-color: $brand-500;
-}
+  }
   
+  .slider-mark-before {
+    background-color: $dark-2;
+  }
+  
+  .slider-mark-active {
+    background-color: $brand-500;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.slider {
+  margin: auto;
+}
+
+.slider-track {
+  top: 8px;
+  height: 4px;
+  background: $brand-700;
+}
+
+.slider-track.slider-track-0 {
+  background: $brand-700;
+}
+
+.slider-thumb {
+  cursor: pointer;
+  /*color for the thumb */
+  background: $brand-700;
+  /* shape of the thumb: circle */
+  width: 21px;
+  height: 21px;
+  border-radius: 100%;
+  transition: box-shadow 75ms $transition-standard-easing;
+  /* remove default outline when selected */
+  outline: none;
+}
+
+.slider-thumb:hover {
+  box-shadow: 0 0 0 8px $brand-500;
+}
+
+.slider-mark {
+  cursor: pointer;
+  top: 6px;
+  width: 1.5px;
+  height: 8px;
+  background-color: $brand-500;
+}
+
 .slider-mark-before {
-    background-color: $brand-700;
+  background-color: $brand-700;
 }
 
 .slider-mark-active {
-    background-color: $brand-200;
+  background-color: $brand-200;
 }

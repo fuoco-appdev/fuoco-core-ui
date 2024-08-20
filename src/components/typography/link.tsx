@@ -1,4 +1,3 @@
-import { HandlerFunction } from '@storybook/addon-actions'
 import React from 'react'
 // @ts-ignore
 import LinkStyles from './link.module.scss'
@@ -9,7 +8,7 @@ interface Props {
   href?: string
   className?: string
   style?: React.CSSProperties
-  onClick?: HandlerFunction
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
 }
 
 function Link({

@@ -33,7 +33,7 @@ function Card(
     rippleProps,
     onClick,
   }: CardProps,
-  ref: React.ForwardedRef<any>
+  ref: React.ForwardedRef<any>,
 ) {
   let containerClasses = [CardStyles['button-ripple'], classNames?.container]
   let classes = [CardStyles['card'], classNames?.card]
@@ -45,6 +45,9 @@ function Card(
 
   return (
     <Ripples
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
       {...(clickable ? rippleProps : { color: 'rgba(0,0,0,0)' })}
       className={containerClasses.join(' ')}
       onClick={onClick}

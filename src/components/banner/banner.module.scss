@@ -2,21 +2,60 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .banner-container {
+    background-color: #121212;
+  }
+
+  .banner-title {
+    color: $gray-100;
+  }
+  
+  .banner-subtitle {
+    color: $gray-100;
+  }
+  
+  .banner-description {
+    color: $gray-100;
+  }
+  
+  .banner-footer-text {
+    color: $gray-100;
+  }
+
+  .banner-close-container {
+    color: $gray-100;
+  }
+  
+  .banner-close-button {
+    color: $gray-100;
+  }
+
+  .banner-icon-container {
+    color: $gray-100;
+  }
+}
+
 .banner-root {
   position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 24;
+  height: 100vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
   pointer-events: none;
   overflow: none;
 }
 
 .banner-overlay-container {
-  height: inherit;
-  width: inherit;
+  position: relative;
+  height: 100%;
+  width: 100%;
   display: flex;
-  gap: 8px;
+  gap: $mp-4;
   overflow: none;
+  padding: $mp-7;
 }
 
 .banner-overlay-container-up {
@@ -29,12 +68,12 @@
 
 .banner-overlay-container-left {
   align-items: flex-start;
-  padding-left: $mp-10;
+  padding-left: $mp-6;
 }
 
 .banner-overlay-container-right {
   align-items: flex-end;
-  padding-right: $mp-10;
+  padding-right: $mp-6;
 }
 
 .banner-overlay-container-center {
@@ -58,17 +97,17 @@
   -webkit-border-radius: $rounded-md;
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
-  padding: $mp-4;
-  width: 360px;
-  min-height: 120px;
+  padding: $mp-6;
+  width: 380px;
+  min-height: 90px;
   display: flex;
   flex: 1;
   overflow: hidden;
-  background-color: #fff;
+  background-color: $gray-100;
 }
 
 .banner-container-touchscreen {
-  width: calc(100vw - $mp-8);
+  min-width: calc(100vw - $mp-6);
 }
 
 .banner-container > div {
@@ -80,12 +119,13 @@
   flex-shrink: 0;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
+  color: $gray-900;
 }
 
 .banner-details {
   display: flex;
   flex: 1;
-  margin-left: $mp-3;
+  margin-left: $mp-4;
 }
 
 .banner-details__content {
@@ -103,7 +143,7 @@
 
 .banner-subtitle {
   margin: 0px;
-  font-size: $font-size-xs;
+  font-size: $font-size-sm;
   line-height: $font-line-height-xs;
   font-weight: $font-weight-bold;
   color: $brand-900;
@@ -129,8 +169,8 @@
 
 .banner-details-actions {
   display: flex;
-  margin-right: $mp-4;
-  margin-left: $mp-4;
+  margin-right: $mp-7;
+  margin-left: $mp-7;
 }
 
 .banner-close-container {

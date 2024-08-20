@@ -5,10 +5,10 @@
 .sbui-upload-dragger {
   display: flex;
   justify-content: center;
-  padding-left: $mp-6;
-  padding-right: $mp-6;
-  padding-top: $mp-5;
-  padding-bottom: $mp-6;
+  padding-left: $mp-7;
+  padding-right: $mp-7;
+  padding-top: $mp-7;
+  padding-bottom: $mp-7;
   border-width: 2px;
   border-color: $gray-300;
   border-style: dashed;
@@ -17,7 +17,7 @@
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
   cursor: pointer;
-  max-width: 32rem/* 512px */;
+  max-width: 32rem /* 512px */;
 }
 
 .sbui-upload-dragger--dragged {

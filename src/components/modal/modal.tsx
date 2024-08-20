@@ -28,7 +28,6 @@ export interface ModalClasses {
 
 export interface ModalProps {
   classNames?: ModalClasses
-  iconColor?: string
   children?: React.ReactNode
   customFooter?: React.ReactNode
   description?: string
@@ -55,15 +54,14 @@ export interface ModalProps {
 
 const Modal = ({
   classNames,
-  iconColor = '#ffffff',
   children,
   customFooter = undefined,
   description,
   hideFooter = false,
   loading = false,
   cancelText = 'Cancel',
-  onConfirm = () => { },
-  onCancel = () => { },
+  onConfirm = () => {},
+  onCancel = () => {},
   confirmText = 'Confirm',
   title,
   footerBackground,
@@ -199,7 +197,11 @@ const Modal = ({
               classNames?.overlayContainer,
             ].join(' ')}
           >
-            <div className={overlayClasses.join(' ')} style={overlayStyle} onClick={() => (onCancel ? onCancel() : null)} />
+            <div
+              className={overlayClasses.join(' ')}
+              style={overlayStyle}
+              onClick={() => (onCancel ? onCancel() : null)}
+            />
             {transition(
               (transitionStyle, item) =>
                 item && (
@@ -278,11 +280,11 @@ const Modal = ({
                       </div>
                     </div>
                   </animated.div>
-                )
+                ),
             )}
           </div>
         </animated.div>
-      )
+      ),
   )
 }
 

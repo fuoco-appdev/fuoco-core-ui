@@ -43,7 +43,7 @@ function Toggle({
   size = 'medium',
 }: ToggleProps) {
   const [intChecked, setIntChecked] = useState(
-    (defaultChecked || checked) ?? false
+    (defaultChecked || checked) ?? false,
   )
 
   // check if toggle checked is true or false

@@ -37,7 +37,7 @@ function ListWrap({ items }: ListWrapProps) {
   const columns = useMedia(
     ['(min-width: 1500px)', '(min-width: 1000px)', '(min-width: 600px)'],
     [5, 3, 2],
-    2
+    2,
   )
   const [ref, { width }] = useMeasure()
   const [heights, gridItems] = useMemo(() => {

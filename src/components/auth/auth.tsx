@@ -155,8 +155,6 @@ export interface AuthProps {
   emailValue?: string
   passwordValue?: string
   confirmPasswordValue?: string
-  defaultIconColor?: string
-  litIconColor?: string
   children?: React.ReactNode
   touchScreen?: boolean
   socialLoadingComponent?: JSX.Element
@@ -234,8 +232,6 @@ function Auth({
   emailValue,
   passwordValue,
   confirmPasswordValue,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   style,
   strings,
   socialLoadingComponent,
@@ -287,7 +283,7 @@ function Auth({
   const [authView, setAuthView] = useState(view)
   const verticalSocialLayout = socialLayout === 'vertical' ? true : false
 
-  let containerClasses = [AuthStyles['sbui-auth'], classNames?.container]
+  let containerClasses = [AuthStyles['auth'], classNames?.container]
   useEffect(() => {
     // handle view override
     setAuthView(view)
@@ -302,8 +298,6 @@ function Auth({
           touchScreen={touchScreen}
           socialLoadingComponent={socialLoadingComponent}
           strings={{ ...defaultStrings, ...strings }}
-          defaultIconColor={defaultIconColor}
-          litIconColor={litIconColor}
           supabaseClient={supabaseClient}
           verticalSocialLayout={verticalSocialLayout}
           providers={providers}
@@ -328,13 +322,11 @@ function Auth({
         <EmailAuth
           classNames={classNames?.emailAuth}
           id={authView === VIEWS.SIGN_UP ? 'auth-sign-up' : 'auth-sign-in'}
-          defaultIconColor={defaultIconColor}
           touchScreen={touchScreen}
           loadingComponent={emailLoadingComponent}
           emailValue={emailValue}
           passwordValue={passwordValue}
           confirmPasswordValue={confirmPasswordValue}
-          litIconColor={litIconColor}
           strings={{ ...defaultStrings, ...strings }}
           rippleProps={rippleProps}
           supabaseClient={supabaseClient}
@@ -364,8 +356,6 @@ function Auth({
           classNames={classNames?.forgottenPassword}
           strings={{ ...defaultStrings, ...strings }}
           touchScreen={touchScreen}
-          defaultIconColor={defaultIconColor}
-          litIconColor={litIconColor}
           supabaseClient={supabaseClient}
           redirectTo={redirectTo}
           emailErrorMessage={emailErrorMessage}
@@ -379,8 +369,6 @@ function Auth({
           classNames={classNames?.magicLink}
           strings={{ ...defaultStrings, ...strings }}
           touchScreen={touchScreen}
-          defaultIconColor={defaultIconColor}
-          litIconColor={litIconColor}
           supabaseClient={supabaseClient}
           setAuthView={setAuthView}
           redirectTo={redirectTo}
@@ -394,8 +382,6 @@ function Auth({
           classNames={classNames?.updatePassword}
           strings={{ ...defaultStrings, ...strings }}
           touchScreen={touchScreen}
-          defaultIconColor={defaultIconColor}
-          litIconColor={litIconColor}
           supabaseClient={supabaseClient}
           passwordErrorMessage={passwordErrorMessage}
           onUpdatePasswordError={onUpdatePasswordError}
@@ -583,7 +569,7 @@ function SocialButton({
         >
           <div
             className={[AuthStyles['button-icon'], classNames?.buttonIcon].join(
-              ' '
+              ' ',
             )}
           >
             {AuthIcon ? <AuthIcon /> : ''}
@@ -598,8 +584,6 @@ function SocialButton({
 function SocialAuth({
   classNames,
   style,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   strings,
   touchScreen,
   socialLoadingComponent,
@@ -731,8 +715,6 @@ function EmailAuth({
     },
   },
   touchScreen,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   id,
   supabaseClient,
   magicLink,
@@ -754,12 +736,10 @@ function EmailAuth({
   onSignupError,
 }: {
   classNames?: EmailAuthClasses
-  defaultIconColor?: string
   emailValue?: string
   passwordValue?: string
   touchScreen?: boolean
   confirmPasswordValue?: string
-  litIconColor?: string
   loadingComponent?: JSX.Element
   authView: ViewType
   strings: AuthStrings
@@ -788,9 +768,6 @@ function EmailAuth({
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [termAgreementChecked, setTermAgreementChecked] = useState(false)
-  const [emailIconLit, setEmailIconLit] = useState(false)
-  const [passwordIconLit, setPasswordIconLit] = useState(false)
-  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -812,7 +789,7 @@ function EmailAuth({
         case 'sign_up':
           if (passwordValue !== confirmPasswordValue) {
             onSigninError?.(
-              new AuthError('Confirm password does not match', 401)
+              new AuthError('Confirm password does not match', 401),
             )
             break
           }
@@ -845,27 +822,9 @@ function EmailAuth({
             error={emailErrorMessage}
             autoComplete="email"
             value={emailValue}
-            iconColor={defaultIconColor}
-            icon={
-              <Email
-                size={24}
-                strokeWidth={0}
-                stroke={emailIconLit ? litIconColor : defaultIconColor}
-                color={emailIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Email size={21} strokeWidth={0} />}
             onChange={(e) => {
               onEmailChanged?.(e)
-            }}
-            onMouseEnter={() => setEmailIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setEmailIconLit(false)
-              }
-            }}
-            onFocus={() => setEmailIconLit(true)}
-            onBlur={(e) => {
-              setEmailIconLit(false)
             }}
           />
           <Input
@@ -875,29 +834,11 @@ function EmailAuth({
             error={passwordErrorMessage}
             reveal={true}
             password={true}
-            iconColor={defaultIconColor}
             value={passwordValue}
             autoComplete="current-password"
-            icon={
-              <Key
-                size={24}
-                strokeWidth={0}
-                stroke={passwordIconLit ? litIconColor : defaultIconColor}
-                color={passwordIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Key size={21} strokeWidth={0} />}
             onChange={(e) => {
               onPasswordChanged?.(e)
-            }}
-            onMouseEnter={() => setPasswordIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setPasswordIconLit(false)
-              }
-            }}
-            onFocus={() => setPasswordIconLit(true)}
-            onBlur={(e) => {
-              setPasswordIconLit(false)
             }}
           />
           {authView === VIEWS.SIGN_UP && (
@@ -906,35 +847,13 @@ function EmailAuth({
               classNames={classNames?.input}
               label={strings.confirmPassword}
               error={confirmPasswordErrorMessage}
-              iconColor={defaultIconColor}
               reveal={true}
               password={true}
               value={confirmPasswordValue}
               autoComplete="current-password"
-              icon={
-                <Key
-                  size={24}
-                  strokeWidth={0}
-                  stroke={
-                    confirmPasswordIconLit ? litIconColor : defaultIconColor
-                  }
-                  color={
-                    confirmPasswordIconLit ? litIconColor : defaultIconColor
-                  }
-                />
-              }
+              icon={<Key size={21} strokeWidth={0} />}
               onChange={(e) => {
                 onConfirmPasswordChanged?.(e)
-              }}
-              onMouseEnter={() => setConfirmPasswordIconLit(true)}
-              onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-                if (document.activeElement !== e.currentTarget) {
-                  setConfirmPasswordIconLit(false)
-                }
-              }}
-              onFocus={() => setConfirmPasswordIconLit(true)}
-              onBlur={(e) => {
-                setConfirmPasswordIconLit(false)
               }}
             />
           )}
@@ -1048,7 +967,7 @@ function EmailAuth({
                     classNames?.buttonIcon,
                   ].join(' ')}
                 >
-                  <Lock size={24} strokeWidth={0} />
+                  <Lock size={21} strokeWidth={0} />
                 </div>
                 {authView === VIEWS.SIGN_IN ? strings.signIn : strings.signUp}
               </div>
@@ -1104,9 +1023,7 @@ function MagicLink({
   setAuthView,
   strings,
   touchScreen,
-  defaultIconColor = '#ffffff',
   loadingComponent,
-  litIconColor = '#4AFFFF',
   supabaseClient,
   redirectTo,
   rippleProps = {
@@ -1119,9 +1036,7 @@ function MagicLink({
 }: {
   classNames?: MagicLinkClasses
   touchScreen?: boolean
-  defaultIconColor?: string
   loadingComponent?: JSX.Element
-  litIconColor?: string
   setAuthView: any
   strings: AuthStrings
   supabaseClient: SupabaseClient
@@ -1133,7 +1048,6 @@ function MagicLink({
 }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState('')
-  const [emailIconLit, setEmailIconLit] = useState(false)
 
   const handleMagicLinkSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -1165,26 +1079,10 @@ function MagicLink({
             label={strings.emailAddress}
             placeholder={strings.yourEmailAddress}
             error={emailErrorMessage}
-            iconColor={defaultIconColor}
-            icon={
-              <Email
-                size={24}
-                strokeWidth={0}
-                stroke={emailIconLit ? litIconColor : defaultIconColor}
-                color={emailIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Email size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
-            onMouseEnter={() => setEmailIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setEmailIconLit(false)
-              }
-            }}
-            onFocus={() => setEmailIconLit(true)}
-            onBlur={() => setEmailIconLit(false)}
           />
           <Button
             classNames={classNames?.button}
@@ -1209,7 +1107,7 @@ function MagicLink({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Inbox size={24} strokeWidth={0} />
+                <Inbox size={21} strokeWidth={0} />
               </div>
               {strings.sendMagicLink}
             </div>
@@ -1235,8 +1133,6 @@ function ForgottenPassword({
   strings,
   touchScreen,
   loadingComponent,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   supabaseClient,
   redirectTo,
   emailErrorMessage,
@@ -1249,10 +1145,8 @@ function ForgottenPassword({
   onResetPasswordSent,
 }: {
   classNames?: ForgottenPasswordClasses
-  defaultIconColor?: string
   touchScreen?: boolean
   loadingComponent?: JSX.Element
-  litIconColor?: string
   strings: AuthStrings
   supabaseClient: SupabaseClient
   redirectTo?: RedirectTo
@@ -1264,7 +1158,6 @@ function ForgottenPassword({
 }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState('')
-  const [emailIconLit, setEmailIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -1293,26 +1186,10 @@ function ForgottenPassword({
             label="Email address"
             placeholder="Your email address"
             error={emailErrorMessage}
-            iconColor={defaultIconColor}
-            icon={
-              <Email
-                size={24}
-                strokeWidth={0}
-                stroke={emailIconLit ? litIconColor : defaultIconColor}
-                color={emailIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Email size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
-            onMouseEnter={() => setEmailIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setEmailIconLit(false)
-              }
-            }}
-            onFocus={() => setEmailIconLit(true)}
-            onBlur={() => setEmailIconLit(false)}
           />
           <Button
             touchScreen={touchScreen}
@@ -1336,7 +1213,7 @@ function ForgottenPassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Inbox size={24} strokeWidth={0} />
+                <Inbox size={21} strokeWidth={0} />
               </div>
               {strings.sendResetPasswordInstructions}
             </div>
@@ -1363,8 +1240,6 @@ function ResetPassword({
   strings,
   touchScreen,
   loadingComponent,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   passwordErrorMessage,
   confirmPasswordErrorMessage,
   rippleProps = {
@@ -1377,8 +1252,6 @@ function ResetPassword({
   classNames?: ResetPasswordClasses
   supabaseClient: SupabaseClient
   touchScreen?: boolean
-  defaultIconColor?: string
-  litIconColor?: string
   strings?: AuthStrings
   loadingComponent?: JSX.Element
   passwordErrorMessage?: string
@@ -1389,9 +1262,7 @@ function ResetPassword({
 }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [password, setPassword] = useState('')
-  const [passwordIconLit, setPasswordIconLit] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -1399,7 +1270,7 @@ function ResetPassword({
       setIsLoading(true)
       if (password !== confirmPassword) {
         onResetPasswordError?.(
-          new AuthError('Confirm password does not match', 401)
+          new AuthError('Confirm password does not match', 401),
         )
         return
       }
@@ -1430,27 +1301,11 @@ function ResetPassword({
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
             password={true}
-            iconColor={defaultIconColor}
             error={passwordErrorMessage}
-            icon={
-              <Key
-                size={24}
-                strokeWidth={0}
-                stroke={passwordIconLit ? litIconColor : defaultIconColor}
-                color={passwordIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Key size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
             }
-            onMouseEnter={() => setPasswordIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setPasswordIconLit(false)
-              }
-            }}
-            onFocus={() => setPasswordIconLit(true)}
-            onBlur={() => setPasswordIconLit(false)}
           />
           <Input
             classNames={classNames?.input}
@@ -1458,29 +1313,11 @@ function ResetPassword({
             placeholder={strings?.confirmNewPasswordPlaceholder}
             reveal={true}
             password={true}
-            iconColor={defaultIconColor}
             error={confirmPasswordErrorMessage}
-            icon={
-              <Key
-                size={24}
-                strokeWidth={0}
-                stroke={
-                  confirmPasswordIconLit ? litIconColor : defaultIconColor
-                }
-                color={confirmPasswordIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Key size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setConfirmPassword(e.target.value)
             }
-            onMouseEnter={() => setConfirmPasswordIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setConfirmPasswordIconLit(false)
-              }
-            }}
-            onFocus={() => setConfirmPasswordIconLit(true)}
-            onBlur={() => setConfirmPasswordIconLit(false)}
           />
           <Button
             block
@@ -1505,7 +1342,7 @@ function ResetPassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Key size={24} strokeWidth={0} />
+                <Key size={21} strokeWidth={0} />
               </div>
               {strings?.resetPassword}
             </div>
@@ -1521,8 +1358,6 @@ export interface UpdatePasswordProps {
   supabaseClient: SupabaseClient
   touchScreen?: boolean
   loadingComponent?: JSX.Element
-  defaultIconColor?: string
-  litIconColor?: string
   strings: AuthStrings
   passwordErrorMessage?: string
   confirmPasswordErrorMessage?: string
@@ -1537,8 +1372,6 @@ function UpdatePassword({
   strings,
   touchScreen,
   loadingComponent,
-  defaultIconColor = '#ffffff',
-  litIconColor = '#4AFFFF',
   passwordErrorMessage,
   confirmPasswordErrorMessage,
   rippleProps = {
@@ -1550,9 +1383,7 @@ function UpdatePassword({
 }: UpdatePasswordProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [password, setPassword] = useState('')
-  const [passwordIconLit, setPasswordIconLit] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [confirmPasswordIconLit, setConfirmPasswordIconLit] = useState(false)
 
   const handlePasswordReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -1560,7 +1391,7 @@ function UpdatePassword({
       setIsLoading(true)
       if (password !== confirmPassword) {
         onUpdatePasswordError?.(
-          new AuthError('Confirm password does not match', 401)
+          new AuthError('Confirm password does not match', 401),
         )
         return
       }
@@ -1589,27 +1420,11 @@ function UpdatePassword({
             placeholder={strings?.enterYourNewPassword}
             reveal={true}
             password={true}
-            iconColor={defaultIconColor}
             error={passwordErrorMessage}
-            icon={
-              <Key
-                size={24}
-                strokeWidth={0}
-                stroke={passwordIconLit ? litIconColor : defaultIconColor}
-                color={passwordIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Key size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(e.target.value)
             }
-            onMouseEnter={() => setPasswordIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setPasswordIconLit(false)
-              }
-            }}
-            onFocus={() => setPasswordIconLit(true)}
-            onBlur={() => setPasswordIconLit(false)}
           />
           <Input
             classNames={classNames?.input}
@@ -1617,29 +1432,11 @@ function UpdatePassword({
             placeholder={strings?.confirmNewPasswordPlaceholder}
             reveal={true}
             password={true}
-            iconColor={defaultIconColor}
             error={confirmPasswordErrorMessage}
-            icon={
-              <Key
-                size={24}
-                strokeWidth={0}
-                stroke={
-                  confirmPasswordIconLit ? litIconColor : defaultIconColor
-                }
-                color={confirmPasswordIconLit ? litIconColor : defaultIconColor}
-              />
-            }
+            icon={<Key size={21} strokeWidth={0} />}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setConfirmPassword(e.target.value)
             }
-            onMouseEnter={() => setConfirmPasswordIconLit(true)}
-            onMouseLeave={(e: React.MouseEvent<HTMLInputElement>) => {
-              if (document.activeElement !== e.currentTarget) {
-                setConfirmPasswordIconLit(false)
-              }
-            }}
-            onFocus={() => setConfirmPasswordIconLit(true)}
-            onBlur={() => setConfirmPasswordIconLit(false)}
           />
           <Button
             block
@@ -1664,7 +1461,7 @@ function UpdatePassword({
                   classNames?.buttonIcon,
                 ].join(' ')}
               >
-                <Key size={24} strokeWidth={0} />
+                <Key size={21} strokeWidth={0} />
               </div>
               {strings?.updatePassword}
             </div>

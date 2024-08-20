@@ -1,79 +1,80 @@
+@import '../../themes/global';
+@import '../../themes/colors';
+@import '../../themes/margins-paddings';
+
 .root {
-    position: relative;
-    height: 100%;
-    width: 100%;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .scroll-container {
- 
 }
 
 .scroll-content {
-
 }
 
 .children {
-
 }
 
 .pull-indicator {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 150ms;
-    transition-timing-function: $transition-standard-easing;
-    z-index: -1;
-    padding: $mp-4;
-  }
-  
-  .pull-indicator * {
-    transition: transform 150ms;
-    transition-timing-function: $transition-standard-easing;
-    transform-origin: 50% 50%;
-  }
-  
-  .flip * {
-    transform: rotate(180deg);
-  }
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 150ms;
+  transition-timing-function: $transition-standard-easing;
+  z-index: -1;
+  padding: $mp-7;
+}
 
-  .scale * {
-    scale: 1;
-    transform: scale(150ms);
-  }
+.pull-indicator * {
+  transition: transform 150ms;
+  transition-timing-function: $transition-standard-easing;
+  transform-origin: 50% 50%;
+}
 
-  .reload-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 150ms;
-    transition-timing-function: $transition-standard-easing;
-    z-index: -1;
-    padding: $mp-4;
-  }
+.flip * {
+  transform: rotate(180deg);
+}
 
-  .reload-container * {
-    transition: transform 150ms;
-    transition-timing-function: $transition-standard-easing;
-    transform-origin: 50% 50%;
-  }
+.scale * {
+  scale: 1;
+  transform: scale(150ms);
+}
 
-  .load-container {
-    width: 100%;
-    scale: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: scale 75ms;
-    transition-timing-function: $transition-standard-easing;
-    padding: $mp-4;
-  }
+.reload-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 150ms;
+  transition-timing-function: $transition-standard-easing;
+  z-index: -1;
+  padding: $mp-7;
+}
+
+.reload-container * {
+  transition: transform 150ms;
+  transition-timing-function: $transition-standard-easing;
+  transform-origin: 50% 50%;
+}
+
+.load-container {
+  width: 100%;
+  scale: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: scale 75ms;
+  transition-timing-function: $transition-standard-easing;
+  padding: $mp-7;
+}

@@ -21,7 +21,7 @@ function getMask(
   dialCode: string,
   predefinedMask: string,
   defaultMask: string,
-  alwaysDefaultMask: boolean
+  alwaysDefaultMask: boolean,
 ) {
   if (!predefinedMask || alwaysDefaultMask) {
     return prefix + ''.padEnd(dialCode.length, '.') + ' ' + defaultMask
@@ -36,7 +36,7 @@ function initCountries(
   enableAreaCodes: Array<string>,
   prefix: string,
   defaultMask: string,
-  alwaysDefaultMask: boolean
+  alwaysDefaultMask: boolean,
 ) {
   let hiddenAreaCodes: CountryDataProps[] = []
 
@@ -53,7 +53,7 @@ function initCountries(
           country[3] as string,
           country[4] as string,
           defaultMask,
-          alwaysDefaultMask
+          alwaysDefaultMask,
         ),
         priority: (country[5] as number) ?? 0,
         mainCode: false,
@@ -103,7 +103,7 @@ function extendUserContent(
   userContent: Array<string[]>,
   contentItemIndex: number,
   extendingObject: string[] | number | undefined,
-  firstExtension?: boolean
+  firstExtension?: boolean,
 ) {
   if (!extendingObject) return
 
@@ -130,7 +130,7 @@ function extendUserContent(
 function initUserContent(
   masks: string[] | undefined,
   priority: number | undefined,
-  areaCodes: string[] | undefined
+  areaCodes: string[] | undefined,
 ) {
   let userContent: Array<string[]> = []
   extendUserContent(userContent, 1, masks, true)
@@ -141,7 +141,7 @@ function initUserContent(
 
 function extendRawCountries(
   countries: Array<Array<string | number | Array<string>>>,
-  userContent: Array<string[]>
+  userContent: Array<string[]>,
 ) {
   if (userContent.length === 0) return countries
 
@@ -178,16 +178,16 @@ export class CountryData {
     defaultMask: string,
     alwaysDefaultMask: boolean,
     masks: string[] | undefined,
-    priority: number | undefined
+    priority: number | undefined,
   ) {
     const userContent = initUserContent(masks, priority, areaCodes)
     const rawCountries = extendRawCountries(
       JSON.parse(JSON.stringify(RawCountries)),
-      userContent
+      userContent,
     )
     const rawTerritories = extendRawCountries(
       JSON.parse(JSON.stringify(RawTerritories)),
-      userContent
+      userContent,
     )
 
     let [initializedCountries, hiddenAreaCodes] = initCountries(
@@ -195,7 +195,7 @@ export class CountryData {
       enableAreaCodes,
       prefix,
       defaultMask,
-      alwaysDefaultMask
+      alwaysDefaultMask,
     )
     if (enableTerritories) {
       let [initializedTerritories, hiddenAreaCodes] = initCountries(
@@ -203,11 +203,11 @@ export class CountryData {
         enableAreaCodes,
         prefix,
         defaultMask,
-        alwaysDefaultMask
+        alwaysDefaultMask,
       )
       initializedCountries = this.sortTerritories(
         initializedTerritories,
-        initializedCountries
+        initializedCountries,
       )
     }
     if (regions.length > 0)
@@ -216,13 +216,13 @@ export class CountryData {
     const filteredCountries = this.getFilteredCountryList(
       onlyCountries,
       initializedCountries,
-      preserveOrder.includes('onlyCountries')
+      preserveOrder.includes('onlyCountries'),
     )
     const countries = this.excludeCountries(filteredCountries, excludeCountries)
     this._onlyCountries = this.localizeCountries(
       countries,
       localization,
-      preserveOrder.includes('onlyCountries')
+      preserveOrder.includes('onlyCountries'),
     )
 
     this._preferredCountries =
@@ -232,16 +232,16 @@ export class CountryData {
             this.getFilteredCountryList(
               preferredCountries,
               initializedCountries,
-              preserveOrder.includes('preferredCountries')
+              preserveOrder.includes('preferredCountries'),
             ),
             localization,
-            preserveOrder.includes('preferredCountries')
+            preserveOrder.includes('preferredCountries'),
           )
 
     // apply filters to hiddenAreaCodes
     this._hiddenAreaCodes = this.excludeCountries(
       this.getFilteredCountryList(onlyCountries, hiddenAreaCodes),
-      excludeCountries
+      excludeCountries,
     )
   }
 
@@ -279,7 +279,7 @@ export class CountryData {
 
   private sortTerritories(
     initializedTerritories: CountryDataProps[],
-    initializedCountries: CountryDataProps[]
+    initializedCountries: CountryDataProps[],
   ) {
     const fullCountryList = [...initializedTerritories, ...initializedCountries]
     fullCountryList.sort(function (a, b) {
@@ -297,7 +297,7 @@ export class CountryData {
   private getFilteredCountryList(
     countryCodes: string[],
     sourceCountryList: CountryDataProps[],
-    preserveOrder?: boolean
+    preserveOrder?: boolean,
   ): CountryDataProps[] {
     if (countryCodes.length === 0) return sourceCountryList
 
@@ -307,7 +307,7 @@ export class CountryData {
       let countries = countryCodes
         .map((countryCode) => {
           const country = sourceCountryList.find(
-            (country) => country.iso2 === countryCode
+            (country) => country.iso2 === countryCode,
           )
           if (country) return country
         })
@@ -329,7 +329,7 @@ export class CountryData {
   private localizeCountries(
     countries: CountryDataProps[],
     localization: Record<string, string>,
-    preserveOrder: boolean
+    preserveOrder: boolean,
   ) {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
@@ -354,7 +354,7 @@ export class CountryData {
 
   private excludeCountries(
     onlyCountries: CountryDataProps[],
-    excludedCountries: string[]
+    excludedCountries: string[],
   ) {
     if (excludedCountries.length === 0) {
       return onlyCountries

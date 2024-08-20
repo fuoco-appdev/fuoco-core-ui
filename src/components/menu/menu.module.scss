@@ -7,9 +7,10 @@ svg {
 }
 
 .sbui-menu__item {
-  padding: $mp-2 $mp-4;
+  padding: $mp-2 $mp-7;
   cursor: pointer;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 
@@ -19,7 +20,7 @@ svg {
 }
 
 .sbui-menu__group {
-  padding: $mp-2 $mp-4;
+  padding: $mp-2 $mp-7;
 }
 
 .sbui-menu__content {

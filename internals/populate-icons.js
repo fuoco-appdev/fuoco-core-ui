@@ -10,9 +10,8 @@ let importList = []
 //
 
 Object.values(icons).map((icon) => {
-  iconList[
-    `icon-${icon.name}`
-  ] = `src/components/icon/icons/icon-${icon.name}/index.tsx`
+  iconList[`icon-${icon.name}`] =
+    `src/components/icon/icons/icon-${icon.name}/index.tsx`
   importList.push(`export * as Icon${icon.name} from './icon-${icon.name}'`)
 
   var dir = `src/components/icon/icons/icon-${icon.name}`
@@ -26,7 +25,7 @@ Object.values(icons).map((icon) => {
     `export { default as icon-${icon.name} } from './icon-${icon.name}'`,
     function (err) {
       if (err) return console.log(err)
-    }
+    },
   )
 
   fs.writeFile(
@@ -47,7 +46,7 @@ Object.values(icons).map((icon) => {
     function (err) {
       if (err) return console.log(err)
       // console.log(`${icon.name} > ${icon.path}`)
-    }
+    },
   )
 })
 
@@ -66,7 +65,7 @@ ${importList
   function (err) {
     if (err) return console.log(err)
     // console.log(`wrote file for rollup`)
-  }
+  },
 )
 
 //
@@ -79,5 +78,5 @@ fs.writeFile(
   function (err) {
     if (err) return console.log(err)
     // console.log(`wrote file for rollup`)
-  }
+  },
 )

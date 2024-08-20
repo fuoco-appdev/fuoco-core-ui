@@ -159,7 +159,7 @@ export function Item({
                   >
                     <ExpandMore
                       strokeWidth={0}
-                      size={24}
+                      size={21}
                       stroke={iconColor}
                       color={iconColor}
                     />

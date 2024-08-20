@@ -66,9 +66,9 @@ export default function Avatar({
     styles[`avatar-size-${size}`],
     classNames?.container,
   ]
-  let iconSize = 24
+  let iconSize = 21
   if (size === 'medium') {
-    iconSize = 16
+    iconSize = 13
   }
 
   if (src) {
@@ -141,7 +141,7 @@ export default function Avatar({
                 ...classNames?.button,
               }}
               rippleProps={rippleProps}
-              icon={<Line.Add stroke={'#fff'} size={iconSize} />}
+              icon={<Line.Edit size={iconSize} />}
               onClick={onEditFileClick}
             />
           </div>
@@ -150,7 +150,7 @@ export default function Avatar({
       {editMode &&
         createPortal(
           <CropImage
-            src={selectedImages ?? FileList.prototype}
+            src={selectedImages}
             isVisible={isModalVisible}
             onChange={onChange}
             onConfirmed={onCropConfirmed}
@@ -163,7 +163,7 @@ export default function Avatar({
             loadingComponent={loadingComponent}
             onLoading={onLoading}
           />,
-          document.body
+          document.body,
         )}
     </div>
   )

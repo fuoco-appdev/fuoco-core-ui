@@ -8,7 +8,7 @@ export default {
   component: InputGeocoding,
 }
 
-export const Default = (args: any) => {
+export function Default() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   return (
     <div
@@ -20,12 +20,19 @@ export const Default = (args: any) => {
         height: '80vh',
       }}
     >
-      <InputGeocoding {...args} parentRef={containerRef} />
+      <InputGeocoding
+        mapboxAccessToken={''}
+        label={'Location'}
+        layout={'vertical'}
+        onLocationChanged={(value: string, feature: any) =>
+          console.log(feature)
+        }
+      />
     </div>
   )
 }
 
-export const WithIcon = (args: any) => {
+export function WithIcon() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [mapPinIconLit, setMapPinIconLit] = useState<boolean>(false)
   return (
@@ -39,8 +46,12 @@ export const WithIcon = (args: any) => {
       }}
     >
       <InputGeocoding
-        {...args}
-        parentRef={containerRef}
+        mapboxAccessToken={''}
+        label={'Location'}
+        layout={'vertical'}
+        onLocationChanged={(value: string, feature: any) =>
+          console.log(feature)
+        }
         icon={
           <LocationOn
             stroke={mapPinIconLit ? '#4AFFFF' : '#ffffff'}
@@ -61,7 +72,7 @@ export const WithIcon = (args: any) => {
   )
 }
 
-export const DefaultCoordinates = (args: any) => {
+export function DefaultCoordinates() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   return (
     <div
@@ -73,14 +84,30 @@ export const DefaultCoordinates = (args: any) => {
         height: '80vh',
       }}
     >
-      <InputGeocoding {...args} parentRef={containerRef} />
+      <InputGeocoding
+        mapboxAccessToken={''}
+        label={'Location'}
+        layout={'vertical'}
+        onLocationChanged={(value: string, feature: any) =>
+          console.log(feature)
+        }
+      />
     </div>
   )
 }
 
-export const DefaultWithError = (args: any) => <InputGeocoding {...args} />
+export function DefaultWithError() {
+  return (
+    <InputGeocoding
+      mapboxAccessToken={''}
+      label={'Location'}
+      layout={'vertical'}
+      onLocationChanged={(value: string, feature: any) => console.log(feature)}
+    />
+  )
+}
 
-export const TouchScreen = (args: any) => {
+export function TouchScreen() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   return (
     <div
@@ -92,49 +119,15 @@ export const TouchScreen = (args: any) => {
         height: '80vh',
       }}
     >
-      <InputGeocoding {...args} parentRef={containerRef} touchScreen={true} />
+      <InputGeocoding
+        mapboxAccessToken={''}
+        label={'Location'}
+        layout={'vertical'}
+        onLocationChanged={(value: string, feature: any) =>
+          console.log(feature)
+        }
+        touchScreen={true}
+      />
     </div>
   )
-}
-
-Default.args = {
-  mapboxAccessToken:
-    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
-  label: 'Location',
-  layout: 'vertical',
-  onLocationChanged: (value: string, feature: any) => console.log(feature),
-}
-
-WithIcon.args = {
-  mapboxAccessToken:
-    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
-  label: 'Location',
-  layout: 'vertical',
-  onLocationChanged: (value: string, feature: any) => console.log(feature),
-}
-
-DefaultCoordinates.args = {
-  mapboxAccessToken:
-    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
-  label: 'Location',
-  layout: 'vertical',
-  defaultCoordinates: [-74.587974, 46.132518],
-  onLocationChanged: (value: string, feature: any) => console.log(feature),
-}
-
-TouchScreen.args = {
-  mapboxAccessToken:
-    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
-  label: 'Location',
-  layout: 'vertical',
-  defaultCoordinates: [-74.587974, 46.132518],
-  onLocationChanged: (value: string, feature: any) => console.log(feature),
-}
-
-DefaultWithError.args = {
-  mapboxAccessToken:
-    'pk.eyJ1IjoibHVjYXNmdW9jbyIsImEiOiJjbGFjeWl5YWMwM2MyM3ZueW5xNnRnbWFiIn0.SKWlyHhXNfAwdTLqfIdLYQ',
-  label: 'Location',
-  layout: 'vertical',
-  error: 'Not a valid location',
 }

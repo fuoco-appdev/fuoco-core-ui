@@ -2,10 +2,16 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  a.sbui-typography-link {
+    color: $brand-400;
+  }
+}
+
 a.sbui-typography-link {
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
-  color: $brand-400;
+  color: $brand-600;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */

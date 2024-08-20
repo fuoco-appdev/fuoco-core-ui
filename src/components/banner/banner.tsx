@@ -12,7 +12,6 @@ import { ButtonClasses } from '../button/button'
 export interface BannerProps {
   key: string
   classNames?: BannerClasses
-  iconColor?: string
   refCallback?: (ref: HTMLDivElement | null) => void
   icon?: React.ReactNode
   title?: string
@@ -42,7 +41,6 @@ export interface BannerClasses {
 function Banner({
   key,
   classNames,
-  iconColor = '#000',
   refCallback,
   icon,
   title,
@@ -65,7 +63,7 @@ function Banner({
     <div ref={refCallback} className={containerClasses.join(' ')}>
       <div
         className={[BannerStyles['banner-content'], classNames?.content].join(
-          ' '
+          ' ',
         )}
       >
         <Typography.Text
@@ -141,14 +139,7 @@ function Banner({
             type={'text'}
             rounded={true}
             classNames={classNames?.closeButton}
-            icon={
-              <Close
-                size={24}
-                strokeWidth={0}
-                stroke={iconColor}
-                color={iconColor}
-              />
-            }
+            icon={<Close size={21} strokeWidth={0} />}
             onClick={onClose}
           />
         </div>
@@ -203,7 +194,7 @@ export function BannerOverlay({
       setItems((state) =>
         state.filter((i) => {
           return i.key !== item.key
-        })
+        }),
       )
     },
     config: (item, index, phase) => (key) =>

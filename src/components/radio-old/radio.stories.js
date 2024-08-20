@@ -10,7 +10,7 @@ export default {
 export const Default = (args) => (
   <div className="block font-sans">
     <div>
-      <Radio name="radio-group" label="JavaScript" {...args} /> 
+      <Radio name="radio-group" label="JavaScript" {...args} />
     </div>
     <div>
       <Radio name="radio-group" label="TypeScript" {...args} />

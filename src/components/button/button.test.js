@@ -26,7 +26,7 @@ describe('#Button', () => {
     wrapper.rerender(<Button>按钮</Button>)
     expect(screen.getByText('按钮')).toBeInTheDocument()
   })
-  
+
   it('should ignore events when disabled', () => {
     const WrapperButton = () => {
       const [state, setState] = React.useState('state1')
@@ -60,7 +60,7 @@ describe('#Button', () => {
   it('should have "w-full" class', async () => {
     render(<Button block>Button Block</Button>)
     expect(screen.queryByRole('button')).toHaveClass(
-      'sbui-btn sbui-btn-primary sbui-btn--w-full sbui-btn-container--shadow sbui-btn--tiny'
+      'sbui-btn sbui-btn-primary sbui-btn--w-full sbui-btn-container--shadow sbui-btn--tiny',
     )
   })
 
@@ -69,11 +69,11 @@ describe('#Button', () => {
 
     if (type !== 'text' && type !== 'link') {
       expect(screen.queryByRole('button')).toHaveClass(
-        `sbui-btn sbui-btn-${type} sbui-btn-container--shadow sbui-btn--tiny`
+        `sbui-btn sbui-btn-${type} sbui-btn-container--shadow sbui-btn--tiny`,
       )
     } else {
       expect(screen.queryByRole('button')).toHaveClass(
-        `sbui-btn sbui-btn-${type} sbui-btn--tiny`
+        `sbui-btn sbui-btn-${type} sbui-btn--tiny`,
       )
     }
   })
@@ -81,7 +81,7 @@ describe('#Button', () => {
   it.each(SIZES)('should have "btn--%s" class', (size) => {
     render(<Button size={size}>Button</Button>)
     expect(screen.queryByRole('button')).toHaveClass(
-      `sbui-btn sbui-btn-primary sbui-btn-container--shadow sbui-btn--${size}`
+      `sbui-btn sbui-btn-primary sbui-btn-container--shadow sbui-btn--${size}`,
     )
   })
 })

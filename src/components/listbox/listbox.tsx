@@ -4,10 +4,12 @@ import { Listbox as HeadlessListbox } from '@headlessui/react'
 import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 // @ts-ignore
 import SelectStyles from './select-styled.module.scss'
+import * as Line from '../icon/icons/line'
 import InputErrorIcon from '../../lib/layout/input-error-icon'
 import Ripples from 'react-ripples'
 import { Dropdown } from '../dropdown'
 import { DropdownAlignment } from '../dropdown/dropdown'
+import { ErrorOutline } from '../icon/icons/line'
 
 const ListboxContext = React.createContext<{
   selectedId?: string
@@ -67,7 +69,7 @@ function Listbox({
   onBlur,
 }: ListboxProps) {
   const [selectedOption, setSelectedOption] = useState<OptionProps | undefined>(
-    undefined
+    undefined,
   )
   const [anchorRect, setAnchorRect] = useState<DOMRect | undefined>()
   const anchorRef = useRef<HTMLDivElement | null>(null)
@@ -93,7 +95,7 @@ function Listbox({
   if (borderless)
     selectClasses.push(
       SelectStyles['listbox-borderless'],
-      classNames?.borderless
+      classNames?.borderless,
     )
 
   return (
@@ -114,7 +116,7 @@ function Listbox({
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <HeadlessListbox value={selectedOption?.value} onChange={() => { }}>
+        <HeadlessListbox value={selectedOption?.value} onChange={() => {}}>
           {({ open }) => {
             return (
               <ListboxContext.Provider
@@ -138,6 +140,9 @@ function Listbox({
                       SelectStyles['listbox-ripple'],
                       classNames?.ripple,
                     ].join(' ')}
+                    placeholder={undefined}
+                    onPointerEnterCapture={undefined}
+                    onPointerLeaveCapture={undefined}
                   >
                     <HeadlessListbox.Button className={selectClasses.join(' ')}>
                       {icon && (
@@ -175,7 +180,13 @@ function Listbox({
                             classNames?.actionsContainer,
                           ].join(' ')}
                         >
-                          {error && <InputErrorIcon />}
+                          {error && (
+                            <ErrorOutline
+                              size={21}
+                              color={'#FF0000'}
+                              strokeWidth={0}
+                            />
+                          )}
                         </div>
                       )}
                       <span
@@ -184,22 +195,7 @@ function Listbox({
                           classNames?.chevronContainer,
                         ].join(' ')}
                       >
-                        <svg
-                          className={[
-                            SelectStyles['listbox-chevron'],
-                            classNames?.chevron,
-                          ].join(' ')}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                        <Line.UnfoldMore size={21} />
                       </span>
                     </HeadlessListbox.Button>
                   </Ripples>
@@ -208,7 +204,6 @@ function Listbox({
                   style={{
                     ...(anchorRect && { width: anchorRect.width }),
                   }}
-
                   touchScreen={touchScreen}
                   onOpen={() => {
                     onFocus?.()

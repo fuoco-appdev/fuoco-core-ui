@@ -10,11 +10,15 @@ describe('#Input', () => {
 
   it('should have "form-input--error" class', () => {
     render(<Input isError data-testid="form-input" />)
-    expect(screen.queryByTestId('form-input')).toHaveClass('form-input border-solid form-input--error')
+    expect(screen.queryByTestId('form-input')).toHaveClass(
+      'form-input border-solid form-input--error',
+    )
   })
 
   it.each(SIZES)('should have "form-input--%s" class', (size) => {
     render(<Input size={size} data-testid="form-input" />)
-    expect(screen.queryByTestId('form-input')).toHaveClass(`form-input border-solid form-input--${size}`)
+    expect(screen.queryByTestId('form-input')).toHaveClass(
+      `form-input border-solid form-input--${size}`,
+    )
   })
 })

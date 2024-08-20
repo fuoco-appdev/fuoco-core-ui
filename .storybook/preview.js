@@ -10,7 +10,8 @@ export const parameters = {
   },
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/rt3Z8bPlorat7Ck4eLwAmP/Core-App?node-id=0%3A1'
+    url: 'https://www.figma.com/file/rt3Z8bPlorat7Ck4eLwAmP/Core-App?node-id=0%3A1',
   },
-  zeplinLink: "https://zpl.io/KGnoG1A"
+  zeplinLink: 'https://zpl.io/KGnoG1A',
 }
+export const tags = ['autodocs']

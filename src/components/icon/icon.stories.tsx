@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Typography } from '../../index'
-import { Email } from '../icon/icons/line'
+import { Email } from './icons/line'
 
 export default {
   title: 'General/Icon',

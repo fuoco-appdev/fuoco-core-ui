@@ -7,7 +7,7 @@
   font-size: $font-size-xs;
   line-height: $font-line-height-xs;
   color: $gray-100;
-  padding: $mp-4 $mp-1-5;
+  padding: $mp-7 $mp-2;
   align-items: center;
   margin-right: $mp-2;
   margin-left: $mp-2;
@@ -27,13 +27,13 @@
   align-items: center;
   font-size: 0.65rem;
   color: $gray-100;
-  padding: $mp-1-5 $mp-4;
+  padding: $mp-2 $mp-7;
   margin-right: $mp-2;
   margin-left: $mp-2;
 }
 
 .sbui-contextmenu-misc {
-  padding: $mp-1-5 $mp-4;
+  padding: $mp-2 $mp-7;
 }
 
 .sbui-contextmenu-item:focus-visible {

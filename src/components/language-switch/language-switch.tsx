@@ -142,6 +142,7 @@ function LanguageSwitch({
           ref={anchorRef}
           classNames={classNames?.button}
           type={'text'}
+          size={'medium'}
           rounded={true}
           rippleProps={rippleProps}
           floatingLabel={floatingLabel}
@@ -181,9 +182,12 @@ function LanguageSwitch({
           >
             <Ripples
               className={[styles['listbox-ripple'], classNames?.ripple].join(
-                ' '
+                ' ',
               )}
               onClick={onOpen}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               <div
                 className={[styles['listbox'], classNames?.listbox].join(' ')}
@@ -202,7 +206,7 @@ function LanguageSwitch({
                 </div>
                 <span
                   className={[styles['listbox-label'], classNames?.label].join(
-                    ' '
+                    ' ',
                   )}
                 >
                   {languagesInfo[language]?.nativeName}

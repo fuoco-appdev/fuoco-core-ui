@@ -1,11 +1,11 @@
 .list {
-    position: relative;
-    height: inherit;
-    width: 100%;
+  position: relative;
+  height: inherit;
+  width: 100%;
 }
 
 .card {
-    position: absolute;
-    will-change: transform, height, opacity;
-    width: inherit;
+  position: absolute;
+  will-change: transform, height, opacity;
+  width: inherit;
 }

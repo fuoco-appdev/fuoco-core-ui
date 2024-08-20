@@ -11,13 +11,17 @@ export default {
   iconAnchor: 'src/components/icon/icons/icon-anchor/index.tsx',
   iconAperture: 'src/components/icon/icons/icon-aperture/index.tsx',
   iconArchive: 'src/components/icon/icons/icon-archive/index.tsx',
-  iconArrowDownCircle: 'src/components/icon/icons/icon-arrow-down-circle/index.tsx',
+  iconArrowDownCircle:
+    'src/components/icon/icons/icon-arrow-down-circle/index.tsx',
   iconArrowDownLeft: 'src/components/icon/icons/icon-arrow-down-left/index.tsx',
-  iconArrowDownRight: 'src/components/icon/icons/icon-arrow-down-right/index.tsx',
+  iconArrowDownRight:
+    'src/components/icon/icons/icon-arrow-down-right/index.tsx',
   iconArrowDown: 'src/components/icon/icons/icon-arrow-down/index.tsx',
-  iconArrowLeftCircle: 'src/components/icon/icons/icon-arrow-left-circle/index.tsx',
+  iconArrowLeftCircle:
+    'src/components/icon/icons/icon-arrow-left-circle/index.tsx',
   iconArrowLeft: 'src/components/icon/icons/icon-arrow-left/index.tsx',
-  iconArrowRightCircle: 'src/components/icon/icons/icon-arrow-right-circle/index.tsx',
+  iconArrowRightCircle:
+    'src/components/icon/icons/icon-arrow-right-circle/index.tsx',
   iconArrowRight: 'src/components/icon/icons/icon-arrow-right/index.tsx',
   iconArrowUpCircle: 'src/components/icon/icons/icon-arrow-up-circle/index.tsx',
   iconArrowUpLeft: 'src/components/icon/icons/icon-arrow-up-left/index.tsx',
@@ -27,7 +31,8 @@ export default {
   iconAward: 'src/components/icon/icons/icon-award/index.tsx',
   iconBarChart2: 'src/components/icon/icons/icon-bar-chart-2/index.tsx',
   iconBarChart: 'src/components/icon/icons/icon-bar-chart/index.tsx',
-  iconBatteryCharging: 'src/components/icon/icons/icon-battery-charging/index.tsx',
+  iconBatteryCharging:
+    'src/components/icon/icons/icon-battery-charging/index.tsx',
   iconBattery: 'src/components/icon/icons/icon-battery/index.tsx',
   iconBellOff: 'src/components/icon/icons/icon-bell-off/index.tsx',
   iconBell: 'src/components/icon/icons/icon-bell/index.tsx',
@@ -58,7 +63,8 @@ export default {
   iconClipboard: 'src/components/icon/icons/icon-clipboard/index.tsx',
   iconClock: 'src/components/icon/icons/icon-clock/index.tsx',
   iconCloudDrizzle: 'src/components/icon/icons/icon-cloud-drizzle/index.tsx',
-  iconCloudLightning: 'src/components/icon/icons/icon-cloud-lightning/index.tsx',
+  iconCloudLightning:
+    'src/components/icon/icons/icon-cloud-lightning/index.tsx',
   iconCloudOff: 'src/components/icon/icons/icon-cloud-off/index.tsx',
   iconCloudRain: 'src/components/icon/icons/icon-cloud-rain/index.tsx',
   iconCloudSnow: 'src/components/icon/icons/icon-cloud-snow/index.tsx',
@@ -71,11 +77,15 @@ export default {
   iconCommand: 'src/components/icon/icons/icon-command/index.tsx',
   iconCompass: 'src/components/icon/icons/icon-compass/index.tsx',
   iconCopy: 'src/components/icon/icons/icon-copy/index.tsx',
-  iconCornerDownLeft: 'src/components/icon/icons/icon-corner-down-left/index.tsx',
-  iconCornerDownRight: 'src/components/icon/icons/icon-corner-down-right/index.tsx',
-  iconCornerLeftDown: 'src/components/icon/icons/icon-corner-left-down/index.tsx',
+  iconCornerDownLeft:
+    'src/components/icon/icons/icon-corner-down-left/index.tsx',
+  iconCornerDownRight:
+    'src/components/icon/icons/icon-corner-down-right/index.tsx',
+  iconCornerLeftDown:
+    'src/components/icon/icons/icon-corner-left-down/index.tsx',
   iconCornerLeftUp: 'src/components/icon/icons/icon-corner-left-up/index.tsx',
-  iconCornerRightDown: 'src/components/icon/icons/icon-corner-right-down/index.tsx',
+  iconCornerRightDown:
+    'src/components/icon/icons/icon-corner-right-down/index.tsx',
   iconCornerRightUp: 'src/components/icon/icons/icon-corner-right-up/index.tsx',
   iconCornerUpLeft: 'src/components/icon/icons/icon-corner-up-left/index.tsx',
   iconCornerUpRight: 'src/components/icon/icons/icon-corner-up-right/index.tsx',
@@ -120,7 +130,8 @@ export default {
   iconGitBranch: 'src/components/icon/icons/icon-git-branch/index.tsx',
   iconGitCommit: 'src/components/icon/icons/icon-git-commit/index.tsx',
   iconGitMerge: 'src/components/icon/icons/icon-git-merge/index.tsx',
-  iconGitPullRequest: 'src/components/icon/icons/icon-git-pull-request/index.tsx',
+  iconGitPullRequest:
+    'src/components/icon/icons/icon-git-pull-request/index.tsx',
   iconGitHub: 'src/components/icon/icons/icon-github/index.tsx',
   iconGitlab: 'src/components/icon/icons/icon-gitlab/index.tsx',
   iconGlobe: 'src/components/icon/icons/icon-globe/index.tsx',
@@ -167,7 +178,8 @@ export default {
   iconMinus: 'src/components/icon/icons/icon-minus/index.tsx',
   iconMonitor: 'src/components/icon/icons/icon-monitor/index.tsx',
   iconMoon: 'src/components/icon/icons/icon-moon/index.tsx',
-  iconMoreHorizontal: 'src/components/icon/icons/icon-more-horizontal/index.tsx',
+  iconMoreHorizontal:
+    'src/components/icon/icons/icon-more-horizontal/index.tsx',
   iconMoreVertical: 'src/components/icon/icons/icon-more-vertical/index.tsx',
   iconMousePointer: 'src/components/icon/icons/icon-mouse-pointer/index.tsx',
   iconMove: 'src/components/icon/icons/icon-move/index.tsx',
@@ -182,7 +194,8 @@ export default {
   iconPenTool: 'src/components/icon/icons/icon-pen-tool/index.tsx',
   iconPercent: 'src/components/icon/icons/icon-percent/index.tsx',
   iconPhoneCall: 'src/components/icon/icons/icon-phone-call/index.tsx',
-  iconPhoneForwarded: 'src/components/icon/icons/icon-phone-forwarded/index.tsx',
+  iconPhoneForwarded:
+    'src/components/icon/icons/icon-phone-forwarded/index.tsx',
   iconPhoneIncoming: 'src/components/icon/icons/icon-phone-incoming/index.tsx',
   iconPhoneMissed: 'src/components/icon/icons/icon-phone-missed/index.tsx',
   iconPhoneOff: 'src/components/icon/icons/icon-phone-off/index.tsx',

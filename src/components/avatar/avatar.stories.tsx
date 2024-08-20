@@ -92,7 +92,7 @@ Icon.args = {
 Edit.args = {
   avatarIcon: <Airplay />,
   editMode: true,
-  size: 'large',
+  size: 'medium',
 }
 
 TouchScreen.args = {

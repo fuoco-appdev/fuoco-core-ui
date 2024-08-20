@@ -65,10 +65,10 @@ function Tabs({
   const navRef = useRef<HTMLDivElement>(null)
   const removableRef = useRef<HTMLButtonElement>(null)
   const [selectedRect, setSelectedRect] = useState<DOMRect | undefined>(
-    undefined
+    undefined,
   )
   const [removableRect, setRemovableRect] = useState<DOMRect | undefined>(
-    undefined
+    undefined,
   )
   const [navRect, setNavRect] = useState<DOMRect | undefined>(undefined)
   const [selectStyles, setSelectStyles] = useState<React.CSSProperties>({})
@@ -76,7 +76,7 @@ function Tabs({
     opacity: 0,
   })
   const [selectPillStyles, setSelectPillStyles] = useState<React.CSSProperties>(
-    { opacity: 0 }
+    { opacity: 0 },
   )
 
   useEffect(() => {
@@ -107,7 +107,7 @@ function Tabs({
     return () => resizeObserver.disconnect()
   }, [activeId, tabs])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if ((type === 'nav' || type === 'underlined') && navRect) {
       if (selectedRect) {
         const styles: React.CSSProperties = {}
@@ -177,7 +177,7 @@ function Tabs({
     e:
       | React.PointerEvent<HTMLButtonElement>
       | React.FocusEvent<HTMLButtonElement>,
-    i: number
+    i: number,
   ) => {
     setHoveredRect((e.target as HTMLButtonElement).getBoundingClientRect())
     setHoveredTabIndex(i)
@@ -211,7 +211,7 @@ function Tabs({
       {type === 'nav' && (
         <div
           className={[TabsStyles['tab-slider'], classNames?.tabSlider].join(
-            ' '
+            ' ',
           )}
           style={hoverStyles}
         />
@@ -219,7 +219,7 @@ function Tabs({
       {type === 'underlined' && (
         <div
           className={[TabsStyles['tab-outline'], classNames?.tabOutline].join(
-            ' '
+            ' ',
           )}
           style={selectStyles}
         />

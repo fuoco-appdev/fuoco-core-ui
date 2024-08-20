@@ -41,25 +41,24 @@ export const Responsive = (args: any) => {
 
 Normal.args = {
   active: true,
-  source: 'https://via.placeholder.com/300'
+  source: 'https://via.placeholder.com/300',
 }
 
 Circle.args = {
-    active: true,
-    type: 'circle',
-    source: 'https://via.placeholder.com/300'
+  active: true,
+  type: 'circle',
+  source: 'https://via.placeholder.com/300',
 }
 
 Rounded.args = {
   active: true,
   type: 'rounded',
-  source: 'https://via.placeholder.com/300'
+  source: 'https://via.placeholder.com/300',
 }
 
 Responsive.args = {
   active: true,
   type: 'normal',
   source: 'https://via.placeholder.com/300',
-  responsive: true
-
+  responsive: true,
 }

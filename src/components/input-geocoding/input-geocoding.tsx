@@ -12,7 +12,6 @@ import { ErrorOutline, Search } from '../icon/icons/line'
 export interface InputGeocodingProps {
   mapboxAccessToken: string
   id?: string
-  iconColor?: string
   touchScreen?: boolean
   className?: string
   strings?: {
@@ -65,7 +64,6 @@ export interface InputGeocodingProps {
 function InputGeocoding({
   id,
   touchScreen = false,
-  iconColor = '#ffffff',
   mapboxAccessToken,
   icon,
   className,
@@ -123,7 +121,7 @@ function InputGeocoding({
 
   const handleFeatureItemClick = (
     feature: any,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     setSelectedFeature(feature)
     setValue(feature['place_name'])
@@ -150,7 +148,7 @@ function InputGeocoding({
     return () => clearTimeout(timeout)
   }, [value])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateLocationAsync = new Promise<void>(async (resolve, reject) => {
       let selectedLongitude = 0
       let selectedLatitude = 0
@@ -240,10 +238,6 @@ function InputGeocoding({
               handleChange(event)
             }}
             onInput={() => setShowDropdown(true)}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onFocus={onFocus}
-            onBlur={onBlur}
             value={value}
             placeholder={placeholder}
             disabled={disabled}
@@ -283,8 +277,6 @@ function InputGeocoding({
                 <Search
                   size={24}
                   strokeWidth={0}
-                  color={iconColor}
-                  stroke={iconColor}
                   className={InputGeocodingStyles['search--with-icon']}
                 />
               </div>

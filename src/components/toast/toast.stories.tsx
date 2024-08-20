@@ -196,7 +196,6 @@ export const TouchScreen = (args: any) => {
         height: '90vh',
         width: '100%',
         display: 'flex',
-        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >

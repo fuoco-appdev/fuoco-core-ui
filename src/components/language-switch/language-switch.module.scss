@@ -2,6 +2,33 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .language-name {
+    color: $gray-100;
+  }
+
+  .listbox-icon-container {
+    color: $gray-100;
+  }
+
+  .listbox {
+    color: $gray-100;
+    border-color: $gray-100;
+  }
+
+  .listbox:hover {
+    border-color: $gray-200;
+  }
+
+  .listbox-label {
+    color: $gray-100;
+  }
+
+  .listbox-chevron {
+    color: $gray-100;
+  }
+}
+
 .language-name {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
@@ -15,7 +42,7 @@
 .listbox {
   display: flex;
   width: 100%;
-  padding: $mp-3 $mp-3;
+  padding: $mp-4 $mp-4;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   border-radius: $rounded-md;
@@ -53,7 +80,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-right: $mp-3;
+  margin-right: $mp-4;
 }
 
 .listbox-ripple {
@@ -92,13 +119,14 @@
 }
 
 .listbox-chevron {
-  height: $mp-5;
-  width: $mp-5;
+  height: $mp-7;
+  width: $mp-7;
   color: $gray-100;
 }
 
 .flag {
+  display: flex;
+  align-items: center;
   width: 25px;
   height: 20px;
-  margin-bottom: 4px;
 }

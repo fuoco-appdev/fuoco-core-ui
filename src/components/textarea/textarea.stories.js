@@ -10,5 +10,5 @@ export default {
 export const Default = (args) => <Textarea {...args} />
 Default.args = {
   placeholder: 'Type text here ...',
-  disabled: false
+  disabled: false,
 }

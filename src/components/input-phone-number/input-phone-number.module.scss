@@ -2,6 +2,58 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .input-container {
+    border-color: $gray-100;
+  }
+  
+  .inputphonenumber {
+    color: $gray-100;
+  }
+  
+  .inputphonenumber::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $gray-300;
+  }
+  
+  .inputphonenumber:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $gray-300;
+  }
+  
+  .inputphonenumber::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $gray-300;
+  }
+  
+  .dropdown {
+    border-color: $gray-100;
+  }
+  
+  .country-name,
+  .dial-code {
+    color: $gray-100;
+  }
+  
+  .search-container {
+    border-color: $gray-100;
+    background-color: $dark-1;
+  }
+  
+  .search {
+    color: $gray-100;
+  }
+  
+  .search-with-icon {
+    color: $gray-100;
+  }
+  
+  .input-container-error {
+    color: $red-500;
+    border-color: $red-500;
+  }
+}
+
 .input-container {
   display: flex;
   flex-direction: row;
@@ -14,22 +66,18 @@
   -khtml-border-radius: $rounded-md;
   border-width: 1px;
   border-style: solid;
-  border-color: $gray-100;
-  padding: 0 $mp-1;
-  padding-right: $mp-3;
-}
-
-.container:hover {
-  border-color: $brand-200;
+  border-color: $gray-900;
+  padding: 0 $mp-3;
+  padding-right: $mp-5;
 }
 
 .inputphonenumber {
   border: 0;
-  padding: $mp-3 $mp-2;
+  padding: $mp-5 $mp-3;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  color: $gray-100;
+  color: $gray-900;
   box-shadow: none !important;
   font-family: inherit;
   appearance: textfield;
@@ -40,17 +88,17 @@
 
 .inputphonenumber::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputphonenumber:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputphonenumber::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .dropdown {
@@ -61,7 +109,7 @@
   -moz-border-radius: $rounded-base;
   -khtml-border-radius: $rounded-base;
   border-width: 1px;
-  border-color: $gray-100;
+  border-color: $gray-900;
 }
 
 .country-name,
@@ -77,36 +125,27 @@
 
 .search-root {
   width: 100%;
-  padding-left: $mp-4;
-  padding-right: $mp-4;
-  padding-bottom: $mp-3;
+  padding-left: $mp-7;
+  padding-right: $mp-7;
+  padding-bottom: $mp-5;
   z-index: 1;
 }
 
 .search-container {
   display: flex;
-  padding: 0 $mp-2;
+  padding: 0 $mp-3;
   border-width: 1px;
   border-style: solid;
   border-radius: $rounded-full;
   -webkit-border-radius: $rounded-full;
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
-  border-color: $gray-100;
-  background-color: white;
-  height: 36px;
-
-  & :hover {
-    border-color: $gray-100;
-  }
-
-  & :focus {
-    border-color: $gray-100;
-  }
+  border-color: $gray-900;
+  height: 34px;
 }
 
 .search {
-  padding: $mp-1 $mp-2;
+  padding: $mp-2 $mp-3;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
@@ -114,7 +153,7 @@
   font-family: inherit;
   appearance: textfield;
   background: transparent;
-  color: $gray-600;
+  color: $gray-900;
   appearance: none;
   -webkit-appearance: none;
   outline: 0;
@@ -134,8 +173,8 @@
 }
 
 .search-with-icon {
-  padding: $mp-0-5;
-  color: $gray-600;
+  padding: $mp-1;
+  color: $gray-900;
 }
 
 .dropdown-list {
@@ -168,7 +207,7 @@
   top: 0px;
   bottom: 0px;
   right: 0px;
-  padding-left: $mp-3;
+  padding-left: $mp-4;
   padding-right: $mp-1;
 }
 

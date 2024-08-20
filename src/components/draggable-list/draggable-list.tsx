@@ -20,7 +20,7 @@ const fn =
     active = false,
     originalIndex = 0,
     curIndex = 0,
-    y = 0
+    y = 0,
   ) =>
   (index: number) =>
     active && index === originalIndex
@@ -51,7 +51,7 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
     const curRow = clamp(
       Math.round((curIndex * 100 + y) / 100),
       0,
-      items.length - 1
+      items.length - 1,
     )
     const newOrder = move(orderRef.current, curIndex, curRow)
     api.start(fn(newOrder, items, active, originalIndex, curIndex, y)) // Feed springs new style data, they'll animate the view without causing a single render
@@ -82,7 +82,7 @@ function DraggableList({ items, onChanged }: DraggableListProps) {
           style={{
             zIndex,
             boxShadow: shadow.to(
-              (s) => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`
+              (s) => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`,
             ),
             y,
           }}

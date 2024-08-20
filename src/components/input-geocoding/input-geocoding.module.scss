@@ -2,6 +2,54 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .container {
+    border-color: $gray-100;
+    background-color: $dark-1;
+  }
+
+  .input-geocoding-icon {
+    color: $gray-100;
+  }
+
+  .inputgeocoding {
+    color: $gray-100;
+  }
+  
+  .inputgeocoding::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $gray-300;
+  }
+  
+  .inputgeocoding:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $gray-300;
+  }
+  
+  .inputgeocoding::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $gray-300;
+  }
+  
+  .dropdown {
+    border-color: $gray-100;
+    color: $gray-100;
+  }
+
+  .search-container {
+    border-color: $gray-100;
+    background-color: $gray-100;
+  }
+  
+  .search {
+    color: $gray-600;
+  }
+
+  .search--with-icon {
+    color: $gray-600;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -12,12 +60,8 @@
   -khtml-border-radius: $rounded-md;
   border-width: 1px;
   border-style: solid;
-  border-color: $gray-100;
-  padding: 0 $mp-3;
-}
-
-.container:hover {
-  border-color: $brand-200;
+  border-color: $gray-900;
+  padding: 0 $mp-5;
 }
 
 .inputgeocoding {
@@ -30,26 +74,26 @@
   appearance: textfield;
   float: left;
   background: transparent;
-  padding: $mp-3 0;
+  padding: $mp-5 0;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  color: $gray-100;
+  color: $gray-900;
 }
 
 .inputgeocoding::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputgeocoding:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .inputgeocoding::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: $gray-300;
+  color: $gray-600;
 }
 
 .dropdown {
@@ -59,8 +103,8 @@
   -moz-border-radius: $rounded-base;
   -khtml-border-radius: $rounded-base;
   border-width: 1px;
-  border-color: $gray-100;
-  color: white;
+  border-color: $gray-900;
+  color: $gray-900;
   top: 36px;
   height: inherit;
   width: inherit;
@@ -72,8 +116,6 @@
 
 .search-container {
   position: relative;
-  margin-left: $mp-3;
-  margin-right: $mp-3;
 }
 
 .search {
@@ -95,14 +137,15 @@
   font-family: inherit;
   background-color: transparent;
   color: $gray-600;
-  border-color: $gray-100;
+  border-color: $gray-900;
 }
 
 .input-geocoding-icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-right: $mp-3;
+  padding-right: $mp-4;
+  color: $gray-900;
 }
 
 .place-name {
@@ -112,14 +155,14 @@
 }
 
 .search--with-icon {
-  padding: $mp-0-5;
+  padding: $mp-1;
   color: $gray-600;
 }
 
 .map-pin-icon {
   top: 0px;
   bottom: 0px;
-  right: $mp-3;
+  right: $mp-4;
   padding-right: $mp-2;
   padding-left: $mp-2;
   display: flex;
@@ -151,43 +194,34 @@
   top: 0px;
   bottom: 0px;
   right: 0px;
-  padding-left: $mp-3;
+  padding-left: $mp-4;
   padding-right: $mp-1;
   display: flex;
   align-items: center;
 }
 
 .search-root {
-  width: 100%;
-  padding-left: $mp-4;
-  padding-right: $mp-4;
-  padding-bottom: $mp-3;
+  padding-left: $mp-5;
+  padding-right: $mp-5;
+  padding-bottom: $mp-4;
   z-index: 1;
 }
 
 .search-container {
   display: flex;
-  padding: 0 $mp-2;
+  padding: 0 $mp-5;
   border-width: 1px;
   border-style: solid;
   border-radius: $rounded-full;
   -webkit-border-radius: $rounded-full;
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
-  border-color: $gray-100;
-  background-color: white;
-
-  & :hover {
-    border-color: $gray-100;
-  }
-
-  & :focus {
-    border-color: $gray-100;
-  }
+  border-color: $gray-900;
+  background-color: transparent;
 }
 
 .search {
-  padding: $mp-1 $mp-2;
+  padding: $mp-3 $mp-4;
   width: 100%;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
@@ -215,7 +249,7 @@
 }
 
 .search--with-icon {
-  padding: $mp-0-5;
+  padding: $mp-1;
   color: $gray-600;
 }
 

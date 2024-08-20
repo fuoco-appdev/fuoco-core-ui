@@ -172,6 +172,9 @@ export function Checkbox({
         return (
           <div className={containerClasses.join(' ')}>
             <Ripples
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
               {...rippleProps}
               className={[
                 CheckboxStyles['ripple-button'],

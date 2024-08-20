@@ -54,7 +54,7 @@ function List({ items }: ListProps) {
         y: y ?? 0,
         height: height ?? 0,
       }),
-    }
+    },
   )
 
   return (

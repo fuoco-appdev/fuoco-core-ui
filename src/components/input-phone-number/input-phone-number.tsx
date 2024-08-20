@@ -34,7 +34,6 @@ export interface InputPhoneNumberClasses {
 
 export interface InputPhoneNumberProps {
   id?: string
-  iconColor?: string
   classNames?: InputPhoneNumberClasses
   touchScreen?: boolean
   error?: string
@@ -88,17 +87,16 @@ export interface InputPhoneNumberProps {
     event:
       | React.ChangeEvent<HTMLInputElement>
       | React.MouseEvent<HTMLButtonElement>,
-    formattedValue: string
+    formattedValue: string,
   ) => void
   onFocus?: (
     event: React.FocusEvent<HTMLInputElement>,
-    data: CountryDataProps | {}
+    data: CountryDataProps | {},
   ) => void
 }
 
 function InputPhoneNumber({
   id,
-  iconColor = '#000',
   classNames,
   touchScreen = false,
   error,
@@ -164,14 +162,14 @@ function InputPhoneNumber({
     defaultMask,
     alwaysDefaultMask,
     masks,
-    priority
+    priority,
   )
   const guessSelectedCountry = memoize(
     (
       inputNumber: string,
       country: string | number,
       onlyCountries: CountryDataProps[],
-      hiddenAreaCodes: CountryDataProps[]
+      hiddenAreaCodes: CountryDataProps[],
     ): CountryDataProps | undefined => {
       // if enableAreaCodes == false, try to search in hidden area codes to detect area code correctly
       // then search and insert main country which has this area code
@@ -227,12 +225,12 @@ function InputPhoneNumber({
           }),
           dialCode: '',
           priority: 10001,
-        }
+        },
       )
 
       if (!bestGuess?.name) return secondBestGuess
       return bestGuess
-    }
+    },
   )
 
   const [onlyCountriesData, setOnlyCountriesData] = useState<
@@ -242,12 +240,12 @@ function InputPhoneNumber({
     CountryDataProps[]
   >(countryData.hiddenAreaCodes)
   const [countryGuess, setCountryGuess] = useState<CountryDataProps | null>(
-    null
+    null,
   )
 
   const formatNumber = (
     text: string,
-    country: CountryDataProps | null
+    country: CountryDataProps | null,
   ): string => {
     if (!country) return text
 
@@ -263,7 +261,7 @@ function InputPhoneNumber({
         pattern = format.split(' ')
         pattern[1] = pattern[1].replace(
           /\.+/,
-          ''.padEnd(country.areaCodeLength, '.')
+          ''.padEnd(country.areaCodeLength, '.'),
         )
         pattern = pattern.join(' ')
       } else {
@@ -272,7 +270,7 @@ function InputPhoneNumber({
     }
 
     if (!text || text.length === 0) {
-      return disableCountryCode ? '' : prefix ?? ''
+      return disableCountryCode ? '' : (prefix ?? '')
     }
 
     // for all strings with length less than 3, just return it (1, 2 etc.)
@@ -305,7 +303,7 @@ function InputPhoneNumber({
       {
         formattedText: '',
         remainingText: text.split(''),
-      }
+      },
     )
 
     let formattedNumber: string = ''
@@ -324,7 +322,7 @@ function InputPhoneNumber({
 
   const [formattedNumber, setFormattedNumber] = useState<string>('')
   const [highlightCountryIndex, setHighlightCountryIndex] = useState<number>(
-    countryData.onlyCountries.findIndex((o) => o === countryGuess)
+    countryData.onlyCountries.findIndex((o) => o === countryGuess),
   )
   const [preferredCountriesData, setPreferredCountriesData] = useState<
     CountryDataProps[]
@@ -351,14 +349,14 @@ function InputPhoneNumber({
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    let newFormattedNumber = disableCountryCode ? '' : prefix ?? ''
+    let newFormattedNumber = disableCountryCode ? '' : (prefix ?? '')
     let newSelectedCountry: CountryDataProps | null = selectedCountry
 
     if (!countryCodeEditable) {
       const mainCode: string | undefined = newSelectedCountry?.hasAreaCodes
         ? onlyCountriesData.find(
             (o: CountryDataProps) =>
-              o.iso2 === newSelectedCountry?.iso2 && o.mainCode
+              o.iso2 === newSelectedCountry?.iso2 && o.mainCode,
           )?.dialCode
         : newSelectedCountry?.dialCode
 
@@ -412,7 +410,7 @@ function InputPhoneNumber({
               inputNumber.substring(0, 6),
               country ?? '',
               onlyCountriesData,
-              hiddenAreaCodesData
+              hiddenAreaCodesData,
             ) || selectedCountry
         }
 
@@ -445,7 +443,7 @@ function InputPhoneNumber({
       numberInputRef?.current?.blur()
       numberInputRef?.current?.setSelectionRange(
         newFormattedNumber.length - 1,
-        newFormattedNumber.length - 1
+        newFormattedNumber.length - 1,
       )
       numberInputRef?.current?.focus()
     } else if (
@@ -459,7 +457,7 @@ function InputPhoneNumber({
       numberInputRef?.current?.blur()
       numberInputRef?.current?.setSelectionRange(
         oldCaretPosition,
-        oldCaretPosition
+        oldCaretPosition,
       )
       numberInputRef?.current?.focus()
     }
@@ -468,7 +466,7 @@ function InputPhoneNumber({
       newFormattedNumber.replace(/[^0-9]+/g, ''),
       getCountryData(),
       e,
-      newFormattedNumber
+      newFormattedNumber,
     )
   }
 
@@ -503,7 +501,7 @@ function InputPhoneNumber({
             inputNumber.substring(0, 6),
             country,
             onlyCountriesData,
-            hiddenAreaCodesData
+            hiddenAreaCodesData,
           ) || selectedCountry
       }
 
@@ -514,7 +512,7 @@ function InputPhoneNumber({
           : ''
       newFormattedNumber = formatNumber(
         (disableCountryCode ? '' : dialCode) + inputNumber,
-        newSelectedCountry
+        newSelectedCountry,
       )
 
       setSelectedCountry(newSelectedCountry)
@@ -527,7 +525,7 @@ function InputPhoneNumber({
     let newSelectedCountry
     if (country.charAt(0) >= '0' && country.charAt(0) <= '9') {
       newSelectedCountry = onlyCountriesData.find(
-        (o) => o.dialCode === `+${country}`
+        (o) => o.dialCode === `+${country}`,
       )
     } else {
       newSelectedCountry = onlyCountriesData.find((o) => o.iso2 === country)
@@ -639,10 +637,8 @@ function InputPhoneNumber({
               ].join(' ')}
             >
               <Search
-                size={24}
+                size={21}
                 strokeWidth={0}
-                color={iconColor}
-                stroke={iconColor}
                 className={[
                   InputPhoneNumberStyles['search-with-icon'],
                   classNames?.searchWithIcon,
@@ -697,7 +693,7 @@ function InputPhoneNumber({
     if (searchValue === '' && selectedCountry) {
       highlightIndex = concatPreferredCountries(
         preferredCountriesData,
-        onlyCountriesData
+        onlyCountriesData,
       ).findIndex((o) => o === selectedCountry)
       // wait asynchronous search results re-render, then scroll
       setTimeout(() => scrollTo(getElement(highlightCountryIndex)), 100)
@@ -753,7 +749,9 @@ function InputPhoneNumber({
 
   const handleFlagItemClick = (
     country: CountryDataProps,
-    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>,
   ) => {
     const currentSelectedCountry = selectedCountry
     const newSelectedCountry = onlyCountriesData.find((o) => o === country)
@@ -768,12 +766,12 @@ function InputPhoneNumber({
       unformattedNumber.length > 1
         ? unformattedNumber.replace(
             currentSelectedCountry?.dialCode ?? '',
-            newSelectedCountry.dialCode
+            newSelectedCountry.dialCode,
           )
         : newSelectedCountry.dialCode
     const newFormattedNumber = formatNumber(
       newNumber.replace(/\D/g, ''),
-      newSelectedCountry
+      newSelectedCountry,
     )
 
     setShowDropdown(false)
@@ -787,7 +785,7 @@ function InputPhoneNumber({
       formattedNumber.replace(/[^0-9]+/g, ''),
       getCountryData(),
       e,
-      formattedNumber
+      formattedNumber,
     )
 
     numberInputRef.current?.focus()
@@ -796,7 +794,7 @@ function InputPhoneNumber({
   const getSearchFilteredCountries = () => {
     const allCountries = concatPreferredCountries(
       preferredCountriesData,
-      onlyCountriesData
+      onlyCountriesData,
     )
     const sanitizedSearchValue = searchValue
       .trim()
@@ -810,15 +808,15 @@ function InputPhoneNumber({
         // values wrapped in ${} to prevent undefined
         return allCountries.filter(({ dialCode }) =>
           [`${dialCode}`].some((field) =>
-            field.toLowerCase().includes(sanitizedSearchValue)
-          )
+            field.toLowerCase().includes(sanitizedSearchValue),
+          ),
         )
       } else {
         const iso2countries: CountryDataProps[] = allCountries.filter(
           ({ iso2 }) =>
             [`${iso2}`].some((field) =>
-              field.toLowerCase().includes(sanitizedSearchValue)
-            )
+              field.toLowerCase().includes(sanitizedSearchValue),
+            ),
         )
         // || '' - is a fix to prevent search of 'undefined' strings
         // Since all the other values shouldn't be undefined, this fix was accepte
@@ -826,13 +824,13 @@ function InputPhoneNumber({
         const searchedCountries = allCountries.filter(
           ({ name, localName, iso2 }) =>
             [`${name}`, `${localName || ''}`].some((field) =>
-              field.toLowerCase().includes(sanitizedSearchValue)
-            )
+              field.toLowerCase().includes(sanitizedSearchValue),
+            ),
         )
         scrollToTop()
         return [
           ...new Set(
-            ([] as CountryDataProps[]).concat(iso2countries, searchedCountries)
+            ([] as CountryDataProps[]).concat(iso2countries, searchedCountries),
           ),
         ]
       }
@@ -849,7 +847,7 @@ function InputPhoneNumber({
 
   const concatPreferredCountries = (
     preferredCountriesData: CountryDataProps[],
-    onlyCountriesData: CountryDataProps[]
+    onlyCountriesData: CountryDataProps[],
   ) => {
     if (preferredCountries.length > 0) {
       return [...new Set(preferredCountriesData.concat(onlyCountriesData))]
@@ -874,7 +872,7 @@ function InputPhoneNumber({
           inputNumber.substring(0, 6),
           country,
           countryData.onlyCountries,
-          countryData.hiddenAreaCodes
+          countryData.hiddenAreaCodes,
         ) || null
     } else if (country) {
       // Default country
@@ -889,7 +887,7 @@ function InputPhoneNumber({
         : ''
     const number = formatNumber(
       (disableCountryCode ? '' : dialCode) + inputNumber,
-      guess
+      guess,
     )
     setCountryGuess(guess)
     setFormattedNumber(number)
@@ -998,7 +996,7 @@ function InputPhoneNumber({
               ].join(' ')}
             >
               {error && (
-                <ErrorOutline size={24} color={'#ff0000'} strokeWidth={0} />
+                <ErrorOutline size={21} color={'#ff0000'} strokeWidth={0} />
               )}
             </div>
           ) : null}

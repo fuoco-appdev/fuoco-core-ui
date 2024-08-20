@@ -1,35 +1,37 @@
 import CropImage from './crop-image'
+import React from 'react'
 
 export default {
   title: 'General/Crop Image',
   component: CropImage,
 }
 
-export const Default = (args: any) => {
+export function Default() {
+  const [files, setFiles] = React.useState<FileList | undefined>(undefined)
   return (
     <>
-      <CropImage
-        {...args}
-        isVisible={true}
-        src={['https://miro.medium.com/max/1200/1*jIwBKde_hz5cDOVw6tyA4Q.jpeg']}
+      <input
+        type="file"
+        onChange={(e) => {
+          setFiles(e.currentTarget.files ?? undefined)
+        }}
       />
+      <CropImage isVisible={true} src={files} />
     </>
   )
 }
 
-export const TouchScreen = (args: any) => {
+export function TouchScreen() {
+  const [files, setFiles] = React.useState<FileList | undefined>(undefined)
   return (
     <>
-      <CropImage
-        {...args}
-        isVisible={true}
-        src={['https://miro.medium.com/max/1200/1*jIwBKde_hz5cDOVw6tyA4Q.jpeg']}
-        touchScreen={true}
+      <input
+        type="file"
+        onChange={(e) => {
+          setFiles(e.currentTarget.files ?? undefined)
+        }}
       />
+      <CropImage isVisible={true} src={files} touchScreen={true} />
     </>
   )
 }
-
-Default.args = {}
-
-TouchScreen.args = {}

@@ -64,13 +64,13 @@ export function FormLayout({
     if (align === 'left') {
       containerClasses.push(
         FormLayoutStyles['formlayout-flex-left'],
-        classNames?.flexLeft
+        classNames?.flexLeft,
       )
     }
     if (align === 'right') {
       containerClasses.push(
         FormLayoutStyles['formlayout-flex-right'],
-        classNames?.flexRight
+        classNames?.flexRight,
       )
     }
   }

@@ -324,7 +324,7 @@ export const ModalWithDropdowns = () => {
         visible={visible}
         onCancel={() => setVisible(!visible)}
         hideFooter
-      // className="pointer-events-auto"
+        // className="pointer-events-auto"
       >
         <Button as="span">Trigger dropdown</Button>
         <Dropdown>

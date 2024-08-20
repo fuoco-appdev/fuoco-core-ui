@@ -11,13 +11,11 @@ This UI library will exclusively need to be used with tailwind.
 
 The Auth component will be moved over to [@supabase/auth-helpers](https://github.com/supabase-community/supabase-auth-helpers).
 
-
 ---
 
-🚧  Supabase UI is still a work-in-progress until a major release is published.
+🚧 Supabase UI is still a work-in-progress until a major release is published.
 
 [![Product hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=290768&theme=light)](https://www.producthunt.com/posts/supabase-ui)
-
 
 [View docs](https://ui.supabase.com)
 
@@ -63,7 +61,6 @@ You can use our Auth widget straight out the box with Supabase auth including so
 
 <img width="380" alt="Screenshot 2021-02-05 at 19 25 01" src="https://user-images.githubusercontent.com/8291514/107029572-32f72d00-67ea-11eb-982e-e737f052eea1.png">
 
-
 The Auth component also includes a context component which detects whether a user is logged in or not.
 
 Make sure to also install `@supabase/supabase-js`
@@ -75,19 +72,19 @@ npm install @supabase/supabase-js
 You can then easily import `Auth` from the ui library and pass the `createClient` to the `Auth` component.
 
 ```js
-import { Auth, Typography, Button } from "@supabase/ui";
-import { createClient } from "@supabase/supabase-js";
+import { Auth, Typography, Button } from '@supabase/ui'
+import { createClient } from '@supabase/supabase-js'
 
 const { Text } = Typography
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(
-  "https://xyzcompany.supabase.co",
-  "public-anon-key"
-);
+  'https://xyzcompany.supabase.co',
+  'public-anon-key',
+)
 
 const Container = (props) => {
-  const { user } = Auth.useUser();
+  const { user } = Auth.useUser()
   if (user)
     return (
       <>
@@ -96,19 +93,19 @@ const Container = (props) => {
           Sign out
         </Button>
       </>
-    );
-  return props.children;
-};
+    )
+  return props.children
+}
 
 export default function Home() {
   return (
     <Auth.UserContextProvider supabaseClient={supabase}>
       <Container supabaseClient={supabase}>
-        <Auth providers={['facebook', 'github']} supabaseClient={supabase}/>
+        <Auth providers={['facebook', 'github']} supabaseClient={supabase} />
       </Container>
     </Auth.UserContextProvider>
-  );
-};
+  )
+}
 ```
 
 ## Roadmap

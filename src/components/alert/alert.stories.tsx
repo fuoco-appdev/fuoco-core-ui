@@ -1,127 +1,96 @@
-import React from 'react'
+import { Meta, StoryObj } from '@storybook/react'
 import { Alert } from '.'
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const meta: Meta = {
   title: 'Displays/Alert',
   component: Alert,
 }
 
-export const Success = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
+export default meta
 
-export const SuccessWithIcon = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
+type Story = StoryObj<typeof Alert>
 
-export const Danger = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const DangerWithIcon = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const Info = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const InfoWithIcon = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const Warning = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const WarningWithIcon = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-export const Closable = (args: any) => (
-  <Alert {...args}>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
-    labore.
-  </Alert>
-)
-
-Success.args = {
-  title: 'Success alert',
-  isVisible: true,
+export const Success: Story = {
+  render: () => (
+    <Alert title={'Success alert'}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-SuccessWithIcon.args = {
-  title: 'Success alert with icon',
-  withIcon: true,
-  isVisible: true,
+export const SuccessWithIcon: Story = {
+  render: () => (
+    <Alert title={'Success alert with icon'} withIcon={true}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-Danger.args = {
-  title: 'Danger alert',
-  variant: 'danger',
-  isVisible: true,
+export const Danger: Story = {
+  render: () => (
+    <Alert title={'Danger alert'} variant={'danger'}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-DangerWithIcon.args = {
-  title: 'Danger alert with icon',
-  variant: 'danger',
-  withIcon: true,
-  isVisible: true,
+export const DangerWithIcon: Story = {
+  render: () => (
+    <Alert title={'Danger alert with icon'} variant={'danger'} withIcon={true}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-Info.args = {
-  title: 'Info alert',
-  variant: 'info',
-  isVisible: true,
+export const Info: Story = {
+  render: () => (
+    <Alert title={'Info alert'} variant={'info'}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-InfoWithIcon.args = {
-  title: 'Info alert with icon',
-  variant: 'info',
-  withIcon: true,
-  isVisible: true,
+export const InfoWithIcon: Story = {
+  render: () => (
+    <Alert title={'Info alert with icon'} variant={'info'} withIcon={true}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-Warning.args = {
-  title: 'Warning alert',
-  variant: 'warning',
-  isVisible: true,
+export const Warning: Story = {
+  render: () => (
+    <Alert title={'Warning alert'} variant={'warning'}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-WarningWithIcon.args = {
-  title: 'Warning alert with icon',
-  variant: 'warning',
-  withIcon: true,
-  isVisible: true,
+export const WarningWithIcon: Story = {
+  render: () => (
+    <Alert
+      title={'Warning alert with icon'}
+      variant={'warning'}
+      withIcon={true}
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }
 
-Closable.args = {
-  title: 'Closable alert',
-  closable: true,
-  isVisible: true,
+export const Closable: Story = {
+  render: () => (
+    <Alert title={'Closable alert'} closable={true}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet
+      labore.
+    </Alert>
+  ),
 }

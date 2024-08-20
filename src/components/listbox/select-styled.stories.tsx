@@ -15,7 +15,7 @@ const defaultOptions = [
   { id: 'four', value: 'four', label: 'four' },
 ]
 
-export const Default = () => {
+export function Default() {
   const [selectedId, setSelectedId] = useState<string>('one')
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
@@ -104,7 +104,7 @@ const people = [
   },
 ]
 
-export const People = () => {
+export function People() {
   const [selectedId, setSelectedId] = useState<string>('emil-schaefer')
   const options: OptionProps[] = []
   for (const person of people) {
@@ -151,14 +151,7 @@ export const People = () => {
   )
 }
 
-People.args = {
-  disabled: false,
-  label: 'Label',
-  layout: 'vertical',
-  size: 'medium',
-}
-
-export const WithIcon = () => {
+export function WithIcon() {
   const [selectedId, setSelectedId] = useState<string>('en')
   const [isGlobeIconLit, setIsGlobeIconLit] = useState<boolean>(false)
   return (
@@ -217,13 +210,7 @@ export const WithIcon = () => {
   )
 }
 
-WithIcon.args = {
-  disabled: false,
-  layout: 'vertical',
-  size: 'medium',
-}
-
-export const ErrorState = () => {
+export function ErrorState() {
   const [selectedId, setSelectedId] = useState<string>('arlene-mccoy')
   const options: OptionProps[] = []
   for (const person of people) {
@@ -268,7 +255,7 @@ export const ErrorState = () => {
   )
 }
 
-export const TouchScreen = () => {
+export function TouchScreen() {
   const [selectedId, setSelectedId] = useState<string>('one')
   const options: OptionProps[] = []
   for (const option of defaultOptions) {
@@ -283,7 +270,7 @@ export const TouchScreen = () => {
   return (
     <div style={{ height: '80vh' }}>
       <Listbox
-        label="Default listbox"
+        label={'Choose a person'}
         touchScreen={true}
         selectedId={selectedId}
         options={options}
@@ -293,9 +280,4 @@ export const TouchScreen = () => {
       />
     </div>
   )
-}
-
-ErrorState.args = {
-  label: 'Choose a person',
-  descriptionText: 'Choose a person for this role',
 }

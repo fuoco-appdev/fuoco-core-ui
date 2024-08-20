@@ -13,11 +13,11 @@ export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
 
 const icons: Partial<{ [key in ToastType]: any }> = {
   error: (
-    <Error size={24} color={'#f44336'} stroke={'#f44336'} strokeWidth={0} />
+    <Error size={21} color={'#f44336'} stroke={'#f44336'} strokeWidth={0} />
   ),
   success: (
     <CheckCircle
-      size={24}
+      size={21}
       color={'#4caf50'}
       stroke={'#4caf50'}
       strokeWidth={0}
@@ -28,7 +28,6 @@ const icons: Partial<{ [key in ToastType]: any }> = {
 export interface ToastProps {
   key: string
   classNames?: ToastClasses
-  iconColor?: string
   refCallback?: (ref: HTMLDivElement | null) => void
   type?: 'success' | 'error' | 'loading'
   icon?: React.ReactNode
@@ -62,7 +61,6 @@ export interface ToastClasses {
 
 function Toast({
   classNames,
-  iconColor,
   refCallback,
   type,
   icon,
@@ -103,10 +101,10 @@ function Toast({
     <div ref={refCallback} className={containerClasses.join(' ')}>
       <div
         className={[ToastStyles['toast-content'], classNames?.content].join(
-          ' '
+          ' ',
         )}
       >
-        <Typography.Text
+        <div
           className={[
             ToastStyles['toast-icon-container'],
             classNames?.iconContainer,
@@ -114,19 +112,17 @@ function Toast({
         >
           {type === 'loading' ? (
             <Refresh
-              size={24}
+              size={21}
               strokeWidth={0}
               className={[
                 ToastStyles['alert-anim-spin'],
                 classNames?.alertAnimSpin,
               ].join(' ')}
-              stroke={iconColor}
-              color={iconColor}
             />
           ) : (
             icon || icons[type ?? 'blank']
           )}
-        </Typography.Text>
+        </div>
         <div
           className={[
             ToastStyles['toast-text-container'],
@@ -182,18 +178,10 @@ function Toast({
               touchScreen={touchScreen}
               type={'text'}
               classNames={{
-                container: closeButtonClasses.join(' '),
                 ...classNames?.closeButton,
               }}
-              icon={
-                <Close
-                  size={24}
-                  strokeWidth={0}
-                  aria-hidden="true"
-                  stroke={iconColor}
-                  color={iconColor}
-                />
-              }
+              rounded={true}
+              icon={<Close size={21} strokeWidth={0} aria-hidden="true" />}
               onClick={onClose}
             />
           </div>
@@ -257,7 +245,7 @@ export function ToastOverlay({
       setItems((state) =>
         state.filter((i) => {
           return i.key !== item.key
-        })
+        }),
       )
     },
     config: (item, index, phase) => (key) =>
@@ -285,27 +273,38 @@ export function ToastOverlay({
           classNames?.overlayContainer,
         ].join(' ')}
       >
-        {transitions(({ life, ...style }, item) => (
-          <animated.div style={style}>
-            <Toast
-              {...item}
-              classNames={classNames?.toast}
-              touchScreen={touchScreen}
-              life={life}
-              onClose={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.stopPropagation()
-                if (cancelMap && cancelMap.has(item) && life?.get() !== '0%') {
-                  cancelMap.get(item)()
-                }
-              }}
-              refCallback={(ref: HTMLDivElement | null) => {
-                if (ref && item?.key) {
-                  refMap.set(item, ref)
-                }
-              }}
-            />
-          </animated.div>
-        ))}
+        <div
+          className={[
+            ToastStyles['toasts'],
+            touchScreen && ToastStyles['toasts-touchscreen'],
+          ].join(' ')}
+        >
+          {transitions(({ life, ...style }, item) => (
+            <animated.div style={style}>
+              <Toast
+                {...item}
+                classNames={classNames?.toast}
+                touchScreen={touchScreen}
+                life={life}
+                onClose={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.stopPropagation()
+                  if (
+                    cancelMap &&
+                    cancelMap.has(item) &&
+                    life?.get() !== '0%'
+                  ) {
+                    cancelMap.get(item)()
+                  }
+                }}
+                refCallback={(ref: HTMLDivElement | null) => {
+                  if (ref && item?.key) {
+                    refMap.set(item, ref)
+                  }
+                }}
+              />
+            </animated.div>
+          ))}
+        </div>
       </div>
     </div>
   )

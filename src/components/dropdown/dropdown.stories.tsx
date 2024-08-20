@@ -34,7 +34,7 @@ export const Default = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+          <span>Account</span>
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
@@ -42,7 +42,7 @@ export const Default = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          <span>Settings</span>
         </Dropdown.Item>
         <Divider light />
         <Dropdown.Item
@@ -54,7 +54,7 @@ export const Default = (args: any) => {
           <Dropdown.Icon>
             <Login size={24} />
           </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          <span>Log out</span>
         </Dropdown.Item>
       </Dropdown>
     </div>
@@ -87,7 +87,7 @@ export const DefaultLeft = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+          <span>Account</span>
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
@@ -95,7 +95,7 @@ export const DefaultLeft = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          <span>Settings</span>
         </Dropdown.Item>
         <Divider light />
         <Dropdown.Item
@@ -107,7 +107,7 @@ export const DefaultLeft = (args: any) => {
           <Dropdown.Icon>
             <Login size={24} />
           </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          <span>Log out</span>
         </Dropdown.Item>
       </Dropdown>
     </div>
@@ -140,7 +140,7 @@ export const DefaultCenter = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+          <span>Account</span>
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
@@ -148,7 +148,7 @@ export const DefaultCenter = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          <span>Settings</span>
         </Dropdown.Item>
         <Divider light />
         <Dropdown.Item
@@ -160,7 +160,7 @@ export const DefaultCenter = (args: any) => {
           <Dropdown.Icon>
             <Login size={24} />
           </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          <span>Log out</span>
         </Dropdown.Item>
       </Dropdown>
     </div>
@@ -202,17 +202,17 @@ export const Bottom = (args: any) => {
           }}
         >
           <Dropdown.Item onClick={() => console.log('clicked')}>
-            <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+            <span>Account</span>
           </Dropdown.Item>
           <Dropdown.Item>
-            <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+            <span>Settings</span>
           </Dropdown.Item>
           <Divider light />
           <Dropdown.Item>
             <Dropdown.Icon>
               <Login size={24} />
             </Dropdown.Icon>
-            <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+            <span>Log out</span>
           </Dropdown.Item>
         </Dropdown>
       </div>
@@ -249,7 +249,7 @@ export const TouchScreenTitle = (args: any) => {
               console.log('clicked')
             }}
           >
-            <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+            <span>Account</span>
           </Dropdown.Item>
         ))}
         <Dropdown.Item
@@ -258,7 +258,7 @@ export const TouchScreenTitle = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          <span>Settings</span>
         </Dropdown.Item>
         <Divider light />
         <Dropdown.Item
@@ -270,7 +270,7 @@ export const TouchScreenTitle = (args: any) => {
           <Dropdown.Icon>
             <Login size={24} />
           </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          <span>Log out</span>
         </Dropdown.Item>
       </Dropdown>
     </div>
@@ -308,7 +308,7 @@ export const TouchScreenScroll = (args: any) => {
               console.log('clicked')
             }}
           >
-            <span style={{ color: 'rgb(75, 85, 99)' }}>Account</span>
+            <span>Account</span>
           </Dropdown.Item>
         ))}
         <Dropdown.Item
@@ -317,7 +317,7 @@ export const TouchScreenScroll = (args: any) => {
             console.log('clicked')
           }}
         >
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Settings</span>
+          <span>Settings</span>
         </Dropdown.Item>
         <Divider light />
         <Dropdown.Item
@@ -329,7 +329,7 @@ export const TouchScreenScroll = (args: any) => {
           <Dropdown.Icon>
             <Login size={24} />
           </Dropdown.Icon>
-          <span style={{ color: 'rgb(75, 85, 99)' }}>Log out</span>
+          <span>Log out</span>
         </Dropdown.Item>
       </Dropdown>
     </div>

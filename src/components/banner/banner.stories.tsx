@@ -35,7 +35,7 @@ export const Default = (args: any) => {
                 description:
                   '20% off all wines that have a vintage greater than 2020.',
                 footerText: 'Ends on Friday, 18, 2023, 24:00',
-                icon: <Line.Sell size={40} color={'#000'} />,
+                icon: <Line.Sell size={34} />,
               },
             ])
           }}
@@ -107,7 +107,7 @@ export const TouchScreen = (args: any) => {
                 description:
                   '20% off all wines that have a vintage greater than 2020.',
                 footerText: 'Ends on Friday, 18, 2023, 24:00',
-                icon: <Line.Sell size={40} color={'#000'} />,
+                icon: <Line.Sell size={34} />,
               },
             ])
           }}

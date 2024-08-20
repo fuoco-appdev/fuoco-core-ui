@@ -10,6 +10,8 @@ describe('#Textarea', () => {
 
   it('should have "form-textarea--error" class', () => {
     render(<Textarea isError data-testid="form-textarea" />)
-    expect(screen.queryByTestId('form-textarea')).toHaveClass('form-textarea border-solid form-textarea--error')
+    expect(screen.queryByTestId('form-textarea')).toHaveClass(
+      'form-textarea border-solid form-textarea--error',
+    )
   })
 })

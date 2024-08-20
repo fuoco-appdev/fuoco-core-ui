@@ -35,10 +35,10 @@ function Slider({
     <ReactSlider
       className={[styles['slider'], classNames?.slider].join(' ')}
       thumbClassName={[styles['slider-thumb'], classNames?.sliderThumb].join(
-        ' '
+        ' ',
       )}
       trackClassName={[styles['slider-track'], classNames?.sliderTrack].join(
-        ' '
+        ' ',
       )}
       markClassName={[styles['slider-mark'], classNames?.sliderMark].join(' ')}
       marks={marks}

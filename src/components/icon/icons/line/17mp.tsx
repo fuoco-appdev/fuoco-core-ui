@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react'
 
-const Icon = ({ size = 46, color = "currentColor", ...props }) => (
+const Icon = ({ size = 46, color = 'currentColor', ...props }) => (
   <svg
     width={size}
     height={size}
@@ -15,6 +15,6 @@ const Icon = ({ size = 46, color = "currentColor", ...props }) => (
     <path d="M8.5 11.5H10v-6H7V7h1.5v4.5Z" />
     <path d="M13.25 11.5H15l1.46-4.71c.19-.64-.29-1.29-.96-1.29H12V7h2.62l-1.37 4.5Z" />
   </svg>
-);
+)
 
-export default Icon;
+export default Icon

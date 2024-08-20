@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './input.scss'
+import './input.module.scss'
 
 export const SIZES = ['small', 'medium']
 
 const Input = ({
   className = '',
-  type='text',
+  type = 'text',
   size = 'medium',
   isError = false,
   children,

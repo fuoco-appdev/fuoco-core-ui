@@ -14,10 +14,10 @@ describe('#Alert', () => {
     const { container } = render(
       <Alert title="Required Title" className={'custom classes'}>
         {'Description'}
-      </Alert>
+      </Alert>,
     )
     expect(container.querySelector('div')).toHaveClass(
-      `sbui-alert-container sbui-alert-container--success custom classes`
+      `sbui-alert-container sbui-alert-container--success custom classes`,
     )
   })
 
@@ -25,7 +25,7 @@ describe('#Alert', () => {
     render(
       <Alert title="Required Title" closable>
         {'Description'}
-      </Alert>
+      </Alert>,
     )
 
     const closeButton = screen.getByRole('button')
@@ -39,11 +39,11 @@ describe('#Alert', () => {
     const { container } = render(
       <Alert title="Required Title" withIcon>
         {'Description'}
-      </Alert>
+      </Alert>,
     )
 
     expect(
-      container.querySelector('div.flex-shrink-0 > svg')
+      container.querySelector('div.flex-shrink-0 > svg'),
     ).toBeInTheDocument()
   })
 
@@ -53,15 +53,15 @@ describe('#Alert', () => {
       const { container } = render(
         <Alert title="Required Title" variant={variant}>
           {'Description'}
-        </Alert>
+        </Alert>,
       )
 
       expect(container.querySelector('div')).toHaveClass(
-        `sbui-alert-container sbui-alert-container--${variant}`
+        `sbui-alert-container sbui-alert-container--${variant}`,
       )
       expect(screen.queryByText('Description')).toHaveClass(
-        `sbui-alert-description sbui-alert-description--${variant}`
+        `sbui-alert-description sbui-alert-description--${variant}`,
       )
-    }
+    },
   )
 })

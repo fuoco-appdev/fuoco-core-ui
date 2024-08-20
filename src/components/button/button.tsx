@@ -6,6 +6,7 @@ import Ripples, { RipplesProps } from 'react-ripples'
 import { CSSTransition } from 'react-transition-group'
 
 export interface ButtonClasses {
+  root?: string
   container?: string
   button?: string
   loading?: string
@@ -32,13 +33,13 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   style?: React.CSSProperties
   rounded?: boolean
   type?:
-  | 'primary'
-  | 'default'
-  | 'secondary'
-  | 'outline'
-  | 'dashed'
-  | 'link'
-  | 'text'
+    | 'primary'
+    | 'default'
+    | 'secondary'
+    | 'outline'
+    | 'dashed'
+    | 'link'
+    | 'text'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   ariaSelected?: boolean
@@ -85,7 +86,7 @@ function Button(
     rippleProps,
     ...props
   }: ButtonProps,
-  ref: React.ForwardedRef<any>
+  ref: React.ForwardedRef<any>,
 ) {
   const rootRef = useRef<HTMLDivElement | null>(null)
   const floatingLabelRef = useRef<HTMLDivElement | null>(null)
@@ -121,7 +122,7 @@ function Button(
   if (!touchScreen) {
     classes.push(
       ButtonStyles['button-desktop'],
-      ButtonStyles[`button-${type}-desktop`]
+      ButtonStyles[`button-${type}-desktop`],
     )
   }
   let containerClasses = [
@@ -177,9 +178,16 @@ function Button(
       className={[
         ButtonStyles['root'],
         block && ButtonStyles['root-block'],
+        classNames?.root,
       ].join(' ')}
     >
-      <Ripples {...rippleProps} className={containerClasses.join(' ')}>
+      <Ripples
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+        {...rippleProps}
+        className={containerClasses.join(' ')}
+      >
         <button
           {...props}
           ref={ref}
@@ -209,7 +217,7 @@ function Button(
           {loading && (
             <div
               className={[ButtonStyles['loading'], classNames?.loading].join(
-                ' '
+                ' ',
               )}
             >
               {loadingComponent}

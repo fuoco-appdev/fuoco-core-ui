@@ -1,46 +1,35 @@
-import React from 'react'
+import { Meta, StoryObj } from '@storybook/react'
 import { Badge } from '.'
 
-export default {
+const meta: Meta = {
   title: 'Displays/Badge',
   component: Badge,
 }
 
-export const Default = (args: any) => (
-  <Badge {...args}>Hello world</Badge>
-)
+export default meta
 
-export const withColor = (args: any) => (
-  <Badge {...args}>Hello world</Badge>
-)
+type Story = StoryObj<typeof Badge>
 
-export const withDot = (args: any) => (
-  <Badge {...args}>Hello world</Badge>
-)
-
-export const large = (args: any) => (
-  <Badge {...args}>Hello world</Badge>
-)
-
-export const withDotLarge = (args: any) => (
-  <Badge {...args}>Hello world</Badge>
-)
-
-Default.args = {}
-
-withColor.args = {
-  color: 'red'
+export const Default: Story = {
+  render: () => <Badge>Hello world</Badge>,
 }
 
-withDot.args = {
-  dot: true
+export const WithColor: Story = {
+  render: () => <Badge color={'red'}>Hello world</Badge>,
 }
 
-large.args = {
-  size: 'large'
+export const WithDot: Story = {
+  render: () => <Badge dot={true}>Hello world</Badge>,
 }
 
-withDotLarge.args = {
-  size: 'large',
-  dot: true
+export const Large: Story = {
+  render: () => <Badge size={'large'}>Hello world</Badge>,
+}
+
+export const WithDotLarge: Story = {
+  render: () => (
+    <Badge size={'large'} dot={true}>
+      Hello world
+    </Badge>
+  ),
 }

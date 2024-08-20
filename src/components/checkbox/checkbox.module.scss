@@ -2,6 +2,42 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
+:global(.dark) {
+  .checkbox {
+    background-color: transparent;
+    border-color: $gray-100;
+  }
+
+  .checkbox[type='checkbox']:hover {
+    background-color: $dark-8;
+  }
+
+  .checkbox[type='checkbox']:checked:hover {
+    background-color: $dark-8;
+  }
+
+  .checkbox[type='checkbox']:checked {
+    background-color: $dark-2;
+  }
+
+  .checkbox-label-container-label {
+    color: $gray-100;
+  }
+
+  .checkbox-label-container-label {
+    color: $gray-100;
+  }
+  
+  .checkbox-label-container-label-span .checkbox-before-label,
+  .checkbox-label-container-label-span .checkbox-after-label {
+    color: $gray-100;
+  }
+  
+  .checkbox-description-label {
+    color: $gray-100;
+  }
+}
+
 .ripple-button {
   display: flex;
   justify-content: center;
@@ -30,7 +66,6 @@
   height: 20px;
   width: 20px;
   background-color: transparent;
-  border-color: #6b7280;
   border-width: 1px;
 }
 
@@ -43,7 +78,7 @@
   -moz-border-radius: $mp-1;
   -khtml-border-radius: $mp-1;
   background-color: transparent;
-  border-color: $gray-300;
+  border-color: $gray-900;
 }
 
 .checkbox[type='checkbox']:checked:hover {
@@ -70,7 +105,7 @@
 }
 
 .checkbox-label-container-label {
-  color: $gray-100;
+  color: $gray-900;
   margin-top: 0px;
 }
 
@@ -80,12 +115,12 @@
 
 .checkbox-label-container-label-span .checkbox-before-label,
 .checkbox-label-container-label-span .checkbox-after-label {
-  color: $gray-100;
+  color: $gray-900;
 }
 
 .checkbox-description-label {
   margin-top: 0px;
-  color: $gray-100;
+  color: $gray-900;
 }
 /*
   Label sizes
@@ -127,21 +162,21 @@
 */
 
 .checkbox-container-tiny .checkbox {
-  height: $mp-3;
-  width: $mp-3;
+  height: $mp-4;
+  width: $mp-4;
 }
 
 .checkbox-container-small .checkbox {
-  height: $mp-3-5;
-  width: $mp-3-5;
+  height: $mp-7;
+  width: $mp-7;
 }
 
 .checkbox-container-large .checkbox {
-  height: $mp-5;
-  width: $mp-5;
+  height: $mp-7;
+  width: $mp-7;
 }
 
 .checkbox-container-xlarge .checkbox {
-  height: $mp-5;
-  width: $mp-5;
+  height: $mp-7;
+  width: $mp-7;
 }

@@ -27,7 +27,7 @@ export const useSelectContext = () => {
   const context = useContext(SelectContext)
   if (context === undefined) {
     throw new Error(
-      `useFormContextOnChange must be used within a FormContextProvider.`
+      `useFormContextOnChange must be used within a FormContextProvider.`,
     )
   }
   return context

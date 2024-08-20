@@ -63,138 +63,137 @@ function Dropdown({
   const contentRef = useRef<HTMLDivElement | null>(null)
 
   const handleTouchStart = (startEvent: TouchEvent) => {
-    const contentEl = contentRef.current;
-    const divEl = divRef.current;
-    const dropdownEl = dropdownRef.current;
-    if (!contentEl || !divEl || !dropdownEl) return;
+    const contentEl = contentRef.current
+    const divEl = divRef.current
+    const dropdownEl = dropdownRef.current
+    if (!contentEl || !divEl || !dropdownEl) return
 
     // get the initial Y position
-    const initialY = startEvent.touches[0].clientY;
+    const initialY = startEvent.touches[0].clientY
 
     const onTransitionEnd = () => {
       // remove transition
-      divEl.style.transition = "";
+      divEl.style.transition = ''
 
       // cleanup
-      divEl.removeEventListener("transitionend", onTransitionEnd);
+      divEl.removeEventListener('transitionend', onTransitionEnd)
     }
 
     const handleTouchMove = (moveEvent: TouchEvent) => {
       // get the current Y position
-      const currentY = moveEvent.touches[0].clientY;
+      const currentY = moveEvent.touches[0].clientY
 
       // get the difference
-      const dy = currentY - initialY;
+      const dy = currentY - initialY
 
-      if (dy < 0) return;
+      if (dy < 0) return
 
       if (dropdownEl.scrollTop <= 0) {
-        divEl.style.transition = "";
-        divEl.style.transform = `translateY(${dy}px)`;
+        divEl.style.transition = ''
+        divEl.style.transform = `translateY(${dy}px)`
       }
     }
 
     const handleTouchEnd = (endEvent: TouchEvent) => {
       if (dropdownEl.scrollTop <= 0) {
         // add transition
-        divEl.style.transition = "transform";
-        divEl.style.transform = `translateY(0)`;
+        divEl.style.transition = 'transform'
+        divEl.style.transform = `translateY(0)`
 
         // run the callback
-        const y = endEvent.changedTouches[0].clientY;
-        const dy = y - initialY;
-        const dropThreshold = (dropdownEl.clientHeight * (100 - dropThresholdPercent)) / 100;
+        const y = endEvent.changedTouches[0].clientY
+        const dy = y - initialY
+        const dropThreshold =
+          (dropdownEl.clientHeight * (100 - dropThresholdPercent)) / 100
         if (dy > dropThreshold) {
-          onClose?.();
+          onClose?.()
         }
       }
 
       // listen for transition end event
-      divEl.addEventListener("transitionend", onTransitionEnd);
+      divEl.addEventListener('transitionend', onTransitionEnd)
 
       // cleanup
-      divEl.removeEventListener("touchmove", handleTouchMove);
-      divEl.removeEventListener("touchend", handleTouchEnd);
+      divEl.removeEventListener('touchmove', handleTouchMove)
+      divEl.removeEventListener('touchend', handleTouchEnd)
     }
 
-    divEl.addEventListener("touchmove", handleTouchMove);
-    divEl.addEventListener("touchend", handleTouchEnd);
+    divEl.addEventListener('touchmove', handleTouchMove)
+    divEl.addEventListener('touchend', handleTouchEnd)
   }
 
   useEffect(() => {
-    const parentEl = parentRef.current;
-    const divEl = divRef.current;
-    const contentEl = contentRef.current;
-    const anchorEl = anchorRef?.current;
-    if (!divEl || !contentEl || !parentEl) return;
+    const parentEl = parentRef.current
+    const divEl = divRef.current
+    const contentEl = contentRef.current
+    const anchorEl = anchorRef?.current
+    if (!divEl || !contentEl || !parentEl) return
 
     if (touchScreen) {
       if (open) {
-        divEl.style.transform = `translateY(100%)`;
         setTimeout(() => {
-          divEl.style.transform = `translateY(0)`;
-        }, 150);
+          divEl.style.transform = `translateY(0)`
+        }, 150)
         // attach the event listener
-        contentEl.addEventListener("touchstart", handleTouchStart);
+        contentEl.addEventListener('touchstart', handleTouchStart)
       }
-    }
-    else {
+    } else {
       if (!anchorEl) {
-        return;
+        return
       }
 
       if (open) {
-        const parentRect = parentEl?.getBoundingClientRect();
-        const anchorRect = anchorEl?.getBoundingClientRect();
-        const divRect = divEl?.getBoundingClientRect();
+        const parentRect = parentEl?.getBoundingClientRect()
+        const anchorRect = anchorEl?.getBoundingClientRect()
+        const divRect = divEl?.getBoundingClientRect()
         const parentHeight = parentRect?.height ?? 0
-        const parentWidth = parentRect.width ?? 0;
+        const parentWidth = parentRect.width ?? 0
         const anchorY = anchorRect?.y ?? 0
         const anchorX = anchorRect?.x ?? 0
         const anchorHeight = anchorRect?.height ?? 0
         const dropdownHeight = divRect?.height ?? 0
         const anchorWidth = anchorRect.width ?? 0
 
-        let originX = '0';
-        let originY = '0';
-        if (anchorY > (parentHeight / 2)) {
-          originY = '100%';
-          divEl.style.bottom = `${parentHeight - (anchorY - dropdownHeight)}px`;
+        let originX = '0'
+        let originY = '0'
+        if (anchorY > parentHeight / 2) {
+          originY = '100%'
+          divEl.style.bottom = `${parentHeight - (anchorY - dropdownHeight)}px`
         } else {
-          originY = '0';
-          divEl.style.top = `${anchorY + anchorHeight}px`;
+          originY = '0'
+          divEl.style.top = `${anchorY + anchorHeight}px`
         }
 
         if (align === DropdownAlignment.Left) {
-          divEl.style.left = `${anchorX}px`;
-          originX = '0';
+          divEl.style.left = `${anchorX}px`
+          originX = '0'
         } else if (align === DropdownAlignment.Right) {
-          divEl.style.right = `${parentWidth - anchorX - anchorWidth}px`;
-          originX = '100%';
+          divEl.style.right = `${parentWidth - anchorX - anchorWidth}px`
+          originX = '100%'
         } else if (align === DropdownAlignment.Center) {
-          divEl.style.left = `${anchorX}px`;
-          originX = '50%';
+          divEl.style.left = `${anchorX}px`
+          originX = '50%'
         }
 
-        divEl.style.transformOrigin = `${originX} ${originY}`;
+        divEl.style.transformOrigin = `${originX} ${originY}`
 
         setTimeout(() => {
-          divEl.style.scale = '1';
-        }, 75);
+          divEl.style.scale = '1'
+        }, 75)
 
         onOpen?.()
       } else {
-        onClose?.();
+        onClose?.()
       }
     }
 
     return () => {
       if (touchScreen) {
         // let's not forget to cleanup
-        contentEl.removeEventListener("touchstart", handleTouchStart);
+        contentEl.removeEventListener('touchstart', handleTouchStart)
       }
-    };
-  }, [divRef.current, contentRef.current, parentRef.current, open, children]);
+    }
+  }, [divRef.current, contentRef.current, parentRef.current, open, children])
 
   if (!touchScreen) {
     return open ? (
@@ -205,30 +204,29 @@ function Dropdown({
           classNames?.touchscreenAnimatedOverlay,
         ].join(' ')}
         onClick={() => {
-          divRef.current!.style.scale = `0`;
-          setTimeout(() => onClose?.(), 150);
+          divRef.current!.style.scale = `0`
+          setTimeout(() => onClose?.(), 150)
         }}
       >
         <div
           ref={divRef}
-          className={[
-            DropdownStyles['animated-container'],
-          ].join(' ')}
+          className={[DropdownStyles['animated-container']].join(' ')}
         >
           <div
             ref={contentRef}
             id={id}
             style={style}
-            className={[
-              DropdownStyles['dropdown'],
-              classNames?.dropdown,
-            ].join(' ')}
+            className={[DropdownStyles['dropdown'], classNames?.dropdown].join(
+              ' ',
+            )}
           >
             {children}
           </div>
         </div>
       </div>
-    ) : <></>;
+    ) : (
+      <></>
+    )
   } else {
     return open ? (
       <div
@@ -244,8 +242,8 @@ function Dropdown({
             classNames?.touchscreenOverlay,
           ].join(' ')}
           onClick={() => {
-            divRef.current!.style.transform = `translateY(100%)`;
-            setTimeout(() => onClose?.(), 150);
+            divRef.current!.style.transform = `translateY(100%)`
+            setTimeout(() => onClose?.(), 150)
           }}
         />
         <div
@@ -272,7 +270,7 @@ function Dropdown({
                 classNames?.touchscreenDropdownBar,
               ].join(' ')}
               style={{
-                pointerEvents: 'none'
+                pointerEvents: 'none',
               }}
             >
               <div
@@ -305,7 +303,7 @@ function Dropdown({
                 DropdownStyles['touchscreen-dropdown-content'],
                 classNames?.touchscreenDropdownContent,
                 title &&
-                DropdownStyles['touchscreen-dropdown-content-with-title'],
+                  DropdownStyles['touchscreen-dropdown-content-with-title'],
               ].join(' ')}
             >
               {children}
@@ -313,7 +311,9 @@ function Dropdown({
           </div>
         </div>
       </div>
-    ) : <></>
+    ) : (
+      <></>
+    )
   }
 }
 
@@ -343,7 +343,7 @@ function Item({
     <li
       ref={ref}
       className={[DropdownStyles['dropdown-item'], classNames?.container].join(
-        ' '
+        ' ',
       )}
     >
       <Button

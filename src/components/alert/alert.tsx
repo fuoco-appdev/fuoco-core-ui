@@ -22,21 +22,10 @@ const icons: Record<
   'success' | 'danger' | 'warning' | 'info',
   React.ReactElement
 > = {
-  danger: (
-    <Error size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />
-  ),
-  success: (
-    <CheckCircle
-      size={24}
-      stroke={'#ffffff'}
-      color={'#ffffff'}
-      strokeWidth={0}
-    />
-  ),
-  warning: (
-    <Warning size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />
-  ),
-  info: <Info size={24} stroke={'#ffffff'} color={'#ffffff'} strokeWidth={0} />,
+  danger: <Error size={21} strokeWidth={0} />,
+  success: <CheckCircle size={21} strokeWidth={0} />,
+  warning: <Warning size={21} strokeWidth={0} />,
+  info: <Info size={21} strokeWidth={0} />,
 }
 
 const Alert = ({
@@ -76,7 +65,7 @@ const Alert = ({
                 <Close
                   stroke={iconColor}
                   color={iconColor}
-                  size={24}
+                  size={21}
                   strokeWidth={0}
                 />
               }

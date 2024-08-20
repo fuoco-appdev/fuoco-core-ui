@@ -11,6 +11,7 @@ module.exports = {
     'react-app',
     'prettier',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
   ],
   plugins: ['prettier'],
   // add your custom rules here

@@ -93,68 +93,55 @@ export function Underlined() {
   )
 }
 
-export const IconsAndText = (args: any) => (
-  <Tabs
-    {...args}
-    activeId={'panel-1'}
-    tabs={[
-      {
-        id: 'panel-1',
-        label: '1st tab',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-2',
-        label: '2st tab',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-3',
-        label: '3st tab',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-    ]}
-  />
-)
+export function IconsAndText() {
+  return (
+    <Tabs
+      type={'nav'}
+      activeId={'panel-1'}
+      tabs={[
+        {
+          id: 'panel-1',
+          label: '1st tab',
+          icon: <Email size={23} />,
+        },
+        {
+          id: 'panel-2',
+          label: '2st tab',
+          icon: <Email size={23} />,
+        },
+        {
+          id: 'panel-3',
+          label: '3st tab',
+          icon: <Email size={23} />,
+        },
+      ]}
+    />
+  )
+}
 
-export const Vertical = (args: any) => (
-  <Tabs
-    {...args}
-    activeId={'panel-1'}
-    tabs={[
-      {
-        id: 'panel-1',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-2',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-3',
-        icon: <Email />,
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-    ]}
-  />
-)
+export function Vertical() {
+  return (
+    <Tabs
+      type={'nav'}
+      direction={'vertical'}
+      activeId={'panel-1'}
+      tabs={[
+        {
+          id: 'panel-1',
+          icon: <Email size={23} />,
+        },
+        {
+          id: 'panel-2',
+          icon: <Email size={23} />,
+        },
+        {
+          id: 'panel-3',
+          icon: <Email size={23} />,
+        },
+      ]}
+    />
+  )
+}
 
 export function VerticalText() {
   const [isExanded, setIsExpanded] = useState<boolean>(false)
@@ -170,7 +157,7 @@ export function VerticalText() {
         }}
         icon={<Line.Menu size={24} />}
       />
-      <div style={{ width: isExanded ? '256px' : '56px' }}>
+      <div style={{ width: isExanded ? '256px' : '50px' }}>
         <Tabs
           activeId={selectedId}
           direction={'vertical'}
@@ -199,137 +186,86 @@ export function VerticalText() {
   )
 }
 
-export const Nav = (args: any) => (
-  <Tabs
-    {...args}
-    activeId={'panel-1'}
-    tabs={[
-      {
-        id: 'panel-1',
-        label: '1st tab',
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-2',
-        label: '2st tab',
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-3',
-        label: '3st tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-    ]}
-  />
-)
+export function Nav() {
+  return (
+    <Tabs
+      type={'nav'}
+      activeId={'panel-1'}
+      tabs={[
+        {
+          id: 'panel-1',
+          label: '1st tab',
+        },
+        {
+          id: 'panel-2',
+          label: '2st tab',
+        },
+        {
+          id: 'panel-3',
+          label: '3st tab',
+        },
+      ]}
+    />
+  )
+}
 
-export const Removable = (args: any) => (
-  <Tabs
-    {...args}
-    activeId={'panel-1'}
-    removable={true}
-    tabs={[
-      {
-        id: 'panel-1',
-        label: '1st tab',
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-2',
-        label: '2st tab',
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-3',
-        label: '3st tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-4',
-        label: '4th tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-5',
-        label: '5th tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-6',
-        label: '6th tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-      {
-        id: 'panel-7',
-        label: '7th tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
-      },
-    ]}
-  />
-)
+export function Removable() {
+  return (
+    <Tabs
+      activeId={'panel-1'}
+      removable={true}
+      tabs={[
+        {
+          id: 'panel-1',
+          label: '1st tab',
+        },
+        {
+          id: 'panel-2',
+          label: '2st tab',
+        },
+        {
+          id: 'panel-3',
+          label: '3st tab',
+        },
+        {
+          id: 'panel-4',
+          label: '4th tab',
+        },
+        {
+          id: 'panel-5',
+          label: '5th tab',
+        },
+        {
+          id: 'panel-6',
+          label: '6th tab',
+        },
+        {
+          id: 'panel-7',
+          label: '7th tab',
+        },
+      ]}
+    />
+  )
+}
 
 export const Flex = (args: any) => (
   <Tabs
-    {...args}
+    type={'nav'}
     flex={true}
     activeId={'panel-1'}
     tabs={[
       {
         id: 'panel-1',
         label: '1st tab',
-        children: (
-          <Typography.Text>Content for the first panel</Typography.Text>
-        ),
       },
       {
         id: 'panel-2',
         label: '2st tab',
-        children: (
-          <Typography.Text>Content for the second panel</Typography.Text>
-        ),
       },
       {
         id: 'panel-3',
         label: '3st tab',
-        children: (
-          <Typography.Text>Content for the third panel</Typography.Text>
-        ),
       },
     ]}
   />
 )
-
-IconsAndText.args = {
-  type: 'nav',
-}
-Vertical.args = {
-  type: 'nav',
-  direction: 'vertical',
-}
-Nav.args = {
-  type: 'nav',
-}
-
-Flex.args = {
-  type: 'nav',
-}
