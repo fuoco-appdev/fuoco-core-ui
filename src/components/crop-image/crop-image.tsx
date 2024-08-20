@@ -19,7 +19,7 @@ import { Button } from '../button'
 import { ButtonClasses } from '../button/button'
 import { RipplesProps } from 'react-ripples'
 import { Line } from '../icon'
-import 'react-image-crop/src/ReactCrop.scss'
+import 'react-image-crop/dist/ReactCrop.css'
 
 export interface CropClasses {
   root?: string
