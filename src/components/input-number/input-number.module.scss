@@ -4,7 +4,6 @@
 
 :global(.dark) {
   .container {
-    border-color: $gray-100;
     background-color: $dark-1;
   }
   
@@ -43,18 +42,16 @@
   position: relative;
   display: flex;
   box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
   border-radius: $rounded-md;
   -webkit-border-radius: $rounded-md;
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: $gray-900;
   transition: box-shadow 0.3s ease-in-out;
   padding: 0 $mp-5;
   align-items: center;
+  background-color: $gray-100;
 }
 
 .inputnumber {
@@ -144,8 +141,6 @@
   -khtml-border-radius: $rounded-md;
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
-  border-width: 1px;
-  border-style: solid;
   background-color: transparent;
   border-color: transparent;
   color: $gray-900;

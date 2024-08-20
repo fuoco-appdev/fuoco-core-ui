@@ -4,7 +4,7 @@
 
 :global(.dark) {
   .input-container {
-    border-color: $gray-100;
+    background-color: $dark-1;
   }
   
   .inputphonenumber {
@@ -27,7 +27,7 @@
   }
   
   .dropdown {
-    border-color: $gray-100;
+ 
   }
   
   .country-name,
@@ -36,7 +36,6 @@
   }
   
   .search-container {
-    border-color: $gray-100;
     background-color: $dark-1;
   }
   
@@ -64,11 +63,9 @@
   -webkit-border-radius: $rounded-md;
   -moz-border-radius: $rounded-md;
   -khtml-border-radius: $rounded-md;
-  border-width: 1px;
-  border-style: solid;
-  border-color: $gray-900;
   padding: 0 $mp-3;
   padding-right: $mp-5;
+  background-color: $gray-100;
 }
 
 .inputphonenumber {
@@ -108,8 +105,6 @@
   -webkit-border-radius: $rounded-base;
   -moz-border-radius: $rounded-base;
   -khtml-border-radius: $rounded-base;
-  border-width: 1px;
-  border-color: $gray-900;
 }
 
 .country-name,
@@ -140,7 +135,6 @@
   -webkit-border-radius: $rounded-full;
   -moz-border-radius: $rounded-full;
   -khtml-border-radius: $rounded-full;
-  border-color: $gray-900;
   height: 34px;
 }
 

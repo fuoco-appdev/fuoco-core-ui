@@ -1,6 +1,6 @@
 {
   "name": "@fuoco.appdev/web-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/cjs/index.js",
   "types": "./dist/cjs/src/index.d.ts",
   "module": "./dist/cjs/index.js",
