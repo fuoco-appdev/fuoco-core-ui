@@ -5,6 +5,7 @@ import { animated } from 'react-spring'
 // @ts-ignore
 import AlertStyles from './alert.module.scss'
 import { Button } from '../button'
+import { Typography } from '../typography'
 
 export interface AlertProps {
   variant?: 'success' | 'danger' | 'warning' | 'info'
@@ -39,26 +40,30 @@ const Alert = ({
   style,
   onCloseClick,
 }: AlertProps) => {
-  let containerClasses = [AlertStyles['sbui-alert-container']]
-  containerClasses.push(AlertStyles[`sbui-alert-container--${variant}`])
+  let containerClasses = [AlertStyles['alert-container']]
+  containerClasses.push(AlertStyles[`alert-container--${variant}`])
   if (className) containerClasses.push(className)
-  let descriptionClasses = [AlertStyles['sbui-alert-description']]
-  descriptionClasses.push(AlertStyles[`sbui-alert-description--${variant}`])
+  let descriptionClasses = [AlertStyles['alert-description']]
+  descriptionClasses.push(AlertStyles[`alert-description--${variant}`])
 
   return (
     <>
       <animated.div className={containerClasses.join(' ')} style={style}>
-        <div className={AlertStyles['sbui-content']}>
-          <div className={AlertStyles['sbui-icon-content-container']}>
+        <div className={AlertStyles['content']}>
+          <div className={AlertStyles['icon-content-container']}>
             {withIcon && icons[variant]}
           </div>
-          <div className={AlertStyles['sbui-description-content-container']}>
-            <h3 className={AlertStyles['sbui-alert-title']}>{title}</h3>
-            <div className={descriptionClasses.join(' ')}>{children}</div>
+          <div className={AlertStyles['description-content-container']}>
+            <Typography.Title level={4} className={AlertStyles['alert-title']}>
+              {title}
+            </Typography.Title>
+            <Typography.Text className={descriptionClasses.join(' ')}>
+              {children}
+            </Typography.Text>
           </div>
         </div>
         {closable && (
-          <div className={AlertStyles['sbui-close-root']}>
+          <div className={AlertStyles['close-root']}>
             <Button
               type={'text'}
               icon={
@@ -70,7 +75,7 @@ const Alert = ({
                 />
               }
               onClick={(e) => onCloseClick?.(e)}
-              className={AlertStyles['sbui-close-button']}
+              className={AlertStyles['close-button']}
             />
           </div>
         )}

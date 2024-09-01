@@ -9,6 +9,7 @@ import styles from './language-switch.module.scss'
 import ISO6391, { LanguageCode } from 'iso-639-1'
 import * as countriesList from 'countries-list'
 import { ButtonClasses } from '../button/button'
+import { Typography } from '../typography'
 
 export function getCountriesInfo(): { [isoCode: string]: string[] } {
   const countriesInfo: { [isoCode: string]: string[] } = {}
@@ -204,13 +205,13 @@ function LanguageSwitch({
                     svg
                   />
                 </div>
-                <span
+                <Typography.Text
                   className={[styles['listbox-label'], classNames?.label].join(
                     ' ',
                   )}
                 >
                   {languagesInfo[language]?.nativeName}
-                </span>
+                </Typography.Text>
                 <span
                   className={[
                     styles['listbox-chevron-container'],
@@ -274,9 +275,9 @@ function LanguageSwitch({
                   />
                 </div>
               </Dropdown.Icon>
-              <span className={styles['language-name']}>
+              <Typography.Text className={styles['language-name']}>
                 {languagesInfo[language.isoCode]?.nativeName}
-              </span>
+              </Typography.Text>
             </Dropdown.Item>
           )
         })}

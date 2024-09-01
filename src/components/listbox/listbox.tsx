@@ -10,6 +10,7 @@ import Ripples from 'react-ripples'
 import { Dropdown } from '../dropdown'
 import { DropdownAlignment } from '../dropdown/dropdown'
 import { ErrorOutline } from '../icon/icons/line'
+import { Typography } from '../typography'
 
 const ListboxContext = React.createContext<{
   selectedId?: string
@@ -165,14 +166,14 @@ function Listbox({
                           {selectedOption.addOnBefore(selectedOption?.value)}
                         </span>
                       )}
-                      <span
+                      <Typography.Text
                         className={[
                           SelectStyles['listbox-label'],
                           classNames?.label,
                         ].join(' ')}
                       >
                         {selectedOption?.value}
-                      </span>
+                      </Typography.Text>
                       {error && (
                         <div
                           className={[
@@ -189,14 +190,14 @@ function Listbox({
                           )}
                         </div>
                       )}
-                      <span
+                      <div
                         className={[
                           SelectStyles['listbox-chevron-container'],
                           classNames?.chevronContainer,
                         ].join(' ')}
                       >
                         <Line.UnfoldMore size={21} />
-                      </span>
+                      </div>
                     </HeadlessListbox.Button>
                   </Ripples>
                 </div>

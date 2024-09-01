@@ -1,6 +1,7 @@
 import React from 'react'
 // @ts-ignore
 import DividerStyles from './divider.module.scss'
+import { Typography } from '../typography'
 
 interface Props {
   children?: React.ReactNode
@@ -26,29 +27,29 @@ export default function Divider({
 }: Props) {
   let classes = [
     type === 'horizontal'
-      ? DividerStyles['sbui-divider']
-      : DividerStyles['sbui-divider-vertical'],
+      ? DividerStyles['divider']
+      : DividerStyles['divider-vertical'],
   ]
   classes.push(classNames?.divider)
-  if (light) classes.push(DividerStyles['sbui-divider--light'])
+  if (light) classes.push(DividerStyles['divider--light'])
 
   if (children) {
-    classes.push(DividerStyles[`sbui-divider--${orientation}`])
+    classes.push(DividerStyles[`divider--${orientation}`])
   } else if (!children && type === 'horizontal') {
-    classes.push(DividerStyles[`sbui-divider--no-text`])
+    classes.push(DividerStyles[`divider--no-text`])
   }
 
   return (
     <div className={classes.join(' ')} role="seperator" style={style}>
       {children && (
-        <span
+        <Typography.Text
           className={[
-            DividerStyles['sbui-divider__content'],
+            DividerStyles['divider__content'],
             classNames?.content,
           ].join(' ')}
         >
           {children}
-        </span>
+        </Typography.Text>
       )}
     </div>
   )

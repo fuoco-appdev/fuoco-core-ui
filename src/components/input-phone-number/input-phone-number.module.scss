@@ -109,8 +109,6 @@
 
 .country-name,
 .dial-code {
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
   color: $gray-600;
 }
 
@@ -123,6 +121,7 @@
   padding-left: $mp-7;
   padding-right: $mp-7;
   padding-bottom: $mp-5;
+  padding-top: $mp-5;
   z-index: 1;
 }
 

@@ -4,6 +4,7 @@ import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import RadioStyles from './radio.module.scss'
 import { RadioContext } from './radio-context'
 import Ripples, { RipplesProps } from 'react-ripples'
+import { Typography } from '../typography'
 
 export interface RadioClasses {
   container?: string
@@ -211,44 +212,44 @@ function Radio({
                   classNames?.labelContainer,
                 ].join(' ')}
               >
-                <span
+                <Typography.Text
                   className={[
                     RadioStyles['radio-label-text'],
                     classNames?.labelText,
                   ].join(' ')}
                 >
                   {beforeLabel && (
-                    <span
+                    <Typography.Text
                       className={[
                         RadioStyles['radio-label-text-before'],
                         classNames?.labelTextBefore,
                       ].join(' ')}
                     >
                       {beforeLabel}
-                    </span>
+                    </Typography.Text>
                   )}
                   {label}
                   {afterLabel && (
-                    <span
+                    <Typography.Text
                       className={[
                         RadioStyles['radio-label-text-after'],
                         classNames?.labelTextAfter,
                       ].join(' ')}
                     >
                       {afterLabel}
-                    </span>
+                    </Typography.Text>
                   )}
-                </span>
+                </Typography.Text>
 
                 {description && (
-                  <span
+                  <Typography.Text
                     className={[
                       RadioStyles['radio-label-description'],
                       classNames?.labelDescription,
                     ].join(' ')}
                   >
                     {description}
-                  </span>
+                  </Typography.Text>
                 )}
               </div>
               <div

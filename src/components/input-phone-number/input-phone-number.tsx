@@ -13,6 +13,7 @@ import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment, DropdownClasses } from '../dropdown/dropdown'
 import ReactCountryFlag from 'react-country-flag'
 import { ButtonClasses } from '../button/button'
+import { Typography } from '../typography'
 
 export interface InputPhoneNumberClasses {
   countryName?: string
@@ -587,15 +588,15 @@ function InputPhoneNumber({
               style={{ width: 18, height: 18 }}
             />
           </Dropdown.Icon>
-          <span
+          <Typography.Text
             className={[
               InputPhoneNumberStyles['country-name'],
               classNames?.countryName,
             ].join(' ')}
           >
             {getDropdownCountryName(country)}
-          </span>
-          <span
+          </Typography.Text>
+          <Typography.Text
             className={[
               InputPhoneNumberStyles['dial-code'],
               classNames?.dialCode,
@@ -604,7 +605,7 @@ function InputPhoneNumber({
             {country.format
               ? formatNumber(country.dialCode, country)
               : prefix + country.dialCode}
-          </span>
+          </Typography.Text>
         </Dropdown.Item>
       )
     })

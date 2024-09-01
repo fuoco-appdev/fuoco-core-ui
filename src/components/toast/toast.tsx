@@ -136,23 +136,24 @@ function Toast({
                 classNames?.detailsContent,
               ].join(' ')}
             >
-              <div
+              <Typography.Title
+                level={4}
                 className={[
                   ToastStyles['toast-message'],
                   classNames?.message,
                 ].join(' ')}
               >
                 {message}
-              </div>
+              </Typography.Title>
               {description && (
-                <div
+                <Typography.Text
                   className={[
                     ToastStyles['toast-description'],
                     classNames?.description,
                   ].join(' ')}
                 >
                   {description}
-                </div>
+                </Typography.Text>
               )}
             </div>
             {actions && (

@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-divider {
+.divider {
   width: 100%;
   display: flex;
   align-items: center;
@@ -12,31 +12,29 @@
   user-select: none; /* Standard syntax */
 }
 
-.sbui-divider-vertical {
+.divider-vertical {
   width: 1px;
   height: inherit;
   background-color: $gray-200;
 }
 
-.sbui-divider-vertical.sbui-divider--light {
+.divider-vertical.divider--light {
   background-color: $gray-100;
 }
 
-.sbui-divider--no-text {
+.divider--no-text {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-color: $gray-200;
 }
 
-.sbui-divider > span {
+.divider > span {
   display: inline-block;
-  padding: 0 1em;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
+  padding: 0 $mp-5;
   color: $gray-300;
 }
 
-.sbui-divider--left:before {
+.divider--left:before {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   top: 50%;
@@ -47,7 +45,7 @@
   border-color: $gray-200;
 }
 
-.sbui-divider--left:after {
+.divider--left:after {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   top: 50%;
@@ -58,7 +56,7 @@
   border-color: $gray-200;
 }
 
-.sbui-divider--right:before {
+.divider--right:before {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   top: 50%;
@@ -69,7 +67,7 @@
   border-color: $gray-200;
 }
 
-.sbui-divider--right:after {
+.divider--right:after {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   top: 50%;
@@ -80,8 +78,8 @@
   border-color: $gray-200;
 }
 
-.sbui-divider--center:before,
-.sbui-divider--center:after {
+.divider--center:before,
+.divider--center:after {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   top: 50%;
@@ -92,16 +90,16 @@
   border-color: $gray-200;
 }
 
-.sbui-divider--light.sbui-divider--left:before,
-.sbui-divider--light.sbui-divider--left:after,
-.sbui-divider--light.sbui-divider--right:before,
-.sbui-divider--light.sbui-divider--right:after,
-.sbui-divider--light.sbui-divider--center:before,
-.sbui-divider--light.sbui-divider--center:after,
-.sbui-divider--light.sbui-divider--no-text {
+.divider--light.divider--left:before,
+.divider--light.divider--left:after,
+.divider--light.divider--right:before,
+.divider--light.divider--right:after,
+.divider--light.divider--center:before,
+.divider--light.divider--center:after,
+.divider--light.divider--no-text {
   border-color: $gray-100;
 }
 
-.sbui-divider--light.sbui-divider > span {
+.divider--light.divider > span {
   color: $gray-200;
 }

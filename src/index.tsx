@@ -8,6 +8,7 @@ export * from './components/avatar'
 export * from './components/crop-image'
 export * from './components/language-switch'
 export * from './components/scroll'
+export * from './components/schedule'
 
 // DISPLAYS
 

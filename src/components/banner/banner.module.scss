@@ -53,7 +53,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  gap: $mp-4;
+  gap: $mp-6;
   overflow: none;
   padding: $mp-7;
 }
@@ -117,8 +117,6 @@
 
 .banner-icon-container {
   flex-shrink: 0;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
   color: $gray-900;
 }
 
@@ -135,16 +133,12 @@
 
 .banner-title {
   margin: 0px;
-  font-size: $font-size-base;
-  line-height: $font-line-height-base;
   font-weight: $font-weight-bold;
   color: $brand-900;
 }
 
 .banner-subtitle {
   margin: 0px;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-xs;
   font-weight: $font-weight-bold;
   color: $brand-900;
 }
@@ -152,8 +146,6 @@
 .banner-description {
   margin: 0px;
   margin: $mp-2 0;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
   font-weight: $font-weight-normal;
   color: $brand-900;
   flex: 1;
@@ -161,8 +153,6 @@
 
 .banner-footer-text {
   margin: 0px;
-  font-size: $font-size-xs;
-  line-height: $font-line-height-xs;
   font-weight: $font-weight-bold;
   color: $brand-900;
 }

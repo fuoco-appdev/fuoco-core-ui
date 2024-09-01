@@ -2,7 +2,7 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-contextmenu-item {
+.contextmenu-item {
   cursor: pointer;
   font-size: $font-size-xs;
   line-height: $font-line-height-xs;
@@ -18,42 +18,43 @@
   }
 }
 
-.sbui-contextmenu-item svg {
+.contextmenu-item svg {
   color: $gray-100;
 }
 
-.sbui-contextmenu-label {
+.contextmenu-label {
   display: flex;
   align-items: center;
-  font-size: 0.65rem;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
   color: $gray-100;
   padding: $mp-2 $mp-7;
   margin-right: $mp-2;
   margin-left: $mp-2;
 }
 
-.sbui-contextmenu-misc {
+.contextmenu-misc {
   padding: $mp-2 $mp-7;
 }
 
-.sbui-contextmenu-item:focus-visible {
+.contextmenu-item:focus-visible {
   border: none;
   outline: none;
 }
 
-.sbui-contextmenu-input {
+.contextmenu-input {
   display: flex;
   align-items: center;
   margin-right: $mp-2;
   margin-left: $mp-2;
 }
 
-.sbui-contextmenu-input__check {
+.contextmenu-input__check {
   display: flex;
   align-items: center;
 }
 
-.sbui-contextmenu__content {
+.contextmenu__content {
   overflow: visible;
   border-style: solid;
   border-width: 1px;
@@ -66,7 +67,7 @@
   box-shadow: $shadow-6;
 }
 
-.sbui-contextmenu__trigger {
+.contextmenu__trigger {
   border-style: none;
   background-color: transparent;
   padding: 0px;

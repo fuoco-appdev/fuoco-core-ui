@@ -18,11 +18,13 @@
   --font-size-sm: 13px;
   --font-size-base: 21px;
   --font-size-lg: 34px;
+  --font-size-xl: 55px;
 
   --font-line-height-xs: 13px;
   --font-line-height-sm: 21px;
   --font-line-height-base: 34px;
   --font-line-height-lg: 55px;
+  --font-line-height-xl: 90px;
 
   --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -82,11 +84,13 @@ $font-size-xs: var(--font-size-xs) !default;
 $font-size-sm: var(--font-size-sm) !default;
 $font-size-base: var(--font-size-base) !default;
 $font-size-lg: var(--font-size-lg) !default;
+$font-size-xl: var(--font-size-xl) !default;
 
 $font-line-height-xs: var(--font-line-height-xs) !default;
 $font-line-height-sm: var(--font-line-height-sm) !default;
 $font-line-height-base: var(--font-line-height-base) !default;
-$font-line-height-lg: var(--font-line-height-lg) /* 28px */ !default;
+$font-line-height-lg: var(--font-line-height-lg) !default;
+$font-line-height-xl: var(--font-line-height-xl) !default;
 
 $shadow-1: var(--shadow-1) !default;
 $shadow-2: var(--shadow-2) !default;

@@ -7,8 +7,8 @@ import Link from './link'
 
 function Typography({ children, className, tag = 'div', style }: any) {
   let classes = [
-    TypographyStyles['sbui-typography'],
-    TypographyStyles['sbui-typography-container'],
+    TypographyStyles['typography'],
+    TypographyStyles['typography-container'],
   ]
   if (className) {
     classes.push(className)

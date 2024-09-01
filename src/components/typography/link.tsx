@@ -19,10 +19,7 @@ function Link({
   onClick,
   style,
 }: Props) {
-  let classes = [
-    LinkStyles['sbui-typography'],
-    LinkStyles['sbui-typography-link'],
-  ]
+  let classes = [LinkStyles['typography'], LinkStyles['typography-link']]
   if (className) {
     classes.push(className)
   }

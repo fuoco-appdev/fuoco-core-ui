@@ -3,37 +3,37 @@
 @import '../../themes/margins-paddings';
 
 :global(.dark) {
-  .sbui-typography-title {
+  .typography-title {
     color: $gray-100;
   }
 }
 
-.sbui-typography-title {
+.typography-title {
   color: $gray-900;
   margin: 0;
 }
 
-h1.sbui-typography-title {
-  font-size: 55px;
-  line-height: 90px;
+h1.typography-title {
+  font-size: $font-size-xl;
+  line-height: $font-line-height-xl;
 }
 
-h2.sbui-typography-title {
-  font-size: 34px;
-  line-height: 55px;
-}
-
-h3.sbui-typography-title {
-  font-size: 21px;
-  line-height: 34px;
-}
-
-h4.sbui-typography-title {
+h2.typography-title {
   font-size: $font-size-lg;
   line-height: $font-line-height-lg;
 }
 
-h5.sbui-typography-title {
+h3.typography-title {
   font-size: $font-size-base;
   line-height: $font-line-height-base;
+}
+
+h4.typography-title {
+  font-size: $font-size-sm;
+  line-height: $font-line-height-sm;
+}
+
+h5.typography-title {
+  font-size: $font-size-xs;
+  line-height: $font-line-height-xs;
 }

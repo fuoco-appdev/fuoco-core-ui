@@ -7,6 +7,7 @@ import DropdownStyles from './dropdown.module.scss'
 import { useDrag } from '@use-gesture/react'
 import { ButtonClasses } from '../button/button'
 import { RipplesProps } from 'react-ripples'
+import { Typography } from '../typography'
 
 export enum DropdownAlignment {
   Left,
@@ -179,6 +180,7 @@ function Dropdown({
 
         setTimeout(() => {
           divEl.style.scale = '1'
+          divEl.style.opacity = '1'
         }, 75)
 
         onOpen?.()
@@ -205,6 +207,7 @@ function Dropdown({
         ].join(' ')}
         onClick={() => {
           divRef.current!.style.scale = `0`
+          divRef.current!.style.opacity = '0'
           setTimeout(() => onClose?.(), 150)
         }}
       >
@@ -287,14 +290,15 @@ function Dropdown({
                 />
               </div>
               {title && (
-                <div
+                <Typography.Title
+                  level={4}
                   className={[
                     DropdownStyles['touchscreen-dropdown-title'],
                     classNames?.touchscreenDropdownTitle,
                   ].join(' ')}
                 >
                   {title}
-                </div>
+                </Typography.Title>
               )}
             </div>
             <div

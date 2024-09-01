@@ -2,46 +2,46 @@
 @import '../../themes/colors';
 @import '../../themes/margins-paddings';
 
-.sbui-typography-text {
+.typography-text {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
   color: inherit;
 }
 
-.sbui-typography-text-center {
+.typography-text-center {
   align-self: center;
 }
 
-.sbui-typography-text-left {
+.typography-text-left {
   align-self: flex-start;
 }
 
-.sbui-typography-text-right {
+.typography-text-right {
   align-self: flex-end;
 }
 
-.sbui-typography-text-small {
+.typography-text-small {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
 
-.sbui-typography-text-secondary {
+.typography-text-secondary {
   color: white;
 }
 
-.sbui-typography-text-success {
+.typography-text-success {
   color: $green-500;
 }
 
-.sbui-typography-text-warning {
+.typography-text-warning {
   color: $yellow-500;
 }
 
-.sbui-typography-text-danger {
+.typography-text-danger {
   color: $red-500;
 }
 
-.sbui-typography-text-disabled {
+.typography-text-disabled {
   color: $gray-400;
   cursor: not-allowed;
   -webkit-user-select: none;
@@ -50,25 +50,25 @@
   user-select: none;
 }
 
-.sbui-typography-text-underline {
+.typography-text-underline {
   text-decoration-line: underline;
 }
 
-.sbui-typography-text-strikethrough {
+.typography-text-strikethrough {
   text-decoration-line: line-through;
 }
 
-.sbui-typography-text strong {
+.typography-text strong {
   font-size: $font-size-sm;
   line-height: $font-line-height-sm;
 }
 
-mark.sbui-typography-text {
+mark.typography-text {
   padding: 0;
   background-color: #ffe58f;
 }
 
-code.sbui-typography-text {
+code.typography-text {
   /* margin: 0 .2em; */
   padding: 0.2em 0.4em 0.1em;
   /* font-size: 85%; */
@@ -80,7 +80,7 @@ code.sbui-typography-text {
   -khtml-border-radius: 3px;
 }
 
-kbd.sbui-typography-text {
+kbd.typography-text {
   /* margin: 0 .2em; */
   padding: 0.15em 0.4em 0.1em;
   /* font-size: 90%; */

@@ -8,6 +8,7 @@ import { animated, useSpring } from 'react-spring'
 import { DropdownAlignment, DropdownClasses } from '../dropdown/dropdown'
 import InputIconContainer from '../../lib/layout/input-icon-container'
 import { ErrorOutline, Search } from '../icon/icons/line'
+import { Typography } from '../typography'
 
 export interface InputGeocodingProps {
   mapboxAccessToken: string
@@ -308,9 +309,9 @@ function InputGeocoding({
                 }
                 key={`feature_${index}`}
               >
-                <span className={InputGeocodingStyles['place-name']}>
+                <Typography.Text className={InputGeocodingStyles['place-name']}>
                   {feature['place_name']}
-                </span>
+                </Typography.Text>
               </Dropdown.Item>
             )
           })}

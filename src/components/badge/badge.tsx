@@ -2,7 +2,7 @@ import React from 'react'
 // @ts-ignore
 import BadgeStyles from './badge.module.scss'
 
-interface Props {
+export interface BadgeProps {
   color?:
     | 'gray'
     | 'red'
@@ -17,7 +17,7 @@ interface Props {
   dot?: boolean
 }
 
-function Badge({ color, children, size, dot }: Props) {
+function Badge({ color, children, size, dot }: BadgeProps) {
   let classes = [BadgeStyles['badge']]
   if (color) {
     classes.push(BadgeStyles[`badge--${color}`])

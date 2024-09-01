@@ -3,12 +3,12 @@
 @import '../../themes/margins-paddings';
 
 :global(.dark) {
-  a.sbui-typography-link {
+  a.typography-link {
     color: $brand-400;
   }
 }
 
-a.sbui-typography-link {
+a.typography-link {
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   color: $brand-600;

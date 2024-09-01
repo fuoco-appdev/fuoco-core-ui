@@ -117,7 +117,7 @@ export function Item({
   })
 
   const buttonIconStyle = useSpring({
-    transform: disclosureOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+    transform: disclosureOpen ? 'rotate(-90deg)' : 'rotate(0deg)',
     config: {
       tension: 1000,
       friction: 40,

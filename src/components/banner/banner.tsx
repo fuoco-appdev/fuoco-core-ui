@@ -87,43 +87,46 @@ function Banner({
                 classNames?.detailsContent,
               ].join(' ')}
             >
-              <div
+              <Typography.Title
+                level={3}
                 className={[
                   BannerStyles['banner-title'],
                   classNames?.title,
                 ].join(' ')}
               >
                 {title}
-              </div>
+              </Typography.Title>
               {subtitle && (
-                <div
+                <Typography.Title
+                  level={4}
                   className={[
                     BannerStyles['banner-subtitle'],
                     classNames?.subtitle,
                   ].join(' ')}
                 >
                   {subtitle}
-                </div>
+                </Typography.Title>
               )}
               {description && (
-                <div
+                <Typography.Text
                   className={[
                     BannerStyles['banner-description'],
                     classNames?.description,
                   ].join(' ')}
                 >
                   {description}
-                </div>
+                </Typography.Text>
               )}
               {footerText && (
-                <div
+                <Typography.Title
+                  level={4}
                   className={[
                     BannerStyles['banner-footer-text'],
                     classNames?.footerText,
                   ].join(' ')}
                 >
                   {footerText}
-                </div>
+                </Typography.Title>
               )}
             </div>
           </div>

@@ -3,87 +3,87 @@
 @import '../../themes/margins-paddings';
 
 :global(.dark) {
-  .sbui-typography {
+  .typography {
     color: $gray-100;
   }
   
-  .sbui-typography h1 {
+  .typography h1 {
     color: $gray-100;
   }
   
-  .sbui-typography h2 {
+  .typography h2 {
     color: $gray-100;
   }
   
-  .sbui-typography h3 {
+  .typography h3 {
     color: $gray-100;
   }
   
-  .sbui-typography h4 {
+  .typography h4 {
     color: $gray-100;
   }
   
-  .sbui-typography h5 {
+  .typography h5 {
     color: $gray-100;
   }
   
-  .sbui-typography strong {
+  .typography strong {
     color: $gray-100;
   }
   
-  .sbui-typography li::before {
+  .typography li::before {
     color: $gray-100;
   }
   
-  .sbui-typography a {
+  .typography a {
     color: $gray-100;
   }
   
-  .sbui-typography blockquote {
+  .typography blockquote {
     color: $gray-100;
   }
   
-  .sbui-typography code {
+  .typography code {
     color: $gray-100;
   }
   
-  .sbui-typography figcaption {
+  .typography figcaption {
     color: $gray-100;
   }
 }
 
 /* marker fix */
-.sbui-typography li::marker {
+.typography li::marker {
   display: none;
   content: '';
 }
 
-.sbui-typography-container {
+.typography-container {
 }
 
-.sbui-typography {
+.typography {
   font-size: $font-size-base;
   line-height: $font-line-height-base;
   color: $gray-900;
 }
 
-/* .sbui-typography--prose-sm {
+/* .typography--prose-sm {
   @apply prose prose-sm;
 }
 
-.sbui-typography--prose-lg {
+.typography--prose-lg {
   @apply prose prose-lg;
 }
 
-.sbui-typography--prose-xl {
+.typography--prose-xl {
   @apply prose prose-xl;
 }
 
-.sbui-typography--prose-2xl {
+.typography--prose-2xl {
   @apply prose prose-2xl;
 } */
 
-.sbui-typography code {
+.typography code {
   padding: 0.2em 0.4em 0.1em;
   background: hsla(0, 0%, 58.8%, 0.1);
   border: 1px solid hsla(0, 0%, 39.2%, 0.2);
@@ -93,50 +93,50 @@
   -khtml-border-radius: 3px;
 }
 
-.sbui-typography {
+.typography {
   color: $gray-900;
 }
 
-.sbui-typography h1 {
+.typography h1 {
   color: $gray-900;
 }
 
-.sbui-typography h2 {
+.typography h2 {
   color: $gray-900;
 }
 
-.sbui-typography h3 {
+.typography h3 {
   color: $gray-900;
 }
 
-.sbui-typography h4 {
+.typography h4 {
   color: $gray-900;
 }
 
-.sbui-typography h5 {
+.typography h5 {
   color: $gray-900;
 }
 
-.sbui-typography strong {
+.typography strong {
   color: $gray-900;
 }
 
-.sbui-typography li::before {
+.typography li::before {
   color: $gray-900;
 }
 
-.sbui-typography a {
+.typography a {
   color: $gray-900;
 }
 
-.sbui-typography blockquote {
+.typography blockquote {
   color: $gray-900;
 }
 
-.sbui-typography code {
+.typography code {
   color: $gray-900;
 }
 
-.sbui-typography figcaption {
+.typography figcaption {
   color: $gray-900;
 }

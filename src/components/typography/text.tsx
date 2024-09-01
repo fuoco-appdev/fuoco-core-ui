@@ -33,33 +33,33 @@ function Text({
   strong,
   small,
 }: Props) {
-  let classes = [TextStyles['sbui-typography-text']]
+  let classes = [TextStyles['typography-text']]
   if (className) {
     classes.push(className)
   }
 
   if (type) {
-    classes.push(TextStyles[`sbui-typography-text-${type}`])
+    classes.push(TextStyles[`typography-text-${type}`])
   }
 
   if (disabled) {
-    classes.push(TextStyles[`sbui-typography-text-disabled`])
+    classes.push(TextStyles[`typography-text-disabled`])
   }
 
   if (underline) {
-    classes.push(TextStyles[`sbui-typography-text-underline`])
+    classes.push(TextStyles[`typography-text-underline`])
   }
 
   if (strikethrough) {
-    classes.push(TextStyles[`sbui-typography-text-strikethrough`])
+    classes.push(TextStyles[`typography-text-strikethrough`])
   }
 
   if (small) {
-    classes.push(TextStyles['sbui-typography-text-small'])
+    classes.push(TextStyles['typography-text-small'])
   }
 
   if (align) {
-    classes.push(TextStyles[`sbui-typography-text-${align}`])
+    classes.push(TextStyles[`typography-text-${align}`])
   }
 
   if (code)
