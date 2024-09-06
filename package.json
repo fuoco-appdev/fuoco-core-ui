@@ -7,9 +7,9 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
-    "./src/*.scss": {
-      "import": "./src/*.scss",
-      "require": "./src/*.scss"
+    "./dist/*.scss": {
+      "import": "./dist/*.scss",
+      "require": "./dist/*.scss"
     }
   },
   "files": [
