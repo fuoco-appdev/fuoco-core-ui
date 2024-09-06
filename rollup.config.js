@@ -67,6 +67,8 @@ export default [
         targets: [
           { src: 'src/_styles.scss', dest: 'dist/cjs' },
           { src: 'src/themes/**/*', dest: 'dist/cjs/themes' },
+          { src: 'src/_styles.scss', dest: 'dist/esm' },
+          { src: 'src/themes/**/*', dest: 'dist/esm/themes' },
         ],
       }),
       babel({
