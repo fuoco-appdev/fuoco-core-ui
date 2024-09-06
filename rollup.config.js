@@ -3,7 +3,7 @@ import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import external from 'rollup-plugin-peer-deps-external'
 import commonjs from '@rollup/plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript'
 import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
 import url from 'postcss-url'
@@ -18,12 +18,12 @@ export default [
     input: 'src/index.tsx',
     output: [
       {
-        file: 'dist/cjs/index.js',
+        file: 'dist/cjs/index.cjs',
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: 'dist/esm/index.js',
+        file: 'dist/esm/index.mjs',
         format: 'es',
         sourcemap: true,
       },
