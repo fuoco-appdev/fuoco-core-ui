@@ -14,7 +14,7 @@ export default {
 export function Default() {
   const [value, setValue] = React.useState<number>(0)
   return (
-    <Slider value={value} onChange={(value) => setValue(value)} marks={0} />
+    <Slider value={value} onChange={(e) => setValue(Number(e.target.value))} />
   )
 }
 
@@ -22,7 +22,10 @@ export function Location() {
   const [value, setValue] = React.useState<number>(0)
   return (
     <FormLayout label={'Location'} afterLabel={`${value} km`}>
-      <Slider value={value} onChange={(value) => setValue(value)} marks={0} />
+      <Slider
+        value={value}
+        onChange={(e) => setValue(Number(e.target.value))}
+      />
     </FormLayout>
   )
 }

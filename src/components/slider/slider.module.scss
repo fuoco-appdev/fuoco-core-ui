@@ -3,79 +3,135 @@
 @import '../../themes/margins-paddings';
 
 :global(.dark) {
-  .slider-track {
-    background: $dark-2;
-  }
-  
-  .slider-track.slider-track-0 {
-    background: $dark-8;
-  }
-  
-  .slider-thumb {
-    background: $brand-500;
-  }
-
-  .slider-mark {
-    background-color: $brand-500;
-  }
-  
-  .slider-mark-before {
+  .track {
     background-color: $dark-2;
   }
   
-  .slider-mark-active {
-    background-color: $brand-500;
+  .track2 {
+    background-color: $brand-100;
+  }
+  
+  .slider-input[type="range"]{
+    background-color: transparent;
+  }
+  
+  .slider-input[type="range"]::-webkit-slider-thumb{
+    background-color: $brand-400;
+  
+  }
+  .slider-input[type="range"]::-moz-range-thumb{
+    background-color: $brand-400;
+  }
+  .slider-input[type="range"]::-ms-thumb{
+    background-color: $brand-400;
+  }
+  .slider-input[type="range"]:active::-webkit-slider-thumb{
+    background-color: none;
   }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.slider {
-  margin: auto;
-}
-
-.slider-track {
-  top: 8px;
-  height: 4px;
-  background: $gray-100;
-}
-
-.slider-track.slider-track-0 {
-  background: $gray-100;
-}
-
-.slider-thumb {
-  cursor: pointer;
-  /*color for the thumb */
-  background: $brand-700;
-  /* shape of the thumb: circle */
-  width: 21px;
+.root {
+  position: relative;
+  width: 100%;
   height: 21px;
-  border-radius: 100%;
-  transition: box-shadow 75ms $transition-standard-easing;
-  /* remove default outline when selected */
-  outline: none;
 }
 
-.slider-thumb:hover {
-  box-shadow: 0 0 0 8px $brand-500;
-}
-
-.slider-mark {
-  cursor: pointer;
-  top: 6px;
-  width: 1.5px;
+.track {
+  position: absolute;
+  border-radius: $rounded-full;
+  background-color: $gray-100;
+  left: 0px;
+  right: 0px;
   height: 8px;
-  background-color: $brand-500;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 
-.slider-mark-before {
+.track2 {
+  position: absolute;
+  border-radius: $rounded-full;
   background-color: $brand-700;
+  height: 8px;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 
-.slider-mark-active {
-  background-color: $brand-200;
+.slider-input[type="range"]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  height: 21px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.slider-input[type="range"]::-webkit-slider-runnable-track{
+  -webkit-appearance: none;
+  height: 21px;
+ 
+  
+}
+.slider-input[type="range"]::-moz-range-track{
+  -moz-appearance: none;
+  height: 21px;
+ 
+  
+}
+.slider-input[type="range"]::-ms-track{
+  appearance: none;
+  height: 21px;
+ 
+  
+}
+.slider-input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  height:21px;
+  width: 21px;
+  background-color: $brand-900;
+  box-shadow: $shadow-1;
+  border-radius: $rounded-full;
+  cursor: pointer;
+  pointer-events: auto;
+
+}
+.slider-input[type="range"]::-moz-range-thumb{
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  height:21px;
+  width: 21px;
+  box-shadow: $shadow-1;
+  border-radius: $rounded-full;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: auto;
+}
+.slider-input[type="range"]::-ms-thumb{
+  border: none;
+  outline: none;
+  appearance: none;
+  height:21px;
+  width: 21px;
+  box-shadow: $shadow-1;
+  border-radius: $rounded-full;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: auto;
+}
+.slider-input[type="range"]:active::-webkit-slider-thumb{
+  background-color: none;
+}
+.slider-input[type="range"]:focus::-moz-range-thumb {
+  border: none;
+  outline: none;
+  
+}
+.slider-input[type="range"]:active::-moz-range-thumb {
+  border: none;
+  outline: none;
 }
