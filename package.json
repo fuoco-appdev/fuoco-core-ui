@@ -1,10 +1,16 @@
 {
   "name": "@fuoco.appdev/web-components",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "./dist/cjs/index.js",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./src/*.scss": {
+      "import": "./src/*.scss",
+      "require": "./src/*.scss"
+    }
   },
   "files": [
     "dist"
