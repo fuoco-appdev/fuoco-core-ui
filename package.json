@@ -1,9 +1,11 @@
 {
   "name": "@fuoco.appdev/web-components",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "./dist/cjs/index.js",
-  "types": "./dist/cjs/src/index.d.ts",
-  "module": "./dist/cjs/index.js",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
   "files": [
     "dist"
   ],
