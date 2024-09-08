@@ -83,6 +83,31 @@ export const Listbox = (args: any) => {
   )
 }
 
+export const Icon = () => {
+  const [open, setOpen] = useState<boolean>(false)
+  const [language, setLanguage] = useState<LanguageCode>('en')
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '80vh',
+      }}
+    >
+      <LanguageSwitch
+        language={language}
+        open={open}
+        hideText={true}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+        dropdownProps={{ align: DropdownAlignment.Left }}
+        type={'button'}
+        onChange={(code) => setLanguage(code)}
+      />
+    </div>
+  )
+}
+
 export const None = (args: any) => {
   const [language, setLanguage] = useState<LanguageCode>('en')
   return (

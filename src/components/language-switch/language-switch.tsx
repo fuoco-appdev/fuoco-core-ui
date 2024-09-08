@@ -143,7 +143,7 @@ function LanguageSwitch({
           ref={anchorRef}
           classNames={classNames?.button}
           type={'text'}
-          size={'medium'}
+          size={'small'}
           rounded={true}
           rippleProps={rippleProps}
           floatingLabel={floatingLabel}
@@ -151,7 +151,7 @@ function LanguageSwitch({
             <div className={styles['flag']}>
               <ReactCountryFlag
                 countryCode={languagesInfo[language]?.countryCode ?? ''}
-                style={{ width: 18, height: 18 }}
+                style={{ width: 21, height: 21 }}
                 svg
               />
             </div>

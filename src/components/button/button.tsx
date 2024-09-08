@@ -40,6 +40,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | 'dashed'
     | 'link'
     | 'text'
+    | 'rounded'
   danger?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   ariaSelected?: boolean
@@ -130,7 +131,7 @@ function Button(
     className,
     classNames?.container,
   ]
-  if (rounded) {
+  if (rounded || type === 'rounded') {
     containerClasses.push(ButtonStyles['button-ripple-rounded'])
     classes.push(ButtonStyles['button-rounded'])
   }
