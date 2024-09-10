@@ -188,7 +188,7 @@
 }
 .button-xlarge {
   padding: $mp-10 $mp-10;
-  line-height: $font-line-height-sm;
+  line-height: $font-line-height-base;
 }
 .button-full {
   width: 100%;
@@ -217,8 +217,8 @@
 }
 .button-xlarge-with-children {
   padding: $mp-5 $mp-8;
-  font-size: $font-size-sm;
-  line-height: $font-line-height-sm;
+  font-size: $font-size-base;
+  line-height: $font-line-height-base;
 }
 .button-full-with-children {
   width: 100%;
