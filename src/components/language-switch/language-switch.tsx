@@ -8,7 +8,7 @@ import { FormLayout, FormLayoutClasses } from '../../lib/layout/form-layout'
 import styles from './language-switch.module.scss'
 import ISO6391, { LanguageCode } from 'iso-639-1'
 import * as countriesList from 'countries-list'
-import { ButtonClasses } from '../button/button'
+import { ButtonClasses, ButtonProps } from '../button/button'
 import { Typography } from '../typography'
 
 export function getCountriesInfo(): { [isoCode: string]: string[] } {
@@ -61,6 +61,7 @@ export interface LanguageSwitchProps {
   supportedLanguages?: SupportedLanguage[]
   touchScreen?: boolean
   dropdownProps?: DropdownProps
+  buttonProps?: ButtonProps
   hideText?: boolean
   floatingLabel?: string
   classNames?: LanguageSwitchClasses
@@ -100,6 +101,7 @@ function LanguageSwitch({
   onMouseLeave,
   style,
   dropdownProps,
+  buttonProps,
   onOpen,
   onClose,
   onChange,
@@ -143,8 +145,7 @@ function LanguageSwitch({
           ref={anchorRef}
           classNames={classNames?.button}
           type={'text'}
-          size={'small'}
-          rounded={true}
+          size={'tiny'}
           rippleProps={rippleProps}
           floatingLabel={floatingLabel}
           icon={
@@ -158,6 +159,7 @@ function LanguageSwitch({
           }
           onClick={onOpen}
           touchScreen={touchScreen}
+          {...buttonProps}
         >
           {!hideText && languagesInfo[language]?.nativeName}
         </Button>
