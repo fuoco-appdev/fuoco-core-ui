@@ -10,6 +10,7 @@ import ISO6391, { LanguageCode } from 'iso-639-1'
 import * as countriesList from 'countries-list'
 import { ButtonClasses, ButtonProps } from '../button/button'
 import { Typography } from '../typography'
+import ReactDOM from 'react-dom'
 
 export function getCountriesInfo(): { [isoCode: string]: string[] } {
   const countriesInfo: { [isoCode: string]: string[] } = {}
@@ -242,48 +243,56 @@ function LanguageSwitch({
           </div>
         </FormLayout>
       )}
-      <Dropdown
-        {...dropdownProps}
-        style={{
-          ...(type === 'listbox' && {
-            width: anchorRef?.current?.getBoundingClientRect().width,
-          }),
-        }}
-        touchScreen={touchScreen}
-        anchorRef={anchorRef}
-        open={open}
-        onClose={onClose}
-      >
-        {supportedLanguages.map((language, index) => {
-          return (
-            <Dropdown.Item
-              onClick={() => {
-                onChange?.(language.isoCode, languagesInfo[language.isoCode])
-                onClose?.()
-              }}
-              ref={(el: HTMLLIElement) =>
-                (dropdownRefs[`flag_no_${index}`] = el)
-              }
-              key={`flag_no_${index}`}
-            >
-              <Dropdown.Icon>
-                <div className={styles['flag']}>
-                  <ReactCountryFlag
-                    countryCode={
-                      languagesInfo[language.isoCode]?.countryCode ?? ''
-                    }
-                    style={{ width: 24 }}
-                    svg
-                  />
-                </div>
-              </Dropdown.Icon>
-              <Typography.Text className={styles['language-name']}>
-                {languagesInfo[language.isoCode]?.nativeName}
-              </Typography.Text>
-            </Dropdown.Item>
-          )
-        })}
-      </Dropdown>
+      {ReactDOM.createPortal(
+        <>
+          <Dropdown
+            {...dropdownProps}
+            style={{
+              ...(type === 'listbox' && {
+                width: anchorRef?.current?.getBoundingClientRect().width,
+              }),
+            }}
+            touchScreen={touchScreen}
+            anchorRef={anchorRef}
+            open={open}
+            onClose={onClose}
+          >
+            {supportedLanguages.map((language, index) => {
+              return (
+                <Dropdown.Item
+                  onClick={() => {
+                    onChange?.(
+                      language.isoCode,
+                      languagesInfo[language.isoCode],
+                    )
+                    onClose?.()
+                  }}
+                  ref={(el: HTMLLIElement) =>
+                    (dropdownRefs[`flag_no_${index}`] = el)
+                  }
+                  key={`flag_no_${index}`}
+                >
+                  <Dropdown.Icon>
+                    <div className={styles['flag']}>
+                      <ReactCountryFlag
+                        countryCode={
+                          languagesInfo[language.isoCode]?.countryCode ?? ''
+                        }
+                        style={{ width: 24 }}
+                        svg
+                      />
+                    </div>
+                  </Dropdown.Icon>
+                  <Typography.Text className={styles['language-name']}>
+                    {languagesInfo[language.isoCode]?.nativeName}
+                  </Typography.Text>
+                </Dropdown.Item>
+              )
+            })}
+          </Dropdown>
+        </>,
+        document.body,
+      )}
     </div>
   )
 }
